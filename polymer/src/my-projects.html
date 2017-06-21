@@ -1,0 +1,163 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="shared-styles.html">
+
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+
+<!--<link rel="import" href="my-projects-list-view.html">-->
+<!--<link rel="import" href="my-projects-detail-view.html">-->
+<dom-module id="my-projects">
+    <template>
+
+        <custom-style>
+            <style is="custom-style" include="shared-styles">
+
+                app-toolbar {
+                    background-color: #4285f4;
+                    color: #fff;
+                    @apply(--layout-horizontal);
+                    @apply(--layout-flex);
+                }
+
+                .projectMenu{
+                    @apply(--layout-horizontal);
+                    @apply(--layout-flex);
+
+                }
+                .projectMenu a{
+                    color: lightgray;
+                    text-decoration: none;
+                    font-size: 10px;
+                    padding-right:10px;
+                }
+                .projectMenu .iron-selected{
+                    color: white;
+                }
+
+                paper-fab{
+                    border-radius:5px;
+                }
+
+                .iron-selected paper-fab{
+                    border: 1px solid var(--paper-tab-ink, var(--paper-yellow-a100));
+                    box-shadow: 3px -3px var(--paper-tab-ink, var(--paper-yellow-a100));
+                    -moz-box-shadow: 3px -3px var(--paper-tab-ink, var(--paper-yellow-a100));
+                    -webkit-box-shadow: 3px -3px var(--paper-tab-ink, var(--paper-yellow-a100));
+                    -o-box-shadow: 3px -3px var(--paper-tab-ink, var(--paper-yellow-a100));
+                    border-radius:5px;
+                }
+
+            </style>
+        </custom-style>
+
+        <app-route
+                route="{{route}}"
+                pattern="/:page"
+                data="{{projectsData}}"
+                active="{{viewActive}}"
+
+        ></app-route>
+
+        <!--<app-route-->
+        <!--route="{{route}}"-->
+        <!--pattern="/projects/projects-list-view"-->
+        <!--data="{{projectsData}}"-->
+        <!--active="{{listActive}}"-->
+        <!--&gt;</app-route>-->
+
+
+        <app-toolbar>
+            <iron-selector class="projectMenu" selected="[[projectsData.page]]"  attr-for-selected="name" role="navigation">
+
+                <a name="projects-detail-view" href="projects/projects-detail-view">
+                    <paper-fab mini icon="content-copy"></paper-fab>
+                    Detail view</a>
+                <a name="projects-list-view" href="projects/projects-list-view">
+                    <paper-fab mini icon="list"></paper-fab>
+                    List view</a>
+            </iron-selector>
+        </app-toolbar>
+        <div>
+            <iron-pages id="projectsIronPage"
+                        selected="[[projectsData.page]]"
+                        attr-for-selected="name"
+
+            >
+                <my-projects-list-view name="projects-list-view" ></my-projects-list-view>
+                <my-projects-detail-view id="detailView" name="projects-detail-view" recordId="{{recordId}}"></my-projects-detail-view>
+
+            </iron-pages>
+        </div>
+
+    </template>
+
+    <script>
+        (function() {
+            class MyProjects extends Polymer.Element {
+                static get is() {
+                    return 'my-projects';
+                }
+
+                static get properties(){
+                    return {
+//                        view: {
+//                            type: String,
+//                            reflectToAttribute: true,
+//                            notify: true,
+//                            observer: '_viewChanged',
+//                        },
+                        projectsData: { type:Object,
+                                        notify:true,
+                                        observer:'_projectsDataChanged'},
+                        recordId:{type:String,
+                                   notify:true,
+                        }
+
+                    };
+                }
+                /*constructor(){
+                 super();
+
+                 console.log(this.projectsData);
+                 }
+                 */
+                _projectsDataChanged(projectsData,oldProjectsData){
+                    this.projectsData.page = projectsData.page || "projects-detail-view";
+                    //this.$.projectsIronPage.selected = this.projectsData.page;
+                    this.set('route.path',this.projectsData.page);
+                    if(projectsData!==oldProjectsData){
+                        var resolvedPageUrl = this.resolveUrl('my-'+ projectsData.page + '.html');
+                        Polymer.importHref(
+                            resolvedPageUrl,
+                            null,
+                            null,
+                            true);
+                    }
+
+
+                }
+
+                ready(){
+                    super.ready();
+                    this.addEventListener('change-projectItem', e => this._onChangeProjectItem(e));
+                }
+
+                _onChangeProjectItem(event){
+                    let detail = event.detail;
+                    this.recordId = detail.recordId;
+                    //console.log(this.recordId);
+                    this.$.detailView.recordId = this.recordId;
+                }
+
+
+
+            }
+
+            window.customElements.define(MyProjects.is, MyProjects);
+        }());
+    </script>
+</dom-module>

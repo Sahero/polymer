@@ -1,0 +1,34 @@
+[
+  {
+    "fieldData": {
+      "Name_Full": "Test Claimant",
+      "Email": "",
+      "Phone1": "",
+      "Category": "",
+      "Status": "Active",
+      "Department": "",
+      "T171a_claimant_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/3C27F3E9C3B4CBF91C331252D3364E038BB46FF68F24CE5435CD5D69F3CAEE83.png?RCType=EmbeddedRCFileProcessor",
+      "ID_claimant": "CLM032515",
+      "State_Province": "NSW"
+    },
+    "portalData": {},
+    "recordId": "781656",
+    "modId": "2"
+  },
+  {
+    "fieldData": {
+      "Name_Full": "Claiman First",
+      "Email": "",
+      "Phone1": "",
+      "Category": "",
+      "Status": "Active",
+      "Department": "",
+      "T171a_claimant_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/A7C4586D6A49D836DC7B33E7BDF4AD46A97AC7AEC9E6074710955CAFEC5C5527.png?RCType=EmbeddedRCFileProcessor",
+      "ID_claimant": "CLM032516",
+      "State_Province": ""
+    },
+    "portalData": {},
+    "recordId": "781657",
+    "modId": "0"
+  }
+]

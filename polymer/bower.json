@@ -1,0 +1,61 @@
+{
+  "name": "polymer-starter-kit",
+  "authors": [
+    "The Polymer Authors"
+  ],
+  "license": "https://polymer.github.io/LICENSE.txt",
+  "dependencies": {
+    "app-layout": "PolymerElements/app-layout#2.0-preview",
+    "app-route": "PolymerElements/app-route#2.0-preview",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#2.0-preview",
+    "iron-iconset-svg": "PolymerElements/iron-iconset-svg#2.0-preview",
+    "iron-media-query": "PolymerElements/iron-media-query#2.0-preview",
+    "iron-pages": "PolymerElements/iron-pages#2.0-preview",
+    "iron-selector": "PolymerElements/iron-selector#2.0-preview",
+    "paper-icon-button": "PolymerElements/paper-icon-button#^2.0.0",
+    "polymer": "Polymer/polymer#^2.0.0-rc.3",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.7",
+    "iron-form": "PolymerElements/iron-form#^1.1.5",
+    "paper-input": "PolymerElements/paper-input#^2.0.1",
+    "paper-checkbox": "PolymerElements/paper-checkbox#^2.0.0",
+    "paper-button": "PolymerElements/paper-button#^2.0.0",
+    "iron-localstorage": "PolymerElements/iron-localstorage#^2.0.0",
+    "app-storage": "PolymerElements/app-storage#^2.0.2",
+    "paper-styles": "^2.0.0",
+    "iron-icons": "PolymerElements/iron-icons#^2.0.1",
+    "vaadin-grid": "vaadin/vaadin-grid#3.0.0-alpha2",
+    "paper-dialog": "PolymerElements/paper-dialog#^2.0.0",
+    "paper-behaviors": "PolymerElements/paper-behaviors#^2.0.0",
+    "iron-icon": "PolymerElements/iron-icon#2.0.0",
+    "vaadin-icons": "^4.1.0",
+    "paper-toolbar": "PolymerElements/paper-toolbar#^2.0.0",
+    "paper-fab": "^2.0.0",
+    "paper-tabs": "^2.0.0",
+    "iron-ajax": "PolymerElements/iron-ajax#^2.0.2",
+    "iron-list": "PolymerElements/iron-list#^2.0.1",
+    "vaadin-combo-box": "2.0.0-alpha4",
+    "paper-listbox": "PolymerElements/paper-listbox#^2.0.0"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0-prerelease.7"
+  },
+  "private": true,
+  "resolutions": {
+    "paper-icon-button": "^2.0.0",
+    "webcomponentsjs": "^v1.0.0",
+    "polymer": "^2.0.0",
+    "iron-flex-layout": "1 - 2",
+    "iron-form": "2.0-preview",
+    "paper-checkbox": "^2.0.0",
+    "iron-iconset-svg": "^2.0.0",
+    "iron-selector": "1 - 2",
+    "paper-behaviors": "^2.0.0",
+    "iron-icon": "^2.0.0",
+    "iron-resizable-behavior": "^v2.0.0",
+    "paper-styles": "^2.0.0",
+    "iron-a11y-keys-behavior": "^v2.0.0",
+    "iron-meta": "1 - 2",
+    "iron-scroll-target-behavior": "^v2.0.0",
+    "iron-ajax": "^2.0.2"
+  }
+}

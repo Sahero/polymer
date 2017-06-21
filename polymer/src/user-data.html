@@ -1,0 +1,54 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="user-data">
+    <script>
+        (function() {
+
+            var instances = [];
+
+            class UserData extends Polymer.Element {
+                static get is() {
+                    return 'user-data';
+                }
+
+                static get properties() {
+                    return {
+                        user: {
+                            type: Object,
+                            //value: '',
+                            readOnly: false,
+                            notify: true,
+                            //attached: _attached(),
+                            observer:'_user_changed'
+                        }
+                    };
+                }
+                _created(){
+                    console.log('created');
+                    instances.push(this);
+                }
+
+                _detached() {
+                    console.log('detached');
+                    var i = instances.indexOf(this);
+                    if (i >= 0) {
+                        instances.splice(i, 1);
+                    }
+                }
+
+                _user_changed(newvalue, oldvalue){
+                    //console.log('change');
+                    //console.log(newvalue);
+                    //console.log(oldvalue);
+                    instances.forEach(function(instance){
+                        if(instance!==this){
+                            instance.notifyPath('user', newvalue);
+                        }
+                    });
+                }
+            }
+
+            window.customElements.define(UserData.is, UserData);
+        }());
+    </script>
+</dom-module>

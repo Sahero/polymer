@@ -1,0 +1,61 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+
+<link rel="import" href="user-data.html">
+
+<dom-module id="log-out">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+
+                padding: 10px;
+            }
+            paper-button {
+                background: #f44336;
+                color: #fff;
+                font-weight: bold;
+            }
+            a {
+                color: #fff;
+                display: inline-block;
+                font-size: 13px;
+            }
+        </style>
+
+        <app-location route="{{route}}" data="{{routeData}}"></app-location>
+
+        <user-data user="{{storedUser}}"></user-data>
+
+        <paper-button raised on-tap="logout">Log Out</paper-button>
+
+
+    </template>
+
+    <script>
+        (function() {
+            class MyView1 extends Polymer.Element {
+                static get is() {
+                    return 'log-out';
+                }
+
+                static get properties() {
+                    return {
+                        storedUser: Object
+                    };
+                }
+
+                logout() {
+                   localStorage.clear();
+                    this.storedUser = null;
+                    this.set('route.path', '/my-login');
+
+                }
+            }
+
+            window.customElements.define(MyView1.is, MyView1);
+        }());
+    </script>
+</dom-module>

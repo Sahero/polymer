@@ -1,0 +1,307 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/vaadin-grid/all-imports.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/iron-list/iron-list.html">
+<!--<link rel="import" href="../bower_components/app-layout/app-grid/app-grid-style.html">-->
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<!--<link rel="import" href="my-datatable-styles.html">-->
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
+
+
+<dom-module id="my-projects-detail-view">
+    <template>
+        <custom-style>
+            <style is="custom-style" include="iron-flex iron-flex-alignment">
+                .group-header,
+                .group-item {
+                    padding: 5px;
+                    font-size: 12px;
+                }
+                .group-item {
+                    cursor: pointer;
+                    border-left: 1px solid #ddd;
+                    border-right: 1px solid #ddd;
+                    display:table;
+                    /*width:25%;*/
+                }
+                .group-header {
+                    font-weight: bold;
+                    border: 1px solid #ddd;
+                    color: gray;
+                    margin-top: 10px;
+                }
+                .group-item-row {
+                    display:table-row;
+                }
+                .primary{
+                    color: gray;
+                    display:table-cell;
+                    border-bottom: inherit;
+                }
+                .secondary {
+                    color: gray;
+                    display:table-cell;
+                    border-bottom: inherit;
+                    padding-left: 10px;
+                }
+
+                .all-list{
+                    margin:10px;
+                }
+                .box-container{
+                    text-align: center;
+                }
+                .all-list > ul {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-end;
+                    list-style-type: none;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                .all-list > .list-horizontal > div > a,
+                .all-list > .list-horizontal > div > span {
+                    padding:8px;
+                    display: inline-block;
+                }
+
+                .all-list > .list-horizontal {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-end;
+                    list-style-type: none;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                .all-list ul > li > a, .all-list ul > li > span {
+
+                    padding:8px;
+                    display: inline-block;
+                }
+
+                .border-lightgray{
+                    border: 1px solid lightgray;
+                }
+
+                .border-bottom-lightgray{
+                    border-bottom: 1px solid lightgray;
+                }
+                .box-spacing{
+                    margin: 5px 20px 0px 5px;
+                }
+
+                li paper-icon-button{
+                    width: 32px;
+                    height: 32px;
+                    float:right;
+                }
+
+                div paper-icon-button{
+                    width: 32px;
+                    height: 32px;
+                    float:right;
+                }
+
+            </style>
+        </custom-style>
+        <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localstorage"></app-localstorage-document>
+        <!--url$="https://localhost:3000/fm/getProjectsDetail/{{recordId}}"-->
+        <iron-ajax
+
+                id="getProjectsDetail"
+                method="get"
+                url$="https://localhost:3000/fm/getProjectsDetail/{{recordId}}"
+
+                headers$='{"FM-data-token": "[[tokenData.token]]"}'
+                handle-as="json"
+
+                on-response="detailLoaded"
+        ></iron-ajax>
+
+
+
+        <iron-list id="list" class="app-grid" items="{{projectDetail}}" as="project" scroll-target="document">
+            <template>
+                <div class="layout horizontal wrap justified">
+                    <div class="group-item box-spacing flex border-lightgray" >
+                        <div class="group-header group-item-row">
+                            <span class="primary">REF#</span>
+                            <span class="secondary">[[project.fieldData.ID_Project]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Title</span>
+                            <span class="secondary">[[project.fieldData.Project_Name]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Category</span>
+                            <span class="secondary">[[project.fieldData.Category]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Status</span>
+                            <span class="secondary">[[project.fieldData.Status]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Claim No</span>
+                            <span class="secondary">[[project.fieldData.Claim_No]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Policy No</span>
+                            <span class="secondary">[[project.fieldData.Policy_No]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Company</span>
+                            <span class="secondary">[[project.fieldData.Account_Name]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Claimant</span>
+                            <span class="secondary">[[project.fieldData.Claimant]]</span>
+                        </div>
+                    </div>
+                    <div class="group-staff box-spacing border-lightgray">
+                        <div class="group-header group-item-row">
+                            <div class="box-container">Staff</div>
+                            <div class="all-list border-lightgray layout vertical">
+                                <ul>
+                                    <li><a href="#">Staff Name</a></li>
+                                    <li horizontal end-justified layout><paper-icon-button icon="close"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="search"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="mail"></paper-icon-button></li>
+                                </ul>
+                                <ul>
+                                    <li><a href="#">Staff Name 2</a></li>
+                                    <li><paper-icon-button icon="close"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="search"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="mail"></paper-icon-button></li>
+                                </ul>
+
+                                <!--//console.log(this.projectDetail[0].portalData["Investigator_Portal Copy"]["0"]["T16q_projects_STAFF|id_staff|id_staff|::Name_Full"]);-->
+                                <!--["0"].portalData.Investigator_P["0"]["PRJ_Projects_ING_Investigators::Investigator"]-->
+                                <iron-list class="list-horizontal" items="[[investigators]]" scroll-target="document">
+                                    <template>
+                                        <div><a href="/">[[item.PRJ_Projects_ING_Investigators::Investigator]]</a></div>
+                                        <div><paper-icon-button icon="close"></paper-icon-button></div>
+                                        <div><paper-icon-button icon="search"></paper-icon-button></div>
+                                        <div><paper-icon-button icon="mail"></paper-icon-button></div>
+                                    </template>
+                                </iron-list>
+                                <div class="list-horizontal">
+                                    <div><span>Add: </span><paper-icon-button icon="search"></paper-icon-button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group-investigators box-spacing border-lightgray">
+                        <div class="group-header group-item-row">
+                            <div class="box-container">Investigators</div>
+                            <div class="all-list border-lightgray layout vertical">
+                                <ul>
+                                    <li><a href="#">Investigator Name</a></li>
+                                    <li><paper-icon-button icon="close"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="search"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="mail"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="language"></paper-icon-button></li>
+                                </ul>
+                                <ul>
+                                    <li><a href="#">Investigator Name 2</a></li>
+                                    <li><paper-icon-button icon="close"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="search"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="mail"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="language"></paper-icon-button></li>
+                                </ul>
+                                <ul>
+                                    <li><span>Add: </span><paper-icon-button icon="search"></paper-icon-button></li>
+                                </ul>
+                                <paper-listbox items="[[investigators]]">
+                                    <paper-item>[[item.PRJ_Projects_ING_Investigators::Investigator]]</paper-item>
+                                </paper-listbox>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group-staff box-spacing border-lightgray">
+                        <div class="group-header group-item-row">
+                            <div class="box-container">Contacts</div>
+                            <div class="all-list border-lightgray layout vertical">
+                                <ul>
+                                    <li><a href="#">Contact Name</a></li>
+                                    <li><paper-icon-button icon="close"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="search"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="mail"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="language"></paper-icon-button></li>
+                                </ul>
+                                <ul>
+                                    <li><a href="#">Contact Name 2</a></li>
+                                    <li><paper-icon-button icon="close"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="search"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="mail"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="language"></paper-icon-button></li>
+                                </ul>
+                                <ul>
+                                    <li><span>Add: </span><paper-icon-button icon="search"></paper-icon-button></li>
+                                </ul>
+                                <!--<paper-listbox items="[[projectData.portalData.Investigator_Portal Copy]]">
+                                    <paper-item>[[item.T16q_projects_STAFF|id_staff|id_staff|::Name_Full]]</paper-item>
+                                    <paper-item>Item 2</paper-item>
+                                </paper-listbox>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </iron-list>
+
+
+    </template>
+
+    <script>
+        //(function() {
+        class MyProjectsDetailView extends Polymer.Element {
+            static get is() {
+                return 'my-projects-detail-view';
+            }
+            static get properties() {
+                return {
+                    projectDetail: Array,
+                    recordId: {
+                        type: String,
+                        value: '716788',
+                        notify:true,
+                        observer: '_recordIdChanged'
+                    },
+                    investigators: Array,
+                    staffs:Array,
+                    contacts: Array,
+                };
+            }
+
+            _recordIdChanged(recordId){
+                this.$.getProjectsDetail.generateRequest();
+            }
+
+            detailLoaded(data){
+                console.log(data.detail.response);
+
+                this.projectDetail= data.detail.response;
+                if(this.projectDetail){
+                    this.investigators = this.projectDetail[0].portalData.Investigator_Portal;
+                    this.staffs = this.projectDetail[0].portalData["Investigator_Portal Copy"];
+                    this.contacts = this.projectDetail[0].portalData.portalProjectContacts;
+                }
+                //console.log(this.projectDetail[0].portalData);
+                //console.log(this.projectDetail[0].portalData.Investigator_P[0]['PRJ_Projects_ING_Investigators::Investigator']);
+                //console.log(this.projectDetail[0].portalData["Investigator_Portal Copy"]["0"]["T16q_projects_STAFF|id_staff|id_staff|::Name_Full"]);
+
+                //["Investigator_Portal Copy"]["0"]["T16q_projects_STAFF|id_staff|id_staff|::Name_Full"]
+            }
+        }
+        window.customElements.define(MyProjectsDetailView.is, MyProjectsDetailView);
+        // }());
+    </script>
+</dom-module>

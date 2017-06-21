@@ -1,0 +1,52 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/custom-style.html">
+
+<dom-module id="my-main">
+
+    <template>
+        <custom-style>
+            <style is="custom-style">
+                .homeImage{
+                    display:flex;
+                    align-self:center;
+                    justify-content: center;
+                }
+            </style>
+        </custom-style>
+        <div  class="homeImage" >
+            <img src="../images/investigation.jpg"/>
+        </div>
+    </template>
+
+    <script>
+
+
+        class MyMain extends Polymer.Element {
+
+            static get is() {
+                return 'my-main';
+            }
+
+
+            /*static get properties() {
+                return {
+                    visible: {
+                        type: Boolean,
+                        observer: '_visibleChanged'
+                    }
+
+                }
+            }
+
+            _visibleChanged(visible) {
+                if (visible) {
+                    this.dispatchEvent(new CustomEvent('change-section', {
+                        bubbles: true, composed: true, detail: {view:'main',title: 'Home'}}));
+                }
+            }*/
+        }
+        window.customElements.define(MyMain.is, MyMain);
+
+
+    </script>
+</dom-module>

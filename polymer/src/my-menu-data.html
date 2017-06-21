@@ -1,0 +1,55 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="my-menu-data">
+    <script>
+        (function(){
+            let menuData = [
+                {
+                    name:'clients',
+                    title:'CLIENTS',
+                    iconName:'supervisor-account'
+                },
+                {
+                    name:'contacts',
+                    title:'CONTACTS',
+                    iconName:'perm-contact-calendar'
+                },
+                {
+                    name:'investigators',
+                    title:'INVESTIGATORS',
+                    iconName:'settings'
+                },
+                {
+                    name:'claimants',
+                    title:'CLAIMANTS',
+                    iconName:'account-circle'
+                },
+                {
+                    name:'projects',
+                    title:'PROJECTS',
+                    iconName:'description'
+                }
+            ];
+
+            class MyMenuData extends Polymer.Element{
+                static get is() {return 'my-menu-data';}
+
+                static get properties(){
+                    return{
+                        menus:{
+                            type: Array,
+                            value: menuData,
+                            readOnly: true,
+                            notify: true
+                        },
+                        menu:{
+                            type: Object,
+                            notify: true
+                        }
+                    }
+                }
+            }
+            window.customElements.define(MyMenuData.is, MyMenuData);
+        })();
+    </script>
+</dom-module>

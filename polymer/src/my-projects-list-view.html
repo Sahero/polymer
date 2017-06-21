@@ -1,0 +1,175 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/vaadin-grid/all-imports.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+
+<link rel="import" href="my-datatable-styles.html">
+
+
+<dom-module id="my-projects-list-view">
+    <template>
+
+        <style include="my-datatable-styles">
+        </style>
+
+
+
+        <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localstorage"></app-localstorage-document>
+
+        <iron-ajax
+                auto
+                id="getProjectsList"
+                method="get"
+                url="https://localhost:3000/fm/getProjectsList"
+                headers$='{"FM-data-token": "[[tokenData.token]]"}'
+                handle-as="json"
+                last-response="{{listData}}"
+                on-response="listLoaded"
+        ></iron-ajax>
+
+        <div class="card">
+            <vaadin-grid items="{{listData}}" id="projectsListViewDatatable" class="listViewDatatable" active-item="{{selectedItem}}" >
+
+                <vaadin-grid-column>
+                    <template class="header">
+                        <vaadin-grid-sorter path="fieldData.ID_Project">REF #</vaadin-grid-sorter>
+                    </template>
+                    <template>[[item.fieldData.ID_Project]]</template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">CLAIM #</template>
+                    <template>[[item.fieldData.Claim_No]]</template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">Claimant</template>
+                    <template>[[item.fieldData.Claimant]]</template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">Contact</template>
+                    <template>[[item.fieldData.Contact]]</template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">Client</template>
+                    <template>[[item.fieldData.Account_Name]]</template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">Staff</template>
+                    <template>[[item.fieldData.Staff]]</template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">Investigators</template>
+                    <template>[[item.fieldData.Account_Name]]</template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">Start</template>
+                    <template>[[item.fieldData.Date_Start]]</template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">End</template>
+                    <template>[[item.fieldData.Date_End]]</template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">Due</template>
+                    <template><span class$="{{_getClassForDueDate(item.fieldData.Date_Due)}}">[[item.fieldData.Date_Due]]</span></template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">Category</template>
+                    <template>[[item.fieldData.Category]]</template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">Status</template>
+                    <template><span class$="{{_getClassForStatus(item.fieldData.Status)}}">[[item.fieldData.Status]]</span></template>
+                </vaadin-grid-column>
+            </vaadin-grid>
+        </div>
+    </template>
+
+
+    <script>
+
+        (function() {
+            class MyProjectsListView extends Polymer.Element {
+                static get is() {
+                    return 'my-projects-list-view';
+                }
+
+                static get properties() {
+                    return {
+                        listData: {
+                            type: Array,
+                            notify:true
+                        },
+                        selectedItem: {
+                            observer: '_selectedItemChanged'
+                        }
+                    }
+                }
+
+
+
+
+                listLoaded(data){
+                    this.listData= data.detail.response;
+                    //console.log(this.listData);
+                }
+               /* constructor(){
+                    super();
+                    console.log(this.selectedItem);
+                }
+                ready(){
+                    super.ready();
+                    this.$.projectsListViewDatatable.selectItem(0);
+                    console.log(this.selectedItem);
+                }*/
+
+                _selectedItemChanged(item){
+                    if(item) {
+                        this.$.projectsListViewDatatable.selectedItems = item ? [item] : [];
+                        // this.selectedItem = item;
+                        //console.log(this.selectedItem);
+                        this.dispatchEvent(new CustomEvent('change-projectItem',
+                            {
+                                bubbles: true,
+                                composed: true,
+                                detail: {
+                                    recordId: this.selectedItem.recordId
+                                }
+                            }));
+                    }
+                }
+
+                _getClassForStatus(status) {
+                    //console.log(status);
+                    if (status=="Open") {
+                        return "open";
+                    }
+                    return "completed";
+                }
+
+                _getClassForDueDate(dueDate) {
+                    if(dueDate=="" || dueDate ==null){
+                        return "";
+                    }
+
+                    var today = new Date();
+                    dueDate=new Date(dueDate);
+                    //console.log((dueDate - today)/(1000*60*60*24));
+                    if (today > dueDate) {
+                        return "dueOver";
+                    }
+                    else if(((dueDate - today)/(1000*60*60*24)) < 5){
+                        return "dueSoon";
+                    }
+                    else{
+                        return "";
+                    }
+
+                }
+
+            }
+
+            window.customElements.define(MyProjectsListView.is, MyProjectsListView);
+        }());
+
+
+    </script>
+</dom-module>

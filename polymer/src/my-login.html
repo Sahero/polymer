@@ -1,0 +1,112 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/iron-localstorage/iron-localstorage.html">
+<link rel="import" href="../bower_components/iron-input/iron-input.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="user-data.html">
+
+<dom-module id="my-login">
+    <template>
+        <style></style>
+
+        <app-location route="{{route}}" data="{{routeData}}"></app-location>
+
+        <iron-localstorage name="user-storage" value="{{storedUser}}"></iron-localstorage>
+
+        <user-data user="{{storedUser}}"></user-data>
+
+        <iron-ajax
+                id="loginAjax"
+                method="post"
+                content-type="application/json"
+                handle-as="text"
+                on-response="handleUserResponse"
+                on-error="handleUserError"></iron-ajax>
+
+        <div>
+            <template is="dom-if" if="[[error]]">
+                <p class="alert-error"><strong>Error:</strong> [[error]]</p>
+            </template>
+            <paper-input is="iron-input" id="username" type="text" value="{{formData.username}}"></paper-input>
+            <paper-input is="iron-input" id="password" type="password" value="{{formData.password}}"></paper-input>
+            <br>
+            <paper-button raised on-tap="postLogin">Log In</paper-button>
+            <paper-button raised on-tap="_reset(event)">Reset</paper-button>
+            <div class="output"></div>
+
+        </div>
+
+        <!--<paper-dialog modal opened="[[opened]]">-->
+            <!--<h2>Please Sign In</h2>-->
+
+            <!--<template is="dom-if" if="[[error]]">-->
+                <!--<p class="alert-error"><strong>Error:</strong> [[error]]</p>-->
+            <!--</template>-->
+            <!--<paper-input is="iron-input" id="username" type="text" value="{{formData.username}}"></paper-input>-->
+            <!--<paper-input is="iron-input" id="password" type="password" value="{{formData.password}}"></paper-input>-->
+            <!--<br>-->
+            <!--<paper-button raised on-tap="postLogin">Log In</paper-button>-->
+
+        <!--</paper-dialog>-->
+
+    </template>
+    <script>
+        class MyLogin extends Polymer.Element {
+            static get is() { return 'my-login'; }
+
+            static get properties() {
+                return {
+
+                    formData: {type: Object,value:{}},
+                    storedUser: Object,
+                    error: String
+                };
+            }
+
+            postLogin(){
+                this.$.loginAjax.url = 'http://localhost:3000/users/login';
+                //console.log(this.formData);
+                this.$.loginAjax.body = this.formData;
+                this.$.loginAjax.generateRequest();
+            }
+
+            handleUserResponse(event) {
+                var response = JSON.parse(event.detail.response);
+                //console.log(event);
+                //console.log(response);
+                //var response = event.detail.response;
+
+                if (response.id_token) {
+                    this.error = '';
+                    this.storedUser = {
+                        username: response.data.username,
+                        user_id: response.data.id,
+                        id_token: response.id_token,
+                        access_token: response.access_token,
+                        loggedin: true
+                    };
+                    console.log(this.storedUser);
+                    this.set('routeData.stored-user', this.storedUser);
+                    this.set('route.path', 'my-main');
+                         }
+                else{
+                    this.error = response.msg;
+                    }
+                //console.log(this.formData);
+                // reset form data
+                this.formData = {};
+            }
+            handleUserError(event) {
+                this.error = event.detail.request.xhr.response;
+            }
+        }
+
+
+        window.customElements.define(MyLogin.is, MyLogin);
+    </script>
+</dom-module>
