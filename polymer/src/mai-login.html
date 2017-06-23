@@ -8,9 +8,9 @@
 <link rel="import" href="../bower_components/app-route/app-location.html">
 
 <link rel="import" href="shared-styles.html">
-<link rel="import" href="user-data.html">
+<link rel="import" href="mai-user-data.html">
 
-<dom-module id="my-login">
+<dom-module id="mai-login">
     <template>
         <style></style>
 
@@ -56,8 +56,8 @@
 
     </template>
     <script>
-        class MyLogin extends Polymer.Element {
-            static get is() { return 'my-login'; }
+        class MaiLogin extends Polymer.Element {
+            static get is() { return 'mai-login'; }
 
             static get properties() {
                 return {
@@ -92,7 +92,7 @@
                     };
                     console.log(this.storedUser);
                     this.set('routeData.stored-user', this.storedUser);
-                    this.set('route.path', 'my-main');
+                    this.set('route.path', 'mai-main');
                          }
                 else{
                     this.error = response.msg;
@@ -107,6 +107,6 @@
         }
 
 
-        window.customElements.define(MyLogin.is, MyLogin);
+        window.customElements.define(MaiLogin.is, MaiLogin);
     </script>
 </dom-module>

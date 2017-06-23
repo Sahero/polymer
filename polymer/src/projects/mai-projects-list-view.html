@@ -1,17 +1,15 @@
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/vaadin-grid/all-imports.html">
-<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/vaadin-grid/all-imports.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 
-<link rel="import" href="my-datatable-styles.html">
+<link rel="import" href="../mai-datatable-styles.html">
 
 
-<dom-module id="my-projects-list-view">
+<dom-module id="mai-projects-list-view">
     <template>
 
-        <style include="my-datatable-styles">
+        <style include="mai-datatable-styles">
         </style>
-
-
 
         <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localstorage"></app-localstorage-document>
 
@@ -19,7 +17,7 @@
                 auto
                 id="getProjectsList"
                 method="get"
-                url="https://localhost:3000/fm/getProjectsList"
+                url="[[_computeURL()]]"
                 headers$='{"FM-data-token": "[[tokenData.token]]"}'
                 handle-as="json"
                 last-response="{{listData}}"
@@ -87,9 +85,9 @@
     <script>
 
         (function() {
-            class MyProjectsListView extends Polymer.Element {
+            class MaiProjectsListView extends Polymer.Element {
                 static get is() {
-                    return 'my-projects-list-view';
+                    return 'mai-projects-list-view';
                 }
 
                 static get properties() {
@@ -104,29 +102,29 @@
                     }
                 }
 
-
-
-
                 listLoaded(data){
                     this.listData= data.detail.response;
+                    if(this.listData) {
+                        this.$.projectsListViewDatatable.activeItem = this.listData[0];
+                    }
                     //console.log(this.listData);
                 }
-               /* constructor(){
-                    super();
-                    console.log(this.selectedItem);
-                }
-                ready(){
-                    super.ready();
-                    this.$.projectsListViewDatatable.selectItem(0);
-                    console.log(this.selectedItem);
-                }*/
+                /* constructor(){
+                 super();
+                 console.log(this.selectedItem);
+                 }
+                 ready(){
+                 super.ready();
+                 this.$.projectsListViewDatatable.selectItem(0);
+                 console.log(this.selectedItem);
+                 }*/
 
                 _selectedItemChanged(item){
                     if(item) {
                         this.$.projectsListViewDatatable.selectedItems = item ? [item] : [];
                         // this.selectedItem = item;
                         //console.log(this.selectedItem);
-                        this.dispatchEvent(new CustomEvent('change-projectItem',
+                        this.dispatchEvent(new CustomEvent('project-item-selected',
                             {
                                 bubbles: true,
                                 composed: true,
@@ -165,9 +163,14 @@
 
                 }
 
+                _computeURL(){
+                    //return `https://localhost:3000/fm/getProjectsList`;
+                    return `https://localhost:3000/fm/getLocalProjectsList`;
+                }
+
             }
 
-            window.customElements.define(MyProjectsListView.is, MyProjectsListView);
+            window.customElements.define(MaiProjectsListView.is, MaiProjectsListView);
         }());
 
 

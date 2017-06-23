@@ -24,17 +24,12 @@
 
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
-<!--<link rel="import" href="my-icons.html">-->
 
-<!--<link rel="import" href="user-data.html">-->
-<!--<link rel="import" href="log-out.html">-->
-<!--<link rel="lazy-import" href="my-login.html">-->
-<!--<link rel="import" href="../bower_components/iron-localstorage/iron-localstorage.html">-->
-<link rel="import" href="my-main.html">
-<link rel="import" href="my-menu-data.html">
+<link rel="import" href="mai-main.html">
+<link rel="import" href="mai-menu-data.html">
 
 
-<dom-module id="my-app">
+<dom-module id="mai-app">
   <template>
     <custom-style>
       <style is="custom-style" include="iron-flex iron-flex-alignment">
@@ -121,9 +116,10 @@
     </custom-style>
 
     <iron-ajax
+
             id="generateToken"
             method="get"
-            url="https://localhost:3000/fm/getToken"
+            url="[[_computeTokenURL()]]"
             handle-as="json"
             last-response="{{tokenData}}"
 
@@ -139,7 +135,7 @@
 
     <!--<iron-localstorage name="user-storage" value="{{storedUser}}"></iron-localstorage>-->
     <!--<user-data user="{{storedUser}}"></user-data>-->
-    <my-menu-data menus="{{menus}}"></my-menu-data>
+    <mai-menu-data menus="{{menus}}"></mai-menu-data>
 
     <!--get the token from the filemaker database-->
 
@@ -150,12 +146,12 @@
 
       <app-header slot="header" id="header" fixed effects="waterfall">
         <app-toolbar>
-          <div align="left"><paper-fab icon="dashboard" id="toggle"></paper-fab>
+          <div align="left"><paper-fab icon="dashboard" on-tap="_toggleDrawer"></paper-fab>
           </div>
           <div class="paperTabs">
             <paper-tabs id="toolbarMenu" selected="{{page}}"
                         attr-for-selected="name"
-                        fallbackSelection="my-view404"
+                        fallbackSelection="view404"
                         role="navigation" sticky>
               <dom-repeat items="[[menus]]" as="menu">
                 <template>
@@ -173,12 +169,10 @@
       </app-header>
 
       <app-drawer-layout id="drawerLayout" force-narrow>
-        <app-drawer slot="drawer">
+        <app-drawer slot="drawer" opened="{{drawerOpened}}">
           <div class="drawer-contents">
-            <iron-selector selected="[[routeData.page]]" attr-for-selected="name" fallback-selection="my-view404" class="drawer-list" role="navigation">
+            <iron-selector selected="[[routeData.page]]" attr-for-selected="name" fallback-selection="view404" class="drawer-list" role="navigation">
 
-              <!--<a name="projects" href="/my-projects"><paper-fab icon="shop" title="Projects"></paper-fab>Projects</a>-->
-              <!--<a name="clients" href="/my-clients"><paper-fab icon="description" title="Clients"></paper-fab>Clients</a>-->
               <dom-repeat items="[[menus]]" as="menu">
                 <template>
                   <a name="[[menu.name]]" href="/[[menu.name]]">
@@ -197,10 +191,10 @@
                 attr-for-selected="name"
                 fallback-selection="view404"
                 role="main">
-          <my-main name="main"></my-main>
-          <my-clients name="clients"></my-clients>
-          <my-projects name="projects" page="{{routeData.page}}" route="{{routeTail}}" ></my-projects>
-          <my-view404 name="view404"></my-view404>
+          <mai-main name="main"></mai-main>
+          <mai-clients name="clients"></mai-clients>
+          <mai-projects name="projects" page="{{routeData.page}}" route="{{routeTail}}" ></mai-projects>
+          <mai-view404 name="view404"></mai-view404>
 
         </iron-pages>
 
@@ -213,10 +207,10 @@
   <script>
 
 
-      class MyApp extends Polymer.Element {
+      class MaiApp extends Polymer.Element {
 
 
-          static get is() { return 'my-app'; }
+          static get is() { return 'mai-app'; }
 
           static get properties() {
               return {
@@ -249,7 +243,7 @@
 
           _routePageChanged(page) {
 
-              if (page === undefined) {
+              if (page === undefined || page === "") {
                   return;
               }
               console.log(page);
@@ -262,37 +256,29 @@
           _pageChanged(page, oldPage) {
               // Load page import on demand. Show 404 page if fails
 
-              if(page !=null){
-                  if(page=="main"){
-                      this._pageLoaded(Boolean(oldPage));
-                  }
-                  else{
-                      let cb = this._pageLoaded.bind(this, Boolean(oldPage));
-                      //console.log(page);
-                      Polymer.importHref(
-                          this.resolveUrl('my-'+page + '.html'),
-                          cb, cb, true);
-                  }
-              }
-              //console.log(page);
-            /*var resolvedPageUrl = this.resolveUrl(page + '.html');
-             Polymer.importHref(
-             resolvedPageUrl,
-             null,
-             this._showPage404.bind(this),
-             true);*/
+              this._ensureLazyLoaded();
+
+              var resolvedPageUrl = this.resolveUrl('mai-'+ page + '.html');
+              Polymer.importHref(
+                  resolvedPageUrl,
+                  null,
+                  this._showPage404.bind(this),
+                  true);
+
+              document.title = 'MAI '+page.toUpperCase();
+              this.drawerOpened = false;
           }
 
-          _pageLoaded(shouldResetLayout) {
-              this._ensureLazyLoaded();
-              if (shouldResetLayout) {
-                  // The size of the header depends on the page (e.g. on some pages the tabs
-                  // do not appear), so reset the header's layout only when switching pages.
-                  Polymer.Async.timeOut.run(() => {
-                      this.$.header.resetLayout();
-                  }, 1);
-              }
-          }
+        /*_pageLoaded(shouldResetLayout) {
+         this._ensureLazyLoaded();
+         if (shouldResetLayout) {
+         // The size of the header depends on the page (e.g. on some pages the tabs
+         // do not appear), so reset the header's layout only when switching pages.
+         Polymer.Async.timeOut.run(() => {
+         this.$.header.resetLayout();
+         }, 1);
+         }
+         }*/
 
           _ensureLazyLoaded() {
               // load lazy resources after render and set `loadComplete` when done.
@@ -314,52 +300,41 @@
               this.page = 'view404';
           }
 
-        /*_toggleDrawer() {
-         this.drawerOpened = !this.drawerOpened;
-         }*/
+        _toggleDrawer() {
+            var drawerLayout = this.$.drawerLayout;
+            drawerLayout.drawer.toggle();
+         }
+
 
           ready(){
               super.ready();
-              var drawerLayout = this.$.drawerLayout;
-              this.$.toggle.addEventListener('click', function() {
-                  if (drawerLayout.forceNarrow || !drawerLayout.narrow) {
-                      drawerLayout.forceNarrow = !drawerLayout.forceNarrow;
-                  } else {
-                      drawerLayout.drawer.toggle();
 
-                  }
-
-              });
-
-              if (localStorage.getItem("token") === null) {
+              if (localStorage.getItem("token") === null || localStorage.getItem("token").length <= 2) {
                   this.$.generateToken.generateRequest();
               }
-              //this.addEventListener('change-section', (e)=>this._onChangeSection(e));
+              this.addEventListener('change-view', e => this._onChangeView(e));
           }
-        /*
-         _onChangeSection(event) {
 
-         let detail = event.detail;
+          _onChangeView(event){
+              //console.log(event);
+              let detail = event.detail;
+              var resolvedPageUrl = this.resolveUrl(detail.name+'/mai-'+ detail.view + '.html');
+              Polymer.importHref(
+                  resolvedPageUrl,
+                  null,
+                  null,
+                  true);
 
-         //this.page = detail.name || 'main';
-         //console.log(this.page);
-         this.set('route.path',this.page+'/'+detail.name);
-
-         // Announce the page's title
-         if (detail.title) {
-         console.log(1);
-         document.title = detail.title + ' - MAI';
-         }
-         }*/
-
-          /*tokenLoaded(data){
-              this.tokenData= data.detail.response.data;
-              console.log(this.tokenData);
+              document.title = 'MAI '+ detail.view.toUpperCase();
           }
-*/
+
+          _computeTokenURL(){
+              return `https://localhost:3000/fm/getToken`;
+          }
+
       }
 
-      window.customElements.define(MyApp.is, MyApp);
+      window.customElements.define(MaiApp.is, MaiApp);
 
 
   </script>

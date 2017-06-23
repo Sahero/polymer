@@ -1,81 +1,12 @@
-var express = require('express');
-//var FileMaker = require('../filemaker/filemaker-connector');
-var config = require('../config/config');
-var request = require('request');
-var _ = require('lodash');
-var router = module.exports = express.Router();
-/*var filemaker = new FileMaker(
- {
- "protocol" : config.filemaker.protocol,
- "ip" : config.filemaker.ip,
- "solution" : config.filemaker.solution,
- "headers" : config.filemaker.headers,
- "body" : config.filemaker.body,
- "selfSignedCertificate" : config.filemaker.selfSignedCertificate
- }
- );*/
-/*
- function getUrl(flag){
- if(flag==="login"){
- return config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/auth/'+config.filemaker.solution;
- }
- }
- function getBody(flag){
- if(flag==="login"){
- return {"user" : "sagar", "password" : "sagar2017", "layout": "L121_PROJECTS_List_View"};
- }
- }
-
- function getToken(){
- var token =
- request({
- "rejectUnauthorized": false,
- "method" : 'POST',
- "auth":{"user" : "sagar", "password" : "sagar2017", "layout": "L121_PROJECTS_List_View"},
- "url" : getUrl("login"),
- "headers" : config.filemaker.headers,
- "agentOptions" : config.filemaker.selfSignedCertificate,
- "json" : true,
- //        "body" : getBody("login"),
-
- }, (error, response, body) => {
- console.log(body);
- if(!error) {
- return body;
-
- }
- else {
- return "ss";
- }
- });
-
- return token;
- }
-
- router.get('/test', function(req, res) {
- var url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/auth/'+config.filemaker.solution;
- var token = "test";
- request.post({
- "rejectUnauthorized": false,
- "method" : 'POST',
- "url" : url,
- "headers" : config.filemaker.headers,
- "agentOptions" : config.filemaker.selfSignedCertificate,
- "json" : true,
- "body" : config.filemaker.body
- })
- .on('response', function(response, body){
- //console.log(body);
- console.log("response");
- console.log(response.statusCode);
- })
-
- ;
- https://{{server}}/fmi/rest/api/record/MAI/L121_PROJECTS_List_View
- });*/
+let express = require('express');
+let config = require('../config/config');
+let request = require('request');
+let _ = require('lodash');
+let router = module.exports = express.Router();
 
 router.get('/getToken', function(req, res) {
-    var url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/auth/'+config.filemaker.solution;
+
+    let url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/auth/'+config.filemaker.solution;
 
     // Make the API Call
     request({
@@ -88,8 +19,6 @@ router.get('/getToken', function(req, res) {
         "body" : config.filemaker.body
     }, (error, response, body) => {
 
-        //var arr = _.values(body);
-        //c/onsole.log(arr);
 
         if(!error) {
             res.json(body);
@@ -106,7 +35,7 @@ router.get('/getToken', function(req, res) {
 router.get('/getProjectsList', function(req, res) {
     //console.log(req.headers);
     //console.log(req.header('fm-data-token'));
-    var url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/record/'+config.filemaker.solution+'/L121_PROJECTS_List_View';
+    let url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/record/'+config.filemaker.solution+'/L121_PROJECTS_List_View';
 
     // Make the API Call
     request({
@@ -117,8 +46,12 @@ router.get('/getProjectsList', function(req, res) {
         "agentOptions" : config.filemaker.selfSignedCertificate,
         "json": true
     }, (error, response, body) => {
-
-        res.json(body.data);
+        if(error){
+            console.log(error);
+        }
+        else{
+            res.json(body.data);
+        }
     });
 });
 
@@ -126,7 +59,7 @@ router.get('/getProjectsList', function(req, res) {
 router.get('/getProjectsDetail/:recordid', function(req, res) {
     //console.log(req.params.recordid);
     //console.log(req.header('fm-data-token'));
-    var url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/record/'+config.filemaker.solution+'/L120_Projects_Data_entry/'+req.params.recordid;
+    let url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/record/'+config.filemaker.solution+'/L120_Projects_Data_entry/'+req.params.recordid;
     console.log(url);
 
     // Make the API Call
@@ -138,11 +71,28 @@ router.get('/getProjectsDetail/:recordid', function(req, res) {
         "agentOptions" : config.filemaker.selfSignedCertificate,
         "json": true
     }, (error, response, body) => {
-        res.json(body.data);
+        if(error){
+            console.log(error);
+        }
+        else{
+            res.json(body.data);
+        }
     });
 });
 
-var bcs = require('../data/projectsList.json');
-router.get('/test', function(req, res){
-    res.json(bcs);
+
+router.get('/getLocalProjectsList', function(req, res){
+    res.json(require('../data/projectsList.json'));
+});
+
+let detailsJson = require('../data/detail.json');
+router.get('/getLocalProjectsDetail/:recordid', function(req, res){
+    console.log(req.params.recordid);
+    console.log(_.find(detailsJson, {recordId: req.params.recordid}));
+
+    res.json({'rest':'rest'});
+    /*if (_.find(detailsJson, {recordId: req.params.recordid})) {
+        return res.json({success:false, msg:'A user with that username already exists'});
+    }
+    res.json(require('../data/projectsList.json'));*/
 });

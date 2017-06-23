@@ -1,8 +1,8 @@
 {
   "entrypoint": "index.html",
-  "shell": "src/my-app.html",
+  "shell": "src/mai-app.html",
   "fragments": [
-    "src/my-main.html"
+    "src/mai-main.html"
   ],
   "sources": [
     "src/**/*",

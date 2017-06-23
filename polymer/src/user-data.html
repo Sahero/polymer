@@ -1,14 +1,14 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 
-<dom-module id="user-data">
+<dom-module id="mai-user-data">
     <script>
         (function() {
 
-            var instances = [];
+            let instances = [];
 
-            class UserData extends Polymer.Element {
+            class MaiUserData extends Polymer.Element {
                 static get is() {
-                    return 'user-data';
+                    return 'mai-user-data';
                 }
 
                 static get properties() {
@@ -30,7 +30,7 @@
 
                 _detached() {
                     console.log('detached');
-                    var i = instances.indexOf(this);
+                    let i = instances.indexOf(this);
                     if (i >= 0) {
                         instances.splice(i, 1);
                     }
@@ -48,7 +48,7 @@
                 }
             }
 
-            window.customElements.define(UserData.is, UserData);
+            window.customElements.define(MaiUserData.is, MaiUserData);
         }());
     </script>
 </dom-module>

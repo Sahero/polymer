@@ -1,18 +1,18 @@
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/vaadin-grid/all-imports.html">
-<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="../bower_components/iron-list/iron-list.html">
-<!--<link rel="import" href="../bower_components/app-layout/app-grid/app-grid-style.html">-->
-<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
-<!--<link rel="import" href="my-datatable-styles.html">-->
-<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/vaadin-grid/all-imports.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-list/iron-list.html">
 
-<link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
 
 
-<dom-module id="my-projects-detail-view">
+<dom-module id="mai-projects-detail-view">
     <template>
         <custom-style>
             <style is="custom-style" include="iron-flex iron-flex-alignment">
@@ -116,7 +116,7 @@
 
                 id="getProjectsDetail"
                 method="get"
-                url$="https://localhost:3000/fm/getProjectsDetail/{{recordId}}"
+                url="[[_computeURL(recordId)]]"
 
                 headers$='{"FM-data-token": "[[tokenData.token]]"}'
                 handle-as="json"
@@ -262,16 +262,16 @@
 
     <script>
         //(function() {
-        class MyProjectsDetailView extends Polymer.Element {
+        class MaiProjectsDetailView extends Polymer.Element {
             static get is() {
-                return 'my-projects-detail-view';
+                return 'mai-projects-detail-view';
             }
             static get properties() {
                 return {
                     projectDetail: Array,
                     recordId: {
                         type: String,
-                        value: '716788',
+                        //value: '716788',
                         notify:true,
                         observer: '_recordIdChanged'
                     },
@@ -300,8 +300,14 @@
 
                 //["Investigator_Portal Copy"]["0"]["T16q_projects_STAFF|id_staff|id_staff|::Name_Full"]
             }
+
+            _computeURL(recordId){
+                console.log(recordId);
+                //return `https://localhost:3000/fm/getProjectsDetail/${recordId}`;
+                return `https://localhost:3000/fm/getLocalProjectsDetail/${recordId}`;
+            }
         }
-        window.customElements.define(MyProjectsDetailView.is, MyProjectsDetailView);
+        window.customElements.define(MaiProjectsDetailView.is, MaiProjectsDetailView);
         // }());
     </script>
 </dom-module>

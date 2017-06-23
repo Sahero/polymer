@@ -8,9 +8,7 @@
 
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 
-<!--<link rel="import" href="my-projects-list-view.html">-->
-<!--<link rel="import" href="my-projects-detail-view.html">-->
-<dom-module id="my-projects">
+<dom-module id="mai-projects">
     <template>
 
         <custom-style>
@@ -58,25 +56,16 @@
                 route="{{route}}"
                 pattern="/:page"
                 data="{{projectsData}}"
-                active="{{viewActive}}"
-
         ></app-route>
-
-        <!--<app-route-->
-        <!--route="{{route}}"-->
-        <!--pattern="/projects/projects-list-view"-->
-        <!--data="{{projectsData}}"-->
-        <!--active="{{listActive}}"-->
-        <!--&gt;</app-route>-->
 
 
         <app-toolbar>
             <iron-selector class="projectMenu" selected="[[projectsData.page]]"  attr-for-selected="name" role="navigation">
 
-                <a name="projects-detail-view" href="projects/projects-detail-view">
+                <a name="projects-detail-view" href="{{route.prefix}}/projects-detail-view">
                     <paper-fab mini icon="content-copy"></paper-fab>
                     Detail view</a>
-                <a name="projects-list-view" href="projects/projects-list-view">
+                <a name="projects-list-view" href="{{route.prefix}}/projects-list-view">
                     <paper-fab mini icon="list"></paper-fab>
                     List view</a>
             </iron-selector>
@@ -87,8 +76,8 @@
                         attr-for-selected="name"
 
             >
-                <my-projects-list-view name="projects-list-view" ></my-projects-list-view>
-                <my-projects-detail-view id="detailView" name="projects-detail-view" recordId="{{recordId}}"></my-projects-detail-view>
+                <mai-projects-list-view name="projects-list-view" ></mai-projects-list-view>
+                <mai-projects-detail-view id="detailView" name="projects-detail-view" recordId="{{recordId}}"></mai-projects-detail-view>
 
             </iron-pages>
         </div>
@@ -97,26 +86,21 @@
 
     <script>
         (function() {
-            class MyProjects extends Polymer.Element {
+            class MaiProjects extends Polymer.Element {
                 static get is() {
-                    return 'my-projects';
+                    return 'mai-projects';
                 }
 
                 static get properties(){
                     return {
-//                        view: {
-//                            type: String,
-//                            reflectToAttribute: true,
-//                            notify: true,
-//                            observer: '_viewChanged',
-//                        },
-                        projectsData: { type:Object,
-                                        notify:true,
-                                        observer:'_projectsDataChanged'},
-                        recordId:{type:String,
-                                   notify:true,
-                        }
-
+                        projectsData: {
+                            type:Object,
+                            notify:true,
+                            observer:'_projectsDataChanged'},
+                        recordId: {
+                            type:String,
+                            notify:true,
+                        },
                     };
                 }
                 /*constructor(){
@@ -126,16 +110,21 @@
                  }
                  */
                 _projectsDataChanged(projectsData,oldProjectsData){
-                    this.projectsData.page = projectsData.page || "projects-detail-view";
-                    //this.$.projectsIronPage.selected = this.projectsData.page;
-                    this.set('route.path',this.projectsData.page);
-                    if(projectsData!==oldProjectsData){
-                        var resolvedPageUrl = this.resolveUrl('my-'+ projectsData.page + '.html');
-                        Polymer.importHref(
-                            resolvedPageUrl,
-                            null,
-                            null,
-                            true);
+
+                    if(projectsData.page === undefined || projectsData.page ===""){
+                        this.projectsData.page = projectsData.page || "projects-list-view";
+                        this.set('route.path',this.projectsData.page);
+                    }
+                    else{
+                        this.dispatchEvent(new CustomEvent('change-view',
+                            {
+                                bubbles: true,
+                                composed: true,
+                                detail: {
+                                    name: 'projects',
+                                    view: projectsData.page
+                                }
+                            }));
                     }
 
 
@@ -143,10 +132,10 @@
 
                 ready(){
                     super.ready();
-                    this.addEventListener('change-projectItem', e => this._onChangeProjectItem(e));
+                    this.addEventListener('project-item-selected', e => this._onProjectItemSelected(e));
                 }
 
-                _onChangeProjectItem(event){
+                _onProjectItemSelected(event){
                     let detail = event.detail;
                     this.recordId = detail.recordId;
                     //console.log(this.recordId);
@@ -157,7 +146,7 @@
 
             }
 
-            window.customElements.define(MyProjects.is, MyProjects);
+            window.customElements.define(MaiProjects.is, MaiProjects);
         }());
     </script>
 </dom-module>
