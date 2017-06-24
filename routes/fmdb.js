@@ -96,3 +96,7 @@ router.get('/getLocalProjectsDetail/:recordid', function(req, res){
     }
     res.json(require('../data/projectsList.json'));*/
 });
+
+router.get('/getLocalStaffsList', function(req, res){
+    res.json(require('../data/detail.json'));
+});

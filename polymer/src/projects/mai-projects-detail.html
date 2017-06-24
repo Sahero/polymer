@@ -12,7 +12,7 @@
 <link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
 
 
-<dom-module id="mai-projects-detail-view">
+<dom-module id="mai-projects-detail">
     <template>
         <custom-style>
             <style is="custom-style" include="iron-flex iron-flex-alignment">
@@ -262,9 +262,9 @@
 
     <script>
         //(function() {
-        class MaiProjectsDetailView extends Polymer.Element {
+        class MaiProjectsDetail extends Polymer.Element {
             static get is() {
-                return 'mai-projects-detail-view';
+                return 'mai-projects-detail';
             }
             static get properties() {
                 return {
@@ -307,7 +307,7 @@
                 return `https://localhost:3000/fm/getLocalProjectsDetail/${recordId}`;
             }
         }
-        window.customElements.define(MaiProjectsDetailView.is, MaiProjectsDetailView);
+        window.customElements.define(MaiProjectsDetail.is, MaiProjectsDetail);
         // }());
     </script>
 </dom-module>

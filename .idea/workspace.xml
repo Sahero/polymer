@@ -1,31 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="928b3c8f-bf5d-48d9-aacf-fb2d390b1709" name="Default" comment="Removed files not being used and added a folder">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/polymer/src/projects/mai-projects-detail-view.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/polymer/src/projects/mai-projects-list-view.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/polymer/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/polymer/src/my-icons.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/polymer/src/my-projects-detail-view.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/polymer/src/my-projects-list-view.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/polymer/src/my-view1.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/polymer/src/my-view2.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/polymer/src/my-view3.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/polymer/test/my-view1.html" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/polymer/src/log-out.html" afterPath="$PROJECT_DIR$/polymer/src/mai-logout.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/polymer/src/my-app.html" afterPath="$PROJECT_DIR$/polymer/src/mai-app.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/polymer/src/my-datatable-styles.html" afterPath="$PROJECT_DIR$/polymer/src/mai-datatable-styles.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/polymer/src/my-login.html" afterPath="$PROJECT_DIR$/polymer/src/mai-login.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/polymer/src/my-main.html" afterPath="$PROJECT_DIR$/polymer/src/mai-main.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/polymer/src/my-menu-data.html" afterPath="$PROJECT_DIR$/polymer/src/mai-menu-data.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/polymer/src/my-projects.html" afterPath="$PROJECT_DIR$/polymer/src/mai-projects.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/polymer/src/my-view404.html" afterPath="$PROJECT_DIR$/polymer/src/mai-view404.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polymer/images/favicon.ico" afterPath="$PROJECT_DIR$/polymer/images/favicon.ico" />
+    <list default="true" id="928b3c8f-bf5d-48d9-aacf-fb2d390b1709" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/favicon.ico" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/polymer/src/mai-staffs.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/polymer/src/staffs/mai-staffs-detail.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/polymer/src/staffs/mai-staffs-list.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/polymer/src/styles/mai-shared-styles.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/polymer/src/shared-styles.html" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/polymer/src/mai-datatable-styles.html" afterPath="$PROJECT_DIR$/polymer/src/styles/mai-datatable-styles.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/polymer/src/projects/mai-projects-detail-view.html" afterPath="$PROJECT_DIR$/polymer/src/projects/mai-projects-detail.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/polymer/src/projects/mai-projects-list-view.html" afterPath="$PROJECT_DIR$/polymer/src/projects/mai-projects-list.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polymer/index.html" afterPath="$PROJECT_DIR$/polymer/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polymer/polymer.json" afterPath="$PROJECT_DIR$/polymer/polymer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polymer/src/shared-styles.html" afterPath="$PROJECT_DIR$/polymer/src/shared-styles.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polymer/src/user-data.html" afterPath="$PROJECT_DIR$/polymer/src/user-data.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polymer/src/lazy-resources.html" afterPath="$PROJECT_DIR$/polymer/src/lazy-resources.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polymer/src/mai-app.html" afterPath="$PROJECT_DIR$/polymer/src/mai-app.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polymer/src/mai-login.html" afterPath="$PROJECT_DIR$/polymer/src/mai-login.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polymer/src/mai-logout.html" afterPath="$PROJECT_DIR$/polymer/src/mai-logout.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polymer/src/mai-menu-data.html" afterPath="$PROJECT_DIR$/polymer/src/mai-menu-data.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polymer/src/mai-projects.html" afterPath="$PROJECT_DIR$/polymer/src/mai-projects.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polymer/src/mai-view404.html" afterPath="$PROJECT_DIR$/polymer/src/mai-view404.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/fmdb.js" afterPath="$PROJECT_DIR$/routes/fmdb.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -44,48 +38,58 @@
       <file leaf-file-name="mai-app.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/polymer/src/mai-app.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="246" column="25" lean-forward="true" selection-start-line="246" selection-start-column="25" selection-end-line="246" selection-end-column="25" />
+            <state relative-caret-position="-17">
+              <caret line="108" column="26" lean-forward="false" selection-start-line="108" selection-start-column="26" selection-end-line="108" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mai-projects.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/polymer/src/mai-projects.html">
+      <file leaf-file-name="mai-staffs.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/polymer/src/mai-staffs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="115" column="58" lean-forward="false" selection-start-line="115" selection-start-column="58" selection-end-line="115" selection-end-column="58" />
+            <state relative-caret-position="51">
+              <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mai-view404.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/polymer/src/mai-view404.html">
+      <file leaf-file-name="mai-projects-list.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/polymer/src/projects/mai-projects-list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="19" column="17" lean-forward="false" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
+            <state relative-caret-position="2771">
+              <caret line="163" column="0" lean-forward="true" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="shared-styles.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/polymer/src/shared-styles.html">
+      <file leaf-file-name="mai-staffs-detail.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/polymer/src/staffs/mai-staffs-detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state relative-caret-position="170">
+              <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/polymer/index.html">
+      <file leaf-file-name="mai-projects-detail.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/polymer/src/projects/mai-projects-detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="5100">
+              <caret line="305" column="16" lean-forward="false" selection-start-line="305" selection-start-column="16" selection-end-line="305" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mai-staffs-list.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/polymer/src/staffs/mai-staffs-list.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="76" column="61" lean-forward="false" selection-start-line="76" selection-start-column="61" selection-end-line="76" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -94,28 +98,8 @@
       <file leaf-file-name="mai-main.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/polymer/src/mai-main.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
+            <state relative-caret-position="170">
               <caret line="15" column="10" lean-forward="false" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mai-datatable-styles.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/polymer/src/mai-datatable-styles.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="70" column="12" lean-forward="false" selection-start-line="70" selection-start-column="12" selection-end-line="70" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mai-projects-list-view.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/polymer/src/projects/mai-projects-list-view.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -124,8 +108,18 @@
       <file leaf-file-name="fmdb.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/fmdb.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="94">
-              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="169">
+              <caret line="92" column="30" lean-forward="true" selection-start-line="92" selection-start-column="30" selection-end-line="92" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="detail.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/detail.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="24" lean-forward="true" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -138,41 +132,42 @@
       <list>
         <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="PolymerHTML" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>back</find>
-      <find>backgrou</find>
-      <find>background</find>
-      <find>background-</find>
-      <find>background-co</find>
-      <find>background-color</find>
-      <find>card</find>
-      <find>staff-list</find>
-      <find>selectedItems</find>
-      <find>_selectedItemChanged</find>
-      <find>listData</find>
-      <find>generate</find>
-      <find>menus</find>
-      <find>my-projects</find>
-      <find>viewActive</find>
-      <find>_pageLoaded</find>
-      <find>ready</find>
-      <find>recordId</find>
-      <find>_pageChanged</find>
-      <find>my-</find>
-      <find>projectsData</find>
-      <find>m</find>
-      <find>M</find>
-      <find>My</find>
-      <find>ma</find>
-      <find>mai</find>
-      <find>_toggleDrawer</find>
+      <find>favic</find>
+      <find>favicon</find>
       <find>my</find>
-      <find>var</find>
       <find>toggle</find>
+      <find>staff</find>
+      <find>favicon.</find>
+      <find>s</find>
+      <find>shared</find>
+      <find>shared-</find>
+      <find>shared-st</find>
+      <find>shared-sty</find>
+      <find>padding</find>
+      <find>projectMenu</find>
+      <find>button</find>
+      <find>tabs</find>
+      <find>listViewDatatable</find>
+      <find>projectsData</find>
+      <find>projectsIronPage</find>
+      <find>shared-styles</find>
+      <find>mshared-styles</find>
+      <find>mashared-styles</find>
+      <find>maishared-styles</find>
+      <find>mai-shared-styles</find>
+      <find>hmai-shared-styles</find>
+      <find>hrmai-shared-styles</find>
+      <find>hremai-shared-styles</find>
+      <find>hrefmai-shared-styles</find>
+      <find>href=mai-shared-styles</find>
+      <find>href=&quot;mai-shared-styles</find>
+      <find>project</find>
     </findStrings>
     <replaceStrings>
       <replace>my-view2</replace>
@@ -181,6 +176,7 @@
       <replace>listData</replace>
       <replace>listViewDatatable</replace>
       <replace>mai-</replace>
+      <replace>staffsData</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\HP\WebstormProjects\MAI\config</dir>
@@ -198,23 +194,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/utilities/crypto.js" />
-        <option value="$PROJECT_DIR$/data/users.json" />
-        <option value="$PROJECT_DIR$/routes/users.js" />
-        <option value="$PROJECT_DIR$/polymer/src/login-page.html" />
-        <option value="$PROJECT_DIR$/filemaker/filemaker-connector.js" />
-        <option value="$PROJECT_DIR$/polymer/src/my-view2.html" />
-        <option value="$PROJECT_DIR$/polymer/src/my-login.html" />
-        <option value="$PROJECT_DIR$/polymer/bower_components/iron-icons/iron-icons.html" />
-        <option value="$PROJECT_DIR$/polymer/bower.json" />
         <option value="$PROJECT_DIR$/polymer/src/my-icons.html" />
         <option value="$PROJECT_DIR$/routes/bettercallsaul.js" />
         <option value="$PROJECT_DIR$/polymer/src/my-view1.html" />
         <option value="$PROJECT_DIR$/config/config.js" />
-        <option value="$PROJECT_DIR$/polymer/src/lazy-resources.html" />
         <option value="$PROJECT_DIR$/data/bettercallsaul.json" />
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/polymer/bower_components/vaadin-grid/all-imports.html" />
         <option value="$PROJECT_DIR$/polymer/src/my-datatable.html" />
         <option value="$PROJECT_DIR$/data/projectsList.json" />
@@ -234,18 +218,33 @@
         <option value="$PROJECT_DIR$/polymer/src/projects/mai-projects.html" />
         <option value="$PROJECT_DIR$/polymer/src/projects/mai-projects-detail-view.html" />
         <option value="$PROJECT_DIR$/polymer/src/log-out.html" />
-        <option value="$PROJECT_DIR$/polymer/src/mai-datatable-styles.html" />
         <option value="$PROJECT_DIR$/polymer/src/mai-login.html" />
         <option value="$PROJECT_DIR$/polymer/src/mai-main.html" />
-        <option value="$PROJECT_DIR$/polymer/src/mai-menu-data.html" />
-        <option value="$PROJECT_DIR$/polymer/src/mai-projects.html" />
-        <option value="$PROJECT_DIR$/polymer/src/mai-view404.html" />
-        <option value="$PROJECT_DIR$/polymer/index.html" />
-        <option value="$PROJECT_DIR$/polymer/src/projects/mai-projects-list-view.html" />
-        <option value="$PROJECT_DIR$/polymer/src/mai-app.html" />
-        <option value="$PROJECT_DIR$/routes/fmdb.js" />
         <option value="$PROJECT_DIR$/polymer/src/user-data.html" />
+        <option value="$PROJECT_DIR$/polymer/src/mai-view404.html" />
+        <option value="$PROJECT_DIR$/polymer/src/staff/mai-staff-list.html" />
+        <option value="$PROJECT_DIR$/polymer/index.html" />
+        <option value="$PROJECT_DIR$/polymer/bower_components/iron-icons/iron-icons.html" />
+        <option value="$PROJECT_DIR$/polymer/src/mai-menu-data.html" />
         <option value="$PROJECT_DIR$/polymer/src/shared-styles.html" />
+        <option value="$PROJECT_DIR$/polymer/src/mai-logout.html" />
+        <option value="$PROJECT_DIR$/polymer/src/mai-shared-styles.html" />
+        <option value="$PROJECT_DIR$/polymer/src/mai-datatable-styles.html" />
+        <option value="$PROJECT_DIR$/polymer/src/projects/mai-projects-list-view.html" />
+        <option value="$PROJECT_DIR$/polymer/src/staff/mai-staff-detail.html" />
+        <option value="$PROJECT_DIR$/polymer/src/projects/mai-projects-detail.html" />
+        <option value="$PROJECT_DIR$/polymer/src/mai-projects.html" />
+        <option value="$PROJECT_DIR$/polymer/src/mai-staffs.html" />
+        <option value="$PROJECT_DIR$/polymer/src/staff/mai-staffs-detail.html" />
+        <option value="$PROJECT_DIR$/polymer/src/staff/mai-staffs-list.html" />
+        <option value="$PROJECT_DIR$/polymer/src/staffs/mai-staffs-detail.html" />
+        <option value="$PROJECT_DIR$/polymer/src/lazy-resources.html" />
+        <option value="$PROJECT_DIR$/polymer/src/styles/mai-shared-styles.html" />
+        <option value="$PROJECT_DIR$/polymer/src/projects/mai-projects-list.html" />
+        <option value="$PROJECT_DIR$/routes/fmdb.js" />
+        <option value="$PROJECT_DIR$/polymer/src/staffs/mai-staffs-list.html" />
+        <option value="$PROJECT_DIR$/polymer/src/mai-app.html" />
+        <option value="$PROJECT_DIR$/app.js" />
       </list>
     </option>
   </component>
@@ -276,6 +275,22 @@
     <option name="y" value="-8" />
     <option name="width" value="1382" />
     <option name="height" value="744" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>AngularJS</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -347,47 +362,21 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="polymer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="projects" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MAI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="polymer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MAI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -403,17 +392,20 @@
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
+    <property name="settings.editor.selected.configurable" value="fileTemplates" />
     <property name="JavaScriptPreferStrict" value="false" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\HP\WebstormProjects\MAI\polymer\src\styles" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\HP\WebstormProjects\MAI\public" />
       <recent name="C:\Users\HP\WebstormProjects\MAI\polymer\images" />
       <recent name="C:\Users\HP\WebstormProjects\MAI\polymer\src\projects" />
       <recent name="G:\Projects\polymer-master\polymer\src" />
       <recent name="G:\Projects\polymer-master\polymer\images" />
-      <recent name="C:\Projects\polymer-master\polymer\images" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -521,7 +513,7 @@
       <workItem from="1497432761571" duration="47048000" />
       <workItem from="1497826654648" duration="77126000" />
       <workItem from="1498100169298" duration="2596000" />
-      <workItem from="1498108289053" duration="18265000" />
+      <workItem from="1498108289053" duration="33823000" />
     </task>
     <task id="LOCAL-00001" summary="Removed views that are not used">
       <created>1498106193295</created>
@@ -537,11 +529,18 @@
       <option name="project" value="LOCAL" />
       <updated>1498106217985</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Removed files not being used and added a folder">
+      <created>1498208685915</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1498208685915</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="241536000" />
+    <option name="totallyTimeSpent" value="257094000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -556,21 +555,21 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19182156" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3360522" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3360522" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2985318" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2985318" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -588,39 +587,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/polymer/src/mai-projects.html</url>
-          <line>124</line>
-          <properties />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/bower.json" />
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/polymer/bower_components/iron-icon/iron-icon.html" />
-    <entry file="file://$PROJECT_DIR$/polymer/bower_components/iron-iconset-svg/iron-iconset-svg.html" />
-    <entry file="file://$PROJECT_DIR$/polymer/bower_components/iron-icons/iron-icons.html" />
-    <entry file="file://$PROJECT_DIR$/polymer/bower_components/iron-ajax/iron-ajax.html" />
-    <entry file="file://$PROJECT_DIR$/polymer/bower_components/iron-ajax/bower.json" />
-    <entry file="file://$PROJECT_DIR$/config/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="55" lean-forward="false" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/polymer/bower_components/iron-a11y-announcer/bower.json" />
     <entry file="file://$PROJECT_DIR$/polymer/bower_components/iron-a11y-announcer/.bower.json" />
     <entry file="file://$PROJECT_DIR$/polymer/bower_components/iron-a11y-keys-behavior/bower.json" />
@@ -678,22 +649,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-527">
           <caret line="4" column="16" lean-forward="false" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/detail.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-238">
-          <caret line="6" column="24" lean-forward="true" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/Claimant.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="1" lean-forward="false" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
           <folding />
         </state>
       </provider>
@@ -770,46 +725,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/polymer/src/projects/mai-projects-detail-view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="313" column="0" lean-forward="true" selection-start-line="313" selection-start-column="0" selection-end-line="313" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/polymer/src/lazy-resources.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/polymer/src/mai-logout.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="11" column="31" lean-forward="false" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/polymer/src/mai-login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="106" column="9" lean-forward="true" selection-start-line="106" selection-start-column="9" selection-end-line="106" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/polymer/src/mai-menu-data.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="4" column="20" lean-forward="true" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/polymer/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="816">
@@ -818,41 +733,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/polymer/src/mai-projects.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="115" column="58" lean-forward="false" selection-start-line="115" selection-start-column="58" selection-end-line="115" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/polymer/images/favicon.ico">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/polymer/src/mai-app.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="246" column="25" lean-forward="true" selection-start-line="246" selection-start-column="25" selection-end-line="246" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/polymer/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/fmdb.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="94">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/polymer/src/user-data.html">
@@ -863,42 +746,194 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/polymer/src/shared-styles.html">
+    <entry file="file://$PROJECT_DIR$/polymer/src/mai-view404.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        <state relative-caret-position="187">
+          <caret line="13" column="35" lean-forward="false" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polymer/src/staff/new-file.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polymer/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="16" column="34" lean-forward="true" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polymer/bower_components/iron-icon/iron-icon.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="34" column="93" lean-forward="false" selection-start-line="34" selection-start-column="90" selection-end-line="34" selection-end-column="97" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polymer/bower_components/iron-iconset-svg/iron-iconset-svg.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3568">
+          <caret line="21" column="31" lean-forward="false" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polymer/bower_components/iron-icons/iron-icons.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="225" column="0" lean-forward="false" selection-start-line="225" selection-start-column="0" selection-end-line="225" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polymer/src/mai-menu-data.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="34" column="36" lean-forward="false" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polymer/src/styles/mai-datatable-styles.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="86" column="0" lean-forward="true" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polymer/src/mai-projects.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="53" lean-forward="false" selection-start-line="5" selection-start-column="53" selection-end-line="5" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polymer/src/mai-login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1802">
+          <caret line="106" column="9" lean-forward="true" selection-start-line="106" selection-start-column="9" selection-end-line="106" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polymer/src/mai-logout.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="28" lean-forward="false" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polymer/src/styles/mai-shared-styles.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="11" lean-forward="true" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polymer/src/lazy-resources.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="59" lean-forward="true" selection-start-line="3" selection-start-column="59" selection-end-line="3" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/fmdb.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="92" column="30" lean-forward="true" selection-start-line="92" selection-start-column="30" selection-end-line="92" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/detail.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="24" lean-forward="true" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/polymer/src/mai-main.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
+        <state relative-caret-position="170">
           <caret line="15" column="10" lean-forward="false" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/polymer/src/mai-view404.html">
+    <entry file="file://$PROJECT_DIR$/polymer/src/mai-app.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="19" column="17" lean-forward="false" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
+        <state relative-caret-position="-17">
+          <caret line="108" column="26" lean-forward="false" selection-start-line="108" selection-start-column="26" selection-end-line="108" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/polymer/src/mai-datatable-styles.html">
+    <entry file="file://$PROJECT_DIR$/polymer/src/staffs/mai-staffs-detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="70" column="12" lean-forward="false" selection-start-line="70" selection-start-column="12" selection-end-line="70" selection-end-column="12" />
+        <state relative-caret-position="170">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/polymer/src/projects/mai-projects-list-view.html">
+    <entry file="file://$PROJECT_DIR$/polymer/src/mai-staffs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+        <state relative-caret-position="51">
+          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polymer/src/projects/mai-projects-list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2771">
+          <caret line="163" column="0" lean-forward="true" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/Claimant.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="6" lean-forward="true" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polymer/src/staffs/mai-staffs-list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="76" column="61" lean-forward="false" selection-start-line="76" selection-start-column="61" selection-end-line="76" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polymer/src/projects/mai-projects-detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5100">
+          <caret line="305" column="16" lean-forward="false" selection-start-line="305" selection-start-column="16" selection-end-line="305" selection-end-column="16" />
           <folding />
         </state>
       </provider>

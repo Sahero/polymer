@@ -1,0 +1,45 @@
+
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<!-- shared styles for all views -->
+<dom-module id="mai-shared-styles">
+  <template>
+    <style>
+      app-toolbar {
+        background-color: #4285f4;
+        color: #fff;
+        @apply(--layout-horizontal);
+        @apply(--layout-flex);
+      }
+
+      .view-toolbar{
+        @apply(--layout-horizontal);
+        @apply(--layout-flex);
+
+      }
+      .view-toolbar a{
+        color: lightgray;
+        text-decoration: none;
+        font-size: 10px;
+        padding-right:10px;
+      }
+      .view-toolbar .iron-selected{
+        color: white;
+      }
+
+      .view-toolbar paper-fab{
+        border-radius:5px;
+      }
+
+      .view-toolbar .iron-selected paper-fab{
+        border: 1px solid var(--paper-tab-ink, var(--paper-yellow-a100));
+        box-shadow: 3px -3px var(--paper-tab-ink, var(--paper-yellow-a100));
+        -moz-box-shadow: 3px -3px var(--paper-tab-ink, var(--paper-yellow-a100));
+        -webkit-box-shadow: 3px -3px var(--paper-tab-ink, var(--paper-yellow-a100));
+        -o-box-shadow: 3px -3px var(--paper-tab-ink, var(--paper-yellow-a100));
+        border-radius:5px;
+      }
+
+    </style>
+  </template>
+</dom-module>

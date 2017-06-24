@@ -1,0 +1,99 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="styles/mai-shared-styles.html">
+
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+
+<dom-module id="mai-staffs">
+    <template>
+        <custom-style>
+            <style is="custom-style" include="mai-shared-styles">
+
+            </style>
+        </custom-style>
+
+        <app-route
+                route="{{route}}"
+                pattern="/:page"
+                data="{{staffsData}}"
+        ></app-route>
+
+
+        <app-toolbar>
+            <iron-selector class="view-toolbar" selected="[[staffsData.page]]"  attr-for-selected="name" role="navigation">
+
+                <a name="staffs-detail" href="{{route.prefix}}/staffs-detail">
+                    <paper-fab mini icon="content-copy"></paper-fab>
+                    Detail view</a>
+                <a name="staffs-list" href="{{route.prefix}}/staffs-list">
+                    <paper-fab mini icon="list"></paper-fab>
+                    List view</a>
+            </iron-selector>
+        </app-toolbar>
+
+        <iron-pages selected="[[staffsData.page]]" attr-for-selected="name">
+
+            <mai-staffs-list name="staffs-list" ></mai-staffs-list>
+            <mai-staffs-detail id="detailView" name="staffs-detail" recordId="{{recordId}}"></mai-staffs-detail>
+
+        </iron-pages>
+
+    </template>
+    <script>
+
+        class MaiStaffs extends Polymer.Element
+        {
+            static get is(){ return 'mai-staffs'; }
+
+            static get properties(){
+                return {
+                    staffsData: {
+                        type:Object,
+                        notify:true,
+                        observer:'_onStaffsDataChanged'},
+                    recordId: {
+                        type:String,
+                        notify:true,
+                    },
+                };
+            }
+
+            _onStaffsDataChanged(staffsData,oldStaffsData){
+
+                if(staffsData.page === undefined || staffsData.page ===""){
+                    this.staffsData.page = staffsData.page || "staffs-list";
+                    this.set('route.path',this.staffsData.page);
+                }
+                else{
+                    this.dispatchEvent(new CustomEvent('change-view',
+                        {
+                            bubbles: true,
+                            composed: true,
+                            detail: {
+                                name: 'staffs',
+                                view: staffsData.page
+                            }
+                        }));
+                }
+
+            }
+
+            ready(){
+                super.ready();
+                this.addEventListener('staff-item-selected', e => this._onStaffItemSelected(e));
+            }
+
+            _onStaffItemSelected(event){
+                let detail = event.detail;
+                this.recordId = detail.recordId;
+                //console.log(this.recordId);
+                this.$.detailView.recordId = this.recordId;
+            }
+
+
+        }
+
+        window.customElements.define(MaiStaffs.is,MaiStaffs);
+    </script>
+</dom-module>
