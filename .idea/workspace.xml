@@ -3,15 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="928b3c8f-bf5d-48d9-aacf-fb2d390b1709" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/projectsList.json" afterPath="$PROJECT_DIR$/data/projectsList.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polymer/src/lazy-resources.html" afterPath="$PROJECT_DIR$/polymer/src/lazy-resources.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polymer/src/mai-app.html" afterPath="$PROJECT_DIR$/polymer/src/mai-app.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polymer/src/mai-main.html" afterPath="$PROJECT_DIR$/polymer/src/mai-main.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polymer/src/mai-projects.html" afterPath="$PROJECT_DIR$/polymer/src/mai-projects.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polymer/src/mai-staffs.html" afterPath="$PROJECT_DIR$/polymer/src/mai-staffs.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polymer/src/projects/mai-projects-list.html" afterPath="$PROJECT_DIR$/polymer/src/projects/mai-projects-list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polymer/src/styles/mai-shared-styles.html" afterPath="$PROJECT_DIR$/polymer/src/styles/mai-shared-styles.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/fmdb.js" afterPath="$PROJECT_DIR$/routes/fmdb.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -474,7 +465,7 @@
       <workItem from="1497432761571" duration="47048000" />
       <workItem from="1497826654648" duration="77126000" />
       <workItem from="1498100169298" duration="2596000" />
-      <workItem from="1498108289053" duration="52800000" />
+      <workItem from="1498108289053" duration="52833000" />
     </task>
     <task id="LOCAL-00001" summary="Removed views that are not used">
       <created>1498106193295</created>
@@ -504,11 +495,18 @@
       <option name="project" value="LOCAL" />
       <updated>1498280025639</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="UI changes">
+      <created>1498374254435</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1498374254435</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="276071000" />
+    <option name="totallyTimeSpent" value="276104000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -522,12 +520,12 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21933086" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21933086" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3360522" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24981412" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -572,7 +570,8 @@
     <MESSAGE value="Removed views that are not used" />
     <MESSAGE value="Removed files not being used and added a folder" />
     <MESSAGE value="Re-structured the files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Re-structured the files" />
+    <MESSAGE value="UI changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="UI changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
