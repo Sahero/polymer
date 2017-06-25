@@ -58,23 +58,21 @@
                     },
                     visible: {
                         type: Boolean,
-                        //observer: '_visibleChanged'
+                        observer: '_onStaffsDataChanged'
                     }
                 };
             }
 
             _onStaffsDataChanged(staffsData,oldStaffsData) {
-//                console.log(this.route);
-//                if (this.route.prefix === "/staffs") {
-//                    console.log(oldStaffsData);
-//                    console.log(staffsData);
-//                    //console.log(this.route);
-                if (staffsData.page === undefined || staffsData.page === "") {
-                    this.staffsData.page = staffsData.page || "staffs-list";
-                    this.set('route.path', this.staffsData.page);
-                }
-                else {
-                    if (this.visible) {
+
+                if(this.visible) {
+                    //console.log(staffsData);
+                    if (staffsData.page === undefined || staffsData.page === "") {
+                        this.staffsData.page = staffsData.page || "staffs-list";
+                        this.set('route.path', this.staffsData.page);
+                    }
+                    else {
+                        //if (this.visible) {
                         this.dispatchEvent(new CustomEvent('change-view',
                             {
                                 bubbles: true,
@@ -86,7 +84,7 @@
                             }));
                     }
                 }
-            //}
+                //}
 
             }
 
