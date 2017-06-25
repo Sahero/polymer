@@ -17,7 +17,7 @@
         </custom-style>
 
         <app-route
-                route="{{route}}"
+                route="[[route]]"
                 pattern="/:page"
                 data="{{projectsData}}"
         ></app-route>
@@ -26,10 +26,10 @@
         <app-toolbar>
             <iron-selector class="view-toolbar" selected="[[projectsData.page]]"  attr-for-selected="name" role="navigation">
 
-                <a name="projects-detail" href="{{route.prefix}}/projects-detail">
+                <a name="projects-detail" href="[[route.prefix]]/projects-detail">
                     <paper-fab mini icon="content-copy"></paper-fab>
                     Detail view</a>
-                <a name="projects-list" href="{{route.prefix}}/projects-list">
+                <a name="projects-list" href="[[route.prefix]]/projects-list">
                     <paper-fab mini icon="list"></paper-fab>
                     List view</a>
             </iron-selector>
@@ -62,6 +62,10 @@
                             type:String,
                             notify:true,
                         },
+                        visible: {
+                            type: Boolean,
+                            //observer: '_visibleChanged'
+                        }
                     };
                 }
                 /*constructor(){
@@ -77,15 +81,17 @@
                         this.set('route.path',this.projectsData.page);
                     }
                     else{
-                        this.dispatchEvent(new CustomEvent('change-view',
-                            {
-                                bubbles: true,
-                                composed: true,
-                                detail: {
-                                    name: 'projects',
-                                    view: projectsData.page
-                                }
-                            }));
+                        if(this.visible) {
+                            this.dispatchEvent(new CustomEvent('change-view',
+                                {
+                                    bubbles: true,
+                                    composed: true,
+                                    detail: {
+                                        name: 'projects',
+                                        view: projectsData.page
+                                    }
+                                }));
+                        }
                     }
 
 

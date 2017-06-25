@@ -14,7 +14,7 @@
         </custom-style>
 
         <app-route
-                route="{{route}}"
+                route="[[route]]"
                 pattern="/:page"
                 data="{{staffsData}}"
         ></app-route>
@@ -23,10 +23,10 @@
         <app-toolbar>
             <iron-selector class="view-toolbar" selected="[[staffsData.page]]"  attr-for-selected="name" role="navigation">
 
-                <a name="staffs-detail" href="{{route.prefix}}/staffs-detail">
+                <a name="staffs-detail" href="[[route.prefix]]/staffs-detail">
                     <paper-fab mini icon="content-copy"></paper-fab>
                     Detail view</a>
-                <a name="staffs-list" href="{{route.prefix}}/staffs-list">
+                <a name="staffs-list" href="[[route.prefix]]/staffs-list">
                     <paper-fab mini icon="list"></paper-fab>
                     List view</a>
             </iron-selector>
@@ -35,7 +35,7 @@
         <iron-pages selected="[[staffsData.page]]" attr-for-selected="name">
 
             <mai-staffs-list name="staffs-list" ></mai-staffs-list>
-            <mai-staffs-detail id="detailView" name="staffs-detail" recordId="{{recordId}}"></mai-staffs-detail>
+            <mai-staffs-detail id="sdetailView" name="staffs-detail" recordId="{{recordId}}"></mai-staffs-detail>
 
         </iron-pages>
 
@@ -56,26 +56,37 @@
                         type:String,
                         notify:true,
                     },
+                    visible: {
+                        type: Boolean,
+                        //observer: '_visibleChanged'
+                    }
                 };
             }
 
-            _onStaffsDataChanged(staffsData,oldStaffsData){
-
-                if(staffsData.page === undefined || staffsData.page ===""){
+            _onStaffsDataChanged(staffsData,oldStaffsData) {
+//                console.log(this.route);
+//                if (this.route.prefix === "/staffs") {
+//                    console.log(oldStaffsData);
+//                    console.log(staffsData);
+//                    //console.log(this.route);
+                if (staffsData.page === undefined || staffsData.page === "") {
                     this.staffsData.page = staffsData.page || "staffs-list";
-                    this.set('route.path',this.staffsData.page);
+                    this.set('route.path', this.staffsData.page);
                 }
-                else{
-                    this.dispatchEvent(new CustomEvent('change-view',
-                        {
-                            bubbles: true,
-                            composed: true,
-                            detail: {
-                                name: 'staffs',
-                                view: staffsData.page
-                            }
-                        }));
+                else {
+                    if (this.visible) {
+                        this.dispatchEvent(new CustomEvent('change-view',
+                            {
+                                bubbles: true,
+                                composed: true,
+                                detail: {
+                                    name: 'staffs',
+                                    view: staffsData.page
+                                }
+                            }));
+                    }
                 }
+            //}
 
             }
 
@@ -88,7 +99,7 @@
                 let detail = event.detail;
                 this.recordId = detail.recordId;
                 //console.log(this.recordId);
-                this.$.detailView.recordId = this.recordId;
+                this.$.sdetailView.recordId = this.recordId;
             }
 
 

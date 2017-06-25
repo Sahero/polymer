@@ -27,6 +27,22 @@
             static get is() {
                 return 'mai-main';
             }
+            static get properties() {
+                return {
+                    visible: {
+                        type: Boolean,
+                        //observer: '_visibleChanged'
+                    }
+
+                }
+            }
+
+            /*_visibleChanged(visible) {
+                if (visible) {
+                    this.dispatchEvent(new CustomEvent('change-section', {
+                        bubbles: true, composed: true, detail: {title: 'Home'}}));
+                }
+            }*/
 
         }
         window.customElements.define(MaiMain.is, MaiMain);

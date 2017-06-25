@@ -15,7 +15,7 @@
 <link rel="import" href="../bower_components/iron-form-element-behavior/iron-form-element-behavior.html">
 
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<!--<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">-->
 <link rel="import" href="../bower_components/paper-fab/paper-fab.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
@@ -24,6 +24,7 @@
 
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
 
 <link rel="import" href="mai-main.html">
 <link rel="import" href="mai-menu-data.html">
@@ -143,6 +144,8 @@
             data="{{routeData}}"
             tail="{{routeTail}}"></app-route>
 
+    <iron-media-query query="max-width: 767px" query-matches="{{smallScreen}}"></iron-media-query>
+
     <!--<iron-localstorage name="user-storage" value="{{storedUser}}"></iron-localstorage>-->
     <!--<user-data user="{{storedUser}}"></user-data>-->
     <mai-menu-data menus="{{menus}}"></mai-menu-data>
@@ -158,20 +161,25 @@
         <app-toolbar>
           <div align="left"><paper-fab icon="dashboard" on-tap="_toggleDrawer"></paper-fab>
           </div>
-          <div class="paperTabs">
-            <paper-tabs id="toolbarMenu" selected="{{page}}"
-                        attr-for-selected="name"
-                        fallbackSelection="view404"
-                        role="navigation" sticky>
-              <dom-repeat items="[[menus]]" as="menu">
-                <template>
-                  <paper-tab link name="[[menu.name]]">
-                    <a href="/[[menu.name]]" class="link" tabindex="-1">[[menu.title]]</a>
-                  </paper-tab>
-                </template>
-              </dom-repeat>
-            </paper-tabs>
-          </div>
+          <!--Not loading tabs for small devices-->
+          <dom-if if="[[_shouldShowTabs]]">
+            <template>
+              <div class="paperTabs">
+                <paper-tabs id="toolbarMenu" selected="{{page}}"
+                            attr-for-selected="name"
+                            fallbackSelection="view404"
+                            role="navigation" sticky>
+                  <dom-repeat items="[[menus]]" as="menu">
+                    <template>
+                      <paper-tab link name="[[menu.name]]">
+                        <a href="/[[menu.name]]" class="link" tabindex="-1">[[menu.title]]</a>
+                      </paper-tab>
+                    </template>
+                  </dom-repeat>
+                </paper-tabs>
+              </div>
+            </template>
+          </dom-if>
           <div class="logo">
             <a href="/"><img src="../images/mai_logo_long_darkblue.png"/></a>
           </div>
@@ -199,6 +207,7 @@
                 selected="[[routeData.page]]"
                 attr-for-selected="name"
                 fallback-selection="view404"
+                selected-attribute="visible"
                 role="main">
           <mai-main name="main"></mai-main>
           <mai-clients name="clients"></mai-clients>
@@ -236,7 +245,10 @@
                       type: Array,
                       value: () => [],
                       notify: true
-                  }
+                  },
+                  _shouldShowTabs: {
+                      computed: '_computeShouldShowTabs(smallScreen)'
+                  },
               };
           }
 
@@ -325,9 +337,10 @@
               this.addEventListener('change-view', e => this._onChangeView(e));
           }
 
+
           _onChangeView(event){
-              //console.log(event);
-              let detail = event.detail;
+            console.log(event.detail);
+              var detail = event.detail;
               var resolvedPageUrl = this.resolveUrl(detail.name+'/mai-'+ detail.view + '.html');
               Polymer.importHref(
                   resolvedPageUrl,
@@ -336,6 +349,11 @@
                   true);
 
               document.title = 'MAI '+ detail.view.toUpperCase();
+              //event.
+          }
+
+          _computeShouldShowTabs(smallScreen) {
+              return !smallScreen;
           }
 
           _computeTokenURL(){

@@ -8,7 +8,7 @@
 <dom-module id="mai-projects-list">
     <template>
 
-        <style include="mai-datatable-styles">
+        <style include="mai-datatable-styles mai-shared-styles">
         </style>
 
         <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localstorage"></app-localstorage-document>
@@ -24,7 +24,16 @@
                 on-response="listLoaded"
         ></iron-ajax>
 
-        <vaadin-grid items="{{listData}}" id="projectsListViewDatatable" class="list-view-datatable" active-item="{{selectedItem}}" >
+        <div class="filter-button">
+            <ul>
+                <li><paper-button toggles><iron-icon icon="filter-none"></iron-icon>Find All</paper-button></li>
+                <li><paper-button toggles on-tap="_onFilterClick">Find Open</paper-button></li>
+                <li><paper-button toggles>Find Surveillance</paper-button></li>
+                <li><paper-button toggles>Find Factual</paper-button></li>
+            </ul>
+        </div>
+
+        <vaadin-grid items="{{listData}}" id="projectsListViewDatatable" class="list-view-datatable" active-item="{{selectedItem}}">
 
             <vaadin-grid-column>
                 <template class="header">
@@ -103,20 +112,12 @@
 
                 listLoaded(data){
                     this.listData= data.detail.response;
+                    console.log(this.listData);
                     if(this.listData) {
                         this.$.projectsListViewDatatable.activeItem = this.listData[0];
                     }
                     //console.log(this.listData);
                 }
-                /* constructor(){
-                 super();
-                 console.log(this.selectedItem);
-                 }
-                 ready(){
-                 super.ready();
-                 this.$.projectsListViewDatatable.selectItem(0);
-                 console.log(this.selectedItem);
-                 }*/
 
                 _selectedItemChanged(item){
                     if(item) {
@@ -159,6 +160,15 @@
                     else{
                         return "";
                     }
+
+                }
+
+                _onFilterClick(){
+                    console.log('s');
+                    this.$.getProjectsList.set('params',{"fieldData.Status":"Open"});
+                    console.log(this.$.getProjectsList);
+                    this.$.getProjectsList.generateRequest();
+
 
                 }
 

@@ -80,9 +80,19 @@ router.get('/getProjectsDetail/:recordid', function(req, res) {
     });
 });
 
-
+var localProjectList = require('../data/projectsList.json');
 router.get('/getLocalProjectsList', function(req, res){
-    res.json(require('../data/projectsList.json'));
+//    console.log(req.query);
+    //console.log();
+    //_.filter(summary.data, ['category.parent', 'Food'])
+    console.log(req.query.size);
+    if(Object.keys(req.query).length !== 0) {
+        var toSend = _.filter(localProjectList, ['fieldData.Status', 'Open']);
+        res.json(toSend);
+    }
+    else{
+        res.json(localProjectList);
+    }
 });
 
 let detailsJson = require('../data/detail.json');
