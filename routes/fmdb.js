@@ -45,6 +45,7 @@ router.get('/getList/:layoutname', function(req, res) {
     }, (error, response, body) => {
         if(error){
             console.log(error);
+            res.json(require('../data/'+req.params.layoutname+'.json'));
         }
         else{
             res.json(body.data);
@@ -92,6 +93,10 @@ router.get('/getProjectsDetail/:recordid', function(req, res) {
     }, (error, response, body) => {
         if(error){
             console.log(error);
+            let detailsJson = require('../data/detailProject.json');
+            //console.log();
+            var toJson = _.find(detailsJson, {recordId: req.params.recordid});
+            res.json(toJson);
         }
         else{
             //console.log(body);
@@ -127,7 +132,7 @@ router.get('/getStaffsList', function(req, res) {
 */
 /*
 
-var localProjectList = require('../data/projectsList.json');
+var localProjectList = require('../data/L121_PROJECTS_List_View.json');
 router.get('/getLocalProjectsList', function(req, res){
 //    console.log(req.query);
     //console.log();
@@ -142,7 +147,7 @@ router.get('/getLocalProjectsList', function(req, res){
     }
 });
 
-let detailsJson = require('../data/detail.json');
+let detailsJson = require('../data/L130_STAFF_Data_Entry.json');
 router.get('/getLocalProjectsDetail/:recordid', function(req, res){
     console.log(req.params.recordid);
     console.log(_.find(detailsJson, {recordId: req.params.recordid}));
@@ -151,9 +156,9 @@ router.get('/getLocalProjectsDetail/:recordid', function(req, res){
     /!*if (_.find(detailsJson, {recordId: req.params.recordid})) {
         return res.json({success:false, msg:'A user with that username already exists'});
     }
-    res.json(require('../data/projectsList.json'));*!/
+    res.json(require('../data/L121_PROJECTS_List_View.json'));*!/
 });
 
 router.get('/getLocalStaffsList', function(req, res){
-    res.json(require('../data/detail.json'));
+    res.json(require('../data/L130_STAFF_Data_Entry.json'));
 });*/

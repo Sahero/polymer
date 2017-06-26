@@ -1,7 +1,4 @@
-{
-  "errorCode": "0",
-  "result": "OK",
-  "data": [
+[
     {
       "fieldData": {
         "T16l_projects_NOTES||id_note|::Date": "06/07/2017",
@@ -5517,4 +5514,3 @@
       "modId": "0"
     }
   ]
-}
