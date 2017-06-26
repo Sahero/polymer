@@ -11,11 +11,14 @@
 
 <link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
 
+<link rel="import" href="../../bower_components/polymer/lib/elements/array-selector.html">
+
+
 
 <dom-module id="mai-projects-detail">
     <template>
         <custom-style>
-            <style is="custom-style" include="iron-flex iron-flex-alignment">
+            <style is="custom-style" include="iron-flex iron-flex-alignment mai-datatable-styles">
                 .group-header,
                 .group-item {
                     padding: 5px;
@@ -30,9 +33,9 @@
                 }
                 .group-header {
                     font-weight: bold;
-                    border: 1px solid #ddd;
+                    /*border: 1px solid #ddd;*/
                     color: gray;
-                    margin-top: 10px;
+                    /*margin-top: 10px;*/
                 }
                 .group-item-row {
                     display:table-row;
@@ -49,41 +52,27 @@
                     padding-left: 10px;
                 }
 
-                .all-list{
-                    margin:10px;
-                }
                 .box-container{
                     text-align: center;
                 }
                 .all-list > ul {
                     display: flex;
                     flex-direction: row;
-                    justify-content: flex-end;
-                    list-style-type: none;
-                    padding: 0;
-                    margin: 0;
-                }
-
-                .all-list > .list-horizontal > div > a,
-                .all-list > .list-horizontal > div > span {
-                    padding:8px;
-                    display: inline-block;
-                }
-
-                .all-list > .list-horizontal {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: flex-end;
+                    justify-content: flex-start;
                     list-style-type: none;
                     padding: 0;
                     margin: 0;
                 }
 
                 .all-list ul > li > a, .all-list ul > li > span {
-
+                    color: #4285f4;
                     padding:8px;
                     display: inline-block;
                 }
+                .all-list ul > li:first-child{
+                    flex-grow: 1;
+                }
+
 
                 .border-lightgray{
                     border: 1px solid lightgray;
@@ -92,21 +81,45 @@
                 .border-bottom-lightgray{
                     border-bottom: 1px solid lightgray;
                 }
+
+                .border-right-lightgray{
+                    border-right: 1px solid lightgray;
+                }
+
                 .box-spacing{
                     margin: 5px 20px 0px 5px;
                 }
 
-                li paper-icon-button{
+                paper-icon-button{
                     width: 32px;
                     height: 32px;
                     float:right;
+                    color:#4285f4;
+                }
+                .group-tabs{
+                    flex-grow: 1;
                 }
 
-                div paper-icon-button{
-                    width: 32px;
-                    height: 32px;
-                    float:right;
+                .group-tabs paper-tab[link] {
+                    color: gray;
+                    padding-right: 5px;
                 }
+                paper-tab.iron-selected{
+                    color: #4285f4;
+                    background: white;
+                }
+
+                .time{
+                    font-size: 10px;
+                    text-align: center;
+                    color: lightgray;
+                }
+                .iron-selected > .counts{
+                    font-size:14px;
+                    color: #4285f4;
+                }
+
+
 
             </style>
         </custom-style>
@@ -128,9 +141,9 @@
 
         <iron-list id="list" class="app-grid" items="{{projectDetail}}" as="project" scroll-target="document">
             <template>
-                <div class="layout horizontal wrap justified">
+                <div class="layout horizontal wrap around-justified">
                     <div class="group-item box-spacing flex border-lightgray" >
-                        <div class="group-header group-item-row">
+                        <div class="group-header group-item-row border-bottom-lightgray">
                             <span class="primary">REF#</span>
                             <span class="secondary">[[project.fieldData.ID_Project]]</span>
                         </div>
@@ -163,95 +176,178 @@
                             <span class="secondary">[[project.fieldData.Claimant]]</span>
                         </div>
                     </div>
-                    <div class="group-staff box-spacing border-lightgray">
-                        <div class="group-header group-item-row">
+                    <div class="group-staff box-spacing flex border-lightgray">
+                        <div class="group-header">
                             <div class="box-container">Staff</div>
                             <div class="all-list border-lightgray layout vertical">
-                                <ul>
-                                    <li><a href="#">Staff Name</a></li>
-                                    <li horizontal end-justified layout><paper-icon-button icon="close"></paper-icon-button></li>
-                                    <li><paper-icon-button icon="search"></paper-icon-button></li>
-                                    <li><paper-icon-button icon="mail"></paper-icon-button></li>
-                                </ul>
-                                <ul>
-                                    <li><a href="#">Staff Name 2</a></li>
-                                    <li><paper-icon-button icon="close"></paper-icon-button></li>
-                                    <li><paper-icon-button icon="search"></paper-icon-button></li>
-                                    <li><paper-icon-button icon="mail"></paper-icon-button></li>
-                                </ul>
-
-                                <!--//console.log(this.projectDetail[0].portalData["Investigator_Portal Copy"]["0"]["T16q_projects_STAFF|id_staff|id_staff|::Name_Full"]);-->
-                                <!--["0"].portalData.Investigator_P["0"]["PRJ_Projects_ING_Investigators::Investigator"]-->
-                                <iron-list class="list-horizontal" items="[[investigators]]" scroll-target="document">
+                                <dom-repeat items="{{staffs}}" as="staff" scroll-target="document">
                                     <template>
-                                        <div><a href="/">[[item.PRJ_Projects_ING_Investigators::Investigator]]</a></div>
-                                        <div><paper-icon-button icon="close"></paper-icon-button></div>
-                                        <div><paper-icon-button icon="search"></paper-icon-button></div>
-                                        <div><paper-icon-button icon="mail"></paper-icon-button></div>
+                                        <ul>
+                                            <li><a href="/">[[_getDataFromArray(staffs.*, index, 'T16q_projects_STAFF|id_staff|id_staff|::Name_Full')]]</a></li>
+                                            <li><paper-icon-button icon="close"></paper-icon-button></li>
+                                            <li><paper-icon-button icon="search"></paper-icon-button></li>
+                                            <li><paper-icon-button icon="mail"></paper-icon-button></li>
+                                        </ul>
                                     </template>
-                                </iron-list>
-                                <div class="list-horizontal">
-                                    <div><span>Add: </span><paper-icon-button icon="search"></paper-icon-button></div>
-                                </div>
+                                </dom-repeat>
+
+                                <ul>
+                                    <li></li>
+                                    <li><span>Add: </span><paper-icon-button icon="search"></paper-icon-button></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
 
-                    <div class="group-investigators box-spacing border-lightgray">
-                        <div class="group-header group-item-row">
+                    <div class="group-investigators flex box-spacing border-lightgray">
+                        <div class="group-header">
                             <div class="box-container">Investigators</div>
                             <div class="all-list border-lightgray layout vertical">
+
+                                <dom-repeat items="{{investigators}}" as="investigator" scroll-target="document">
+                                    <template>
+                                        <ul>
+                                            <li><a href="/">[[investigator.PRJ_Projects_ING_Investigators::Investigator]]</a></li>
+                                            <li><paper-icon-button icon="close"></paper-icon-button></li>
+                                            <li><paper-icon-button icon="search"></paper-icon-button></li>
+                                            <li><paper-icon-button icon="mail"></paper-icon-button></li>
+                                        </ul>
+                                    </template>
+                                </dom-repeat>
+
                                 <ul>
-                                    <li><a href="#">Investigator Name</a></li>
-                                    <li><paper-icon-button icon="close"></paper-icon-button></li>
-                                    <li><paper-icon-button icon="search"></paper-icon-button></li>
-                                    <li><paper-icon-button icon="mail"></paper-icon-button></li>
-                                    <li><paper-icon-button icon="language"></paper-icon-button></li>
-                                </ul>
-                                <ul>
-                                    <li><a href="#">Investigator Name 2</a></li>
-                                    <li><paper-icon-button icon="close"></paper-icon-button></li>
-                                    <li><paper-icon-button icon="search"></paper-icon-button></li>
-                                    <li><paper-icon-button icon="mail"></paper-icon-button></li>
-                                    <li><paper-icon-button icon="language"></paper-icon-button></li>
-                                </ul>
-                                <ul>
+                                    <li></li>
                                     <li><span>Add: </span><paper-icon-button icon="search"></paper-icon-button></li>
                                 </ul>
-                                <paper-listbox items="[[investigators]]">
-                                    <paper-item>[[item.PRJ_Projects_ING_Investigators::Investigator]]</paper-item>
-                                </paper-listbox>
                             </div>
                         </div>
                     </div>
 
-                    <div class="group-staff box-spacing border-lightgray">
-                        <div class="group-header group-item-row">
+                    <div class="group-staff box-spacing flex border-lightgray">
+                        <div class="group-header">
                             <div class="box-container">Contacts</div>
                             <div class="all-list border-lightgray layout vertical">
+                                <dom-repeat items="{{contacts}}" as="contact" scroll-target="document">
+                                    <template>
+                                        <ul>
+                                            <li><a href="/">[[contact.PRJ_Projects_CON_Contacts::Contact]]</a></li>
+                                            <li><paper-icon-button icon="close"></paper-icon-button></li>
+                                            <li><paper-icon-button icon="search"></paper-icon-button></li>
+                                            <li><paper-icon-button icon="mail"></paper-icon-button></li>
+                                        </ul>
+                                    </template>
+                                </dom-repeat>
                                 <ul>
-                                    <li><a href="#">Contact Name</a></li>
-                                    <li><paper-icon-button icon="close"></paper-icon-button></li>
-                                    <li><paper-icon-button icon="search"></paper-icon-button></li>
-                                    <li><paper-icon-button icon="mail"></paper-icon-button></li>
-                                    <li><paper-icon-button icon="language"></paper-icon-button></li>
-                                </ul>
-                                <ul>
-                                    <li><a href="#">Contact Name 2</a></li>
-                                    <li><paper-icon-button icon="close"></paper-icon-button></li>
-                                    <li><paper-icon-button icon="search"></paper-icon-button></li>
-                                    <li><paper-icon-button icon="mail"></paper-icon-button></li>
-                                    <li><paper-icon-button icon="language"></paper-icon-button></li>
-                                </ul>
-                                <ul>
+                                    <li></li>
                                     <li><span>Add: </span><paper-icon-button icon="search"></paper-icon-button></li>
                                 </ul>
-                                <!--<paper-listbox items="[[projectData.portalData.Investigator_Portal Copy]]">
-                                    <paper-item>[[item.T16q_projects_STAFF|id_staff|id_staff|::Name_Full]]</paper-item>
-                                    <paper-item>Item 2</paper-item>
-                                </paper-listbox>-->
                             </div>
                         </div>
+                    </div>
+
+                    <!--Tab-->
+                    <div class="group-tabs box-spacing flex border-lightgray" >
+                        <paper-tabs class="border-bottom-lightgray" selected="{{papertabSelected}}" attrForSelected="name">
+                            <paper-tab class="border-right-lightgray" selected="true" link name="tasks"><span class="counts">{{tasks.length}} </span> Tasks </paper-tab>
+                            <paper-tab class="border-right-lightgray" link name="files"><span class="counts">{{files.length}} </span>  Files </paper-tab>
+                            <paper-tab class="border-right-lightgray" link name="notes"><span class="counts">{{notes.length}} </span>  Note </paper-tab>
+                            <paper-tab link name="auditfield"> Audit Field </paper-tab>
+                        </paper-tabs>
+
+                        <iron-pages selected="{{papertabSelected}}" attrForSelected="name">
+                            <div name="tasks">
+                                <vaadin-grid items="{{tasks}}" class="list-view-datatable">
+                                    <vaadin-grid-column>
+                                        <template class="header">Summary</template>
+                                        <template>[[_getDataFromArray(tasks.*, index, 'T16s_projects_TO_DO_LIST||id_project|::Item')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Staff</template>
+                                        <template>[[_getDataFromArray(tasks.*, index, 'T16s_projects_TO_DO_LIST||id_project|::Staff_Name')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Investigator</template>
+                                        <template>[[_getDataFromArray(tasks.*, index, 'T16s_projects_TO_DO_LIST||id_project|::Investigator_Name')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Contact</template>
+                                        <template>[[_getDataFromArray(tasks.*, index, 'T16s_projects_TO_DO_LIST||id_project|::Contact_Name')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Email</template>
+                                        <template>[[_getDataFromArray(tasks.*, index, 'T16s_projects_TO_DO_LIST||id_project|::Email_Form_Title')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Due</template>
+                                        <template>[[_getDataFromArray(tasks.*, index, 'T16s_projects_TO_DO_LIST||id_project|::Date_Due')]]
+                                            <span class="time">[[_getDataFromArray(tasks.*, index, 'T16s_projects_TO_DO_LIST||id_project|::Time_Due')]]</span>
+                                        </template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">End</template>
+                                        <template>[[_getDataFromArray(tasks.*, index, 'T16s_projects_TO_DO_LIST||id_project|::Date_Completed')]]
+                                            <span class="time">[[_getDataFromArray(tasks.*, index, 'T16s_projects_TO_DO_LIST||id_project|::Time_Completed')]]</span>
+                                        </template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Days Remaining</template>
+                                        <template></template>
+                                    </vaadin-grid-column>
+                                </vaadin-grid>
+                            </div>
+                            <div name="files">
+                                <vaadin-grid items="{{files}}" class="list-view-datatable">
+                                    <vaadin-grid-column width="40px" flex-grow="0">
+                                        <template><paper-icon-button icon="delete"></paper-icon-button></template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column width="40px" flex-grow="0">
+                                        <template><paper-icon-button icon="info"></paper-icon-button></template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column width="100px" flex-grow="0">
+                                        <template class="header">Date</template>
+                                        <template>[[_getDataFromArray(files.*, index, 'T16c1_project_DOCUMENTS|thru_mtm|id_project|::Date_Created')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Staff</template>
+                                        <template>[[_getDataFromArray(files.*, index, 'T16c1_project_DOCUMENTS|thru_mtm|id_project|::Document_Name')]]</template>
+                                    </vaadin-grid-column>
+                                </vaadin-grid>
+                            </div>
+                            <div name="notes">
+                                <bind-expanded-items></bind-expanded-items>
+                                <vaadin-grid id="notegrid" items="{{projectDetail}}" class="list-view-datatable"
+                                             on-active-item-changed="_onNoteDetailsChanged">
+                                    <template class="row-details">
+                                        <div class="note-details">
+                                            <p>[[_getDataFromArray(projectDetail.*, index, 'fieldData.T16l_projects_NOTES||id_note|::Text')]]</p>
+                                        </div>
+                                    </template>
+
+                                    <vaadin-grid-column width="40px" flex-grow="0">
+                                        <template><paper-icon-button icon="delete"></paper-icon-button></template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column width="100px" flex-grow="0">
+                                        <template class="header">Date</template>
+                                        <template>[[_getDataFromArray(projectDetail.*, index, 'fieldData.T16l_projects_NOTES||id_note|::Date')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Type</template>
+                                        <template>[[_getDataFromArray(projectDetail.*, index, 'fieldData.T16l_projects_NOTES||id_note|::Note_Type')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Recipient</template>
+                                        <template></template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Subject</template>
+                                        <template>[[_getDataFromArray(projectDetail.*, index, 'fieldData.T16l_projects_NOTES||id_note|::Note_Subject')]]</template>
+                                    </vaadin-grid-column>
+                                </vaadin-grid>
+                            </div>
+                            <div name="auditfield">
+
+                            </div>
+                        </iron-pages>
                     </div>
                 </div>
             </template>
@@ -261,53 +357,94 @@
     </template>
 
     <script>
-        //(function() {
-        class MaiProjectsDetail extends Polymer.Element {
-            static get is() {
-                return 'mai-projects-detail';
-            }
-            static get properties() {
-                return {
-                    projectDetail: Array,
-                    recordId: {
-                        type: String,
-                        //value: '716788',
-                        notify:true,
-                        observer: '_recordIdChanged'
-                    },
-                    investigators: Array,
-                    staffs:Array,
-                    contacts: Array,
-                };
-            }
-
-            _recordIdChanged(recordId){
-                this.$.getProjectsDetail.generateRequest();
-            }
-
-            detailLoaded(data){
-                console.log(data.detail.response);
-
-                this.projectDetail= data.detail.response;
-                if(this.projectDetail){
-                    this.investigators = this.projectDetail[0].portalData.Investigator_Portal;
-                    this.staffs = this.projectDetail[0].portalData["Investigator_Portal Copy"];
-                    this.contacts = this.projectDetail[0].portalData.portalProjectContacts;
+        (function() {
+            class MaiProjectsDetail extends Polymer.Element {
+                static get is() {
+                    return 'mai-projects-detail';
                 }
-                //console.log(this.projectDetail[0].portalData);
-                //console.log(this.projectDetail[0].portalData.Investigator_P[0]['PRJ_Projects_ING_Investigators::Investigator']);
-                //console.log(this.projectDetail[0].portalData["Investigator_Portal Copy"]["0"]["T16q_projects_STAFF|id_staff|id_staff|::Name_Full"]);
+                static get properties() {
+                    return {
+                        projectDetail: Array,
+                        recordId: {
+                            type: String,
+//                        value: '',
+                            notify:true,
+                            observer: '_recordIdChanged'
+                        },
+                        investigators: Array,
+                        staffs:Array,
+                        contacts: Array,
+                        tasks: Array,
+                        files: Array,
+                        notes: Array,
+                        auditField: Array
+                    };
+                }
 
-                //["Investigator_Portal Copy"]["0"]["T16q_projects_STAFF|id_staff|id_staff|::Name_Full"]
-            }
+                _recordIdChanged(recordId){
+                    this.$.getProjectsDetail.generateRequest();
+                }
 
-            _computeURL(recordId){
-                console.log(recordId);
-                //return `https://localhost:3000/fm/getProjectsDetail/${recordId}`;
-                return `https://localhost:3000/fm/getLocalProjectsDetail/${recordId}`;
+                ready(){
+                    super.ready();
+                    //this.recordId = "716788";
+                    addEventListener('WebComponentsReady', function() {
+
+                            _onNoteDetailsChanged(e){
+                                console.log(e);
+                                this.$.notegrid.expandedItems = [e.detail.value];
+                            }
+
+                    });
+                }
+
+                detailLoaded(data){
+                    console.log(data.detail.response);
+                    this.projectDetail= data.detail.response;
+                    if(this.projectDetail){
+                        this.investigators = this.projectDetail[0].portalData.Investigator_Portal;
+                        this.contacts = this.projectDetail[0].portalData.portalProjectContacts;
+                        this.staffs = this.projectDetail[0].portalData["Investigator_Portal Copy"];
+                        /*
+                         var tempStaff = this.projectDetail[0].portalData["Investigator_Portal Copy"];
+
+                         //this.staffs = {recordId:'', Name_Full:''};
+                         this.staffs = new Array();
+                         for(var i=0; i < tempStaff.length; i++){
+                         //console.log(tempStaff[i]);
+                         //console.log(tempStaff[i]["T16q_projects_STAFF|id_staff|id_staff|::Name_Full"]);
+                         this.staffs.push(
+                         {
+                         recordId : tempStaff[i].recordId,
+                         Name_Full : tempStaff[i]["T16q_projects_STAFF|id_staff|id_staff|::Name_Full"]
+                         }
+                         );
+                         //this.staffs.Name_Full = tempStaff[i]["T16q_projects_STAFF|id_staff|id_staff|::Name_Full"];
+                         }*/
+
+                        this.tasks = this.projectDetail[0].portalData.tasks_portal;
+                        this.files = this.projectDetail[0].portalData.portalDocuments;
+                        //this.notes = this.projectDetail[0].fieldData;
+
+                        //console.log(this.notes);
+
+                    }
+
+                }
+
+                _computeURL(recordId){
+                    console.log(recordId);
+                    return `https://localhost:3000/fm/getProjectsDetail/${recordId}`;
+                    //return `https://localhost:3000/fm/getLocalProjectsDetail/${recordId}`;
+                }
+
+                _getDataFromArray(dataList, index, path) {
+                    //console.log(dataList);
+                    return this.get(path, dataList.base[index]);
+                }
+
             }
-        }
-        window.customElements.define(MaiProjectsDetail.is, MaiProjectsDetail);
-        // }());
+            window.customElements.define(MaiProjectsDetail.is, MaiProjectsDetail);
+        }());
     </script>
 </dom-module>

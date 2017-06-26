@@ -31,10 +31,29 @@ router.get('/getToken', function(req, res) {
 
 });
 
+router.get('/getList/:layoutname', function(req, res) {
+    let url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/record/'+config.filemaker.solution+'/'+req.params.layoutname;
+    //console.log(url);
+    // Make the API Call
+    request({
+        "rejectUnauthorized": false,
+        "method" : 'GET',
+        "url" : url,
+        "headers" : {"FM-data-token": req.header('fm-data-token'), "Content-Type" : "application/json"},
+        "agentOptions" : config.filemaker.selfSignedCertificate,
+        "json": true
+    }, (error, response, body) => {
+        if(error){
+            console.log(error);
+        }
+        else{
+            res.json(body.data);
+        }
+    });
+});
 
+/*
 router.get('/getProjectsList', function(req, res) {
-    //console.log(req.headers);
-    //console.log(req.header('fm-data-token'));
     let url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/record/'+config.filemaker.solution+'/L121_PROJECTS_List_View';
 
     // Make the API Call
@@ -53,7 +72,7 @@ router.get('/getProjectsList', function(req, res) {
             res.json(body.data);
         }
     });
-});
+});*/
 
 
 router.get('/getProjectsDetail/:recordid', function(req, res) {
@@ -75,10 +94,38 @@ router.get('/getProjectsDetail/:recordid', function(req, res) {
             console.log(error);
         }
         else{
+            //console.log(body);
             res.json(body.data);
         }
     });
 });
+
+/*
+
+router.get('/getStaffsList', function(req, res) {
+    //console.log(req.headers);
+    //console.log(req.header('fm-data-token'));
+    let url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/record/'+config.filemaker.solution+'/L130_STAFF_Data_Entry';
+
+    // Make the API Call
+    request({
+        "rejectUnauthorized": false,
+        "method" : 'GET',
+        "url" : url,
+        "headers" : {"FM-data-token": req.header('fm-data-token'), "Content-Type" : "application/json"},
+        "agentOptions" : config.filemaker.selfSignedCertificate,
+        "json": true
+    }, (error, response, body) => {
+        if(error){
+            console.log(error);
+        }
+        else{
+            res.json(body.data);
+        }
+    });
+});
+*/
+/*
 
 var localProjectList = require('../data/projectsList.json');
 router.get('/getLocalProjectsList', function(req, res){
@@ -101,12 +148,12 @@ router.get('/getLocalProjectsDetail/:recordid', function(req, res){
     console.log(_.find(detailsJson, {recordId: req.params.recordid}));
 
     res.json({'rest':'rest'});
-    /*if (_.find(detailsJson, {recordId: req.params.recordid})) {
+    /!*if (_.find(detailsJson, {recordId: req.params.recordid})) {
         return res.json({success:false, msg:'A user with that username already exists'});
     }
-    res.json(require('../data/projectsList.json'));*/
+    res.json(require('../data/projectsList.json'));*!/
 });
 
 router.get('/getLocalStaffsList', function(req, res){
     res.json(require('../data/detail.json'));
-});
+});*/

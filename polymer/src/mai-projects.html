@@ -77,7 +77,7 @@
                 _onProjectsDataChanged(projectsData,oldProjectsData){
                     if(this.visible) {
                     if(projectsData.page === undefined || projectsData.page ===""){
-                        this.projectsData.page = projectsData.page || "projects-list";
+                        this.projectsData.page = projectsData.page || "projects-detail";
                         this.set('route.path',this.projectsData.page);
                     }
                     else{
