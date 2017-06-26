@@ -68,7 +68,7 @@
                 if(this.visible) {
                     //console.log(staffsData);
                     if (staffsData.page === undefined || staffsData.page === "") {
-                        this.staffsData.page = staffsData.page || "staffs-list";
+                        this.staffsData.page = staffsData.page || "staffs-detail";
                         this.set('route.path', this.staffsData.page);
                     }
                     else {

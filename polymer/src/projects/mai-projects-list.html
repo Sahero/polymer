@@ -9,6 +9,8 @@
     <template>
 
         <style include="mai-datatable-styles mai-shared-styles">
+
+
         </style>
 
         <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localstorage"></app-localstorage-document>
@@ -173,8 +175,8 @@
                 }
 
                 _computeURL(){
-                    //return `https://localhost:3000/fm/getProjectsList`;
-                    return `https://localhost:3000/fm/getLocalProjectsList`;
+                    return `https://localhost:3000/fm/getList/L121_PROJECTS_List_View`;
+                    //return `https://localhost:3000/fm/getLocalProjectsList`;
                 }
 
             }

@@ -28,6 +28,12 @@
 
             <vaadin-grid-column>
                 <template class="header">
+                    <vaadin-grid-sorter path="fieldData.ID_staff">STA ID</vaadin-grid-sorter>
+                </template>
+                <template>[[item.fieldData.ID_staff]]</template>
+            </vaadin-grid-column>
+            <vaadin-grid-column>
+                <template class="header">
                     <vaadin-grid-sorter path="fieldData.Name_First">First name</vaadin-grid-sorter>
                 </template>
                 <template>[[item.fieldData.Name_First]]</template>
@@ -37,8 +43,20 @@
                 <template>[[item.fieldData.Name_Last]]</template>
             </vaadin-grid-column>
             <vaadin-grid-column>
+                <template class="header">State</template>
+                <template>[[item.fieldData.State_Province]]</template>
+            </vaadin-grid-column>
+            <vaadin-grid-column>
+                <template class="header">Phone</template>
+                <template>[[item.fieldData.Phone1]]</template>
+            </vaadin-grid-column>
+            <vaadin-grid-column>
                 <template class="header">Email</template>
                 <template>[[item.fieldData.Email]]</template>
+            </vaadin-grid-column>
+            <vaadin-grid-column>
+                <template class="header">Permissions</template>
+                <template>[[item.fieldData.Permissions]]</template>
             </vaadin-grid-column>
             <vaadin-grid-column>
                 <template class="header">Status</template>
@@ -88,8 +106,8 @@
             }
 
             _computeURL(){
-                //return `https://localhost:3000/fm/getStaffsList`;
-                return `https://localhost:3000/fm/getLocalStaffsList`;
+                return `https://localhost:3000/fm/getList/L130_STAFF_Data_Entry`;
+                //return `https://localhost:3000/fm/getLocalStaffsList`;
             }
         }
 
