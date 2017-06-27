@@ -1,0 +1,140 @@
+
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="mai-detail-styles">
+    <template>
+        <style>
+            .group-header,
+            .group-item {
+                padding: 5px;
+                font-size: 12px;
+                position:relative;
+
+            }
+            .group-item {
+                cursor: pointer;
+                border-left: 1px solid #ddd;
+                border-right: 1px solid #ddd;
+                display:table;
+                /*width:25%;*/
+            }
+            .group-header {
+                font-weight: bold;
+                /*border: 1px solid #ddd;*/
+                color: gray;
+                /*margin-top: 10px;*/
+            }
+            .group-item-row {
+                display:table-row;
+            }
+            .primary{
+                color: gray;
+                display:table-cell;
+                border-bottom: inherit;
+            }
+            .secondary {
+                color: gray;
+                display:table-cell;
+                border-bottom: inherit;
+                padding-left: 10px;
+            }
+
+            .box-container{
+                text-align: center;
+            }
+
+            .all-dates > div > span{
+                display: inline-block;
+                vertical-align: middle;
+                padding: 5px;
+            }
+            .all-dates > div > span:last-child{
+                float:right;
+            }
+
+            .all-list > ul {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .all-list ul > li > a, .all-list ul > li > span {
+                color: #4285f4;
+                padding:8px;
+                display: inline-block;
+            }
+            .all-list ul > li:first-child{
+                flex-grow: 1;
+            }
+
+
+            .border-lightgray{
+                border: 1px solid lightgray;
+            }
+
+            .border-bottom-lightgray{
+                border-bottom: 1px solid lightgray;
+            }
+
+            .border-right-lightgray{
+                border-right: 1px solid lightgray;
+            }
+
+            .box-spacing{
+                margin: 5px 20px 0px 5px;
+                flex: 1 1 23%;
+                height: 100%;
+            }
+
+            paper-icon-button{
+                width: 32px;
+                height: 32px;
+                float:right;
+                color:#4285f4;
+            }
+            .group-tabs{
+                flex-grow: 1;
+            }
+
+            .group-tabs paper-tab[link] {
+                color: gray;
+                padding-right: 5px;
+            }
+            paper-tab.iron-selected{
+                color: #4285f4;
+                background: white;
+            }
+
+            .time{
+                font-size: 10px;
+                text-align: center;
+                color: lightgray;
+            }
+            .iron-selected > .counts{
+                font-size:14px;
+                color: #4285f4;
+            }
+            .note-details{
+                align-self: center;
+            }
+            .note-details > h5{
+                text-align: left;
+                margin: 2px;
+            }
+
+            .iron-textarea{
+                text-align: left;
+                width: 100%;
+                font-size: 11px;
+                padding: 0;
+                border: none;
+            }
+            iron-list.box-spacing{
+                flex-grow: 0;
+            }
+        </style>
+    </template>
+</dom-module>

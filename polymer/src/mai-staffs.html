@@ -29,13 +29,24 @@
                 <a name="staffs-list" href="[[route.prefix]]/staffs-list">
                     <paper-fab mini icon="list"></paper-fab>
                     List view</a>
+
+                <dom-if if="[[_shouldShowDetailHeaders]]">
+                    <template>
+                        <div class="detailsHeader">
+                            <div># [[selectedData.fieldData.ID_staff]]&nbsp;</div>
+                            <div>[[selectedData.fieldData.Name_First]] [[selectedData.fieldData.Name_Last]]</div>
+                            <div>&nbsp;|&nbsp;</div>
+                            <div style="font-style: italic">[[selectedData.fieldData.Status]]</div>
+                        </div>
+                    </template>
+                </dom-if>
             </iron-selector>
         </app-toolbar>
 
         <iron-pages selected="[[staffsData.page]]" attr-for-selected="name">
 
             <mai-staffs-list name="staffs-list" ></mai-staffs-list>
-            <mai-staffs-detail id="sdetailView" name="staffs-detail" recordId="{{recordId}}"></mai-staffs-detail>
+            <mai-staffs-detail id="detailView" name="staffs-detail" recordId="{{selectedData.recordId}}"></mai-staffs-detail>
 
         </iron-pages>
 
@@ -52,13 +63,17 @@
                         type:Object,
                         notify:true,
                         observer:'_onStaffsDataChanged'},
-                    recordId: {
-                        type:String,
+                    selectedData: {
+                        type:Object,
                         notify:true,
                     },
                     visible: {
                         type: Boolean,
                         observer: '_onStaffsDataChanged'
+                    },
+                    _shouldShowDetailHeaders : {
+                        type: Boolean,
+                        value: false
                     }
                 };
             }
@@ -72,7 +87,7 @@
                         this.set('route.path', this.staffsData.page);
                     }
                     else {
-                        //if (this.visible) {
+                        this._computeShouldShowDetailHeaders();
                         this.dispatchEvent(new CustomEvent('change-view',
                             {
                                 bubbles: true,
@@ -84,7 +99,7 @@
                             }));
                     }
                 }
-                //}
+
 
             }
 
@@ -95,11 +110,21 @@
 
             _onStaffItemSelected(event){
                 let detail = event.detail;
-                this.recordId = detail.recordId;
-                //console.log(this.recordId);
-                this.$.sdetailView.recordId = this.recordId;
+                this.selectedData = detail.data;
+
+                this.$.detailView.recordId = this.selectedData.recordId;
             }
 
+            _computeShouldShowDetailHeaders(){
+
+                if(this.staffsData.page==='staffs-detail'){
+                    this._shouldShowDetailHeaders =  true;
+                }
+                else{
+                    this._shouldShowDetailHeaders = false;
+                }
+
+            }
 
         }
 

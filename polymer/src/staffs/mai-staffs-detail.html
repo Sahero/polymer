@@ -2,18 +2,162 @@
 
 <dom-module id="mai-staffs-detail">
     <template>
-        <style>
+        <style is="custom-style" include="iron-flex iron-flex-alignment mai-datatable-styles mai-detail-styles">
 
         </style>
-        <p>Detail</p>
+
+        <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localstorage"></app-localstorage-document>
+
+        <iron-ajax
+
+                id="getStaffsDetail"
+                method="get"
+                url="[[_computeURL(recordId)]]"
+                headers$='{"FM-data-token": "[[tokenData.token]]"}'
+                handle-as="json"
+                on-response="detailLoaded"
+        ></iron-ajax>
+
+
+
+
+        <iron-list id="list" class="box-spacing" items="{{staffDetail}}" as="staff" scroll-target="document">
+            <template>
+                <div class="layout horizontal wrap start">
+                    <div class="group-item border-lightgray">
+                        <div class="group-header group-item-row border-bottom-lightgray">
+                            <span class="primary"></span>
+                            <span class="secondary">#[[staff.fieldData.ID_staff]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">First</span>
+                            <span class="secondary">[[staff.fieldData.Name_First]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Last</span>
+                            <span class="secondary">[[staff.fieldData.Name_Last]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Permissions</span>
+                            <span class="secondary">[[staff.fieldData.Permissions]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Login Account</span>
+                            <span class="secondary">[[staff.fieldData.FileMaker_Account]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Status</span>
+                            <span class="secondary">[[staff.fieldData.Status]]</span>
+                        </div>
+                    </div>
+
+                    <div class="group-item border-lightgray">
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Phone 1</span>
+                            <span class="secondary">[[staff.fieldData.Phone1]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Phone 2</span>
+                            <span class="secondary">[[staff.fieldData.Phone2]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Mobile Phone</span>
+                            <span class="secondary">[[staff.fieldData.Cell]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Fax</span>
+                            <span class="secondary">[[staff.fieldData.Fax]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Email</span>
+                            <span class="secondary">[[staff.fieldData.Email]]</span>
+                        </div>
+                    </div>
+
+                    <div class="group-item border-lightgray">
+                        <div class="group-item-row border-bottom-lightgray">
+                            <img alt="photo" src="[[staff.fieldData.Image_Data]]"/>
+                        </div>
+                    </div>
+
+                    <div class="group-item border-lightgray">
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Address 1</span>
+                            <span class="secondary">[[staff.fieldData.Street1]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Address 2</span>
+                            <span class="secondary">[[staff.fieldData.Street2]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">City</span>
+                            <span class="secondary">[[staff.fieldData.City]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">State</span>
+                            <span class="secondary">[[staff.fieldData.State]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Postal Code</span>
+                            <span class="secondary">[[staff.fieldData.Postal_Code]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Country</span>
+                            <span class="secondary">[[staff.fieldData.Primary_Country]]</span>
+                        </div>
+                    </div>
+
+                    <div class="group-item border-lightgray">
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Birthday</span>
+                            <span class="secondary">[[staff.fieldData.Birthday]]</span>
+                        </div>
+                        <div class="group-item-row border-bottom-lightgray">
+                            <span class="primary">Company</span>
+                            <span class="secondary">[[staff.fieldData.Instant_Messaging]]</span>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </iron-list>
+
+
     </template>
+
     <script>
+        (function() {
+            class MyStaffsDetail extends Polymer.Element {
+                static get is() {
+                    return 'mai-staffs-detail';
+                }
+                static get properties() {
+                    return {
+                        staffDetail: Array,
+                        recordId: {
+                            type: String,
+                            notify:true,
+                            observer: '_recordIdChanged'
+                        },
+                    };
+                }
 
-        class MyStaffsDetail extends  Polymer.Element
-        {
-            static get is(){ return 'mai-staffs-detail';}
-        }
+                _recordIdChanged(recordId){
+                    this.$.getStaffsDetail.generateRequest();
+                }
 
-        window.customElements.define(MyStaffsDetail.is,MyStaffsDetail);
+                detailLoaded(data){
+                    console.log(data.detail.response);
+                    this.staffDetail= data.detail.response;
+
+                }
+                _computeURL(recordId){
+                    console.log(recordId);
+                    return `https://localhost:3000/fm/getDetail/L130_STAFF_Data_Entry/${recordId}`;
+                }
+
+
+            }
+            window.customElements.define(MyStaffsDetail.is, MyStaffsDetail);
+        }());
     </script>
 </dom-module>
