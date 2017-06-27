@@ -388,14 +388,6 @@
                 ready(){
                     super.ready();
                     //this.recordId = "716788";
-                    addEventListener('WebComponentsReady', function() {
-
-                            _onNoteDetailsChanged(e){
-                                console.log(e);
-                                this.$.notegrid.expandedItems = [e.detail.value];
-                            }
-
-                    });
                 }
 
                 detailLoaded(data){
@@ -441,6 +433,10 @@
                 _getDataFromArray(dataList, index, path) {
                     //console.log(dataList);
                     return this.get(path, dataList.base[index]);
+                }
+
+                _onNoteDetailsChanged(e) {
+                    this.$.notegrid.expandedItems = [e.detail.value];
                 }
 
             }
