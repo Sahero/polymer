@@ -17,8 +17,14 @@
                 route="[[route]]"
                 pattern="/:page"
                 data="{{staffsData}}"
+                tail="{{tailroute}}"
         ></app-route>
 
+        <app-route
+                route="{{tailroute}}"
+                pattern="/:recordId"
+                data="{{recordIdData}}"
+        ></app-route>
 
         <app-toolbar>
             <iron-selector class="view-toolbar" selected="[[staffsData.page]]"  attr-for-selected="name" role="navigation">
@@ -81,7 +87,8 @@
             _onStaffsDataChanged(staffsData,oldStaffsData) {
 
                 if(this.visible) {
-                    //console.log(staffsData);
+                    console.log(this.recordIdData);
+                    this.$.detailView.recordId = this.recordIdData.recordId;
                     if (staffsData.page === undefined || staffsData.page === "") {
                         this.staffsData.page = staffsData.page || "staffs-detail";
                         this.set('route.path', this.staffsData.page);

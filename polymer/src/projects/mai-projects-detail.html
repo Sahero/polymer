@@ -84,7 +84,7 @@
                         <dom-repeat items="{{staffs}}" as="staff" scroll-target="document">
                             <template>
                                 <ul>
-                                    <li><a href="/staffs">[[_getDataFromArray(staffs.*, index, 'T16q_projects_STAFF|id_staff|id_staff|::Name_Full')]]</a></li>
+                                    <li><a href="/staffs/staffs-detail/">[[_getDataFromArray(staffs.*, index, 'T16q_projects_STAFF|id_staff|id_staff|::Name_Full')]]</a></li>
                                     <li><paper-icon-button icon="close"></paper-icon-button></li>
                                     <li><paper-icon-button icon="search"></paper-icon-button></li>
                                     <li><paper-icon-button icon="mail"></paper-icon-button></li>
@@ -158,7 +158,7 @@
                 </paper-tabs>
 
                 <iron-pages selected="{{papertabSelected}}" attrForSelected="name">
-                    <div name="tasks" class="iron-selected">
+                    <div name="tasks">
                         <vaadin-grid items="{{tasks}}" class="list-view-datatable">
                             <vaadin-grid-column>
                                 <template class="header">Summary</template>

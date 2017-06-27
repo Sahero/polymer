@@ -141,6 +141,11 @@
                     };
                 }
 
+            ready(){
+                    super.ready();
+                    console.log(this.recordId);
+            }
+
                 _recordIdChanged(recordId){
                     this.$.getStaffsDetail.generateRequest();
                 }

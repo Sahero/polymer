@@ -11,7 +11,7 @@ const fs = require('fs');
 var app = express();
 
 // uncomment after placing your favicon in /public
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -51,7 +51,7 @@ app.use(function(err, req, res, next) {
     res.send(err.message);
 });
 
-
+//console.log(app.get('env'));
 var port = process.env.PORT || 3000;
 
 var key = fs.readFileSync('config/private.key');
