@@ -1,0 +1,98 @@
+[
+        {
+            "fieldData": {
+                "Name_Full": "Test Investigator",
+                "Email": "alex@itis.com.au",
+                "Phone1": "",
+                "Category": "",
+                "Status": "Inactive",
+                "Department": "",
+                "T17a_investigator_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/883CEE6051A6213D962A1CA40F006B947916F6410B7555079A1884EFBCBE3258.png?RCType=EmbeddedRCFileProcessor",
+                "ID_investigator": "ING0340",
+                "State_Province": ""
+            },
+            "portalData": {},
+            "recordId": "17188",
+            "modId": "49"
+        },
+        {
+            "fieldData": {
+                "Name_Full": "Mickey Spillane",
+                "Email": "calex@itis.com.au",
+                "Phone1": "",
+                "Category": "",
+                "Status": "Active",
+                "Department": "",
+                "T17a_investigator_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/704385FEDDBA60395FEFEBF0A601DCBB0E0561AEA316B0B91B92AEC40791588B.png?RCType=EmbeddedRCFileProcessor",
+                "ID_investigator": "ING0341",
+                "State_Province": ""
+            },
+            "portalData": {},
+            "recordId": "17189",
+            "modId": "29"
+        },
+        {
+            "fieldData": {
+                "Name_Full": "Alex Investigator",
+                "Email": "ialex@itis.com.au",
+                "Phone1": "",
+                "Category": "",
+                "Status": "Active",
+                "Department": "",
+                "T17a_investigator_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/C52CF6CF1EEEBCB6C271F9323AE5E0E559256C4A190C618340274F26909DDA33.png?RCType=EmbeddedRCFileProcessor",
+                "ID_investigator": "ING0342",
+                "State_Province": ""
+            },
+            "portalData": {},
+            "recordId": "17190",
+            "modId": "7"
+        },
+        {
+            "fieldData": {
+                "Name_Full": "Alex Inves",
+                "Email": "ialex@itis.com.au",
+                "Phone1": "",
+                "Category": "",
+                "Status": "Active",
+                "Department": "",
+                "T17a_investigator_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/A15FE411CB1A048E96354FDCDAE72585C8BF1208FDA26B07261AA59F027679BB.png?RCType=EmbeddedRCFileProcessor",
+                "ID_investigator": "ING0343",
+                "State_Province": ""
+            },
+            "portalData": {},
+            "recordId": "17191",
+            "modId": "1"
+        },
+        {
+            "fieldData": {
+                "Name_Full": "Alex Itis",
+                "Email": "calex1@itis.com.au",
+                "Phone1": "",
+                "Category": "",
+                "Status": "Active",
+                "Department": "",
+                "T17a_investigator_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/B5647109FC0387774323A2A0F456A8ABDEA1C1C0379E9FF804F2540972235C18.png?RCType=EmbeddedRCFileProcessor",
+                "ID_investigator": "ING0344",
+                "State_Province": "NSW"
+            },
+            "portalData": {},
+            "recordId": "17192",
+            "modId": "24"
+        },
+        {
+            "fieldData": {
+                "Name_Full": "",
+                "Email": "",
+                "Phone1": "",
+                "Category": "",
+                "Status": "Active",
+                "Department": "",
+                "T17a_investigator_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/543547C53856F4501342FFFEAB5BCC1E3FE1A5BDE57C9A37E029C0F5949EB20B.png?RCType=EmbeddedRCFileProcessor",
+                "ID_investigator": "ING0345",
+                "State_Province": ""
+            },
+            "portalData": {},
+            "recordId": "17193",
+            "modId": "0"
+        }
+    ]

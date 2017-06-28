@@ -5,16 +5,16 @@
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 
+
 <dom-module id="mai-staffs">
     <template>
-        <custom-style>
-            <style is="custom-style" include="mai-shared-styles">
 
-            </style>
-        </custom-style>
+        <style is="custom-style" include="mai-shared-styles">
+
+        </style>
 
         <app-route
-                route="[[route]]"
+                route="{{route}}"
                 pattern="/:page"
                 data="{{staffsData}}"
                 tail="{{tailroute}}"
@@ -22,17 +22,18 @@
 
         <app-route
                 route="{{tailroute}}"
-                pattern="/:recordId"
+                pattern="/staffs/:recordId"
                 data="{{recordIdData}}"
         ></app-route>
+
 
         <app-toolbar>
             <iron-selector class="view-toolbar" selected="[[staffsData.page]]"  attr-for-selected="name" role="navigation">
 
-                <a name="staffs-detail" href="[[route.prefix]]/staffs-detail">
+                <a name="detail" href="[[route.prefix]]/detail">
                     <paper-fab mini icon="content-copy"></paper-fab>
                     Detail view</a>
-                <a name="staffs-list" href="[[route.prefix]]/staffs-list">
+                <a name="list" href="[[route.prefix]]/list">
                     <paper-fab mini icon="list"></paper-fab>
                     List view</a>
 
@@ -51,90 +52,107 @@
 
         <iron-pages selected="[[staffsData.page]]" attr-for-selected="name">
 
-            <mai-staffs-list name="staffs-list" ></mai-staffs-list>
-            <mai-staffs-detail id="detailView" name="staffs-detail" recordId="{{selectedData.recordId}}"></mai-staffs-detail>
+            <mai-staffs-list name="list"></mai-staffs-list>
+            <mai-staffs-detail id="detailView" name="detail" recordId="{{recordIdData.recordId}}"></mai-staffs-detail>
 
         </iron-pages>
 
     </template>
     <script>
+        (function() {
+            class MaiStaffs extends Polymer.Element
+            {
+                static get is(){ return 'mai-staffs'; }
 
-        class MaiStaffs extends Polymer.Element
-        {
-            static get is(){ return 'mai-staffs'; }
-
-            static get properties(){
-                return {
-                    staffsData: {
-                        type:Object,
-                        notify:true,
-                        observer:'_onStaffsDataChanged'},
-                    selectedData: {
-                        type:Object,
-                        notify:true,
-                    },
-                    visible: {
-                        type: Boolean,
-                        observer: '_onStaffsDataChanged'
-                    },
-                    _shouldShowDetailHeaders : {
-                        type: Boolean,
-                        value: false
-                    }
-                };
-            }
-
-            _onStaffsDataChanged(staffsData,oldStaffsData) {
-
-                if(this.visible) {
-                    console.log(this.recordIdData);
-                    this.$.detailView.recordId = this.recordIdData.recordId;
-                    if (staffsData.page === undefined || staffsData.page === "") {
-                        this.staffsData.page = staffsData.page || "staffs-detail";
-                        this.set('route.path', this.staffsData.page);
-                    }
-                    else {
-                        this._computeShouldShowDetailHeaders();
-                        this.dispatchEvent(new CustomEvent('change-view',
-                            {
-                                bubbles: true,
-                                composed: true,
-                                detail: {
-                                    name: 'staffs',
-                                    view: staffsData.page
-                                }
-                            }));
-                    }
+                static get properties(){
+                    return {
+                        staffsData: {
+                            type:Object,
+                            notify:true,
+                            observer:'_onStaffsDataChanged'},
+                        selectedData: {
+                            type:Object,
+                            notify:true,
+                        },
+                        visible: {
+                            type: Boolean,
+                            observer: '_onStaffsDataChanged'
+                        },
+                        _shouldShowDetailHeaders : {
+                            type: Boolean,
+                            value: false
+                        }
+                    };
                 }
 
+                _onStaffsDataChanged(staffsData,oldStaffsData) {
 
-            }
+                    if(this.visible) {
+                        /*To check if the current view page is visible or not*/
+                        if(staffsData===true){
+                            return;
+                        }
 
-            ready(){
-                super.ready();
-                this.addEventListener('staff-item-selected', e => this._onStaffItemSelected(e));
-            }
+                        if ((staffsData.page === undefined || staffsData.page === "")) {
+                            this.staffsData.page = staffsData.page || "detail";
+                            this.set('route.path', this.staffsData.page);
+                            //this.notifyPath('route.path');
 
-            _onStaffItemSelected(event){
-                let detail = event.detail;
-                this.selectedData = detail.data;
+                        }
+                        else {
+                            //console.log(staffsData);
+                            this._computeShouldShowDetailHeaders();
+                            this.dispatchEvent(new CustomEvent('change-view',
+                                {
+                                    bubbles: true,
+                                    composed: true,
+                                    detail: {
+                                        name: 'staffs',
+                                        view: staffsData.page
+                                    }
+                                }));
 
-                this.$.detailView.recordId = this.selectedData.recordId;
-            }
 
-            _computeShouldShowDetailHeaders(){
+                        }
 
-                if(this.staffsData.page==='staffs-detail'){
-                    this._shouldShowDetailHeaders =  true;
+                        if(this.staffsData.page==='detail' && this.recordIdData.recordId) {
+                            this.$.detailView.recordId = this.recordIdData.recordId;
+                            this.set('tailroute.path', this.recordIdData.recordId);
+                            this.notifyPath('tailroute.path');
+                            this.notifyPath('route.path');
+                        }
+
+                    }
+
+
                 }
-                else{
-                    this._shouldShowDetailHeaders = false;
+
+                ready(){
+                    super.ready();
+                    this.addEventListener('staff-item-selected', e => this._onStaffItemSelected(e));
+                }
+
+                _onStaffItemSelected(event){
+                    let detail = event.detail;
+                    this.selectedData = detail.data;
+                    this.recordIdData.recordId = this.selectedData.recordId;
+                    this.$.detailView.recordId = this.selectedData.recordId;
+                }
+
+                _computeShouldShowDetailHeaders(){
+
+                    if(this.staffsData.page==='detail'){
+                        this._shouldShowDetailHeaders =  true;
+                    }
+                    else{
+                        this._shouldShowDetailHeaders = false;
+                    }
+
                 }
 
             }
 
-        }
-
-        window.customElements.define(MaiStaffs.is,MaiStaffs);
+            window.customElements.define(MaiStaffs.is,MaiStaffs);
+        }());
     </script>
 </dom-module>

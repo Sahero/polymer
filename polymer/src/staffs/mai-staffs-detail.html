@@ -1,15 +1,18 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="mai-staffs-detail">
+
+
     <template>
         <style is="custom-style" include="iron-flex iron-flex-alignment mai-datatable-styles mai-detail-styles">
 
         </style>
 
-        <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localstorage"></app-localstorage-document>
+        <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localStorage"></app-localstorage-document>
 
         <iron-ajax
-
                 id="getStaffsDetail"
                 method="get"
                 url="[[_computeURL(recordId)]]"
@@ -18,12 +21,17 @@
                 on-response="detailLoaded"
         ></iron-ajax>
 
-
-
+        <!--<iron-ajax id="getStaffsDetail"
+                   method="get"
+                   handle-as="json"
+                   url="[[_computeURL(recordId)]]"
+                   headers='{"FM-data-token": "a1e9f08b24c5db58ed9e7c644f66e769ce978b859b7573deb50b"}'
+                   on-response="detailLoaded"
+                   ></iron-ajax>-->
 
         <iron-list id="list" class="box-spacing" items="{{staffDetail}}" as="staff" scroll-target="document">
             <template>
-                <div class="layout horizontal wrap start">
+                <div class="layout horizontal wrap around-justified">
                     <div class="group-item border-lightgray">
                         <div class="group-header group-item-row border-bottom-lightgray">
                             <span class="primary"></span>
@@ -121,6 +129,81 @@
             </template>
         </iron-list>
 
+        <!--Tab-->
+        <div class="group-tabs box-spacing border-lightgray" >
+            <paper-tabs  class="border-bottom-lightgray " selected="{{papertabSelected}}" attrForSelected="name">
+                <paper-tab class="border-right-lightgray" link name="projects"><span class="counts">{{projects.length}} </span> Projects </paper-tab>
+                <paper-tab class="border-right-lightgray" link name="tasks"><span class="counts">{{tasks.length}} </span>  Tasks </paper-tab>
+            </paper-tabs>
+
+            <iron-pages selected="{{papertabSelected}}" attrForSelected="name">
+                <div name="projects">
+                    <vaadin-grid items="{{projects}}" class="list-view-datatable">
+                        <vaadin-grid-column>
+                            <template class="header">Project</template>
+                            <template>[[_getDataFromArray(projects.*, index, 'T172b_staff_PROJECTS|id_staff||::ID_Project')]]</template>
+                        </vaadin-grid-column>
+                        <vaadin-grid-column>
+                            <template class="header">Claimant</template>
+                            <template>[[_getDataFromArray(projects.*, index, 'T172b_staff_PROJECTS|id_staff||::Claimant')]]</template>
+                        </vaadin-grid-column>
+                        <vaadin-grid-column>
+                            <template class="header">Investigator</template>
+                            <template>[[_getDataFromArray(projects.*, index, 'T172b_staff_PROJECTS|id_staff||::Investigator')]]</template>
+                        </vaadin-grid-column>
+                        <vaadin-grid-column>
+                            <template class="header">Company</template>
+                            <template>[[_getDataFromArray(projects.*, index, 'T172b_staff_PROJECTS|id_staff||::Account_Name')]]</template>
+                        </vaadin-grid-column>
+                        <vaadin-grid-column>
+                            <template class="header">Start Date</template>
+                            <template>[[_getDataFromArray(projects.*, index, 'T172b_staff_PROJECTS|id_staff||::Date_Start')]]</template>
+                        </vaadin-grid-column>
+                        <vaadin-grid-column>
+                            <template class="header">End Date</template>
+                            <template>[[_getDataFromArray(projects.*, index, 'T172b_staff_PROJECTS|id_staff||::Date_End')]]</template>
+                        </vaadin-grid-column>
+                        <vaadin-grid-column>
+                            <template class="header">Date Due</template>
+                            <template>[[_getDataFromArray(projects.*, index, 'T172b_staff_PROJECTS|id_staff||::Date_Due')]]</template>
+                        </vaadin-grid-column>
+                        <vaadin-grid-column>
+                            <template class="header">Status</template>
+                            <template>[[_getDataFromArray(projects.*, index, 'T172b_staff_PROJECTS|id_staff||::Status')]]</template>
+                        </vaadin-grid-column>
+                    </vaadin-grid>
+                </div>
+                <div name="tasks">
+                    <vaadin-grid items="{{tasks}}" class="list-view-datatable">
+                        <vaadin-grid-column>
+                            <template class="header">Item</template>
+                            <template>[[_getDataFromArray(tasks.*, index, 'T172k_staff_TO_DOS||id_staff|::Item')]]</template>
+                        </vaadin-grid-column>
+                        <vaadin-grid-column>
+                            <template class="header">Category</template>
+                            <template>[[_getDataFromArray(tasks.*, index, 'T05p_contacts_TO_DO_LIST||id_contact|::Category')]]</template>
+                        </vaadin-grid-column>
+                        <vaadin-grid-column>
+                            <template class="header">Start</template>
+                            <template>[[_getDataFromArray(tasks.*, index, 'T172k_staff_TO_DOS||id_staff|::Date_Due')]]
+                                <span class="time">[[_getDataFromArray(tasks.*, index, 'T172k_staff_TO_DOS||id_staff|::Time_Due')]]</span>
+                            </template>
+                        </vaadin-grid-column>
+                        <vaadin-grid-column>
+                            <template class="header">End</template>
+                            <template>[[_getDataFromArray(tasks.*, index, 'T172k_staff_TO_DOS||id_staff|::Date_Completed')]]
+                                <span class="time">[[_getDataFromArray(tasks.*, index, 'T172k_staff_TO_DOS||id_staff|::Time_Completed')]]</span>
+                            </template>
+                        </vaadin-grid-column>
+                        <vaadin-grid-column>
+                            <template class="header">Days Remaining</template>
+                            <template></template>
+                        </vaadin-grid-column>
+                    </vaadin-grid>
+                </div>
+            </iron-pages>
+        </div>
+
 
     </template>
 
@@ -138,13 +221,10 @@
                             notify:true,
                             observer: '_recordIdChanged'
                         },
+                        projects: Array,
+                        tasks: Array
                     };
                 }
-
-            ready(){
-                    super.ready();
-                    console.log(this.recordId);
-            }
 
                 _recordIdChanged(recordId){
                     this.$.getStaffsDetail.generateRequest();
@@ -153,16 +233,29 @@
                 detailLoaded(data){
                     console.log(data.detail.response);
                     this.staffDetail= data.detail.response;
-
+                    if(this.staffDetail){
+                        this.projects = this.staffDetail[0].portalData.STA_Projects_Portal;
+                        this.tasks = this.staffDetail[0].portalData["T172k_staff_TO_DOS||id_staff|"];
+                    }
                 }
                 _computeURL(recordId){
-                    console.log(recordId);
+                    //console.log(recordId);
+                    //console.log(this.tokenData);
                     return `https://localhost:3000/fm/getDetail/L130_STAFF_Data_Entry/${recordId}`;
                 }
 
+                _getDataFromArray(dataList, index, path) {
+                    //console.log(dataList);
+                    if(dataList.value===null){
+                        return;
+                    }
+                    return this.get(path, dataList.base[index]);
+                }
 
             }
             window.customElements.define(MyStaffsDetail.is, MyStaffsDetail);
         }());
+
+
     </script>
 </dom-module>

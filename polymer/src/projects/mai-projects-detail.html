@@ -18,7 +18,7 @@
 
         </style>
 
-        <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localstorage"></app-localstorage-document>
+        <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localStorage"></app-localstorage-document>
         <!--url$="https://localhost:3000/fm/getProjectsDetail/{{recordId}}"-->
         <iron-ajax
 
@@ -84,7 +84,7 @@
                         <dom-repeat items="{{staffs}}" as="staff" scroll-target="document">
                             <template>
                                 <ul>
-                                    <li><a href="/staffs/staffs-detail/">[[_getDataFromArray(staffs.*, index, 'T16q_projects_STAFF|id_staff|id_staff|::Name_Full')]]</a></li>
+                                    <li><a href="/staffs/detail/1304">[[_getDataFromArray(staffs.*, index, 'T16q_projects_STAFF|id_staff|id_staff|::Name_Full')]]</a></li>
                                     <li><paper-icon-button icon="close"></paper-icon-button></li>
                                     <li><paper-icon-button icon="search"></paper-icon-button></li>
                                     <li><paper-icon-button icon="mail"></paper-icon-button></li>
@@ -368,6 +368,9 @@
 
                 _getDataFromArray(dataList, index, path) {
                     //console.log(dataList);
+                    if(dataList.value===null){
+                        return;
+                    }
                     return this.get(path, dataList.base[index]);
                 }
 

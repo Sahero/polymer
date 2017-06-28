@@ -4,8 +4,8 @@ let request = require('request');
 let _ = require('lodash');
 let router = module.exports = express.Router();
 
-let env = express().get('env');
-
+//let env = express().get('env');
+let env ="production";
 router.get('/getToken', function(req, res) {
 
     let url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/auth/'+config.filemaker.solution;
@@ -34,13 +34,13 @@ router.get('/getToken', function(req, res) {
 });
 
 router.get('/getList/:layoutname', function(req, res) {
-    //console.log(env);
-    if(env="development"){
+    console.log(env);
+    if(env=="development"){
         res.json(require('../data/' + req.params.layoutname + '.json'));
     }
     else {
         let url = config.filemaker.protocol + '://' + config.filemaker.ip + '/fmi/rest/api/record/' + config.filemaker.solution + '/' + req.params.layoutname;
-        //console.log(url);
+        console.log(url);
         // Make the API Call
         request({
             "rejectUnauthorized": false,
@@ -116,8 +116,8 @@ router.get('/getList/:layoutname', function(req, res) {
 
 
 router.get('/getDetail/:layoutname/:recordid', function(req, res) {
-
-    if(env="development"){
+//console.log(req);
+    if(env=="development"){
         //res.json(require('../data/' + req.params.layoutname + '.json'));
         let detailsJson = require('../data/'+req.params.layoutname+'.json');;
         //console.log();
@@ -125,9 +125,9 @@ router.get('/getDetail/:layoutname/:recordid', function(req, res) {
         res.json(toJson);
     }
     else{
-        //console.log(req.header('fm-data-token'));
+        console.log(req.header('fm-data-token'));
         let url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/record/'+config.filemaker.solution+'/'+req.params.layoutname+'/'+req.params.recordid;
-        //console.log(url);
+        console.log(url);
 
         // Make the API Call
         request({
