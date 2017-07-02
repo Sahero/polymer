@@ -1,0 +1,56 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="mai-input-date">
+    <template>
+        <style>
+            iron-input > input {
+                font-size: 12px;
+                color: gray;
+                border: none;
+                background: transparent;
+                width: 100%;
+                outline: none;
+            }
+            mai-underline  { position:relative; display:block; width:100%; }
+            mai-underline:before, mai-underline:after   {
+                content:'';
+                height:2px;
+                width:0;
+                bottom:1px;
+                position:absolute;
+                background:#5264AE;
+                transition:0.2s ease all;
+            }
+            mai-underline:before {
+                left:50%;
+            }
+            mai-underline:after {
+                right:50%;
+            }
+
+            /* active state */
+            input:focus ~ mai-underline:before, input:focus ~ mai-underline:after {
+                width:50%;
+            }
+        </style>
+
+        <iron-input bind-value="{{data}}">
+            <!--<input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')" value="{{value::input}}">-->
+            <input value="{{value::input}}">
+        </iron-input>
+        <mai-underline></mai-underline>
+    </template>
+    <script>
+        (function () {
+            class MaiInputDate extends Polymer.Element
+            {
+
+                static get is() {
+                    return 'mai-input-date';
+                }
+
+            }
+            window.customElements.define(MaiInputDate.is,MaiInputDate);
+        })();
+    </script>
+</dom-module>

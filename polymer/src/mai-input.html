@@ -1,0 +1,38 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="mai-input">
+    <template>
+        <style>
+            :root {
+                --paper-input-container-color: none;
+                --paper-input-container-focus-color: #4285f4;
+                --paper-input-container-input-color: gray;
+                --paper-input-container-input:{
+                    font-size:12px;
+                    padding: 0;
+                };
+
+                --paper-input-container: {
+                    padding: 0;
+                };
+            }
+        </style>
+
+        <paper-input value="{{value}}" no-label-float="true" >
+        </paper-input>
+
+    </template>
+    <script>
+        (function () {
+            class MaiInput extends Polymer.Element
+            {
+
+                static get is() {
+                    return 'mai-input';
+                }
+
+            }
+            window.customElements.define(MaiInput.is,MaiInput);
+        })();
+    </script>
+</dom-module>

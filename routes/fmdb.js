@@ -4,8 +4,8 @@ let request = require('request');
 let _ = require('lodash');
 let router = module.exports = express.Router();
 
-//let env = express().get('env');
-let env ="production";
+let env = express().get('env');
+//let env ="production";
 router.get('/getToken', function(req, res) {
 
     let url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/auth/'+config.filemaker.solution;
@@ -117,12 +117,19 @@ router.get('/getList/:layoutname', function(req, res) {
 
 router.get('/getDetail/:layoutname/:recordid', function(req, res) {
 //console.log(req);
+    //console.log(req.headers);
     if(env=="development"){
         //res.json(require('../data/' + req.params.layoutname + '.json'));
         let detailsJson = require('../data/'+req.params.layoutname+'.json');;
         //console.log();
-        var toJson = [_.find(detailsJson, {recordId: req.params.recordid})];
-        res.json(toJson);
+        var toJson = _.find(detailsJson, {recordId: req.params.recordid});
+        //console.log(toJson);
+        if(toJson===undefined){
+            res.json(null);
+        }
+        else{
+            res.json([toJson]);
+        }
     }
     else{
         console.log(req.header('fm-data-token'));
@@ -148,6 +155,12 @@ router.get('/getDetail/:layoutname/:recordid', function(req, res) {
             }
         });
     }
+});
+
+
+router.put('/getDetail/:layoutname/:recordid', function(req, res) {
+console.log(req.body);
+    res.json({msg: 'hh'});
 });
 
 /*

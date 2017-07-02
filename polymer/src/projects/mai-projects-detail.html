@@ -10,7 +10,8 @@
 <link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
 
 <link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
-
+<link rel="import" href="../mai-input.html">
+<link rel="import" href="../mai-input-date.html">
 
 <dom-module id="mai-projects-detail">
     <template>
@@ -21,17 +22,22 @@
         <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localStorage"></app-localstorage-document>
         <!--url$="https://localhost:3000/fm/getProjectsDetail/{{recordId}}"-->
         <iron-ajax
-
                 id="getProjectsDetail"
                 method="get"
                 url="[[_computeURL(recordId)]]"
-
                 headers$='{"FM-data-token": "[[tokenData.token]]"}'
                 handle-as="json"
-
                 on-response="detailLoaded"
         ></iron-ajax>
 
+        <iron-ajax
+                id="updateProjectsDetail"
+                method="put"
+                url="[[_computeURL(recordId)]]"
+                headers$='{"FM-data-token": "[[tokenData.token]]"}'
+                handle-as="json"
+                on-response="checkUpdateResult"
+        ></iron-ajax>
 
         <div class="layout horizontal wrap around-justified">
 
@@ -46,7 +52,7 @@
                         </div>
                         <div class="group-item-row border-bottom-lightgray">
                             <span class="primary">Title</span>
-                            <span class="secondary">[[project.fieldData.Project_Name]]</span>
+                            <mai-input class="secondary" value="{{project.fieldData.Project_Name::input}}"></mai-input>
                         </div>
                         <div class="group-item-row border-bottom-lightgray">
                             <span class="primary">Category</span>
@@ -257,30 +263,44 @@
                     <div class="group-item border-lightgray">
                         <div class="group-header">
                             <div class="box-container">Dates</div>
-                            <div class="all-dates border-lightgray layout vertical">
+                            <div class="group-item border-lightgray" style="display:table">
                                 <div class="group-item-row border-bottom-lightgray">
-                                    <span>Start</span>
-                                    <span><iron-input bind-value="[[_changeDateFormat(project.fieldData.Date_Start)]]"><input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')" ></iron-input></span>
+                                    <span class="primary">Start</span>
+                                    <span class="secondary">
+                                        <mai-input-date value="[[_changeDateFormat(project.fieldData.Date_Start)]]"></mai-input-date>
+                                    </span>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
-                                    <span>End</span>
-                                    <span><iron-input bind-value="[[_changeDateFormat(project.fieldData.Date_End)]]"><input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')"></iron-input></span>
+                                    <span class="primary">End</span>
+                                    <span class="secondary">
+                                        <mai-input-date data="{{project.fieldData.Date_End}}"></mai-input-date>
+                                        <!--<iron-input bind-value="[[_changeDateFormat(project.fieldData.Date_End)]]"><input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')"></iron-input>-->
+                                    </span>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
-                                    <span>Injury</span>
-                                    <span><iron-input bind-value="[[_changeDateFormat(project.fieldData.Date_Injury)]]"><input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')"></iron-input></span>
+                                    <span class="primary">Injury</span>
+                                    <span class="secondary">
+                                        <mai-input-date value="[[_changeDateFormat(project.fieldData.Date_Injury::input)]]"></mai-input-date>
+                                        <!--<iron-input bind-value="[[project.fieldData.Date_Injury]]"><input type="text" value="{{value::input}}" onfocus="(this.type='date')" onfocusout="(this.type='text')"></iron-input>-->
+                                    </span>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
-                                    <span>Instruction</span>
-                                    <span><iron-input bind-value="[[_changeDateFormat(project.fieldData.Date_Instruction)]]"><input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')"></iron-input></span>
+                                    <span class="primary">Instruction</span>
+                                    <span class="secondary">
+                                        <!--<mai-input-date value="[[_changeDateFormat(project.fieldData.Date_Instruction)]]"></mai-input-date>-->
+                                        <!--<mai-input value="{{project.fieldData.Date_Instruction::input}}"></mai-input>-->
+                                        <vaadin-date-picker value="{{_changeDateFormat(project.fieldData.Date_Instruction)}}">
+                                        </vaadin-date-picker>
+                                        <!--<iron-input bind-value="[[_changeDateFormat(project.fieldData.Date_Instruction)]]"><input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')"></iron-input>-->
+                                    </span>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
-                                    <span>Due Client</span>
-                                    <span><iron-input bind-value="[[_changeDateFormat(project.fieldData.Date_Due)]]"><input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')"></iron-input></span>
+                                    <span class="primary">Due Client</span>
+                                    <span class="secondary"><iron-input bind-value="[[_changeDateFormat(project.fieldData.Date_Due)]]"><input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')"></iron-input></span>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
-                                    <span>Due Invest</span>
-                                    <span><iron-input bind-value="[[_changeDateFormat(project.fieldData.Date_Due_Investigator)]]"><input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')"></iron-input></span>
+                                    <span class="primary">Due Invest</span>
+                                    <span class="secondary"><iron-input bind-value="[[_changeDateFormat(project.fieldData.Date_Due_Investigator)]]"><input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')"></iron-input></span>
                                 </div>
                             </div>
                         </div>
@@ -303,8 +323,8 @@
                         recordId: {
                             type: String,
 //                        value: '',
-                            notify:true,
-                            observer: '_recordIdChanged'
+                            //notify:true,
+                            //observer: '_recordIdChanged'
                         },
                         investigators: Array,
                         staffs:Array,
@@ -316,13 +336,20 @@
                     };
                 }
 
+                static get observers() {
+                    return [
+                        '_recordIdChanged(recordId)','_onProjectDetailChanged(projectDetail.*)'
+                    ]
+                }
+
                 _recordIdChanged(recordId){
                     this.$.getProjectsDetail.generateRequest();
                 }
 
                 ready(){
                     super.ready();
-
+                    //console.log('ready');
+                    //console.log(this.$.getProjectsDetail);
                 }
 
                 detailLoaded(data){
@@ -332,6 +359,9 @@
                         this.investigators = this.projectDetail[0].portalData.Investigator_Portal;
                         this.contacts = this.projectDetail[0].portalData.portalProjectContacts;
                         this.staffs = this.projectDetail[0].portalData["Investigator_Portal Copy"];
+                        this.tasks = this.projectDetail[0].portalData.tasks_portal;
+                        this.files = this.projectDetail[0].portalData.portalDocuments;
+                        this.auditField = this.projectDetail[0].fieldData.Audit_log_UltraLog;
                         /*
                          var tempStaff = this.projectDetail[0].portalData["Investigator_Portal Copy"];
 
@@ -349,9 +379,7 @@
                          //this.staffs.Name_Full = tempStaff[i]["T16q_projects_STAFF|id_staff|id_staff|::Name_Full"];
                          }*/
 
-                        this.tasks = this.projectDetail[0].portalData.tasks_portal;
-                        this.files = this.projectDetail[0].portalData.portalDocuments;
-                        this.auditField = this.projectDetail[0].fieldData.Audit_log_UltraLog;
+
 
                         //console.log(this.notes);
                         //console.log(this._changeDateFormat('05/29/201'));
@@ -385,6 +413,24 @@
                     var d = new Date(date);
                     return d.getFullYear()+'-'+('0' + (d.getMonth()+1)).slice(-2)+'-'+('0' + (d.getDate())).slice(-2);
 
+                }
+
+
+                _onProjectDetailChanged(changeDetail) {
+                    //console.log(changeDetail);
+                    if(changeDetail.path !=='projectDetail') {
+                        var path = changeDetail.path;
+                        var fieldName = path.substring(path.lastIndexOf('.') + 1);
+                        var body = `"${fieldName}":"${changeDetail.value}"`;
+                        console.log(body);
+                        //console.log({"data":{body}});
+                        this.$.updateProjectsDetail.body = body;
+                        this.$.updateProjectsDetail.generateRequest();
+                    }
+                }
+
+                checkUpdateResult(data){
+                    console.log(data.detail.response);
                 }
 
             }

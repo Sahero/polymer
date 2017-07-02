@@ -216,16 +216,30 @@
                 static get properties() {
                     return {
                         staffDetail: Array,
+                       /* staffDetail: {
+                            type: Array,
+                            computed: '_computeStaffDetail(recordId)',
+                            notify: true,
+                        },*/
                         recordId: {
                             type: String,
-                            notify:true,
-                            observer: '_recordIdChanged'
+                           // notify:true,
+                            //observer: '_recordIdChanged'
                         },
                         projects: Array,
                         tasks: Array
                     };
                 }
 
+                static get observers() {
+                    return [
+                        '_recordIdChanged(recordId)'
+                    ]
+                }
+
+                /*_computeStaffDetail(recordId){
+                    this.$.getStaffsDetail.generateRequest();
+                }*/
                 _recordIdChanged(recordId){
                     this.$.getStaffsDetail.generateRequest();
                 }

@@ -22,7 +22,7 @@
 
         <app-route
                 route="{{tailroute}}"
-                pattern="/staffs/:recordId"
+                pattern="/:recordId"
                 data="{{recordIdData}}"
         ></app-route>
 
@@ -113,13 +113,14 @@
                                 }));
 
 
-                        }
 
-                        if(this.staffsData.page==='detail' && this.recordIdData.recordId) {
-                            this.$.detailView.recordId = this.recordIdData.recordId;
-                            this.set('tailroute.path', this.recordIdData.recordId);
-                            this.notifyPath('tailroute.path');
-                            this.notifyPath('route.path');
+                            if (this.staffsData.page === 'detail' && this.recordIdData.recordId) {
+                                console.log(this.recordIdData);
+                                this.$.detailView.recordId = this.recordIdData.recordId;
+                                this.set('tailroute.path', this.recordIdData.recordId);
+                                this.notifyPath('tailroute.path');
+                                this.notifyPath('route.path');
+                            }
                         }
 
                     }
