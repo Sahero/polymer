@@ -4,8 +4,8 @@ let request = require('request');
 let _ = require('lodash');
 let router = module.exports = express.Router();
 
-let env = express().get('env');
-//let env ="production";
+//let env = express().get('env');
+let env ="production";
 router.get('/getToken', function(req, res) {
 
     let url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/auth/'+config.filemaker.solution;
@@ -134,7 +134,7 @@ router.get('/getDetail/:layoutname/:recordid', function(req, res) {
     else{
         console.log(req.header('fm-data-token'));
         let url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/record/'+config.filemaker.solution+'/'+req.params.layoutname+'/'+req.params.recordid;
-        console.log(url);
+        //console.log(url);
 
         // Make the API Call
         request({
@@ -160,7 +160,31 @@ router.get('/getDetail/:layoutname/:recordid', function(req, res) {
 
 router.put('/getDetail/:layoutname/:recordid', function(req, res) {
 console.log(req.body);
-    res.json({msg: 'hh'});
+
+    var _body = Object.keys(req.body)[0];
+    console.log(_body);
+    let url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/record/'+config.filemaker.solution+'/'+req.params.layoutname+'/'+req.params.recordid;
+    //console.log(url);
+
+    // Make the API Call
+    request({
+        "rejectUnauthorized": false,
+        "method" : 'PUT',
+        "url" : url,
+        "headers" : {"FM-data-token": req.header('fm-data-token'), "Content-Type" : "application/json"},
+        "agentOptions" : config.filemaker.selfSignedCertificate,
+        "json": true,
+        "body" : JSON.parse(_body)
+    }, (error, response, body) => {
+        if(error){
+            console.log(error);
+            res.json(error);
+        }
+        else{
+            console.log(body);
+            res.json(body);
+        }
+    });
 });
 
 /*

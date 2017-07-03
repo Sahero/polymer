@@ -2,7 +2,7 @@
 
 <dom-module id="mai-input-date">
     <template>
-        <style>
+       <!-- <style>
             iron-input > input {
                 font-size: 12px;
                 color: gray;
@@ -35,10 +35,38 @@
         </style>
 
         <iron-input bind-value="{{data}}">
-            <!--<input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')" value="{{value::input}}">-->
+            &lt;!&ndash;<input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')" value="{{value::input}}">&ndash;&gt;
             <input value="{{value::input}}">
         </iron-input>
-        <mai-underline></mai-underline>
+        <mai-underline></mai-underline>-->
+        <style>
+            :root {
+                --paper-input-container-color: none;
+                --paper-input-container-focus-color: #4285f4;
+                --paper-input-container-input-color: gray;
+                --paper-input-container-input:{
+                    font-size:12px;
+                    padding: 0;
+                };
+
+                --paper-input-container: {
+                    padding: 0;
+                };
+
+                --paper-input-container-input-invalid:{
+                    font-size:10px;
+                }
+
+            }
+
+        </style>
+
+        <paper-input value="{{value}}"
+                     auto-validate
+                     pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d"
+                     no-label-float="true" >
+        </paper-input>
+
     </template>
     <script>
         (function () {

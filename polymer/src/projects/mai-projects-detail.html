@@ -15,13 +15,34 @@
 
 <dom-module id="mai-projects-detail">
     <template>
+        <custom-style>
         <style is="custom-style" include="iron-flex iron-flex-alignment mai-datatable-styles mai-detail-styles">
+            :root{
+                --vaadin-combo-box-overlay-max-height:50px;
+
+            }
+            .secondary vaadin-combo-box{
+                padding:0;
+
+            }
+            #selector vaadin-combo-box-item {
+                font-size:10px;
+            }
+
+            paper-dropdown-menu, paper-listbox {
+                width: 100%;
+            }
+            paper-dropdown-menu {
+                height:auto;
+                display: block;
+            }
 
         </style>
-
+        </custom-style>
         <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localStorage"></app-localstorage-document>
         <!--url$="https://localhost:3000/fm/getProjectsDetail/{{recordId}}"-->
         <iron-ajax
+
                 id="getProjectsDetail"
                 method="get"
                 url="[[_computeURL(recordId)]]"
@@ -40,8 +61,6 @@
         ></iron-ajax>
 
         <div class="layout horizontal wrap around-justified">
-
-
             <!--<div class="" >-->
             <iron-list id="list" class="box-spacing" items="{{projectDetail}}" as="project" scroll-target="document">
                 <template>
@@ -56,11 +75,19 @@
                         </div>
                         <div class="group-item-row border-bottom-lightgray">
                             <span class="primary">Category</span>
-                            <span class="secondary">[[project.fieldData.Category]]</span>
+                            <span class="secondary">
+                                <vaadin-combo-box selected-item="{{project.fieldData.Category::change}}" no-label-float="true"
+                                                  items='["Surveillance","Factual","General","Social Media","Other"]'>
+                                </vaadin-combo-box>
+                            </span>
                         </div>
                         <div class="group-item-row border-bottom-lightgray">
                             <span class="primary">Status</span>
-                            <span class="secondary">[[project.fieldData.Status]]</span>
+                            <span class="secondary">
+                                <vaadin-combo-box selected-item="{{project.fieldData.Status::change}}" no-label-float="true"
+                                                  items='["Open","Overdue","Extension","Completed","Cancelled"]'>
+                                </vaadin-combo-box>
+                                 </span>
                         </div>
                         <div class="group-item-row border-bottom-lightgray">
                             <span class="primary">Claim No</span>
@@ -267,20 +294,19 @@
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Start</span>
                                     <span class="secondary">
-                                        <mai-input-date value="[[_changeDateFormat(project.fieldData.Date_Start)]]"></mai-input-date>
+                                        <mai-input-date value="{{project.fieldData.Date_Start::input}}"></mai-input-date>
                                     </span>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">End</span>
                                     <span class="secondary">
-                                        <mai-input-date data="{{project.fieldData.Date_End}}"></mai-input-date>
-                                        <!--<iron-input bind-value="[[_changeDateFormat(project.fieldData.Date_End)]]"><input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')"></iron-input>-->
+                                        <mai-input-date value="{{project.fieldData.Date_End::input}}"></mai-input-date>
                                     </span>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Injury</span>
                                     <span class="secondary">
-                                        <mai-input-date value="[[_changeDateFormat(project.fieldData.Date_Injury::input)]]"></mai-input-date>
+                                        <mai-input-date value="{{project.fieldData.Date_Injury::input}}"></mai-input-date>
                                         <!--<iron-input bind-value="[[project.fieldData.Date_Injury]]"><input type="text" value="{{value::input}}" onfocus="(this.type='date')" onfocusout="(this.type='text')"></iron-input>-->
                                     </span>
                                 </div>
@@ -288,19 +314,32 @@
                                     <span class="primary">Instruction</span>
                                     <span class="secondary">
                                         <!--<mai-input-date value="[[_changeDateFormat(project.fieldData.Date_Instruction)]]"></mai-input-date>-->
-                                        <!--<mai-input value="{{project.fieldData.Date_Instruction::input}}"></mai-input>-->
-                                        <vaadin-date-picker value="{{_changeDateFormat(project.fieldData.Date_Instruction)}}">
-                                        </vaadin-date-picker>
+                                        <mai-input-date value="{{project.fieldData.Date_Instruction::input}}"></mai-input-date>
+                                        <!--<vaadin-date-picker value="{{_changeDateFormat(project.fieldData.Date_Instruction)}}">-->
+                                        <!--</vaadin-date-picker>-->
                                         <!--<iron-input bind-value="[[_changeDateFormat(project.fieldData.Date_Instruction)]]"><input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')"></iron-input>-->
                                     </span>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Due Client</span>
-                                    <span class="secondary"><iron-input bind-value="[[_changeDateFormat(project.fieldData.Date_Due)]]"><input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')"></iron-input></span>
+                                    <span class="secondary">
+                                        <!--<iron-input bind-value="[[_changeDateFormat(project.fieldData.Date_Due)]]"><input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')"></iron-input>-->
+                                        <mai-input-date value="{{project.fieldData.Date_Due::input}}"></mai-input-date>
+                                        <!--<iron-input bind-value="{{_changeDateFormat(project.fieldData.Date_Due)}}">-->
+                                        <!--<vaadin-date-picker value="{{project.fieldData.Date_Due::input)}}">-->
+                                        <!--</vaadin-date-picker>-->
+                                        <!--</iron-input>-->
+                                        </span>
+
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Due Invest</span>
-                                    <span class="secondary"><iron-input bind-value="[[_changeDateFormat(project.fieldData.Date_Due_Investigator)]]"><input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')"></iron-input></span>
+                                    <span class="secondary">
+                                            <!--<iron-input bind-value="{{_changeDateFormat(project.fieldData.Date_Due_Investigator)}}">-->
+                                        <!--<input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" value="{{project.fieldData.Date_Due_Investigator::input}}">-->
+                                        <!--</iron-input>-->
+                                            <mai-input-date value="{{project.fieldData.Date_Due_Investigator::input}}"></mai-input-date>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -338,19 +377,29 @@
 
                 static get observers() {
                     return [
-                        '_recordIdChanged(recordId)','_onProjectDetailChanged(projectDetail.*)'
+                        '_recordIdChanged(recordId,tokenData)','_onProjectDetailChanged(projectDetail.*)'
                     ]
                 }
 
-                _recordIdChanged(recordId){
-                    this.$.getProjectsDetail.generateRequest();
+                _recordIdChanged(recordId, tokenData){
+                    //console.log(tokenData);
+                    if(tokenData) {
+                        this.$.getProjectsDetail.headers = {'fm-data-token': tokenData.token};
+                        this.$.getProjectsDetail.generateRequest();
+                    }
                 }
 
-                ready(){
-                    super.ready();
-                    //console.log('ready');
-                    //console.log(this.$.getProjectsDetail);
-                }
+                /*ready(){
+                 super.ready();
+                 console.log('ready');
+                 console.log(this.tokenData);
+                 //console.log(this.$.getProjectsDetail);
+                 }
+                 connectedCallback(){
+                 super.connectedCallback();
+                 console.log('c');
+                 console.log(this.tokenData);
+                 }*/
 
                 detailLoaded(data){
                     console.log(data.detail.response);
@@ -421,9 +470,19 @@
                     if(changeDetail.path !=='projectDetail') {
                         var path = changeDetail.path;
                         var fieldName = path.substring(path.lastIndexOf('.') + 1);
-                        var body = `"${fieldName}":"${changeDetail.value}"`;
-                        console.log(body);
-                        //console.log({"data":{body}});
+                        var value = changeDetail.value;
+
+                        if(fieldName.toLowerCase().includes("date") && value!=="" && value!==undefined){
+                            if(value.length<10){
+                                return;
+                            }
+                            value = new Date(value);
+                            value = ('0' + (value.getMonth()+1)).slice(-2) +'/'+('0' + (value.getDate())).slice(-2)+'/'+ value.getFullYear();
+                        }
+
+
+
+                        var body = '{"data": {"'+fieldName+'":"'+value+'"}}';
                         this.$.updateProjectsDetail.body = body;
                         this.$.updateProjectsDetail.generateRequest();
                     }
