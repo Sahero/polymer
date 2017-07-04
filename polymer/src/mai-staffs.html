@@ -114,8 +114,8 @@
 
 
 
-                            if (this.staffsData.page === 'detail' && this.recordIdData.recordId) {
-                                console.log(this.recordIdData);
+                            if (this.staffsData.page === 'detail' && this.recordIdData.recordId!==null) {
+                                //console.log(this.recordIdData);
                                 this.$.detailView.recordId = this.recordIdData.recordId;
                                 this.set('tailroute.path', this.recordIdData.recordId);
                                 this.notifyPath('tailroute.path');

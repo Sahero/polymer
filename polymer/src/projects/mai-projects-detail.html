@@ -491,7 +491,7 @@
                 _recordIdChanged(recordId, tokenData){
                     //console.log(tokenData);
                     if(tokenData) {
-                        //this.$.getProjectsDetail.headers = {'fm-data-token': tokenData.token};
+                        this.$.getProjectsDetail.headers = {'fm-data-token': tokenData.token};
                         this.$.getProjectsDetail.generateRequest();
                     }
                 }

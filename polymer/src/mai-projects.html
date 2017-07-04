@@ -114,7 +114,7 @@
                                     }
                                 }));
 
-                            if(this.projectsData.page==='detail' && this.recordIdData.recordId !== null){
+                            if(this.projectsData.page === 'detail' && this.recordIdData.recordId !== null){
                                 this.$.detailView.recordId = this.recordIdData.recordId;
                                 this.set('tailroute.path', this.recordIdData.recordId);
                                 this.notifyPath('tailroute.path');

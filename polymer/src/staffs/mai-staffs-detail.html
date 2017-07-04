@@ -233,15 +233,18 @@
 
                 static get observers() {
                     return [
-                        '_recordIdChanged(recordId)'
+                        '_recordIdChanged(recordId,tokenData)'
                     ]
                 }
 
                 /*_computeStaffDetail(recordId){
                     this.$.getStaffsDetail.generateRequest();
                 }*/
-                _recordIdChanged(recordId){
-                    this.$.getStaffsDetail.generateRequest();
+                _recordIdChanged(recordId, tokenData){
+                    if(tokenData) {
+                        this.$.getStaffsDetail.headers = {'fm-data-token': tokenData.token};
+                        this.$.getStaffsDetail.generateRequest();
+                    }
                 }
 
                 detailLoaded(data){
