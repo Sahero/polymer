@@ -160,7 +160,10 @@ router.get('/getDetail/:layoutname/:recordid', function(req, res) {
 
 
 router.put('/getDetail/:layoutname/:recordid', function(req, res) {
-console.log(req.body);
+    if(env=="development"){
+        res.json("success dev");
+        return;
+    }
 
     var _body = Object.keys(req.body)[0];
     console.log(_body);
