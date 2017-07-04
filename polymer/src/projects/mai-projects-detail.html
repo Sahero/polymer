@@ -12,32 +12,43 @@
 <link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
 <link rel="import" href="../mai-input.html">
 <link rel="import" href="../mai-input-date.html">
+<link rel="import" href="../clients/mai-clients-list-data.html">
+<link rel="import" href="../claimants/mai-claimants-list-data.html">
+
 
 <dom-module id="mai-projects-detail">
     <template>
         <custom-style>
-        <style is="custom-style" include="iron-flex iron-flex-alignment mai-datatable-styles mai-detail-styles">
-            :root{
-                --vaadin-combo-box-overlay-max-height:50px;
+            <style is="custom-style" include="iron-flex iron-flex-alignment mai-datatable-styles mai-detail-styles">
+                :root{
+                    --vaadin-combo-box-overlay-max-height:50px;
+                    --paper-input-container-input:{
+                        font-size:12px;
+                        color:grey;
+                    };
+                    --paper-input-container-underline:{
+                        border:none;
+                        height:0px;
+                    };
+                }
+                .secondary vaadin-combo-box{
+                    padding:0;
+                }
+                .inputSearch{
+                    display:flex;
+                }
+                .paperDialog{
+                    width: 50%;
+                    height: auto;
+                }
+                .paperDialog h4{
+                    padding: 0;
+                    text-align: center;
+                    margin: 5px;
+                }
 
-            }
-            .secondary vaadin-combo-box{
-                padding:0;
 
-            }
-            #selector vaadin-combo-box-item {
-                font-size:10px;
-            }
-
-            paper-dropdown-menu, paper-listbox {
-                width: 100%;
-            }
-            paper-dropdown-menu {
-                height:auto;
-                display: block;
-            }
-
-        </style>
+            </style>
         </custom-style>
         <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localStorage"></app-localstorage-document>
         <!--url$="https://localhost:3000/fm/getProjectsDetail/{{recordId}}"-->
@@ -59,6 +70,9 @@
                 handle-as="json"
                 on-response="checkUpdateResult"
         ></iron-ajax>
+
+        <mai-clients-list-data clients-data="{{clientsData}}"></mai-clients-list-data>
+        <mai-claimants-list-data claimants-data="{{claimantsData}}"></mai-claimants-list-data>
 
         <div class="layout horizontal wrap around-justified">
             <!--<div class="" >-->
@@ -91,24 +105,78 @@
                         </div>
                         <div class="group-item-row border-bottom-lightgray">
                             <span class="primary">Claim No</span>
-                            <span class="secondary">[[project.fieldData.Claim_No]]</span>
+                            <mai-input class="secondary" value="{{project.fieldData.Claim_No::input}}"></mai-input>
                         </div>
                         <div class="group-item-row border-bottom-lightgray">
                             <span class="primary">Policy No</span>
-                            <span class="secondary">[[project.fieldData.Policy_No]]</span>
+                            <mai-input class="secondary" value="{{project.fieldData.Policy_No::input}}"></mai-input>
                         </div>
                         <div class="group-item-row border-bottom-lightgray">
                             <span class="primary">Company</span>
-                            <span class="secondary">[[project.fieldData.Account_Name]]</span>
+                            <span class="secondary inputSearch">
+                                <mai-input disabled="{{disabled}}" id$="company[[project.recordId]]" value="{{project.fieldData.Account_Name::input}}">
+                                </mai-input>
+                                <paper-icon-button icon="close" field-name="company" on-tap="clearInput"></paper-icon-button>
+                                <paper-icon-button icon="search"field-name="company" on-tap="selectInput"></paper-icon-button>
+                            </span>
                         </div>
                         <div class="group-item-row border-bottom-lightgray">
                             <span class="primary">Claimant</span>
-                            <span class="secondary">[[project.fieldData.Claimant]]</span>
+                            <span class="secondary inputSearch">
+                                <mai-input disabled="{{disabled}}" id$="claimant[[project.recordId]]" value="{{project.fieldData.Claimant::input}}">
+                                </mai-input>
+                                <paper-icon-button icon="close" field-name="claimant" on-tap="clearInput"></paper-icon-button>
+                                <paper-icon-button icon="search"field-name="claimant" on-tap="selectInput"></paper-icon-button>
+                            </span>
                         </div>
                     </div>
                 </template>
             </iron-list>
-            <!--</div>-->
+
+            <!-- Popup selection for company/client/account -->
+            <paper-dialog class="paperDialog" id="companyDialog">
+                    <h4>Clients Search</h4>
+                    <paper-dialog-scrollable>
+                        <vaadin-grid id="companySelector" items="[[clientsData]]" class="list-view-datatable"
+                                     active-item="{{selectedCompany}}">
+                            <vaadin-grid-column>
+                                <template class="header">Name</template>
+                                <template>[[item.fieldData.Account]]</template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column>
+                                <template class="header">Department</template>
+                                <template>[[item.fieldData.Account_Type]]</template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column>
+                                <template class="header">Status</template>
+                                <template>[[item.fieldData.Status]]</template>
+                            </vaadin-grid-column>
+                        </vaadin-grid>
+                    </paper-dialog-scrollable>
+                    <div class="buttons">
+                        <paper-button dialog-dismiss>Cancel</paper-button>
+                    </div>
+            </paper-dialog>
+            <!-- Popup selection for claimants -->
+            <paper-dialog class="paperDialog" id="claimantDialog">
+                <h4>Claimant Search</h4>
+                <paper-dialog-scrollable>
+                    <vaadin-grid id="claimantSelector" items="[[claimantsData]]" class="list-view-datatable"
+                                 active-item="{{selectedClaimant}}">
+                        <vaadin-grid-column>
+                            <template class="header">Name</template>
+                            <template>[[item.fieldData.Name_Full]]</template>
+                        </vaadin-grid-column>
+                        <vaadin-grid-column>
+                            <template class="header">Email</template>
+                            <template>[[item.fieldData.Email]]</template>
+                        </vaadin-grid-column>
+                     </vaadin-grid>
+                </paper-dialog-scrollable>
+                <div class="buttons">
+                    <paper-button dialog-dismiss>Cancel</paper-button>
+                </div>
+            </paper-dialog>
 
             <div class="group-staff box-spacing border-lightgray">
                 <div class="group-header">
@@ -358,6 +426,7 @@
                 }
                 static get properties() {
                     return {
+                        disabled:{type:Boolean,value:false},
                         projectDetail: Array,
                         recordId: {
                             type: String,
@@ -371,8 +440,35 @@
                         tasks: Array,
                         files: Array,
                         notes: Array,
-                        auditField: String
+                        auditField: String,
+                        selectedCompany: {
+                            observer: '_selectedCompanyChanged'
+                        },
+                        selectedClaimant: {
+                            observer: '_selectedClaimantChanged'
+                        }
                     };
+                }
+
+                _selectedCompanyChanged(item){
+                    if(item) {
+                        this.$.companySelector.selectedItems = item ? [item] : [];
+                        var id = 'company'+this.recordId;
+                        this.shadowRoot.querySelector('#' + id).value = this.selectedCompany.fieldData.Account;
+                        this.shadowRoot.querySelector('#' + id).dispatchEvent(new Event('input', { 'bubbles': true,composed:true }));
+                        this.shadowRoot.querySelector('#companyDialog').toggle();
+                    }
+                }
+
+                _selectedClaimantChanged(item){
+                    if(item) {
+                        this.$.claimantSelector.selectedItems = item ? [item] : [];
+                        var id = 'claimant'+this.recordId;
+                        console.log(this.selectedClaimant);
+                        this.shadowRoot.querySelector('#' + id).value = this.selectedClaimant.fieldData.Name_Full;
+                        this.shadowRoot.querySelector('#' + id).dispatchEvent(new Event('input', { 'bubbles': true,composed:true }));
+                        this.shadowRoot.querySelector('#claimantDialog').toggle();
+                    }
                 }
 
                 static get observers() {
@@ -389,18 +485,6 @@
                     }
                 }
 
-                /*ready(){
-                 super.ready();
-                 console.log('ready');
-                 console.log(this.tokenData);
-                 //console.log(this.$.getProjectsDetail);
-                 }
-                 connectedCallback(){
-                 super.connectedCallback();
-                 console.log('c');
-                 console.log(this.tokenData);
-                 }*/
-
                 detailLoaded(data){
                     console.log(data.detail.response);
                     this.projectDetail= data.detail.response;
@@ -411,6 +495,7 @@
                         this.tasks = this.projectDetail[0].portalData.tasks_portal;
                         this.files = this.projectDetail[0].portalData.portalDocuments;
                         this.auditField = this.projectDetail[0].fieldData.Audit_log_UltraLog;
+
                         /*
                          var tempStaff = this.projectDetail[0].portalData["Investigator_Portal Copy"];
 
@@ -480,7 +565,9 @@
                             value = ('0' + (value.getMonth()+1)).slice(-2) +'/'+('0' + (value.getDate())).slice(-2)+'/'+ value.getFullYear();
                         }
 
-
+                        if(value===null){
+                            value="";
+                        }
 
                         var body = '{"data": {"'+fieldName+'":"'+value+'"}}';
                         this.$.updateProjectsDetail.body = body;
@@ -490,6 +577,21 @@
 
                 checkUpdateResult(data){
                     console.log(data.detail.response);
+                }
+
+                clearInput(e){
+                    var field = e.target.getAttribute('field-name');
+                    this._onValueChangedFromSelection(field, '');
+                }
+                selectInput(e){
+                    var id = e.target.getAttribute('field-name')+'Dialog';
+                    this.shadowRoot.querySelector('#' + id).toggle();
+                }
+
+                _onValueChangedFromSelection(field, value){
+                    var id = field + this.recordId;
+                    this.shadowRoot.querySelector('#' + id).value = value;
+                    this.shadowRoot.querySelector('#' + id).dispatchEvent(new Event('input', { 'bubbles': true,composed:true }))
                 }
 
             }

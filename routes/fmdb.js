@@ -54,6 +54,7 @@ router.get('/getList/:layoutname', function(req, res) {
                 console.log(error);
             }
             else {
+                //console.log(body);
                 res.json(body.data);
             }
         });

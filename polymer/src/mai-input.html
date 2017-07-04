@@ -12,13 +12,22 @@
                     padding: 0;
                 };
 
+                --paper-input-container-disabled:{
+                  color:gray;
+                   opacity:100;
+                };
+                --paper-input-container-underline-disabled:{
+                    border: none;
+
+                };
+
                 --paper-input-container: {
                     padding: 0;
                 };
             }
         </style>
 
-        <paper-input value="{{value}}" no-label-float="true" >
+        <paper-input id=[[id]] disabled="[[disabled]]" value="{{value}}" no-label-float="true" >
         </paper-input>
 
     </template>
