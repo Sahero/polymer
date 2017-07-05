@@ -1,0 +1,66 @@
+[
+  {
+    "fieldData": {
+      "Name_First": "Alex",
+      "Category": "",
+      "Status": "",
+      "Account_Name": "Sample Company",
+      "Phone1": "",
+      "Name_Last": "bbb",
+      "T05n_contacts_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/1B30757E7A9857A64BBFE197B32FE93D7E56FF15DA0FF730750FB3F2589B7B7B.png?RCType=EmbeddedRCFileProcessor",
+      "Email": "alex@itis.com.au",
+      "ID_Contact": "CON02279"
+    },
+    "portalData": {},
+    "recordId": "232512",
+    "modId": "70"
+  },
+  {
+    "fieldData": {
+      "Name_First": "Daniel",
+      "Category": "",
+      "Status": "",
+      "Account_Name": "",
+      "Phone1": "",
+      "Name_Last": "Test",
+      "T05n_contacts_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/FBBD3CD21AEA6BFA46125CD772FDF2C55331B1648C9DF2081CAD918E1CF0FAC1.png?RCType=EmbeddedRCFileProcessor",
+      "Email": "",
+      "ID_Contact": "CON02280"
+    },
+    "portalData": {},
+    "recordId": "232513",
+    "modId": "0"
+  },
+  {
+    "fieldData": {
+      "Name_First": "",
+      "Category": "",
+      "Status": "",
+      "Account_Name": "",
+      "Phone1": "",
+      "Name_Last": "",
+      "T05n_contacts_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/5C80FC4C216625D7FC3DE30399B5B1F92464E4BC7EB76B535A50BB46A99B9783.png?RCType=EmbeddedRCFileProcessor",
+      "Email": "",
+      "ID_Contact": "CON02281"
+    },
+    "portalData": {},
+    "recordId": "232514",
+    "modId": "4"
+  },
+  {
+    "fieldData": {
+      "Name_First": "",
+      "Category": "",
+      "Status": "",
+      "Account_Name": "",
+      "Phone1": "",
+      "Name_Last": "",
+      "T05n_contacts_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/8699618F3C92B6C1DCBCDC939D096BE934D5BE05D39F78E43044E44E3BADDB3E.png?RCType=EmbeddedRCFileProcessor",
+      "Email": "",
+      "ID_Contact": "CON02282"
+    },
+    "portalData": {},
+    "recordId": "232515",
+    "modId": "0"
+  }
+]

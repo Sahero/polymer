@@ -1,515 +1,982 @@
 [
-    {
-      "fieldData": {
-        "Claim_No": "test",
-        "Category": "Surveillance",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/5081015254993BE42A8B148ABAECB384381873EDA59A9B7E38EFC9EECE9C8129.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "",
-        "Date_End": "",
-        "Date_Due": "05/29/2017",
-        "ID_Project": "PRJ00001",
-        "Status": "Completed",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": "Test Claimant"
-      },
-      "portalData": {},
-      "recordId": "716785",
-      "modId": "418"
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/D1E86BF509AF2EBBD6735242F2766C82DE0D8716A714266CA733BE6DC9FFF88B.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "test",
+      "Category": "Surveillance",
+      "Date_Start": "05/26/2017",
+      "Date_End": "07/03/2017",
+      "Date_Due": "05/29/2017",
+      "ID_Project": "PRJ00001",
+      "Status": "Completed",
+      "Account_Name": "Company Name bew",
+      "Auditing_Assigned_Investigators_Names": "Test Investigator, Mickey Spillane, Alex Inves, Alex Itis",
+      "Auditing_Assigned_Contacts_Names": "Alex bbb, Daniel Test",
+      "Claimant": "Claiman First",
+      "Auditing_Assigned_Staff_Names": "Louise Reid, Joy DeCarvalho, Claire Chenery, Ainlsie Uttley"
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/D393D9EDB30622AD32BB340C0717D207CDD9882EEFC1D8D9164B3250F73ED730.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00002",
-        "Status": "Open",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716786",
-      "modId": "21"
+    "portalData": {},
+    "recordId": "716785",
+    "modId": "635"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/9AA180C2ABD2B76B94D89AFFDD2743FE792BC3FBFB3A62278E226EC8F7C3D67D.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00002",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "Mickey Spillane",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": "Bronwyn Faulkes, Claire Chenery"
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/8A4BFCCA9DFFE0594A41BBCB9197694D0F6749E0D5F2AC881394237ECBE0DF47.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00003",
-        "Status": "",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716787",
-      "modId": "10"
+    "portalData": {},
+    "recordId": "716786",
+    "modId": "23"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/5F570DD7FB17B646020C9A2313B85EE4E6B205F2158D6DDDC368309083411D36.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00003",
+      "Status": "",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
     },
-    {
-      "fieldData": {
-        "Claim_No": "2343254365",
-        "Category": "Surveillance",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/2F0B986A40716C09712C8391E0F94C40038A68ED574623435EBCB341FEA93410.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "",
-        "Date_End": "",
-        "Date_Due": "06/21/2017",
-        "ID_Project": "PRJ00004",
-        "Status": "Open",
-        "Account_Name": "Sample Company",
-        "Staff": "Louise Reid",
-        "Contact": "",
-        "Claimant": "Claiman First"
-      },
-      "portalData": {},
-      "recordId": "716788",
-      "modId": "60"
+    "portalData": {},
+    "recordId": "716787",
+    "modId": "11"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/400702C82874E69A58B6A41690ED100D176AE9188F1091DAAFD5D08CF9DDF59E.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "2343254365a4",
+      "Category": "Surveillance",
+      "Date_Start": "",
+      "Date_End": "",
+      "Date_Due": "06/21/2017",
+      "ID_Project": "PRJ00004",
+      "Status": "Open",
+      "Account_Name": "Company Name",
+      "Auditing_Assigned_Investigators_Names": "Test Investigator, Mickey Spillane",
+      "Auditing_Assigned_Contacts_Names": "Alex bbb, Daniel Test",
+      "Claimant": "Claiman First",
+      "Auditing_Assigned_Staff_Names": "Donna Hanlon, Joanne Zagame"
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/68AD39BAEA9BBB972298E7E5D65D5A06D5C0EAA1856818A3FCC300391114DBE8.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00005",
-        "Status": "",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716789",
-      "modId": "10"
+    "portalData": {},
+    "recordId": "716788",
+    "modId": "84"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/4F442250B3EBB4DA79AE5D2C21E1644E5951F95C44F688739EDC6F75500BDF30.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00005",
+      "Status": "",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/D78CC19EE007A2818F7BCD59560D3792BCFFE67B243C345228AD36A4E116AEEF.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00012",
-        "Status": "",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716796",
-      "modId": "6"
+    "portalData": {},
+    "recordId": "716789",
+    "modId": "11"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/E856AD6890B10C32AA96DB8786B11DBAF30FDC271CF9FB1B2F1CDA13A108D8CB.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00012",
+      "Status": "",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/EBB3D7B031FC2CB08B6085C94D0FCF5F4B99074A169A883975CDA1F0DC77FA86.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00013",
-        "Status": "Completed",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716797",
-      "modId": "8"
+    "portalData": {},
+    "recordId": "716796",
+    "modId": "7"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/7408D69DFD56CE53B55FAB119D5CD69417FE8F0F3A69E11E7606ED159D71D268.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00013",
+      "Status": "Completed",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/6B2978B5EE58F659768E7CA957B7258B672415C074D63777986E9E43D49B8121.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00014",
-        "Status": "",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716798",
-      "modId": "8"
+    "portalData": {},
+    "recordId": "716797",
+    "modId": "9"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/2DC7AAC170317FC6EEAB5FC13435D1D8F1E87EBA4AFCE27F5A592A2C74C374FE.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00014",
+      "Status": "",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": "Louise Reid"
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/8A5BA528C3E830C9C019CA18CFBB51BDBAE9CAEA0196989B770E4F615300ED14.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00015",
-        "Status": "",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716799",
-      "modId": "7"
+    "portalData": {},
+    "recordId": "716798",
+    "modId": "9"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/4B6D8BEF41315BF1035869C284F3BDD7762E2C2BEDDD1455604BC186081D0068.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00015",
+      "Status": "",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": "Louise Reid"
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/A156DAAC174B677018D828C1BDC067C3C4BDE74C01EED3A24C96F888450E8176.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "06/01/2017",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00018",
-        "Status": "",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716802",
-      "modId": "6"
+    "portalData": {},
+    "recordId": "716799",
+    "modId": "8"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/FE60EE45A74E4D2F55FBC286BB37DDAA32F01FF78E74D85048366BB13DD6B025.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/01/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00018",
+      "Status": "",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": "Louise Reid"
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/79971C76E9451BC2B14E43EC2B0C21EC653D696DCF33098D0A1D3C88ACFE707C.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "06/01/2017",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00019",
-        "Status": "",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716803",
-      "modId": "6"
+    "portalData": {},
+    "recordId": "716802",
+    "modId": "8"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/96E70608043F8BA02066D68A8ED7491A383F3948F23203187A26E0A0490252A4.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/01/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00019",
+      "Status": "",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/B837F52AB6FDFBF1756CD0492AEFF097E6D2E4D0AECF47BE9647584A8B7B8C9B.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "06/01/2017",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00020",
-        "Status": "",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716804",
-      "modId": "6"
+    "portalData": {},
+    "recordId": "716803",
+    "modId": "7"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/9DF89A1F56C616AA139635123AA8C1B8E8169A4F705A64DC1CB00C6371FF155E.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/01/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00020",
+      "Status": "",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/D2B21EA0A9329FE11D053B60C2CCA2641BD968ECF303994C2EF41D1AFF76F549.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "06/01/2017",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00022",
-        "Status": "Open",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716806",
-      "modId": "9"
+    "portalData": {},
+    "recordId": "716804",
+    "modId": "7"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/7C64417723A43AB167301FA0A3841F1608128070BBBE8A1E552B4DD8D72EB2D0.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/01/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00022",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/086EF3EE4EA85A98928D20A7DB3C35FC31C1B2D3131B9F91F1F11B35583AC220.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "06/01/2017",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00023",
-        "Status": "Open",
-        "Account_Name": "Sample Company",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716807",
-      "modId": "7"
+    "portalData": {},
+    "recordId": "716806",
+    "modId": "10"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/5A49D66E04DD5D2256E81E2343A049192FF01030CCDD131E0D3E067A2BF84409.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/01/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00023",
+      "Status": "Open",
+      "Account_Name": "Sample Company",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/2933FE095462AEB18F02248F63B7D0A5F71BB062257DE8C5E14B6F28945BAB9C.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "06/02/2017",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00024",
-        "Status": "Open",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716808",
-      "modId": "6"
+    "portalData": {},
+    "recordId": "716807",
+    "modId": "8"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/9D25B9E4135E29249663C727764456E05E200D3010DEC87EF948EF0715097BD5.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/02/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00024",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/01D39B590762D0E67EF2B8CADED3320609D639477CD02131B6DCD91B0A64976C.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "06/02/2017",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00025",
-        "Status": "Open",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716809",
-      "modId": "6"
+    "portalData": {},
+    "recordId": "716808",
+    "modId": "7"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/82E23315055020CFB0C1E87919144DFDBE0C46642196119C98E867F9AEFDA850.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/02/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00025",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/2BE1276A67297A5F00BC1ADF5F51C0748B2BB164858D5745B791C4153BBD9AE0.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "06/02/2017",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00026",
-        "Status": "Open",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716810",
-      "modId": "6"
+    "portalData": {},
+    "recordId": "716809",
+    "modId": "7"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/FEA8487519D376A9321387CCBA8288E6FA9107E360958B873B6B8A990CA0EA00.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/02/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00026",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/17F5A8853298E0A5FFBEFF24DEDC9DAE32BC8478B7EC46F7A0995DA15CD056BE.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "06/02/2017",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00027",
-        "Status": "Open",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716811",
-      "modId": "6"
+    "portalData": {},
+    "recordId": "716810",
+    "modId": "7"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/B377F1DE10D816D7D8DC19187AA83CC76D0C753BA45E9DEC46542B0392AFEA0C.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/02/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00027",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
     },
-    {
-      "fieldData": {
-        "Claim_No": "123",
-        "Category": "Surveillance",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/F54FBCFE6271C248BA3C0A52B56FB2FC8AA0261670647E29973AB4588339C21B.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "06/05/2017",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00028",
-        "Status": "Open",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716812",
-      "modId": "11"
+    "portalData": {},
+    "recordId": "716811",
+    "modId": "7"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/23BAE36E9DD6C73E0603791B28B6315973683A99ACF928CE7D5355A509B10C4C.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "123",
+      "Category": "Surveillance",
+      "Date_Start": "06/05/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00028",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
     },
-    {
-      "fieldData": {
-        "Claim_No": "CLAIM",
-        "Category": "",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/930E4F7FDA124F14C71F9167EA329AE9FBF8FEBF34F8E9A99174A875A2512976.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "06/05/2017",
-        "Date_End": "",
-        "Date_Due": "06/01/2017",
-        "ID_Project": "PRJ00029",
-        "Status": "Open",
-        "Account_Name": "Sample Company",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": "Claiman First"
-      },
-      "portalData": {},
-      "recordId": "716813",
-      "modId": "21"
+    "portalData": {},
+    "recordId": "716812",
+    "modId": "12"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/148EBBF2EA7C3125377953EA6576C8F733AFD47263C3E7D323202A4E2D376E29.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "CLAIM",
+      "Category": "",
+      "Date_Start": "06/05/2017",
+      "Date_End": "",
+      "Date_Due": "06/01/2017",
+      "ID_Project": "PRJ00029",
+      "Status": "Open",
+      "Account_Name": "Sample Company",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "Claiman First",
+      "Auditing_Assigned_Staff_Names": ""
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "Surveillance",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/150F6D8C5D30F6A50B7455AF5BC26BC764908C2ABE6B9AD7326A00897C55AD63.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "06/07/2017",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00030",
-        "Status": "Open",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716814",
-      "modId": "6"
+    "portalData": {},
+    "recordId": "716813",
+    "modId": "22"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/2547176AAA294240BD969A7ECE3BDB9485301970F4D87FF03BCC74B80C81EF80.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "Surveillance",
+      "Date_Start": "06/07/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00030",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/E44D5668BA49B4EDFF4349B322885CF1DFDB2EA984015D25601FAC308E6EE460.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "06/08/2017",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00031",
-        "Status": "Open",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716815",
-      "modId": "3"
+    "portalData": {},
+    "recordId": "716814",
+    "modId": "7"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/67A6D8A7F32A35C044CC5DC18B3ED845705781F412A0CAF801097D83EA0497C2.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/08/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00031",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/1FEBED58531248960904C21DFA3076A10E086C8121974AC4F2462A5805A133F1.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "06/08/2017",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00032",
-        "Status": "Open",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716816",
-      "modId": "3"
+    "portalData": {},
+    "recordId": "716815",
+    "modId": "4"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/472C4D51C98F8189F19FA387131F86F54E15605C6C48856CA8FA890CD07278AE.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/08/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00032",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
     },
-    {
-      "fieldData": {
-        "Claim_No": "123",
-        "Category": "Surveillance",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/4181CE3F8343EF838B22CE9C3C293799459858DE7D8D8E4ADAB8574E952685E0.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "06/09/2017",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00033",
-        "Status": "Open",
-        "Account_Name": "Sample Company",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": "Claiman First"
-      },
-      "portalData": {},
-      "recordId": "716817",
-      "modId": "11"
+    "portalData": {},
+    "recordId": "716816",
+    "modId": "4"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/F2A6849706444F734A1CB4875ABFBD5ED49944757550903106ECDAA00759202D.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "123",
+      "Category": "Surveillance",
+      "Date_Start": "06/09/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00033",
+      "Status": "Open",
+      "Account_Name": "Sample Company",
+      "Auditing_Assigned_Investigators_Names": "Mickey Spillane",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "Claiman First",
+      "Auditing_Assigned_Staff_Names": "Louise Reid"
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "Surveillance",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/8AFAF48DAEA144EF201D6B5C7B2483329DAD88BA0ABA8C832E33D878ABEFB484.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "06/13/2017",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00034",
-        "Status": "Open",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716818",
-      "modId": "11"
+    "portalData": {},
+    "recordId": "716817",
+    "modId": "13"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/67B8835079D89F91FF6A176C897D971D267859A8184FA0203163BD0A45D8E318.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "Surveillance",
+      "Date_Start": "06/13/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00034",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/253F9FE45C12A4A47BDC7CB7170AA498AA31DEF2A3F7D1B4D9B4BAC52D60C9C6.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "06/14/2017",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00035",
-        "Status": "Open",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716819",
-      "modId": "8"
+    "portalData": {},
+    "recordId": "716818",
+    "modId": "12"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/229E5865F1B2F4A3DB01558361C1D0879063F9DF782105206D243794B05D270D.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/14/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00035",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "Alex Investigator",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": "Louise Reid"
     },
-    {
-      "fieldData": {
-        "Claim_No": "",
-        "Category": "",
-        "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/2DC49ACFD35BF8EBFB14D83B0C0F1855B7A3DA97247184817850361C924009E9.png?RCType=EmbeddedRCFileProcessor",
-        "Date_Start": "06/19/2017",
-        "Date_End": "",
-        "Date_Due": "",
-        "ID_Project": "PRJ00036",
-        "Status": "Open",
-        "Account_Name": "",
-        "Staff": "",
-        "Contact": "",
-        "Claimant": ""
-      },
-      "portalData": {},
-      "recordId": "716820",
-      "modId": "0"
-    }
-  ]
+    "portalData": {},
+    "recordId": "716819",
+    "modId": "21"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/9A9FE7F7C0CD6CD76351A125DE927970FF481BE227FA952B257541EA99C16684.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/19/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00036",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
+    },
+    "portalData": {},
+    "recordId": "716820",
+    "modId": "1"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/DA50536BEB39523FF8EA61E59B4B883701BEC28755AFAF6F690AACEC2023BD24.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "Surveillance",
+      "Date_Start": "06/22/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00037",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "Mickey Spillane",
+      "Auditing_Assigned_Contacts_Names": "Alex bbb",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": "Louise Reid"
+    },
+    "portalData": {},
+    "recordId": "716821",
+    "modId": "83"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/030E0B795599E7EF3B33FE32E174CD66F3C2780BA6E8BEA586649ABC7CDB0D3D.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "123123",
+      "Category": "Surveillance",
+      "Date_Start": "06/23/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00038",
+      "Status": "Overdue",
+      "Account_Name": "Company Name",
+      "Auditing_Assigned_Investigators_Names": "Mickey Spillane",
+      "Auditing_Assigned_Contacts_Names": "Alex bbb",
+      "Claimant": "Claiman First",
+      "Auditing_Assigned_Staff_Names": "Louise Reid"
+    },
+    "portalData": {},
+    "recordId": "716822",
+    "modId": "12"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/BE175A81797414D615FCECAF0B4B4878DE983379C3651F1254D47D2AA13DBD47.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/23/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00039",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
+    },
+    "portalData": {},
+    "recordId": "716823",
+    "modId": "0"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/B312CE5D8FB9F56CE4CCCAC68DA3DBBE5DBFBBF2CC59BD177EFE3659F6E57776.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "Surveillance",
+      "Date_Start": "06/23/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00040",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": "Louise Reid"
+    },
+    "portalData": {},
+    "recordId": "716824",
+    "modId": "5"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/816D69E7CB3377939E4A4442B65D73BB58F4F8DBBB58FFB90EC2B23D29E1CB71.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "Surveillance",
+      "Date_Start": "06/23/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00041",
+      "Status": "Open",
+      "Account_Name": "Company Name",
+      "Auditing_Assigned_Investigators_Names": "Alex Investigator",
+      "Auditing_Assigned_Contacts_Names": "Alex bbb",
+      "Claimant": "Test Claimant",
+      "Auditing_Assigned_Staff_Names": "Louise Reid"
+    },
+    "portalData": {},
+    "recordId": "716825",
+    "modId": "5"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/9E63E30EEA0B7DB146633A1DB5AFDCCF567C3DAD72DDACA7FA43DB14AF6CC466.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/23/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00042",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
+    },
+    "portalData": {},
+    "recordId": "716826",
+    "modId": "0"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/ECB9BC7F9A835B67BF31459E79E68CCE1778B2A78E59AD0D5FEBF6406E85DC60.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/23/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00043",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
+    },
+    "portalData": {},
+    "recordId": "716827",
+    "modId": "0"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/306538AEB4984DA3D411CB6D22FF4D6C340FB91DCF6928D4B379EA803B27B5DD.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/26/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00044",
+      "Status": "Open",
+      "Account_Name": "Company Name",
+      "Auditing_Assigned_Investigators_Names": "Mickey Spillane",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "Claiman First",
+      "Auditing_Assigned_Staff_Names": "Louise Reid"
+    },
+    "portalData": {},
+    "recordId": "716828",
+    "modId": "4"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/7728FF12CB2AC45BA21A2924F5FFF2A061FF5E6A5F894CD3ABEC4805E7484852.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/26/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00045",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
+    },
+    "portalData": {},
+    "recordId": "716829",
+    "modId": "0"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/424E5DD8180F830B0BA5ED03FCD5CD2E51FDF1ED649C6D0DFF103F0A4EE1697E.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/26/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00046",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
+    },
+    "portalData": {},
+    "recordId": "716830",
+    "modId": "0"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/BB2A5100D7B17B43924413ECE2A122DB1FCF2614539BD548EADC0A92E6234305.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/26/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00047",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
+    },
+    "portalData": {},
+    "recordId": "716831",
+    "modId": "0"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/9057D5A7CC84DED49D8AF67424AA6EEE1A841DCE50F3E8A467C6538B1979234D.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/26/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00048",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": "Louise Reid"
+    },
+    "portalData": {},
+    "recordId": "716832",
+    "modId": "1"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/02CAC77BD6E09854FA279DA027F869F4C4E035310DA6D5DAC4B9C3B9CEFFEC4B.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/26/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00049",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
+    },
+    "portalData": {},
+    "recordId": "716833",
+    "modId": "0"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/DF34B3EE2069B712EF90BFE51DAA327F05A17DB19A1B12E9AB49C69817DFAD20.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/26/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00050",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
+    },
+    "portalData": {},
+    "recordId": "716834",
+    "modId": "0"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/BAF865A267BF051A0BCFCD6B71155D681F486584F51C9F067294AA4026978FAC.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/26/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00051",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
+    },
+    "portalData": {},
+    "recordId": "716835",
+    "modId": "0"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/15DCE3DEB416177876FEB3ED3D6968AC50C60C0AEF288FB188C22A3B6FA933EA.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "Surveillance",
+      "Date_Start": "06/27/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00053",
+      "Status": "Overdue",
+      "Account_Name": "Company Name",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "Test Claimant",
+      "Auditing_Assigned_Staff_Names": "Louise Reid"
+    },
+    "portalData": {},
+    "recordId": "716837",
+    "modId": "12"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/F928C991E85CA0C75F8563369C882901D9AD24A0DCAF23B0CD5B97DC38DE65D1.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/27/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00054",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": "Louise Reid"
+    },
+    "portalData": {},
+    "recordId": "716838",
+    "modId": "4"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/50312BD39DA122B191E942A40902AEDFC34ADB3ED863F84394A31A2C09E5EA93.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/27/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00055",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
+    },
+    "portalData": {},
+    "recordId": "716839",
+    "modId": "0"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/5CF6C4F3AE589CDB747D48C958AC5E072CE1A9DDD36C604F42AB4926E77C8E9E.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/28/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00056",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
+    },
+    "portalData": {},
+    "recordId": "716840",
+    "modId": "0"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/702616BFAA52B5209E0016C99E797E8DF732CA773341D8E914B75D38E287C1D3.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/28/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00057",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": ""
+    },
+    "portalData": {},
+    "recordId": "716841",
+    "modId": "0"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/D14AD23444BB722FD6308D442732C2D08EB1742571B91963E11E285129588B05.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "06/28/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00058",
+      "Status": "Open",
+      "Account_Name": "",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": "Louise Reid"
+    },
+    "portalData": {},
+    "recordId": "716842",
+    "modId": "3"
+  },
+  {
+    "fieldData": {
+      "T16n_projects_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/77DB0BFE968E42494974C88C0AC667EB0CA176E86343DA3166258DABDF2B2333.png?RCType=EmbeddedRCFileProcessor",
+      "Claim_No": "",
+      "Category": "",
+      "Date_Start": "07/04/2017",
+      "Date_End": "",
+      "Date_Due": "",
+      "ID_Project": "PRJ00059",
+      "Status": "Open",
+      "Account_Name": "Company Name bew",
+      "Auditing_Assigned_Investigators_Names": "",
+      "Auditing_Assigned_Contacts_Names": "",
+      "Claimant": "",
+      "Auditing_Assigned_Staff_Names": "Louise Reid"
+    },
+    "portalData": {},
+    "recordId": "716843",
+    "modId": "1"
+  }
+]

@@ -1,0 +1,226 @@
+[
+  {
+    "fieldData": {
+      "Name_Full": "Louise Reid",
+      "Email": "louise@ma-investigations.com.au",
+      "Phone1": "",
+      "Permissions": "Manager",
+      "Status": "Active",
+      "Department": "",
+      "T172a_staff_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/5E0E32FB5EE48AC545903E33DA365A2A7E4B02A660813D28C53C5D83E86F1A21.png?RCType=EmbeddedRCFileProcessor",
+      "ID_staff": "STA1",
+      "State_Province": ""
+    },
+    "portalData": {},
+    "recordId": "1304",
+    "modId": "7"
+  },
+  {
+    "fieldData": {
+      "Name_Full": "Justine Shaw",
+      "Email": "justine@ma-investigations.com.au",
+      "Phone1": "",
+      "Permissions": "",
+      "Status": "Active",
+      "Department": "",
+      "T172a_staff_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/0B885AE9E0814A7F80E8B54B7C5B11A055F9B337C66148DD1C240DB174B863F1.png?RCType=EmbeddedRCFileProcessor",
+      "ID_staff": "STA2",
+      "State_Province": ""
+    },
+    "portalData": {},
+    "recordId": "1305",
+    "modId": "2"
+  },
+  {
+    "fieldData": {
+      "Name_Full": "Craig Shaw",
+      "Email": "craig@ma-investigations.com.au",
+      "Phone1": "",
+      "Permissions": "",
+      "Status": "Active",
+      "Department": "",
+      "T172a_staff_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/35E9A34AA88D7FEE685800D05DDC6D59AFB7F29F5107F2892F5CA4224A2FFD04.png?RCType=EmbeddedRCFileProcessor",
+      "ID_staff": "STA3",
+      "State_Province": ""
+    },
+    "portalData": {},
+    "recordId": "1306",
+    "modId": "6"
+  },
+  {
+    "fieldData": {
+      "Name_Full": "Michele Byrne",
+      "Email": "michele@ma-investigations.com.au",
+      "Phone1": "",
+      "Permissions": "",
+      "Status": "Active",
+      "Department": "",
+      "T172a_staff_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/A2FBB77340590AFC68D3F7596FBE50EE30C0175CEE566FB99491D12C838193C9.png?RCType=EmbeddedRCFileProcessor",
+      "ID_staff": "STA4",
+      "State_Province": ""
+    },
+    "portalData": {},
+    "recordId": "1307",
+    "modId": "2"
+  },
+  {
+    "fieldData": {
+      "Name_Full": "Georgina Darke",
+      "Email": "georgi@ma-investigations.com.au",
+      "Phone1": "",
+      "Permissions": "",
+      "Status": "Active",
+      "Department": "",
+      "T172a_staff_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/0FE0681D681B19064DE59FD6637EA4C1962385D22BAC43B3F3BC4716D184503A.png?RCType=EmbeddedRCFileProcessor",
+      "ID_staff": "STA5",
+      "State_Province": ""
+    },
+    "portalData": {},
+    "recordId": "1308",
+    "modId": "4"
+  },
+  {
+    "fieldData": {
+      "Name_Full": "Joana Henriques",
+      "Email": "joanna@ma-investigations.com.au",
+      "Phone1": "",
+      "Permissions": "Staff",
+      "Status": "Active",
+      "Department": "",
+      "T172a_staff_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/DDFD756EEC2D5199189013269C1B5300120ABE3D49F268E39775CC4860B6DA33.png?RCType=EmbeddedRCFileProcessor",
+      "ID_staff": "STA6",
+      "State_Province": ""
+    },
+    "portalData": {},
+    "recordId": "1309",
+    "modId": "3"
+  },
+  {
+    "fieldData": {
+      "Name_Full": "Bronwyn Faulkes",
+      "Email": "bronwyn@ma-investigations.com.au",
+      "Phone1": "",
+      "Permissions": "",
+      "Status": "Active",
+      "Department": "",
+      "T172a_staff_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/880D84EF3201053DAAB320A71CBFBAE75696101890B6FF7357931237A2FE153D.png?RCType=EmbeddedRCFileProcessor",
+      "ID_staff": "STA7",
+      "State_Province": ""
+    },
+    "portalData": {},
+    "recordId": "1310",
+    "modId": "2"
+  },
+  {
+    "fieldData": {
+      "Name_Full": "Donna Hanlon",
+      "Email": "dona@ma-investigations.com.au",
+      "Phone1": "",
+      "Permissions": "",
+      "Status": "Active",
+      "Department": "",
+      "T172a_staff_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/3BE17635B489802760E44B22A4F21460AD4BFAFD42630E440DCD47F3956F45E6.png?RCType=EmbeddedRCFileProcessor",
+      "ID_staff": "STA8",
+      "State_Province": ""
+    },
+    "portalData": {},
+    "recordId": "1311",
+    "modId": "2"
+  },
+  {
+    "fieldData": {
+      "Name_Full": "Joy DeCarvalho",
+      "Email": "joy@ma-investigations.com.au",
+      "Phone1": "",
+      "Permissions": "",
+      "Status": "Active",
+      "Department": "",
+      "T172a_staff_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/DB577D72E2E8F55D0B1973DFB3105F0404006BD358635519F8962F2D6CF1DE6D.png?RCType=EmbeddedRCFileProcessor",
+      "ID_staff": "STA9",
+      "State_Province": ""
+    },
+    "portalData": {},
+    "recordId": "1312",
+    "modId": "2"
+  },
+  {
+    "fieldData": {
+      "Name_Full": "Claire Chenery",
+      "Email": "claire@ma-investigations.com.au",
+      "Phone1": "",
+      "Permissions": "",
+      "Status": "Active",
+      "Department": "",
+      "T172a_staff_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/5391D3180DD10319CC0116ED92679A8274D59B8674CD36F6B194F419F036DDD1.png?RCType=EmbeddedRCFileProcessor",
+      "ID_staff": "STA10",
+      "State_Province": ""
+    },
+    "portalData": {},
+    "recordId": "1313",
+    "modId": "2"
+  },
+  {
+    "fieldData": {
+      "Name_Full": "Joanne Zagame",
+      "Email": "joanne@ma-investigations.com.au",
+      "Phone1": "",
+      "Permissions": "",
+      "Status": "Active",
+      "Department": "",
+      "T172a_staff_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/89B1D0C8B7BF03888ED5C51BA228FDE0335D4A9D6318143C5970B63210140462.png?RCType=EmbeddedRCFileProcessor",
+      "ID_staff": "STA11",
+      "State_Province": ""
+    },
+    "portalData": {},
+    "recordId": "1314",
+    "modId": "2"
+  },
+  {
+    "fieldData": {
+      "Name_Full": "Ainlsie Uttley",
+      "Email": "ainslie@ma-investigations.com.au",
+      "Phone1": "",
+      "Permissions": "",
+      "Status": "Active",
+      "Department": "",
+      "T172a_staff_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/0049592F265E82D8482AEFBD8B5A8FCDD75C32A140B8AD932E13AA660B4B523A.png?RCType=EmbeddedRCFileProcessor",
+      "ID_staff": "STA12",
+      "State_Province": ""
+    },
+    "portalData": {},
+    "recordId": "1315",
+    "modId": "2"
+  },
+  {
+    "fieldData": {
+      "Name_Full": "",
+      "Email": "",
+      "Phone1": "",
+      "Permissions": "",
+      "Status": "Active",
+      "Department": "",
+      "T172a_staff_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/1520C9FBF06C2A7E49B60FBED72C6B917E367946ECBAD2DC0AA7C41DBE166669.png?RCType=EmbeddedRCFileProcessor",
+      "ID_staff": "STA14",
+      "State_Province": ""
+    },
+    "portalData": {},
+    "recordId": "1330",
+    "modId": "1"
+  },
+  {
+    "fieldData": {
+      "Name_Full": "",
+      "Email": "",
+      "Phone1": "",
+      "Permissions": "",
+      "Status": "Active",
+      "Department": "",
+      "T172a_staff_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/DB68FDFFA1CD898E8A583E717BF7BB9FAEA0336172EAF0EF4E1B1266ED61AC3A.png?RCType=EmbeddedRCFileProcessor",
+      "ID_staff": "STA15",
+      "State_Province": ""
+    },
+    "portalData": {},
+    "recordId": "1331",
+    "modId": "0"
+  }
+]

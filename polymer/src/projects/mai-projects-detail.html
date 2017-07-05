@@ -14,7 +14,9 @@
 <link rel="import" href="../mai-input-date.html">
 <link rel="import" href="../clients/mai-clients-list-data.html">
 <link rel="import" href="../claimants/mai-claimants-list-data.html">
-
+<link rel="import" href="../staffs/mai-staffs-list-data.html">
+<link rel="import" href="../investigators/mai-investigators-list-data.html">
+<link rel="import" href="../contacts/mai-contacts-list-data.html">
 
 <dom-module id="mai-projects-detail">
     <template>
@@ -39,7 +41,7 @@
                 }
                 .paperDialog{
                     width: 50%;
-                    height: auto;
+                    height: 50%;
                     border-radius:10px;
                 }
                 .paperDialog h4{
@@ -50,15 +52,23 @@
                 }
                 .paperDialog vaadin-grid{
                     margin:0px 0px 10px 0px;
+                    height:100%;
+                    padding:0;
                 }
                 .dialogHeader{
                     display: flex;
                     justify-content: space-between;
                     margin: 0;
                     padding-right: 0;
+                    background:cadetblue;
                 }
                 .dialogHeader paper-icon-button{
                     color: red;
+                }
+
+                #toastMessage{
+                    --paper-toast-background-color: orangered;
+                    --paper-toast-color: white;
                 }
 
             </style>
@@ -86,6 +96,11 @@
 
         <mai-clients-list-data clients-data="{{clientsData}}"></mai-clients-list-data>
         <mai-claimants-list-data claimants-data="{{claimantsData}}"></mai-claimants-list-data>
+        <mai-staffs-list-data staffs-data="{{staffsData}}"></mai-staffs-list-data>
+        <mai-investigators-list-data investigators-data="{{investigatorsData}}"></mai-investigators-list-data>
+        <mai-contacts-list-data contacts-data="{{contactsData}}"></mai-contacts-list-data>
+
+        <paper-toast id="toastMessage" class="fit-bottom" duration="5000"></paper-toast>
 
         <div class="layout horizontal wrap around-justified">
             <!--<div class="" >-->
@@ -130,7 +145,7 @@
                                 <mai-input disabled="{{disabled}}" id$="company[[project.recordId]]" value="{{project.fieldData.Account_Name::input}}">
                                 </mai-input>
                                 <paper-icon-button icon="close" field-name="company" on-tap="clearInput"></paper-icon-button>
-                                <paper-icon-button icon="search"field-name="company" on-tap="selectInput"></paper-icon-button>
+                                <paper-icon-button icon="search" field-name="company" on-tap="selectInput"></paper-icon-button>
                             </span>
                         </div>
                         <div class="group-item-row border-bottom-lightgray">
@@ -139,7 +154,7 @@
                                 <mai-input disabled="{{disabled}}" id$="claimant[[project.recordId]]" value="{{project.fieldData.Claimant::input}}">
                                 </mai-input>
                                 <paper-icon-button icon="close" field-name="claimant" on-tap="clearInput"></paper-icon-button>
-                                <paper-icon-button icon="search"field-name="claimant" on-tap="selectInput"></paper-icon-button>
+                                <paper-icon-button icon="search" field-name="claimant" on-tap="selectInput"></paper-icon-button>
                             </span>
                         </div>
                     </div>
@@ -174,7 +189,6 @@
                     <h4>Claimant Search</h4>
                     <paper-icon-button icon="close" dialog-dismiss></paper-icon-button>
                 </div>
-                <!--<paper-dialog-scrollable>-->
                 <vaadin-grid id="claimantSelector" items="[[claimantsData]]" class="list-view-datatable"
                              active-item="{{selectedClaimant}}">
                     <vaadin-grid-column>
@@ -186,19 +200,57 @@
                         <template>[[item.fieldData.Email]]</template>
                     </vaadin-grid-column>
                 </vaadin-grid>
-                <!--</paper-dialog-scrollable>-->
             </paper-dialog>
+
+            <!-- Popup selection for staffs -->
+            <paper-dialog class="paperDialog" id="staffDialog">
+                <div class="dialogHeader">
+                    <h4>Staff Search</h4>
+                    <paper-icon-button icon="close" dialog-dismiss></paper-icon-button>
+                </div>
+                <vaadin-grid id="staffSelector" items="[[staffsData]]" class="list-view-datatable"
+                             active-item="{{selectedStaff}}">
+                    <vaadin-grid-column>
+                        <template class="header">Name</template>
+                        <template>[[item.fieldData.Name_Full]]</template>
+                    </vaadin-grid-column>
+                    <vaadin-grid-column>
+                        <template class="header">Email</template>
+                        <template>[[item.fieldData.Email]]</template>
+                    </vaadin-grid-column>
+                </vaadin-grid>
+            </paper-dialog>
+
+            <!-- Popup selection for investigators -->
+            <paper-dialog class="paperDialog" id="investigatorDialog">
+                <div class="dialogHeader">
+                    <h4>Investigators Search</h4>
+                    <paper-icon-button icon="close" dialog-dismiss></paper-icon-button>
+                </div>
+                <vaadin-grid id="investigatorSelector" items="[[investigatorsData]]" class="list-view-datatable"
+                             active-item="{{selectedInvestigator}}">
+                    <vaadin-grid-column>
+                        <template class="header">Name</template>
+                        <template>[[item.fieldData.Name_Full]]</template>
+                    </vaadin-grid-column>
+                    <vaadin-grid-column>
+                        <template class="header">Email</template>
+                        <template>[[item.fieldData.Email]]</template>
+                    </vaadin-grid-column>
+                </vaadin-grid>
+            </paper-dialog>
+
 
             <div class="group-staff box-spacing border-lightgray">
                 <div class="group-header">
                     <div class="box-container">Staff</div>
                     <div class="all-list border-lightgray layout vertical">
-                        <dom-repeat items="{{staffs}}" as="staff" scroll-target="document">
+                        <dom-repeat items="{{staffs::change}}" as="staff" scroll-target="document">
                             <template>
                                 <ul>
                                     <li><a href="/staffs/detail/1304">[[_getDataFromArray(staffs.*, index, 'T16q_projects_STAFF|id_staff|id_staff|::Name_Full')]]</a></li>
-                                    <li><paper-icon-button icon="close"></paper-icon-button></li>
-                                    <li><paper-icon-button icon="search"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="close" field-name="staffs" data-index$="[[index]]" on-tap="removeAssigned"></paper-icon-button></li>
+                                    <!--<li><paper-icon-button icon="search"></paper-icon-button></li>-->
                                     <li><paper-icon-button icon="mail"></paper-icon-button></li>
                                 </ul>
                             </template>
@@ -206,7 +258,7 @@
 
                         <ul>
                             <li></li>
-                            <li><span>Add: </span><paper-icon-button icon="search"></paper-icon-button></li>
+                            <li><span>Add: </span><paper-icon-button icon="search" field-name="staff" on-tap="selectInput"></paper-icon-button></li>
                         </ul>
                     </div>
                 </div>
@@ -217,12 +269,12 @@
                     <div class="box-container">Investigators</div>
                     <div class="all-list border-lightgray layout vertical">
 
-                        <dom-repeat items="{{investigators}}" as="investigator" scroll-target="document">
+                        <dom-repeat items="{{investigators::change}}" as="investigator" scroll-target="document">
                             <template>
                                 <ul>
                                     <li><a href="/">[[investigator.PRJ_Projects_ING_Investigators::Investigator]]</a></li>
-                                    <li><paper-icon-button icon="close"></paper-icon-button></li>
-                                    <li><paper-icon-button icon="search"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="close" field-name="investigators" data-index$="[[index]]" on-tap="removeAssigned"></paper-icon-button></li>
+                                    <!--<li><paper-icon-button icon="search"></paper-icon-button></li>-->
                                     <li><paper-icon-button icon="mail"></paper-icon-button></li>
                                 </ul>
                             </template>
@@ -230,7 +282,7 @@
 
                         <ul>
                             <li></li>
-                            <li><span>Add: </span><paper-icon-button icon="search"></paper-icon-button></li>
+                            <li><span>Add: </span><paper-icon-button icon="search" field-name="investigator" on-tap="selectInput"></paper-icon-button></li>
                         </ul>
                     </div>
                 </div>
@@ -438,7 +490,7 @@
                 static get properties() {
                     return {
                         disabled:{type:Boolean,value:false},
-                        projectDetail: Array,
+                        projectDetail: {type: Array, notify:true},
                         recordId: {
                             type: String,
 //                        value: '',
@@ -457,8 +509,24 @@
                         },
                         selectedClaimant: {
                             observer: '_selectedClaimantChanged'
+                        },
+                        selectedStaff: {
+                            observer: '_selectedStaffChanged'
+                        }
+                        ,
+                        selectedInvestigator: {
+                            observer: '_selectedInvestigatorChanged'
                         }
                     };
+                }
+
+                static get observers() {
+                    return [
+                        '_recordIdChanged(recordId,tokenData)',
+                        '_onProjectDetailChanged(projectDetail.*)',
+                        '_onStaffsChanged(staffs.splices)',
+                        '_onInvestigatorsChanged(investigators.splices)',
+                    ]
                 }
 
                 _selectedCompanyChanged(item){
@@ -482,10 +550,23 @@
                     }
                 }
 
-                static get observers() {
-                    return [
-                        '_recordIdChanged(recordId,tokenData)','_onProjectDetailChanged(projectDetail.*)'
-                    ]
+                _selectedStaffChanged(item){
+                    if(item) {
+                        this.$.staffSelector.selectedItems = item ? [item] : [];
+                        this.push('staffs',{"T16q_projects_STAFF|id_staff|id_staff|::Name_Full":this.selectedStaff.fieldData.Name_Full});
+                        this.shadowRoot.querySelector('#staffDialog').toggle();
+                    }
+                }
+                _selectedInvestigatorChanged(item){
+                    if(item) {
+                        console.log(this.selectedInvestigator);
+                        this.$.investigatorSelector.selectedItems = item ? [item] : [];
+                        this.push('investigators',
+                            {"PRJ_Projects_ING_Investigators::Investigator":this.selectedInvestigator.fieldData.Name_Full},
+                            //{"PRJ_Projects_ING_Investigators::id_investigator":this.selectedInvestigator.fieldData.ID_investigator}
+                            );
+                        this.shadowRoot.querySelector('#investigatorDialog').toggle();
+                    }
                 }
 
                 _recordIdChanged(recordId, tokenData){
@@ -496,47 +577,38 @@
                     }
                 }
 
-                detailLoaded(data){
-                    console.log(data.detail.response);
-                    this.projectDetail= data.detail.response;
-                    if(this.projectDetail){
-                        this.investigators = this.projectDetail[0].portalData.Investigator_Portal;
-                        this.contacts = this.projectDetail[0].portalData.portalProjectContacts;
-                        this.staffs = this.projectDetail[0].portalData["Investigator_Portal Copy"];
-                        this.tasks = this.projectDetail[0].portalData.tasks_portal;
-                        this.files = this.projectDetail[0].portalData.portalDocuments;
-                        this.auditField = this.projectDetail[0].fieldData.Audit_log_UltraLog;
-
-                        /*
-                         var tempStaff = this.projectDetail[0].portalData["Investigator_Portal Copy"];
-
-                         //this.staffs = {recordId:'', Name_Full:''};
-                         this.staffs = new Array();
-                         for(var i=0; i < tempStaff.length; i++){
-                         //console.log(tempStaff[i]);
-                         //console.log(tempStaff[i]["T16q_projects_STAFF|id_staff|id_staff|::Name_Full"]);
-                         this.staffs.push(
-                         {
-                         recordId : tempStaff[i].recordId,
-                         Name_Full : tempStaff[i]["T16q_projects_STAFF|id_staff|id_staff|::Name_Full"]
-                         }
-                         );
-                         //this.staffs.Name_Full = tempStaff[i]["T16q_projects_STAFF|id_staff|id_staff|::Name_Full"];
-                         }*/
-
-
-
-                        //console.log(this.notes);
-                        //console.log(this._changeDateFormat('05/29/201'));
-
-                    }
-
+                _onStaffsChanged(changeRecord){
+                    this._updateChangedItem(changeRecord);
                 }
-                _computeURL(recordId){
-                    console.log(recordId);
 
-                    return `https://localhost:3000/fm/getDetail/L120_Projects_Data_entry/${recordId}`;
-                    //return `https://localhost:3000/fm/getLocalProjectsDetail/${recordId}`;
+                _onInvestigatorsChanged(changeRecord){
+                    this._updateChangedItem(changeRecord);
+                }
+
+                _updateChangedItem(changeRecord){
+                    if (changeRecord) {
+                        console.log(changeRecord);
+                        changeRecord.indexSplices.forEach(function(data) {
+
+                            for (var i=0; i<data.removed.length; i++) {
+                                var item = data.removed[i];
+                                console.log(item);
+                                var value = Object.keys(item)[1];
+                                value = value.substring(0,value.indexOf(":"));
+                                //console.log(value);
+                                this._updateDetail('deleteRelated', value+'.'+item.recordId);
+                            }
+
+                            for (var i=0; i<data.addedCount; i++) {
+                                var index = data.index + i;
+                                var selected = data.object[index];
+                                var fieldName = Object.keys(selected)[0];
+                                var value = selected[fieldName];
+                                console.log(fieldName +'--' + value)
+                                this._updateDetail(fieldName+'.0', value);
+                            }
+                        }, this);
+                    }
                 }
 
                 _getDataFromArray(dataList, index, path) {
@@ -560,7 +632,6 @@
 
                 }
 
-
                 _onProjectDetailChanged(changeDetail) {
                     //console.log(changeDetail);
                     if(changeDetail.path !=='projectDetail') {
@@ -568,26 +639,37 @@
                         var fieldName = path.substring(path.lastIndexOf('.') + 1);
                         var value = changeDetail.value;
 
-                        if(fieldName.toLowerCase().includes("date") && value!=="" && value!==undefined){
-                            if(value.length<10){
-                                return;
-                            }
-                            value = new Date(value);
-                            value = ('0' + (value.getMonth()+1)).slice(-2) +'/'+('0' + (value.getDate())).slice(-2)+'/'+ value.getFullYear();
-                        }
-
-                        if(value===null){
-                            value="";
-                        }
-
-                        var body = '{"data": {"'+fieldName+'":"'+value+'"}}';
-                        this.$.updateProjectsDetail.body = body;
-                        this.$.updateProjectsDetail.generateRequest();
+                        this._updateDetail(fieldName, value);
                     }
                 }
 
+                _updateDetail(fieldName, value){
+                    //var body = '{"data": {"'+fieldName+'":"'+value+'"}}';
+
+                    if(fieldName.toLowerCase().includes("date") && value!=="" && value!==undefined){
+                        if(value.length<10){
+                            return;
+                        }
+                        value = new Date(value);
+                        value = ('0' + (value.getMonth()+1)).slice(-2) +'/'+('0' + (value.getDate())).slice(-2)+'/'+ value.getFullYear();
+                    }
+                    if(value===null){
+                        value="";
+                    }
+                    this.$.updateProjectsDetail.body = '{"data": {"'+fieldName+'":"'+value+'"}}';
+                    this.$.updateProjectsDetail.generateRequest();
+                }
+
                 checkUpdateResult(data){
-                    console.log(data.detail.response);
+                    var response = data.detail.response;
+                    if(response && response.errorCode!=="0") {
+                        this.$.toastMessage.text = "Error updating: "+response.errorMessage;
+                        this.$.toastMessage.open();
+                    }
+                }
+
+                removeAssigned(e){
+                    this.splice(e.target.getAttribute('field-name'),e.target.getAttribute('data-index'),1);
                 }
 
                 clearInput(e){
@@ -604,6 +686,28 @@
                     this.shadowRoot.querySelector('#' + id).value = value;
                     this.shadowRoot.querySelector('#' + id).dispatchEvent(new Event('input', { 'bubbles': true,composed:true }))
                 }
+
+                _computeURL(recordId){
+                    console.log(recordId);
+                    return `https://localhost:3000/fm/getDetail/L120_Projects_Data_entry/${recordId}`;
+                    //return `https://localhost:3000/fm/getLocalProjectsDetail/${recordId}`;
+                }
+
+                detailLoaded(data){
+                    console.log(data.detail.response);
+                    this.projectDetail= data.detail.response;
+                    if(this.projectDetail){
+                        this.investigators = this.projectDetail[0].portalData.Investigator_Portal;
+                        this.contacts = this.projectDetail[0].portalData.portalProjectContacts;
+                        this.staffs = this.projectDetail[0].portalData["Investigator_Portal Copy"];
+                        this.tasks = this.projectDetail[0].portalData.tasks_portal;
+                        this.files = this.projectDetail[0].portalData.portalDocuments;
+                        this.auditField = this.projectDetail[0].fieldData.Audit_log_UltraLog;
+
+                    }
+
+                }
+
 
             }
             window.customElements.define(MaiProjectsDetail.is, MaiProjectsDetail);

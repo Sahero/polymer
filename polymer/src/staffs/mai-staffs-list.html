@@ -1,16 +1,12 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<!--<link rel="import" href="../../bower_components/vaadin-grid/all-imports.html">
-<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
-
-<link rel="import" href="../mai-datatable-styles.html">-->
-
+<link rel="import" href="mai-staffs-list-data.html">
 
 <dom-module id="mai-staffs-list">
     <template>
         <style include="mai-datatable-styles">
 
         </style>
-
+<!--
         <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localStorage"></app-localstorage-document>
 
         <iron-ajax
@@ -22,9 +18,10 @@
                 handle-as="json"
                 last-response="{{listData}}"
                 on-response="listLoaded"
-        ></iron-ajax>
+        ></iron-ajax>-->
+        <mai-staffs-list-data selected-item="{{selectedItem}}" staffs-data="{{staffsData}}"></mai-staffs-list-data>
 
-        <vaadin-grid items="{{listData}}" id="staffsListViewDatatable" class="list-view-datatable" active-item="{{selectedItem}}" >
+        <vaadin-grid items="{{staffsData}}" id="staffsListViewDatatable" class="list-view-datatable" active-item="{{selectedItem}}" >
 
             <vaadin-grid-column>
                 <template class="header">
@@ -34,13 +31,9 @@
             </vaadin-grid-column>
             <vaadin-grid-column>
                 <template class="header">
-                    <vaadin-grid-sorter path="fieldData.Name_First">First name</vaadin-grid-sorter>
+                    <vaadin-grid-sorter path="fieldData.Name_Full">Name</vaadin-grid-sorter>
                 </template>
-                <template>[[item.fieldData.Name_First]]</template>
-            </vaadin-grid-column>
-            <vaadin-grid-column>
-                <template class="header">Last Name</template>
-                <template>[[item.fieldData.Name_Last]]</template>
+                <template>[[item.fieldData.Name_Full]]</template>
             </vaadin-grid-column>
             <vaadin-grid-column>
                 <template class="header">State</template>
@@ -72,23 +65,23 @@
             static get is() { return 'mai-staffs-list'; }
             static get properties() {
                 return {
-                    listData: {
+                    /*listData: {
                         type: Array,
                         notify:true
-                    },
+                    },*/
                     selectedItem: {
                         observer: '_selectedItemChanged'
                     }
                 }
             }
 
-            listLoaded(data){
+            /*listLoaded(data){
                 this.listData= data.detail.response;
                 if(this.listData) {
                     this.$.staffsListViewDatatable.activeItem = this.listData[0];
                 }
                 //console.log(this.listData);
-            }
+            }*/
 
             _selectedItemChanged(item){
                 if(item) {
@@ -105,10 +98,10 @@
                 }
             }
 
-            _computeURL(){
+            /*_computeURL(){
                 return `https://localhost:3000/fm/getList/L130_STAFF_Data_Entry`;
                 //return `https://localhost:3000/fm/getLocalStaffsList`;
-            }
+            }*/
         }
 
         window.customElements.define(MaiStaffsList.is, MaiStaffsList);

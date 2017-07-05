@@ -38,7 +38,8 @@
     "vaadin-date-picker": "2.0.0-alpha1",
     "paper-dropdown-input": "Juravenator/paper-dropdown-input#^2.4.1",
     "paper-dropdown-menu": "^2.0.0",
-    "paper-item": "^2.0.0"
+    "paper-item": "^2.0.0",
+    "paper-toast": "^2.0.0"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0-prerelease.7"

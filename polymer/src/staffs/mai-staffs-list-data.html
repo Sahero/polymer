@@ -1,0 +1,55 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="mai-staffs-list-data">
+
+    <template>
+        <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localStorage"></app-localstorage-document>
+
+        <iron-ajax
+                auto
+                id="getStaffsList"
+                method="get"
+                url="[[_computeURL()]]"
+                headers$='{"FM-data-token": "[[tokenData.token]]"}'
+                handle-as="json"
+                last-response="{{staffsData}}"
+                on-response="listLoaded"
+        ></iron-ajax>
+    </template>
+
+    <script>
+        (function() {
+            class MaiStaffsListData extends Polymer.Element {
+                static get is() {
+                    return 'mai-staffs-list-data';
+                }
+
+                static get properties() {
+                    return {
+                        staffsData: {
+                            type: Array,
+                            notify: true,
+                        },
+                        selectedItem: {
+                            type: Object,
+                            notify: true
+                        }
+                    }
+                }
+
+                listLoaded(data) {
+                    if(data.detail.response!==null) {
+                        this.staffsData = data.detail.response;
+                        this.selectedItem = this.staffsData[0];
+                    }
+                }
+
+                _computeURL() {
+                    return `https://localhost:3000/fm/getList/L131_STAFF_List_View`;
+                }
+
+            }
+            window.customElements.define(MaiStaffsListData.is, MaiStaffsListData);
+        }());
+    </script>
+</dom-module>
