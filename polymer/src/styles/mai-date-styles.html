@@ -1,0 +1,92 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="mai-date-styles">
+    <template>
+        <style>
+            .mai-date-picker {
+                --dark-theme-background-color: #fff;
+                --dark-theme-secondary-color: #737373;
+                --primary-text-color: #abc;
+                --secondary-text-color: #bcbcbc;
+
+                --primary-background-color: var(--paper-grey-900);
+
+                --vaadin-date-picker-yearscroller:{
+                    padding:0;
+                };
+
+                --vaadin-date-picker-toolbar: {
+                    background: var(--paper-grey-900);
+                };
+                --vaadin-date-picker-overlay:{
+                    max-width:230px;
+                    max-height:200px;
+
+                };
+                --vaadin-date-picker-calendar-weekday-cell: {
+                    text-transform: none;
+                    font-size: 10px;
+                };
+                --vaadin-date-picker-calendar-cell-selected: {
+                    color: #000;
+                };
+                --vaadin-date-picker-calendar-date-cell:{
+                    color: white;
+                    padding: 0;
+                    font-size: 10px;
+                    line-height: inherit;
+                };
+                --vaadin-date-picker-calendar:{
+                    padding: 0;
+                    item-height: 100;
+                };
+
+                --vaadin-date-picker-footer:{
+                    padding: 0;
+                    color:gray;
+                    font-size:12px;
+                };
+
+                --vaadin-date-picker-calendar-weekday-cell:{
+                    padding:0;
+                    font-size: 10px;
+                };
+
+                --vaadin-date-picker-calendar-title:{
+                    font-size:12px;
+                    padding:0;
+                }
+
+            }
+
+            iron-input > input {
+                font-size: 12px;
+                color: gray;
+                border: none;
+                background: transparent;
+                width: 100%;
+                outline: none;
+            }
+            mai-underline  { position:relative; display:block; width:100%; }
+            mai-underline:before, mai-underline:after   {
+                content:'';
+                height:2px;
+                width:0;
+                bottom:1px;
+                position:absolute;
+                background:#5264AE;
+                transition:0.2s ease all;
+            }
+            mai-underline:before {
+                left:50%;
+            }
+            mai-underline:after {
+                right:50%;
+            }
+            /* active state */
+            vaadin-date-picker-light[opened] ~ mai-underline:before, vaadin-date-picker-light[opened] ~ mai-underline:after {
+                width:50%;
+            }
+        </style>
+    </template>
+</dom-module>

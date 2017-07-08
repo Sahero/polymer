@@ -2,7 +2,7 @@
 
 <dom-module id="mai-input-date">
     <template>
-       <!-- <style>
+       <style>
             iron-input > input {
                 font-size: 12px;
                 color: gray;
@@ -33,42 +33,46 @@
                 width:50%;
             }
         </style>
-
+<!--
         <iron-input bind-value="{{data}}">
             &lt;!&ndash;<input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')" value="{{value::input}}">&ndash;&gt;
             <input value="{{value::input}}">
         </iron-input>
-        <mai-underline></mai-underline>-->
-        <style>
+        <mai-underline></mai-underline><style>
             :root {
-                --paper-input-container-color: none;
-                --paper-input-container-focus-color: #4285f4;
-                --paper-input-container-input-color: gray;
-                --paper-input-container-input:{
+                &#45;&#45;paper-input-container-color: none;
+                &#45;&#45;paper-input-container-focus-color: #4285f4;
+                &#45;&#45;paper-input-container-input-color: gray;
+                &#45;&#45;paper-input-container-input:{
                     font-size:12px;
                     padding: 0;
                 };
 
-                --paper-input-container: {
+                &#45;&#45;paper-input-container: {
                     padding: 0;
                 };
 
-                --paper-input-container-input-invalid:{
+                &#45;&#45;paper-input-container-input-invalid:{
                     font-size:10px;
                 }
 
             }
 
-        </style>
+        </style>-->
 
-        <paper-input value="{{value}}"
+        <!--<paper-input value="{{value}}"
                      auto-validate
                      pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d"
                      no-label-float="true" >
-        </paper-input>
+        </paper-input>-->
+        <!--<vaadin-date-picker-light>
+            <iron-input bind-value="{{value}}">
+                <input value="value::input">
+            </iron-input>
+        </vaadin-date-picker-light>-->
 
     </template>
-    <script>
+   <!-- <script>
         (function () {
             class MaiInputDate extends Polymer.Element
             {
@@ -77,8 +81,21 @@
                     return 'mai-input-date';
                 }
 
+                _changeDateFormat(date){
+                    console.log(date);
+                    if(date===null || date===""){
+                        return null;
+                    }
+                    //console.log(moment(new Date(date)).format("DD/MM/YYYY"));
+                    //date = new Date(date);
+                    //return moment(new Date(date)).format("DD/MM/YYYY");
+                    //return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                    var d = new Date(date);
+                    return d.getFullYear()+'-'+('0' + (d.getMonth()+1)).slice(-2)+'-'+('0' + (d.getDate())).slice(-2);
+
+                }
             }
             window.customElements.define(MaiInputDate.is,MaiInputDate);
         })();
-    </script>
+    </script>-->
 </dom-module>

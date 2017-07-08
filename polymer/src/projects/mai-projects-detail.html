@@ -21,9 +21,11 @@
 <dom-module id="mai-projects-detail">
     <template>
         <custom-style>
-            <style is="custom-style" include="iron-flex iron-flex-alignment mai-datatable-styles mai-detail-styles">
+            <style is="custom-style" include="iron-flex iron-flex-alignment mai-datatable-styles mai-detail-styles mai-date-styles">
+
                 :root{
                     --vaadin-combo-box-overlay-max-height:50px;
+
                     --paper-input-container-input:{
                         font-size:12px;
                         color:grey;
@@ -70,7 +72,6 @@
                     --paper-toast-background-color: orangered;
                     --paper-toast-color: white;
                 }
-
             </style>
         </custom-style>
         <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localStorage"></app-localstorage-document>
@@ -82,6 +83,7 @@
                 url="[[_computeURL(recordId)]]"
                 headers$='{"FM-data-token": "[[tokenData.token]]"}'
                 handle-as="json"
+
                 on-response="detailLoaded"
         ></iron-ajax>
 
@@ -240,6 +242,24 @@
                 </vaadin-grid>
             </paper-dialog>
 
+            <!-- Popup selection for contacts -->
+            <paper-dialog class="paperDialog" id="contactDialog">
+                <div class="dialogHeader">
+                    <h4>Contacts Search</h4>
+                    <paper-icon-button icon="close" dialog-dismiss></paper-icon-button>
+                </div>
+                <vaadin-grid id="contactSelector" items="[[contactsData]]" class="list-view-datatable"
+                             active-item="{{selectedContact}}">
+                    <vaadin-grid-column>
+                        <template class="header">Name</template>
+                        <template>[[item.fieldData.Name_First]] [[item.fieldData.Name_Last]]</template>
+                    </vaadin-grid-column>
+                    <vaadin-grid-column>
+                        <template class="header">Email</template>
+                        <template>[[item.fieldData.Email]]</template>
+                    </vaadin-grid-column>
+                </vaadin-grid>
+            </paper-dialog>
 
             <div class="group-staff box-spacing border-lightgray">
                 <div class="group-header">
@@ -292,19 +312,19 @@
                 <div class="group-header">
                     <div class="box-container">Contacts</div>
                     <div class="all-list border-lightgray layout vertical">
-                        <dom-repeat items="{{contacts}}" as="contact" scroll-target="document">
+                        <dom-repeat items="{{contacts::change}}" as="contact" scroll-target="document">
                             <template>
                                 <ul>
                                     <li><a href="/">[[contact.PRJ_Projects_CON_Contacts::Contact]]</a></li>
-                                    <li><paper-icon-button icon="close"></paper-icon-button></li>
-                                    <li><paper-icon-button icon="search"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="close" field-name="contacts" data-index$="[[index]]" on-tap="removeAssigned">></paper-icon-button></li>
+                                    <!--<li><paper-icon-button icon="search"></paper-icon-button></li>-->
                                     <li><paper-icon-button icon="mail"></paper-icon-button></li>
                                 </ul>
                             </template>
                         </dom-repeat>
                         <ul>
                             <li></li>
-                            <li><span>Add: </span><paper-icon-button icon="search"></paper-icon-button></li>
+                            <li><span>Add: </span><paper-icon-button icon="search" field-name="contact" on-tap="selectInput"></paper-icon-button></li>
                         </ul>
                     </div>
                 </div>
@@ -425,51 +445,68 @@
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Start</span>
                                     <span class="secondary">
-                                        <mai-input-date value="{{project.fieldData.Date_Start::input}}"></mai-input-date>
+                                        <vaadin-date-picker-light class="mai-date-picker">
+                                          <iron-input bind-value="{{project.fieldData.Date_Start}}">
+                                           <input value="value::input">
+                                          </iron-input>
+                                        </vaadin-date-picker-light>
+                                        <mai-underline></mai-underline>
                                     </span>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">End</span>
                                     <span class="secondary">
-                                        <mai-input-date value="{{project.fieldData.Date_End::input}}"></mai-input-date>
+                                        <vaadin-date-picker-light class="mai-date-picker">
+                                          <iron-input bind-value="{{project.fieldData.Date_End}}">
+                                           <input value="value::input">
+                                          </iron-input>
+                                        </vaadin-date-picker-light>
+                                        <mai-underline></mai-underline>
                                     </span>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Injury</span>
                                     <span class="secondary">
-                                        <mai-input-date value="{{project.fieldData.Date_Injury::input}}"></mai-input-date>
-                                        <!--<iron-input bind-value="[[project.fieldData.Date_Injury]]"><input type="text" value="{{value::input}}" onfocus="(this.type='date')" onfocusout="(this.type='text')"></iron-input>-->
+                                        <vaadin-date-picker-light class="mai-date-picker">
+                                          <iron-input bind-value="{{project.fieldData.Date_Injury}}">
+                                           <input value="value::input">
+                                          </iron-input>
+                                        </vaadin-date-picker-light>
+                                        <mai-underline></mai-underline>
                                     </span>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Instruction</span>
                                     <span class="secondary">
-                                        <!--<mai-input-date value="[[_changeDateFormat(project.fieldData.Date_Instruction)]]"></mai-input-date>-->
-                                        <mai-input-date value="{{project.fieldData.Date_Instruction::input}}"></mai-input-date>
-                                        <!--<vaadin-date-picker value="{{_changeDateFormat(project.fieldData.Date_Instruction)}}">-->
-                                        <!--</vaadin-date-picker>-->
-                                        <!--<iron-input bind-value="[[_changeDateFormat(project.fieldData.Date_Instruction)]]"><input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')"></iron-input>-->
+                                        <vaadin-date-picker-light class="mai-date-picker">
+                                          <iron-input bind-value="{{project.fieldData.Date_Instruction}}">
+                                           <input value="value::input">
+                                          </iron-input>
+                                        </vaadin-date-picker-light>
+                                        <mai-underline></mai-underline>
                                     </span>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Due Client</span>
                                     <span class="secondary">
-                                        <!--<iron-input bind-value="[[_changeDateFormat(project.fieldData.Date_Due)]]"><input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')"></iron-input>-->
-                                        <mai-input-date value="{{project.fieldData.Date_Due::input}}"></mai-input-date>
-                                        <!--<iron-input bind-value="{{_changeDateFormat(project.fieldData.Date_Due)}}">-->
-                                        <!--<vaadin-date-picker value="{{project.fieldData.Date_Due::input)}}">-->
-                                        <!--</vaadin-date-picker>-->
-                                        <!--</iron-input>-->
+                                        <vaadin-date-picker-light class="mai-date-picker">
+                                          <iron-input bind-value="{{project.fieldData.Date_Due}}">
+                                           <input value="value::input">
+                                          </iron-input>
+                                        </vaadin-date-picker-light>
+                                        <mai-underline></mai-underline>
                                         </span>
 
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Due Invest</span>
                                     <span class="secondary">
-                                            <!--<iron-input bind-value="{{_changeDateFormat(project.fieldData.Date_Due_Investigator)}}">-->
-                                        <!--<input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" value="{{project.fieldData.Date_Due_Investigator::input}}">-->
-                                        <!--</iron-input>-->
-                                            <mai-input-date value="{{project.fieldData.Date_Due_Investigator::input}}"></mai-input-date>
+                                        <vaadin-date-picker-light class="mai-date-picker">
+                                          <iron-input bind-value="{{project.fieldData.Date_Due_Investigator}}">
+                                           <input value="value::input">
+                                          </iron-input>
+                                        </vaadin-date-picker-light>
+                                        <mai-underline></mai-underline>
                                     </span>
                                 </div>
                             </div>
@@ -484,12 +521,14 @@
     <script>
         (function() {
             class MaiProjectsDetail extends Polymer.Element {
+
                 static get is() {
                     return 'mai-projects-detail';
                 }
+
                 static get properties() {
                     return {
-                        disabled:{type:Boolean,value:false},
+                        disabled:{type:Boolean,value:true},
                         projectDetail: {type: Array, notify:true},
                         recordId: {
                             type: String,
@@ -516,7 +555,11 @@
                         ,
                         selectedInvestigator: {
                             observer: '_selectedInvestigatorChanged'
-                        }
+                        },
+                        selectedContact: {
+                            observer: '_selectedContactChanged'
+                        },
+
                     };
                 }
 
@@ -526,9 +569,13 @@
                         '_onProjectDetailChanged(projectDetail.*)',
                         '_onStaffsChanged(staffs.splices)',
                         '_onInvestigatorsChanged(investigators.splices)',
+                        '_onContactsChanged(contacts.splices)',
                     ]
                 }
+                showDialog() {
+                    this.shadowRoot.querySelector('#dialog').toggle();
 
+                }
                 _selectedCompanyChanged(item){
                     if(item) {
                         this.$.companySelector.selectedItems = item ? [item] : [];
@@ -564,8 +611,19 @@
                         this.push('investigators',
                             {"PRJ_Projects_ING_Investigators::Investigator":this.selectedInvestigator.fieldData.Name_Full},
                             //{"PRJ_Projects_ING_Investigators::id_investigator":this.selectedInvestigator.fieldData.ID_investigator}
-                            );
+                        );
                         this.shadowRoot.querySelector('#investigatorDialog').toggle();
+                    }
+                }
+
+                _selectedContactChanged(item){
+                    if(item) {
+                        console.log(this.selectedContact);
+                        this.$.contactSelector.selectedItems = item ? [item] : [];
+                        this.push('contacts',
+                            {"PRJ_Projects_CON_Contacts::Contact":this.selectedContact.fieldData.Name_First+' '+this.selectedContact.fieldData.Name_Last},
+                        );
+                        this.shadowRoot.querySelector('#contactDialog').toggle();
                     }
                 }
 
@@ -582,6 +640,9 @@
                 }
 
                 _onInvestigatorsChanged(changeRecord){
+                    this._updateChangedItem(changeRecord);
+                }
+                _onContactsChanged(changeRecord){
                     this._updateChangedItem(changeRecord);
                 }
 
@@ -627,6 +688,10 @@
                     if(date===null || date===""){
                         return null;
                     }
+                    //console.log(moment(new Date(date)).format("DD/MM/YYYY"));
+                    //date = new Date(date);
+                    //return moment(new Date(date)).format("DD/MM/YYYY");
+                    //return new Date(date.getFullYear(), date.getMonth(), date.getDate());
                     var d = new Date(date);
                     return d.getFullYear()+'-'+('0' + (d.getMonth()+1)).slice(-2)+'-'+('0' + (d.getDate())).slice(-2);
 
@@ -645,14 +710,15 @@
 
                 _updateDetail(fieldName, value){
                     //var body = '{"data": {"'+fieldName+'":"'+value+'"}}';
-
-                    if(fieldName.toLowerCase().includes("date") && value!=="" && value!==undefined){
-                        if(value.length<10){
-                            return;
-                        }
-                        value = new Date(value);
-                        value = ('0' + (value.getMonth()+1)).slice(-2) +'/'+('0' + (value.getDate())).slice(-2)+'/'+ value.getFullYear();
-                    }
+                    console.log(fieldName);
+                    console.log(value);
+                    /*if(fieldName.toLowerCase().includes("date") && value!=="" && value!==undefined){
+                     if(value.length<10){
+                     return;
+                     }
+                     value = new Date(value);
+                     value = ('0' + (value.getMonth()+1)).slice(-2) +'/'+('0' + (value.getDate())).slice(-2)+'/'+ value.getFullYear();
+                     }*/
                     if(value===null){
                         value="";
                     }
@@ -662,7 +728,7 @@
 
                 checkUpdateResult(data){
                     var response = data.detail.response;
-                    if(response && response.errorCode!=="0") {
+                    if(response && response.errorCode !== 0) {
                         this.$.toastMessage.text = "Error updating: "+response.errorMessage;
                         this.$.toastMessage.open();
                     }
@@ -703,6 +769,7 @@
                         this.tasks = this.projectDetail[0].portalData.tasks_portal;
                         this.files = this.projectDetail[0].portalData.portalDocuments;
                         this.auditField = this.projectDetail[0].fieldData.Audit_log_UltraLog;
+
 
                     }
 

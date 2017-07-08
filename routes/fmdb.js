@@ -4,10 +4,13 @@ let request = require('request');
 let _ = require('lodash');
 let router = module.exports = express.Router();
 
-//let env = express().get('env');
-let env ="production";
+let env = express().get('env');
+//let env ="production";
 router.get('/getToken', function(req, res) {
-
+    if(env=="development"){
+        res.json({token:'1234'});
+        return;
+    }
     let url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/auth/'+config.filemaker.solution;
 
     // Make the API Call

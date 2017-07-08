@@ -3,18 +3,8 @@
 <dom-module id="mai-staffs-list-data">
 
     <template>
-        <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localStorage"></app-localstorage-document>
-
-        <iron-ajax
-                auto
-                id="getStaffsList"
-                method="get"
-                url="[[_computeURL()]]"
-                headers$='{"FM-data-token": "[[tokenData.token]]"}'
-                handle-as="json"
-                last-response="{{staffsData}}"
-                on-response="listLoaded"
-        ></iron-ajax>
+        <mai-get-list-data layout-name="[[staffsLayout]]" list-data="{{staffsData}}"
+                           selected-item="{{selectedItem}}"></mai-get-list-data>
     </template>
 
     <script>
@@ -33,19 +23,12 @@
                         selectedItem: {
                             type: Object,
                             notify: true
+                        },
+                        staffsLayout:{
+                            type: String,
+                            value: 'L131_STAFF_List_View'
                         }
                     }
-                }
-
-                listLoaded(data) {
-                    if(data.detail.response!==null) {
-                        this.staffsData = data.detail.response;
-                        this.selectedItem = this.staffsData[0];
-                    }
-                }
-
-                _computeURL() {
-                    return `https://localhost:3000/fm/getList/L131_STAFF_List_View`;
                 }
 
             }

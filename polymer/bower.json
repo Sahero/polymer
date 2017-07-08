@@ -11,7 +11,7 @@
     "iron-iconset-svg": "PolymerElements/iron-iconset-svg#2.0-preview",
     "iron-media-query": "PolymerElements/iron-media-query#2.0-preview",
     "iron-pages": "PolymerElements/iron-pages#2.0-preview",
-    "iron-selector": "PolymerElements/iron-selector#2.0-preview",
+    "iron-selector": "^2.0.0",
     "paper-icon-button": "PolymerElements/paper-icon-button#^2.0.0",
     "polymer": "Polymer/polymer#^2.0.0-rc.3",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.7",
@@ -39,14 +39,15 @@
     "paper-dropdown-input": "Juravenator/paper-dropdown-input#^2.4.1",
     "paper-dropdown-menu": "^2.0.0",
     "paper-item": "^2.0.0",
-    "paper-toast": "^2.0.0"
+    "paper-toast": "^2.0.0",
+    "paper-spinner": "^2.0.0",
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0-prerelease.7"
   },
   "private": true,
   "resolutions": {
-    "iron-selector": "2.0-preview",
+    "iron-selector": "^2.0.0",
     "paper-input": "^2.0.1",
     "vaadin-date-picker": "2.0.0-alpha1",
     "polymer": "^2.0.0-rc.3",
@@ -70,6 +71,6 @@
     "iron-dropdown": "2.0.0",
     "iron-resizable-behavior": "^v2.0.0",
     "paper-dropdown-menu": "^2.0.0",
-    "paper-item": "^2.0.0"
+    "paper-item": "^2.0.0",
   }
 }

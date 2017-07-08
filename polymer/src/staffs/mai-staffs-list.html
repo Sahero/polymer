@@ -4,21 +4,8 @@
 <dom-module id="mai-staffs-list">
     <template>
         <style include="mai-datatable-styles">
-
         </style>
-<!--
-        <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localStorage"></app-localstorage-document>
 
-        <iron-ajax
-                auto
-                id="getStaffsList"
-                method="get"
-                url="[[_computeURL()]]"
-                headers$='{"FM-data-token": "[[tokenData.token]]"}'
-                handle-as="json"
-                last-response="{{listData}}"
-                on-response="listLoaded"
-        ></iron-ajax>-->
         <mai-staffs-list-data selected-item="{{selectedItem}}" staffs-data="{{staffsData}}"></mai-staffs-list-data>
 
         <vaadin-grid items="{{staffsData}}" id="staffsListViewDatatable" class="list-view-datatable" active-item="{{selectedItem}}" >
@@ -66,9 +53,9 @@
             static get properties() {
                 return {
                     /*listData: {
-                        type: Array,
-                        notify:true
-                    },*/
+                     type: Array,
+                     notify:true
+                     },*/
                     selectedItem: {
                         observer: '_selectedItemChanged'
                     }
@@ -76,12 +63,12 @@
             }
 
             /*listLoaded(data){
-                this.listData= data.detail.response;
-                if(this.listData) {
-                    this.$.staffsListViewDatatable.activeItem = this.listData[0];
-                }
-                //console.log(this.listData);
-            }*/
+             this.listData= data.detail.response;
+             if(this.listData) {
+             this.$.staffsListViewDatatable.activeItem = this.listData[0];
+             }
+             //console.log(this.listData);
+             }*/
 
             _selectedItemChanged(item){
                 if(item) {
@@ -99,9 +86,9 @@
             }
 
             /*_computeURL(){
-                return `https://localhost:3000/fm/getList/L130_STAFF_Data_Entry`;
-                //return `https://localhost:3000/fm/getLocalStaffsList`;
-            }*/
+             return `https://localhost:3000/fm/getList/L130_STAFF_Data_Entry`;
+             //return `https://localhost:3000/fm/getLocalStaffsList`;
+             }*/
         }
 
         window.customElements.define(MaiStaffsList.is, MaiStaffsList);

@@ -1,22 +1,22 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
-<dom-module id="mai-investigators-list-data">
+<dom-module id="mai-projects-list-data">
 
     <template>
-        <mai-get-list-data layout-name="[[investigatorsLayout]]" list-data="{{investigatorsData}}"
+        <mai-get-list-data layout-name="[[projectsLayout]]" list-data="{{projectsData}}"
         selected-item="{{selectedItem}}"></mai-get-list-data>
     </template>
 
     <script>
         (function() {
-            class MaiInvestigatorsListData extends Polymer.Element {
+            class MaiProjectsListData extends Polymer.Element {
                 static get is() {
-                    return 'mai-investigators-list-data';
+                    return 'mai-projects-list-data';
                 }
 
                 static get properties() {
                     return {
-                        investigatorsData: {
+                        projectsData: {
                             type: Array,
                             notify: true,
                         },
@@ -24,15 +24,15 @@
                             type: Object,
                             notify: true
                         },
-                        investigatorsLayout: {
+                        projectsLayout:{
                             type: String,
-                            value: 'L131_INVESTIGATOR_List_View'
+                            value: 'L121_PROJECTS_List_View'
                         }
                     }
                 }
 
             }
-            window.customElements.define(MaiInvestigatorsListData.is, MaiInvestigatorsListData);
+            window.customElements.define(MaiProjectsListData.is, MaiProjectsListData);
         }());
     </script>
 </dom-module>

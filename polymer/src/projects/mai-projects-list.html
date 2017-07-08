@@ -1,9 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<!--<link rel="import" href="../../bower_components/vaadin-grid/all-imports.html">
-<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
-
-<link rel="import" href="../mai-datatable-styles.html">-->
-
+<link rel="import" href="mai-projects-list-data.html">
 
 <dom-module id="mai-projects-list">
     <template>
@@ -13,18 +9,7 @@
 
         </style>
 
-        <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localStorage"></app-localstorage-document>
-
-        <iron-ajax
-                auto
-                id="getProjectsList"
-                method="get"
-                url="[[_computeURL()]]"
-                headers$='{"FM-data-token": "[[tokenData.token]]"}'
-                handle-as="json"
-                last-response="{{listData}}"
-                on-response="listLoaded"
-        ></iron-ajax>
+        <mai-projects-list-data selected-item="{{selectedItem}}" projects-data="{{projectsData}}"></mai-projects-list-data>
 
         <div class="filter-button">
             <ul>
@@ -35,7 +20,7 @@
             </ul>
         </div>
 
-        <vaadin-grid items="{{listData}}" id="projectsListViewDatatable" class="list-view-datatable" active-item="{{selectedItem}}">
+        <vaadin-grid items="{{projectsData}}" id="projectsListViewDatatable" class="list-view-datatable" active-item="{{selectedItem}}">
 
             <vaadin-grid-column>
                 <template class="header">
@@ -102,7 +87,7 @@
 
                 static get properties() {
                     return {
-                        listData: {
+                        projectsData: {
                             type: Array,
                             notify:true
                         },
@@ -110,15 +95,6 @@
                             observer: '_selectedItemChanged'
                         }
                     }
-                }
-
-                listLoaded(data){
-                    this.listData= data.detail.response;
-                    console.log(this.listData);
-                    if(this.listData) {
-                        this.$.projectsListViewDatatable.activeItem = this.listData[0];
-                    }
-                    //console.log(this.listData);
                 }
 
                 _selectedItemChanged(item){
@@ -170,11 +146,6 @@
                     this.$.getProjectsList.set('params',{"fieldData.Status":"Open"});
                     console.log(this.$.getProjectsList);
                     this.$.getProjectsList.generateRequest();
-                }
-
-                _computeURL(){
-                    return `https://localhost:3000/fm/getList/L121_PROJECTS_List_View`;
-                    //return `https://localhost:3000/fm/getLocalProjectsList`;
                 }
 
             }

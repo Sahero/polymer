@@ -3,18 +3,7 @@
 <dom-module id="mai-clients-list-data">
 
     <template>
-        <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localStorage"></app-localstorage-document>
-
-        <iron-ajax
-                auto
-                id="getClientsDetail"
-                method="get"
-                url="[[_computeURL()]]"
-                headers$='{"FM-data-token": "[[tokenData.token]]"}'
-                handle-as="json"
-
-                on-response="listLoaded"
-        ></iron-ajax>
+        <mai-get-list-data layout-name="[[clientsLayout]]" list-data="{{clientsData}}"></mai-get-list-data>
     </template>
 
     <script>
@@ -29,19 +18,12 @@
                         clientsData: {
                             type: Array,
                             notify: true,
+                        },
+                        clientsLayout:{
+                            type: String,
+                            value: 'L10_ACCOUNTS_Data_Entry'
                         }
                     }
-                }
-
-                listLoaded(data) {
-                    if(data.detail.response!==null) {
-                        this.clientsData = data.detail.response;
-                        console.log(this.clientsData);
-                    }
-                }
-
-                _computeURL() {
-                    return `https://localhost:3000/fm/getList/L10_ACCOUNTS_Data_Entry`;
                 }
 
             }
