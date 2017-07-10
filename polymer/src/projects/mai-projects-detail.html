@@ -728,7 +728,7 @@
 
                 checkUpdateResult(data){
                     var response = data.detail.response;
-                    if(response && response.errorCode !== 0) {
+                    if(response && response.errorCode !== '0') {
                         this.$.toastMessage.text = "Error updating: "+response.errorMessage;
                         this.$.toastMessage.open();
                     }

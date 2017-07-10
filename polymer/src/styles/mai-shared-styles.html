@@ -51,7 +51,7 @@
       }
 
       /*Filter buttons for list view*/
-      .filter-button > ul {
+      .filter-button > iron-selector {
         display:flex;
         flex-direction: row;
         justify-content: center;
@@ -61,6 +61,9 @@
         --iron-icon-width: 12px;
         --iron-icon-height: 12px;
         --iron-icon-stroke-color: none;
+      }
+      .filter-button > iron-selector >.iron-selected {
+        text-decoration: underline;
       }
 
       .detailsHeader {

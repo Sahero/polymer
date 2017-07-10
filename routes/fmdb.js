@@ -4,8 +4,10 @@ let request = require('request');
 let _ = require('lodash');
 let router = module.exports = express.Router();
 
-let env = express().get('env');
-//let env ="production";
+//let env = express().get('env');
+let env ="production";
+
+//Get token for accessing data using default login information
 router.get('/getToken', function(req, res) {
     if(env=="development"){
         res.json({token:'1234'});
@@ -36,13 +38,75 @@ router.get('/getToken', function(req, res) {
 
 });
 
+//get record count of the provided layout
+router.get('/getRecordCount/:layoutname', function(req, res) {
+    if(env=="development"){
+        res.json(require('../data/' + req.params.layoutname + '.json').length);
+    }
+    else {
+        let url = config.filemaker.protocol + '://' + config.filemaker.ip + '/fmi/rest/api/record/' + config.filemaker.solution + '/' + req.params.layoutname;
+        console.log(url);
+        // Make the API Call
+        request({"rejectUnauthorized": false,"method": 'GET',"url": url,"headers": {"FM-data-token": req.header('fm-data-token'), "Content-Type": "application/json"},
+            "agentOptions": config.filemaker.selfSignedCertificate, "json": true
+        }, (error, response, body) => {
+            if (error) {
+                console.log(error);
+            }
+            else {
+                //console.log(body);
+                res.json(body.data.length);
+            }
+        });
+    }
+});
+
+//get record count of the provided layout
+router.post('/getRecordCount/:layoutname', function(req, res) {
+    if(env=="development"){
+        res.json(require('../data/' + req.params.layoutname + '.json').length);
+    }
+    else {
+        var _body = Object.keys(req.body)[0];
+        //console.log(JSON.parse(_body));
+
+        let url = config.filemaker.protocol + '://' + config.filemaker.ip + '/fmi/rest/api/find/' + config.filemaker.solution + '/' + req.params.layoutname;
+        // Make the API Call
+        request({"rejectUnauthorized": false,"method": 'POST',"url": url,"headers": {"FM-data-token": req.header('fm-data-token'), "Content-Type": "application/json"},
+            "agentOptions": config.filemaker.selfSignedCertificate, "json": true, body: JSON.parse(_body)
+        }, (error, response, body) => {
+            if (error) {
+                console.log(error);
+            }
+            else {
+                //console.log(body);
+                res.json(body.data.length);
+            }
+        });
+    }
+});
+
+//Get list data
 router.get('/getList/:layoutname', function(req, res) {
-    console.log(env);
+    res.redirect('/fm/getList/'+req.params.layoutname+'/1');
+});
+
+router.get('/getList/:layoutname/:page', function(req, res) {
+    res.redirect('/fm/getList/'+req.params.layoutname+'/'+req.params.page+'/20');
+});
+
+router.get('/getList/:layoutname/:page/:numofrecords', function(req, res) {
+    /*console.log(req.params.layoutname);
+     console.log(req.params.page);
+     console.log(req.params.numofrecords);
+     var page = req.params.page;*/
+    var offset = ((parseInt(req.params.page)) * parseInt(req.params.numofrecords)) + 1;
+
     if(env=="development"){
         res.json(require('../data/' + req.params.layoutname + '.json'));
     }
     else {
-        let url = config.filemaker.protocol + '://' + config.filemaker.ip + '/fmi/rest/api/record/' + config.filemaker.solution + '/' + req.params.layoutname;
+        let url = config.filemaker.protocol + '://' + config.filemaker.ip + '/fmi/rest/api/record/' + config.filemaker.solution + '/' + req.params.layoutname+'?offset='+offset+'&range='+req.params.numofrecords;
         console.log(url);
         // Make the API Call
         request({
@@ -64,59 +128,6 @@ router.get('/getList/:layoutname', function(req, res) {
     }
 });
 
-/*
- router.get('/getProjectsList', function(req, res) {
- let url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/record/'+config.filemaker.solution+'/L121_PROJECTS_List_View';
-
- // Make the API Call
- request({
- "rejectUnauthorized": false,
- "method" : 'GET',
- "url" : url,
- "headers" : {"FM-data-token": req.header('fm-data-token'), "Content-Type" : "application/json"},
- "agentOptions" : config.filemaker.selfSignedCertificate,
- "json": true
- }, (error, response, body) => {
- if(error){
- console.log(error);
- }
- else{
- res.json(body.data);
- }
- });
- });*/
-
-/*
-
- router.get('/getProjectsDetail/:recordid', function(req, res) {
- //console.log(req.params.recordid);
- //console.log(req.header('fm-data-token'));
- let url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/record/'+config.filemaker.solution+'/L120_Projects_Data_entry/'+req.params.recordid;
- console.log(url);
-
- // Make the API Call
- request({
- "rejectUnauthorized": false,
- "method" : 'GET',
- "url" : url,
- "headers" : {"FM-data-token": req.header('fm-data-token'), "Content-Type" : "application/json"},
- "agentOptions" : config.filemaker.selfSignedCertificate,
- "json": true
- }, (error, response, body) => {
- if(error){
- console.log(error);
- let detailsJson = require('../data/L120_Projects_Data_entry.json');
- //console.log();
- var toJson = _.find(detailsJson, {recordId: req.params.recordid});
- res.json(toJson);
- }
- else{
- //console.log(body);
- res.json(body.data);
- }
- });
- });
- */
 
 
 router.get('/getDetail/:layoutname/:recordid', function(req, res) {
@@ -161,7 +172,7 @@ router.get('/getDetail/:layoutname/:recordid', function(req, res) {
     }
 });
 
-
+//to update and create new records
 router.put('/getDetail/:layoutname/:recordid', function(req, res) {
     if(env=="development"){
         res.json("success dev");
@@ -169,7 +180,7 @@ router.put('/getDetail/:layoutname/:recordid', function(req, res) {
     }
 
     var _body = Object.keys(req.body)[0];
-    console.log(_body);
+    //console.log(_body);
     let url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/record/'+config.filemaker.solution+'/'+req.params.layoutname+'/'+req.params.recordid;
     //console.log(url);
 
@@ -194,60 +205,89 @@ router.put('/getDetail/:layoutname/:recordid', function(req, res) {
     });
 });
 
+//Using POST method to filter the list data
 /*
+ router.post('/getList/:layoutname', function(req, res) {
+ console.log(env);
+ if(env=="development"){
+ res.json(require('../data/' + req.params.layoutname + '.json'));
 
- router.get('/getStaffsList', function(req, res) {
- //console.log(req.headers);
- //console.log(req.header('fm-data-token'));
- let url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/record/'+config.filemaker.solution+'/L130_STAFF_Data_Entry';
+ }
+ else {
+ console.log(req.body);
+ var _body = Object.keys(req.body)[0];
+ console.log(JSON.parse(_body));
 
+ let url = config.filemaker.protocol + '://' + config.filemaker.ip + '/fmi/rest/api/find/' + config.filemaker.solution + '/' + req.params.layoutname;
+ console.log(url);
  // Make the API Call
  request({
  "rejectUnauthorized": false,
- "method" : 'GET',
- "url" : url,
- "headers" : {"FM-data-token": req.header('fm-data-token'), "Content-Type" : "application/json"},
- "agentOptions" : config.filemaker.selfSignedCertificate,
- "json": true
+ "method": 'POST',
+ "url": url,
+ "headers": {"FM-data-token": req.header('fm-data-token'), "Content-Type": "application/json"},
+ "agentOptions": config.filemaker.selfSignedCertificate,
+ "json": true,
+ "body" : JSON.parse(_body)
  }, (error, response, body) => {
- if(error){
+ if (error) {
  console.log(error);
  }
- else{
+ else {
+ //console.log(body);
  res.json(body.data);
  }
  });
+ }
  });
  */
-/*
 
- var localProjectList = require('../data/L121_PROJECTS_List_View.json');
- router.get('/getLocalProjectsList', function(req, res){
- //    console.log(req.query);
- //console.log();
- //_.filter(summary.data, ['category.parent', 'Food'])
- console.log(req.query.size);
- if(Object.keys(req.query).length !== 0) {
- var toSend = _.filter(localProjectList, ['fieldData.Status', 'Open']);
- res.json(toSend);
- }
- else{
- res.json(localProjectList);
- }
- });
 
- let detailsJson = require('../data/L130_STAFF_Data_Entry.json');
- router.get('/getLocalProjectsDetail/:recordid', function(req, res){
- console.log(req.params.recordid);
- console.log(_.find(detailsJson, {recordId: req.params.recordid}));
+router.post('/getList/:layoutname', function(req, res) {
+    res.redirect(307,'/fm/getList/'+req.params.layoutname+'/1');
+});
 
- res.json({'rest':'rest'});
- /!*if (_.find(detailsJson, {recordId: req.params.recordid})) {
- return res.json({success:false, msg:'A user with that username already exists'});
- }
- res.json(require('../data/L121_PROJECTS_List_View.json'));*!/
- });
+router.post('/getList/:layoutname/:page', function(req, res) {
+    res.redirect(307,'/fm/getList/'+req.params.layoutname+'/'+req.params.page+'/20');
+});
 
- router.get('/getLocalStaffsList', function(req, res){
- res.json(require('../data/L130_STAFF_Data_Entry.json'));
- });*/
+router.post('/getList/:layoutname/:page/:numofrecords', function(req, res) {
+    /*console.log(req.params.layoutname);
+     console.log(req.params.page);
+     console.log(req.params.numofrecords);
+     var page = req.params.page;*/
+    var offset = ((parseInt(req.params.page)) * parseInt(req.params.numofrecords)) + 1;
+    //console.log(req.body);
+
+    var _body = Object.keys(req.body)[0];
+    //console.log(_body);
+    //console.log(JSON.parse(_body));
+    _filterBody = _body.substring(0, _body.lastIndexOf("}")) + ',"range":"'+req.params.numofrecords+'"'+ ',"offset":"'+offset+'"}';
+    //console.log(_filterBody);
+    //_body={"query":[{"Status": "open"}    ],"range": "2","offset": "1"};
+    if(env=="development"){
+        res.json(require('../data/' + req.params.layoutname + '.json'));
+    }
+    else {
+        let url = config.filemaker.protocol + '://' + config.filemaker.ip + '/fmi/rest/api/find/' + config.filemaker.solution + '/' + req.params.layoutname;
+        console.log(url);
+        // Make the API Call
+        request({
+            "rejectUnauthorized": false,
+            "method": 'POST',
+            "url": url,
+            "headers": {"FM-data-token": req.header('fm-data-token'), "Content-Type": "application/json"},
+            "agentOptions": config.filemaker.selfSignedCertificate,
+            "json": true,
+            "body" : JSON.parse(_filterBody)
+        }, (error, response, body) => {
+            if (error) {
+                console.log(error);
+            }
+            else {
+                //console.log(body);
+                res.json(body.data);
+            }
+        });
+    }
+});

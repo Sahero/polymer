@@ -7,11 +7,19 @@
 
         <iron-ajax
                 id="getList"
-                method="get"
-                url="[[_computeURL()]]"
+                method="[[method]]"
                 headers$='{"FM-data-token": "[[tokenData.token]]"}'
                 handle-as="json"
                 on-response="listLoaded"
+        ></iron-ajax>
+
+        <iron-ajax
+                id="getRecordCount"
+                method="[[method]]"
+                url="[[_computeURLforRecordCount()]]"
+                headers$='{"FM-data-token": "[[tokenData.token]]"}'
+                handle-as="json"
+                on-response="getRecordCount"
         ></iron-ajax>
     </template>
 
@@ -35,11 +43,55 @@
                             type: Object,
                             notify: true
                         },
+                        method: {
+                            type: String,
+                            notify: true
+                        },
+                        filterQuery:{
+                            type:String,
+                            notify:true
+                        },
+                        pageSize:{value:20},
+                        totalRecord: Number,
+                        pages: {type: Array, notify: true},
+                        currentPage:{type:Number, value:0, notify:true}
                     }
                 }
-                ready(){
-                    super.ready();
+
+                static get observers() {
+                    return [
+                        //'_filterQueryChanged(filterQuery,tokenData)',
+                        '_currentPageChanged(currentPage,filterQuery,tokenData)'
+                    ]
+                }
+
+                _currentPageChanged(currentPage,filterQuery,tokenData){
+                    if(tokenData && currentPage!==undefined) {
+                        if(filterQuery) {
+                            if (filterQuery === "none") {
+                                this.method = "GET";
+                            }
+                            else {
+                                this.method = "POST";
+                                this.$.getList.body = '{"query":[{' + filterQuery + '}]}';
+                                this.$.getRecordCount.body = '{"query":[{' + filterQuery + '}]}';
+                            }
+                        }
+                        else {
+                            this.method = "GET";
+                        }
+                        this.getData();
+                    }
+                }
+
+                getData(){
+                    this.$.getList.url = this._computeURL();
+                    this.$.getList.headers = {'fm-data-token': this.tokenData.token};
                     this.$.getList.generateRequest();
+                    //get total records as well
+                    this.$.getRecordCount.headers = {'fm-data-token': this.tokenData.token};
+                    this.$.getRecordCount.generateRequest();
+
                 }
 
                 listLoaded(data) {
@@ -49,9 +101,24 @@
                         this.selectedItem = this.listData[0];
                     }
                 }
+                getRecordCount(data){
+                    if(data.detail.response!==null){
+                        this.totalRecord = data.detail.response;
+                        console.log(this.totalRecord);
+
+                        this.pages = Array.apply( null, {length: Math.ceil(this.totalRecord/this.pageSize)} ).map((item, index) => {
+                            return index + 1;
+                        });
+                        //console.log(this.pages);
+                    }
+                }
 
                 _computeURL() {
-                    return `https://localhost:3000/fm/getList/${this.layoutName}`;
+                    return `https://localhost:3000/fm/getList/${this.layoutName}/${this.currentPage}/${this.pageSize}`;
+                }
+
+                _computeURLforRecordCount(){
+                    return `https://localhost:3000/fm/getRecordCount/${this.layoutName}`;
                 }
 
             }

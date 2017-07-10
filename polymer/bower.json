@@ -40,7 +40,7 @@
     "paper-dropdown-menu": "^2.0.0",
     "paper-item": "^2.0.0",
     "paper-toast": "^2.0.0",
-    "paper-spinner": "^2.0.0",
+    "paper-spinner": "^2.0.0"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0-prerelease.7"
@@ -71,6 +71,6 @@
     "iron-dropdown": "2.0.0",
     "iron-resizable-behavior": "^v2.0.0",
     "paper-dropdown-menu": "^2.0.0",
-    "paper-item": "^2.0.0",
+    "paper-item": "^2.0.0"
   }
 }

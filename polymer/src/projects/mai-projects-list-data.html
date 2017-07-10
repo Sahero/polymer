@@ -3,8 +3,13 @@
 <dom-module id="mai-projects-list-data">
 
     <template>
-        <mai-get-list-data layout-name="[[projectsLayout]]" list-data="{{projectsData}}"
-        selected-item="{{selectedItem}}"></mai-get-list-data>
+        <mai-get-list-data layout-name="[[projectsLayout]]"
+                           list-data="{{projectsData}}"
+                           selected-item="{{selectedItem}}"
+                           filter-query="{{filterQuery}}"
+                           pages="{{pages}}"
+                           current-page="{{currentPage}}"
+        ></mai-get-list-data>
     </template>
 
     <script>
@@ -27,7 +32,16 @@
                         projectsLayout:{
                             type: String,
                             value: 'L121_PROJECTS_List_View'
-                        }
+                        },
+                        pages:{
+                            type: Array,
+                            notify: true
+                        },
+                        currentPage:{type:Number, notify:true}
+                        /*filterQuery:{
+                            type:String,
+                            notify:true
+                        }*/
                     }
                 }
 
