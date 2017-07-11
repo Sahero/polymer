@@ -60,7 +60,6 @@
 
                 static get observers() {
                     return [
-                        //'_filterQueryChanged(filterQuery,tokenData)',
                         '_currentPageChanged(currentPage,filterQuery,tokenData)'
                     ]
                 }
@@ -97,14 +96,14 @@
                 listLoaded(data) {
                     if(data.detail.response!==null) {
                         this.listData = data.detail.response;
-                        console.log(this.listData);
+                        //console.log(this.listData);
                         this.selectedItem = this.listData[0];
                     }
                 }
                 getRecordCount(data){
                     if(data.detail.response!==null){
                         this.totalRecord = data.detail.response;
-                        console.log(this.totalRecord);
+                        //console.log(this.totalRecord);
 
                         this.pages = Array.apply( null, {length: Math.ceil(this.totalRecord/this.pageSize)} ).map((item, index) => {
                             return index + 1;

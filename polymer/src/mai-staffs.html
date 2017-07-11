@@ -22,7 +22,7 @@
 
         <app-route
                 route="{{tailroute}}"
-                pattern="/:recordId"
+                pattern="/staffs/detail/:recordId"
                 data="{{recordIdData}}"
         ></app-route>
 
@@ -31,10 +31,10 @@
             <iron-selector class="view-toolbar" selected="[[staffsData.page]]"  attr-for-selected="name" role="navigation">
 
                 <a name="detail" href="[[route.prefix]]/detail">
-                    <paper-fab mini icon="content-copy"></paper-fab>
+                    <paper-fab mini icon="mai:content-copy"></paper-fab>
                     Detail view</a>
                 <a name="list" href="[[route.prefix]]/list">
-                    <paper-fab mini icon="list"></paper-fab>
+                    <paper-fab mini icon="mai:list"></paper-fab>
                     List view</a>
 
                 <dom-if if="[[_shouldShowDetailHeaders]]">
@@ -53,7 +53,7 @@
         <iron-pages selected="[[staffsData.page]]" attr-for-selected="name">
 
             <mai-staffs-list name="list"></mai-staffs-list>
-            <mai-staffs-detail id="detailView" name="detail" recordId="{{recordIdData.recordId}}"></mai-staffs-detail>
+            <mai-staffs-detail id="staffDetailView" name="detail" recordId="{{recordIdData.recordId}}"></mai-staffs-detail>
 
         </iron-pages>
 
@@ -76,6 +76,7 @@
                         },
                         visible: {
                             type: Boolean,
+                            notify: true,
                             observer: '_onStaffsDataChanged'
                         },
                         _shouldShowDetailHeaders : {
@@ -89,7 +90,7 @@
 
                     if(this.visible) {
                         /*To check if the current view page is visible or not*/
-                        if(staffsData===true){
+                        if(staffsData===true || (JSON.stringify(staffsData) === JSON.stringify(oldStaffsData))){
                             return;
                         }
 
@@ -113,10 +114,12 @@
                                 }));
 
 
-
+                            if(this.tailroute.path){
+                                this.recordIdData.recordId = this.tailroute.path.replace("/","");
+                            }
                             if (this.staffsData.page === 'detail' && this.recordIdData.recordId!==null) {
                                 //console.log(this.recordIdData);
-                                this.$.detailView.recordId = this.recordIdData.recordId;
+                                this.$.staffDetailView.recordId = this.recordIdData.recordId;
                                 this.set('tailroute.path', this.recordIdData.recordId);
                                 this.notifyPath('tailroute.path');
                                 this.notifyPath('route.path');
@@ -137,7 +140,7 @@
                     let detail = event.detail;
                     this.selectedData = detail.data;
                     this.recordIdData.recordId = this.selectedData.recordId;
-                    this.$.detailView.recordId = this.selectedData.recordId;
+                    this.$.staffDetailView.recordId = this.selectedData.recordId;
                 }
 
                 _computeShouldShowDetailHeaders(){

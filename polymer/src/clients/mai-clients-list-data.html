@@ -3,7 +3,13 @@
 <dom-module id="mai-clients-list-data">
 
     <template>
-        <mai-get-list-data layout-name="[[clientsLayout]]" list-data="{{clientsData}}"></mai-get-list-data>
+        <mai-get-list-data layout-name="[[clientsLayout]]"
+                           list-data="{{clientsData}}"
+                           selected-item="{{selectedItem}}"
+                           filter-query="{{filterQuery}}"
+                           pages="{{pages}}"
+                           current-page="{{currentPage}}"
+        ></mai-get-list-data>
     </template>
 
     <script>
@@ -21,8 +27,17 @@
                         },
                         clientsLayout:{
                             type: String,
-                            value: 'L10_ACCOUNTS_Data_Entry'
-                        }
+                            value: 'L11_ACCOUNTS_List_View'
+                        },
+                        selectedItem: {
+                            type: Object,
+                            notify: true
+                        },
+                        pages:{
+                            type: Array,
+                            notify: true
+                        },
+                        currentPage:{type:Number, notify:true}
                     }
                 }
 

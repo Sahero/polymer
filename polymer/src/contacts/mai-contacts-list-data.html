@@ -3,7 +3,13 @@
 <dom-module id="mai-contacts-list-data">
 
     <template>
-        <mai-get-list-data layout-name="[[contactsLayout]]" list-data="{{contactsData}}"></mai-get-list-data>
+        <mai-get-list-data layout-name="[[contactsLayout]]"
+                           list-data="{{contactsData}}"
+                           selected-item="{{selectedItem}}"
+                           filter-query="{{filterQuery}}"
+                           pages="{{pages}}"
+                           current-page="{{currentPage}}"
+        ></mai-get-list-data>
     </template>
 
     <script>
@@ -22,7 +28,16 @@
                         contactsLayout:{
                             type: String,
                             value: 'L31_CONTACTS_List_View'
-                        }
+                        },
+                        selectedItem: {
+                            type: Object,
+                            notify: true
+                        },
+                        pages:{
+                            type: Array,
+                            notify: true
+                        },
+                        currentPage:{type:Number, notify:true}
                     }
                 }
 

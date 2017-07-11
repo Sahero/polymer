@@ -7,7 +7,7 @@
 
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 
-<dom-module id="mai-projects">
+<dom-module id="mai-clients">
     <template>
 
         <custom-style>
@@ -19,19 +19,19 @@
         <app-route
                 route="[[route]]"
                 pattern="/:page"
-                data="{{projectsData}}"
+                data="{{clientsData}}"
                 tail="{{tailroute}}"
         ></app-route>
 
         <app-route
                 route="{{tailroute}}"
-                pattern="/projects/detail/:recordId"
+                pattern="/clients/detail/:recordId"
                 data="{{recordIdData}}"
         ></app-route>
 
 
         <app-toolbar>
-            <iron-selector class="view-toolbar" selected="[[projectsData.page]]"  attr-for-selected="name" role="navigation">
+            <iron-selector class="view-toolbar" selected="[[clientsData.page]]"  attr-for-selected="name" role="navigation">
                 <a name="detail" href="[[route.prefix]]/detail">
                     <paper-fab mini icon="mai:content-copy"></paper-fab>
                     Detail view</a>
@@ -41,9 +41,8 @@
                 <dom-if if="[[_shouldShowDetailHeaders]]">
                     <template>
                         <div class="detailsHeader">
-                            <div style="flex-grow:0.25">Due [[selectedData.fieldData.Date_Due]]</div>
-                            <div># [[selectedData.fieldData.ID_Project]]&nbsp;</div>
-                            <div>[[selectedData.fieldData.Claim_No]]</div>
+                            <div># [[selectedData.fieldData.ID_Account]]&nbsp;</div>
+                            <div>[[selectedData.fieldData.Account]]</div>
                             <div>&nbsp;|&nbsp;</div>
                             <div style="font-style: italic">[[selectedData.fieldData.Status]]</div>
                         </div>
@@ -53,10 +52,10 @@
 
         </app-toolbar>
         <div>
-            <iron-pages selected="[[projectsData.page]]" attr-for-selected="name">
+            <iron-pages selected="[[clientsData.page]]" attr-for-selected="name">
 
-                <mai-projects-list name="list" ></mai-projects-list>
-                <mai-projects-detail id="detailView" name="detail" recordId="{{recordIdData.recordId}}"></mai-projects-detail>
+                <mai-clients-list name="list" ></mai-clients-list>
+                <mai-clients-detail id="clientsDetailView" name="detail" recordId="{{recordIdData.recordId}}"></mai-clients-detail>
 
             </iron-pages>
         </div>
@@ -65,17 +64,17 @@
 
     <script>
         (function() {
-            class MaiProjects extends Polymer.Element {
+            class MaiClients extends Polymer.Element {
                 static get is() {
-                    return 'mai-projects';
+                    return 'mai-clients';
                 }
 
                 static get properties(){
                     return {
-                        projectsData: {
+                        clientsData: {
                             type:Object,
                             notify:true,
-                            observer:'_onProjectsDataChanged'},
+                            observer:'_onClientsDataChanged'},
                         selectedData: {
                             type:Object,
                             notify:true,
@@ -83,7 +82,7 @@
                         visible: {
                             type: Boolean,
                             notify: true,
-                            observer: '_onProjectsDataChanged'
+                            observer: '_onClientsDataChanged'
                         },
                         _shouldShowDetailHeaders : {
                             type: Boolean,
@@ -92,16 +91,16 @@
                     };
                 }
 
-                _onProjectsDataChanged(projectsData ,oldProjectsData){
+                _onClientsDataChanged(clientsData,oldClientsData){
                     if(this.visible) {
                         /*To check if the current view page is visible or not*/
-                        if(projectsData===true || (JSON.stringify(projectsData) === JSON.stringify(oldProjectsData))){
+                        if(clientsData===true || (JSON.stringify(clientsData) === JSON.stringify(oldClientsData))){
                             return;
                         }
 
-                        if(projectsData.page === undefined || projectsData.page ===""){
-                            this.projectsData.page = projectsData.page || "detail";
-                            this.set('route.path',this.projectsData.page);
+                        if(clientsData.page === undefined || clientsData.page ===""){
+                            this.clientsData.page = clientsData.page || "detail";
+                            this.set('route.path',this.clientsData.page);
                         }
                         else{
                             this._computeShouldShowDetailHeaders();
@@ -110,16 +109,16 @@
                                     bubbles: true,
                                     composed: true,
                                     detail: {
-                                        name: 'projects',
-                                        view: projectsData.page
+                                        name: 'clients',
+                                        view: clientsData.page
                                     }
                                 }));
+
                             if(this.tailroute.path){
                                 this.recordIdData.recordId = this.tailroute.path.replace("/","");
                             }
-
-                            if(this.projectsData.page === 'detail' && this.recordIdData.recordId !== null){
-                                this.$.detailView.recordId = this.recordIdData.recordId;
+                            if(this.clientsData.page === 'detail' && this.recordIdData.recordId !== null){
+                                this.$.clientsDetailView.recordId = this.recordIdData.recordId;
                                 this.set('tailroute.path', this.recordIdData.recordId);
                                 this.notifyPath('tailroute.path');
                                 this.notifyPath('route.path');
@@ -132,24 +131,24 @@
 
                 ready(){
                     super.ready();
-                    this.addEventListener('project-item-selected', e => this._onProjectItemSelected(e));
+                    this.addEventListener('client-item-selected', e => this._onClientItemSelected(e));
                 }
 
-                _onProjectItemSelected(event){
+                _onClientItemSelected(event){
                     let detail = event.detail;
                     this.selectedData = detail.data;
                     this.recordIdData.recordId = this.selectedData.recordId;
-                    this.$.detailView.recordId = this.selectedData.recordId;
+                    this.$.clientsDetailView.recordId = this.selectedData.recordId;
                 }
 
                 _computeShouldShowDetailHeaders(){
 
-                    if(this.projectsData.page==='detail'){
-                        //console.log(this.projectsData);
+                    if(this.clientsData.page==='detail'){
+                        //console.log(this.clientsData);
                         this._shouldShowDetailHeaders =  true;
                     }
                     else{
-                        //console.log(this.projectsData);
+                        //console.log(this.clientsData);
                         this._shouldShowDetailHeaders = false;
                     }
 
@@ -158,7 +157,7 @@
 
             }
 
-            window.customElements.define(MaiProjects.is, MaiProjects);
+            window.customElements.define(MaiClients.is, MaiClients);
         }());
     </script>
 </dom-module>

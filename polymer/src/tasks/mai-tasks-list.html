@@ -1,0 +1,110 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="mai-tasks-list-data.html">
+<link rel="import" href="../mai-page-layout.html">
+
+<dom-module id="mai-tasks-list">
+    <template>
+        <style include="mai-datatable-styles">
+        </style>
+
+        <mai-tasks-list-data selected-item="{{selectedItem}}"
+                              tasks-data="{{tasksData}}"
+                              filter-query="{{filterQuery}}"
+                              pages="{{pages}}"
+                              current-page="{{currentPage}}"
+        ></mai-tasks-list-data>
+
+        <vaadin-grid items="{{tasksData}}" id="tasksListViewDatatable" class="list-view-datatable" active-item="{{selectedItem}}" >
+
+            <vaadin-grid-column>
+                <template class="header">
+                    <vaadin-grid-sorter path="fieldData.id_Timesheet">Time #</vaadin-grid-sorter>
+                </template>
+                <template>[[item.fieldData.id_Timesheet]]</template>
+            </vaadin-grid-column>
+            <vaadin-grid-column>
+                <template class="header">
+                    <vaadin-grid-sorter path="fieldData.Week_Begin">Date</vaadin-grid-sorter>
+                </template>
+                <template>[[item.fieldData.Week_Begin]]</template>
+            </vaadin-grid-column>
+            <vaadin-grid-column>
+                <template class="header">Investigator</template>
+                <template>[[item.fieldData.Investigator_Name]]</template>
+            </vaadin-grid-column>
+            <vaadin-grid-column>
+                <template class="header">Regular</template>
+                <template>[[item.fieldData.Hours_In_Work_Week_Reg]]</template>
+            </vaadin-grid-column>
+            <vaadin-grid-column>
+                <template class="header">Unworked</template>
+                <template>[[item.fieldData.Hours_Reg_UnWorked]]</template>
+            </vaadin-grid-column>
+            <vaadin-grid-column>
+                <template class="header">Overtime</template>
+                <template>[[item.fieldData.Hours_Worked_Over_Reg]]</template>
+            </vaadin-grid-column>
+            <vaadin-grid-column>
+                <template class="header">Total</template>
+                <template>[[item.fieldData.Hours_Total]]</template>
+            </vaadin-grid-column>
+            <vaadin-grid-column>
+                <template class="header">Status</template>
+                <template>[[item.fieldData.Timesheet_Status]] [[item.fieldData.Payment_Status]]</template>
+            </vaadin-grid-column>
+            <vaadin-grid-column>
+                <template class="header">Description</template>
+                <template>[[_getDataFromArray(tasksData.*, index, 'fieldData.Note for Timesheet')]]</template>
+            </vaadin-grid-column>
+        </vaadin-grid>
+
+        <mai-page-layout pages="{{pages}}" current-page="{{currentPage}}"></mai-page-layout>
+
+    </template>
+    <script>
+
+        class MaiTasksList extends Polymer.Element
+        {
+            static get is() { return 'mai-tasks-list'; }
+            static get properties() {
+                return {
+                    tasksData: {
+                        type: Array,
+                        notify:true
+                    },
+                    selectedItem: {
+                        observer: '_selectedItemChanged'
+                    }
+                }
+            }
+
+            _selectedItemChanged(item){
+                if(item) {
+                    this.$.tasksListViewDatatable.selectedItems = item ? [item] : [];
+
+                    this.dispatchEvent(new CustomEvent('task-item-selected',
+                        {
+                            bubbles: true,
+                            composed: true,
+                            detail: {
+                                data: this.selectedItem
+                            }
+                        }));
+                }
+            }
+
+
+            _getDataFromArray(dataList, index, path) {
+                //console.log(dataList);
+                if(dataList.value===null){
+                    return;
+                }
+                return this.get(path, dataList.base[index]);
+            }
+
+        }
+
+        window.customElements.define(MaiTasksList.is, MaiTasksList);
+
+    </script>
+</dom-module>

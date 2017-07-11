@@ -1,0 +1,22 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="mai-contacts-detail">
+
+    <template>
+      <p>Contacts Detail</p>
+    </template>
+
+    <script>
+        (function() {
+            class MyContactsDetail extends Polymer.Element {
+                static get is() {
+                    return 'mai-contacts-detail';
+                }
+
+            }
+            window.customElements.define(MyContactsDetail.is, MyContactsDetail);
+        }());
+
+
+    </script>
+</dom-module>

@@ -55,7 +55,12 @@ router.get('/getRecordCount/:layoutname', function(req, res) {
             }
             else {
                 //console.log(body);
-                res.json(body.data.length);
+                if(body.data){
+                    res.json(body.data.length);
+                }
+                else{
+                    res.json(0);
+                }
             }
         });
     }
@@ -79,8 +84,13 @@ router.post('/getRecordCount/:layoutname', function(req, res) {
                 console.log(error);
             }
             else {
-                //console.log(body);
-                res.json(body.data.length);
+
+                if(body.data.length) {
+                    res.json(body.data.length);
+                }
+                else{
+                    res.json(0);
+                }
             }
         });
     }

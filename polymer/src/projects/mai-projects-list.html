@@ -18,7 +18,7 @@
 
         <div class="filter-button">
             <iron-selector attr-for-selected="field-name" selected="none">
-                <paper-button field-name="none" filter-text="none" on-tap="_onFilterClick"><iron-icon icon="filter-none"></iron-icon>Find All</paper-button>
+                <paper-button field-name="none" filter-text="none" on-tap="_onFilterClick"><iron-icon icon="mai:filter-none"></iron-icon>Find All</paper-button>
                 <paper-button field-name="Status" filter-text="open" on-tap="_onFilterClick">Find Open</paper-button>
                 <paper-button field-name="Category" filter-text="surveillance" on-tap="_onFilterClick">Find Surveillance</paper-button>
                 <paper-button field-name="Factual">Find Factual</paper-button>
@@ -78,15 +78,7 @@
                 <template><span class$="{{_getClassForStatus(item.fieldData.Status)}}">[[item.fieldData.Status]]</span></template>
             </vaadin-grid-column>
         </vaadin-grid>
-        <!--<div id="pages">
-            <button on-tap="_prev">&lt;</button>
-            <dom-repeat items="[[pages]]">
-                <template>
-                    <button on-tap="_select" selected$="[[_isSelected(currentPage, item)]]">[[item]]</button>
-                </template>
-            </dom-repeat>
-            <button on-tap="_next">&gt;</button>
-        </div>-->
+
         <mai-page-layout pages="{{pages}}" current-page="{{currentPage}}"></mai-page-layout>
     </template>
 
@@ -110,28 +102,7 @@
                         }
 
                     }
-                }/*
-
-                _isSelected(page, item) {
-                    //console.log(page, item);
-                return page === item - 1;
-            }
-
-                _select(e) {
-                    console.log(e.model.item);
-                this.currentPage = e.model.item - 1;
-            }
-
-                _next() {
-
-                this.currentPage = Math.min(this.pages.length - 1, this.currentPage + 1);
-                    console.log(this.currentPage);
-            }
-
-                _prev() {
-                this.currentPage = Math.max(0, this.currentPage - 1);
-                    console.log(this.currentPage);
-            }*/
+                }
 
                 _selectedItemChanged(item){
 

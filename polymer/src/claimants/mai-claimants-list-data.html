@@ -3,7 +3,13 @@
 <dom-module id="mai-claimants-list-data">
 
     <template>
-        <mai-get-list-data layout-name="[[claimantsLayout]]" list-data="{{claimantsData}}"></mai-get-list-data>
+        <mai-get-list-data layout-name="[[claimantsLayout]]"
+                           list-data="{{claimantsData}}"
+                           selected-item="{{selectedItem}}"
+                           filter-query="{{filterQuery}}"
+                           pages="{{pages}}"
+                           current-page="{{currentPage}}"
+        ></mai-get-list-data>
     </template>
 
     <script>
@@ -19,7 +25,19 @@
                             type: Array,
                             notify: true,
                         },
-                        claimantsLayout:{type:String, value:'L131_CLAIMANT_List_View'}
+                        claimantsLayout:{
+                            type:String,
+                            value:'L131_CLAIMANT_List_View'
+                        },
+                        selectedItem: {
+                            type: Object,
+                            notify: true
+                        },
+                        pages:{
+                            type: Array,
+                            notify: true
+                        },
+                        currentPage:{type:Number, notify:true}
                     }
                 }
 

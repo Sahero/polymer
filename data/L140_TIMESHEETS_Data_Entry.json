@@ -1,0 +1,190 @@
+[
+  {
+    "fieldData": {
+      "Date_Created": "04/01/2016",
+      "Date_Modified": "05/16/2017",
+      "UserName_Created": "admin",
+      "UserName_Modified": "[WebDirect-5CFED]",
+      "AccountName_Created": "admin",
+      "Time_Created": "11:43:39",
+      "AccountName_Modified": "admin",
+      "Time_Modified": "13:19:32",
+      "Investigator_Name": "Adam Barden",
+      "Pay_Period_End_Date": "03/26/2016",
+      "Pay_Period_Start_Date": "03/13/2016",
+      "id_Timesheet": "TIME001",
+      "T18a_timesheets_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/92E5FCF61621A3D9D6705B80F25C3B1F1853DAB8222CDC9362EA5C9ABCB01C76.png?RCType=EmbeddedRCFileProcessor",
+      "Department": "",
+      "Phone1": "(02)4261-8866",
+      "Timesheet_Status": "Active",
+      "Note for Timesheet": "",
+      "Hours_Total": "2",
+      "Payment_Status": "Not Paid"
+    },
+    "portalData": {
+      "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id": [
+        {
+          "recordId": "54",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Day_Type": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Time_Start": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Time_End": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hours_Lunch": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hours Overide": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Work_Hours": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hourly_Rate_Lookup": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Total_Pay_for_Projects": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Date": "06/02/2017",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Project": ""
+        },
+        {
+          "recordId": "46",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Day_Type": "Regular",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Time_Start": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Time_End": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hours_Lunch": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hours Overide": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Work_Hours": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hourly_Rate_Lookup": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Total_Pay_for_Projects": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Date": "05/17/2017",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Project": ""
+        },
+        {
+          "recordId": "43",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Day_Type": "Regular",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Time_Start": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Time_End": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hours_Lunch": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hours Overide": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Work_Hours": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hourly_Rate_Lookup": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Total_Pay_for_Projects": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Date": "04/13/2016",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Project": ""
+        },
+        {
+          "recordId": "51",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Day_Type": "Regular",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Time_Start": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Time_End": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hours_Lunch": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hours Overide": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Work_Hours": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hourly_Rate_Lookup": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Total_Pay_for_Projects": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Date": "04/11/2016",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Project": ""
+        },
+        {
+          "recordId": "48",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Day_Type": "Regular",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Time_Start": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Time_End": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hours_Lunch": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hours Overide": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Work_Hours": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hourly_Rate_Lookup": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Total_Pay_for_Projects": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Date": "04/03/2016",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Project": ""
+        },
+        {
+          "recordId": "49",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Day_Type": "Regular",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Time_Start": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Time_End": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hours_Lunch": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hours Overide": "2",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Work_Hours": "2",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hourly_Rate_Lookup": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Total_Pay_for_Projects": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Date": "04/03/2016",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Project": ""
+        },
+        {
+          "recordId": "55",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Day_Type": "Regular",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Time_Start": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Time_End": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hours_Lunch": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hours Overide": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Work_Hours": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hourly_Rate_Lookup": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Total_Pay_for_Projects": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Date": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Project": "PRJ00029 - Claiman First - 1212"
+        }
+      ]
+    },
+    "recordId": "12",
+    "modId": "10"
+  },
+  {
+    "fieldData": {
+      "Date_Created": "04/01/2016",
+      "Date_Modified": "12/20/2016",
+      "UserName_Created": "admin",
+      "UserName_Modified": "admin",
+      "AccountName_Created": "admin",
+      "Time_Created": "13:03:36",
+      "AccountName_Modified": "admin",
+      "Time_Modified": "13:43:51",
+      "Investigator_Name": "",
+      "Pay_Period_End_Date": "03/26/2016",
+      "Pay_Period_Start_Date": "03/13/2016",
+      "id_Timesheet": "TIME002",
+      "T18a_timesheets_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/AD50D523188A3BEFBCD5E0DC0CCAFFBB54F99698F25155C28E00B3F96CA725C6.png?RCType=EmbeddedRCFileProcessor",
+      "Department": "",
+      "Phone1": "",
+      "Timesheet_Status": "Active",
+      "Note for Timesheet": "",
+      "Hours_Total": "",
+      "Payment_Status": "Paid"
+    },
+    "portalData": {
+      "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id": [
+        {
+          "recordId": "50",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Day_Type": "Regular",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Time_Start": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Time_End": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hours_Lunch": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hours Overide": "1",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Work_Hours": "1",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hourly_Rate_Lookup": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Total_Pay_for_Projects": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Date": "04/04/2016",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Project": ""
+        },
+        {
+          "recordId": "47",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Day_Type": "Regular",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Time_Start": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Time_End": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hours_Lunch": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hours Overide": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Work_Hours": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hourly_Rate_Lookup": "20",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Total_Pay_for_Projects": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Date": "04/03/2016",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Project": ""
+        },
+        {
+          "recordId": "45",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Day_Type": "Regular",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Time_Start": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Time_End": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hours_Lunch": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hours Overide": "",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Work_Hours": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Hourly_Rate_Lookup": "20",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Total_Pay_for_Projects": "0",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Date": "04/01/2016",
+          "T18f_timesheets_Timesheet_Line_Items||id_timesheet_line_items_id::Project": ""
+        }
+      ]
+    },
+    "recordId": "13",
+    "modId": "2"
+  }
+]

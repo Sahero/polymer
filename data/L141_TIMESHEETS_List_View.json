@@ -1,0 +1,38 @@
+[
+  {
+    "fieldData": {
+      "Week_Begin": "",
+      "Investigator_Name": "Adam Barden",
+      "Hours_In_Work_Week_Reg": "40",
+      "Hours_Reg_UnWorked": "38",
+      "Hours_Worked_Over_Reg": "",
+      "Hours_Total": "2",
+      "Timesheet_Status": "Active",
+      "Note for Timesheet": "",
+      "T18a_timesheets_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/A5C90C32426DDAFC264090AAFA8E53E440284D121090B3083639B5D0E8BB5797.png?RCType=EmbeddedRCFileProcessor",
+      "Payment_Status": "Not Paid",
+      "id_Timesheet": "TIME001"
+    },
+    "portalData": {},
+    "recordId": "12",
+    "modId": "10"
+  },
+  {
+    "fieldData": {
+      "Week_Begin": "",
+      "Investigator_Name": "",
+      "Hours_In_Work_Week_Reg": "40",
+      "Hours_Reg_UnWorked": "40",
+      "Hours_Worked_Over_Reg": "",
+      "Hours_Total": "",
+      "Timesheet_Status": "Active",
+      "Note for Timesheet": "",
+      "T18a_timesheets_PREFERENCES||id_constant|::Company_Logo_System": "https://192.168.2.51/Streaming_SSL/MainDB/1F56EB3A27B8959E8FD8EB3F17770DB60CE7083C6447671AF7A178403BB642B5.png?RCType=EmbeddedRCFileProcessor",
+      "Payment_Status": "Paid",
+      "id_Timesheet": "TIME002"
+    },
+    "portalData": {},
+    "recordId": "13",
+    "modId": "2"
+  }
+]

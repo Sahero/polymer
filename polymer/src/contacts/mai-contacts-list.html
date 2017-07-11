@@ -1,36 +1,32 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="mai-staffs-list-data.html">
+<link rel="import" href="mai-contacts-list-data.html">
 <link rel="import" href="../mai-page-layout.html">
 
-<dom-module id="mai-staffs-list">
+<dom-module id="mai-contacts-list">
     <template>
         <style include="mai-datatable-styles">
         </style>
 
-        <mai-staffs-list-data selected-item="{{selectedItem}}"
-                              staffs-data="{{staffsData}}"
+        <mai-contacts-list-data selected-item="{{selectedItem}}"
+                              contacts-data="{{contactsData}}"
                               filter-query="{{filterQuery}}"
                               pages="{{pages}}"
                               current-page="{{currentPage}}"
-        ></mai-staffs-list-data>
+        ></mai-contacts-list-data>
 
-        <vaadin-grid items="{{staffsData}}" id="staffsListViewDatatable" class="list-view-datatable" active-item="{{selectedItem}}" >
+        <vaadin-grid items="{{contactsData}}" id="contactsListViewDatatable" class="list-view-datatable" active-item="{{selectedItem}}" >
 
             <vaadin-grid-column>
                 <template class="header">
-                    <vaadin-grid-sorter path="fieldData.ID_staff">STA ID</vaadin-grid-sorter>
+                    <vaadin-grid-sorter path="fieldData.ID_contact">CON #</vaadin-grid-sorter>
                 </template>
-                <template>[[item.fieldData.ID_staff]]</template>
+                <template>[[item.fieldData.ID_contact]]</template>
             </vaadin-grid-column>
             <vaadin-grid-column>
                 <template class="header">
-                    <vaadin-grid-sorter path="fieldData.Name_Full">Name</vaadin-grid-sorter>
+                    <vaadin-grid-sorter path="fieldData.Name_First">Name</vaadin-grid-sorter>
                 </template>
-                <template>[[item.fieldData.Name_Full]]</template>
-            </vaadin-grid-column>
-            <vaadin-grid-column>
-                <template class="header">State</template>
-                <template>[[item.fieldData.State_Province]]</template>
+                <template>[[item.fieldData.Name_First]] [[item.fieldData.Name_Last]]</template>
             </vaadin-grid-column>
             <vaadin-grid-column>
                 <template class="header">Phone</template>
@@ -41,8 +37,12 @@
                 <template>[[item.fieldData.Email]]</template>
             </vaadin-grid-column>
             <vaadin-grid-column>
-                <template class="header">Permissions</template>
-                <template>[[item.fieldData.Permissions]]</template>
+                <template class="header">Account</template>
+                <template>[[item.fieldData.Account_Name]]</template>
+            </vaadin-grid-column>
+            <vaadin-grid-column>
+                <template class="header">Category</template>
+                <template>[[item.fieldData.Category]]</template>
             </vaadin-grid-column>
             <vaadin-grid-column>
                 <template class="header">Status</template>
@@ -55,12 +55,12 @@
     </template>
     <script>
 
-        class MaiStaffsList extends Polymer.Element
+        class MaiContactsList extends Polymer.Element
         {
-            static get is() { return 'mai-staffs-list'; }
+            static get is() { return 'mai-contacts-list'; }
             static get properties() {
                 return {
-                    staffsData: {
+                    contactsData: {
                         type: Array,
                         notify:true
                     },
@@ -72,9 +72,9 @@
 
             _selectedItemChanged(item){
                 if(item) {
-                    this.$.staffsListViewDatatable.selectedItems = item ? [item] : [];
+                    this.$.contactsListViewDatatable.selectedItems = item ? [item] : [];
 
-                    this.dispatchEvent(new CustomEvent('staff-item-selected',
+                    this.dispatchEvent(new CustomEvent('contact-item-selected',
                         {
                             bubbles: true,
                             composed: true,
@@ -87,7 +87,7 @@
 
         }
 
-        window.customElements.define(MaiStaffsList.is, MaiStaffsList);
+        window.customElements.define(MaiContactsList.is, MaiContactsList);
 
     </script>
 </dom-module>

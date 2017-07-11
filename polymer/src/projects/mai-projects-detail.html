@@ -75,7 +75,7 @@
             </style>
         </custom-style>
         <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localStorage"></app-localstorage-document>
-        <!--url$="https://localhost:3000/fm/getProjectsDetail/{{recordId}}"-->
+
         <iron-ajax
 
                 id="getProjectsDetail"
@@ -146,8 +146,8 @@
                             <span class="secondary inputSearch">
                                 <mai-input disabled="{{disabled}}" id$="company[[project.recordId]]" value="{{project.fieldData.Account_Name::input}}">
                                 </mai-input>
-                                <paper-icon-button icon="close" field-name="company" on-tap="clearInput"></paper-icon-button>
-                                <paper-icon-button icon="search" field-name="company" on-tap="selectInput"></paper-icon-button>
+                                <paper-icon-button icon="mai:close" field-name="company" on-tap="clearInput"></paper-icon-button>
+                                <paper-icon-button icon="mai:search" field-name="company" on-tap="selectInput"></paper-icon-button>
                             </span>
                         </div>
                         <div class="group-item-row border-bottom-lightgray">
@@ -155,8 +155,8 @@
                             <span class="secondary inputSearch">
                                 <mai-input disabled="{{disabled}}" id$="claimant[[project.recordId]]" value="{{project.fieldData.Claimant::input}}">
                                 </mai-input>
-                                <paper-icon-button icon="close" field-name="claimant" on-tap="clearInput"></paper-icon-button>
-                                <paper-icon-button icon="search" field-name="claimant" on-tap="selectInput"></paper-icon-button>
+                                <paper-icon-button icon="mai:close" field-name="claimant" on-tap="clearInput"></paper-icon-button>
+                                <paper-icon-button icon="mai:search" field-name="claimant" on-tap="selectInput"></paper-icon-button>
                             </span>
                         </div>
                     </div>
@@ -167,7 +167,7 @@
             <paper-dialog class="paperDialog" id="companyDialog">
                 <div class="dialogHeader">
                     <h4>Clients Search</h4>
-                    <paper-icon-button icon="close" dialog-dismiss></paper-icon-button>
+                    <paper-icon-button icon="mai:close" dialog-dismiss></paper-icon-button>
                 </div>
                 <vaadin-grid id="companySelector" items="[[clientsData]]" class="list-view-datatable"
                              active-item="{{selectedCompany}}">
@@ -189,7 +189,7 @@
             <paper-dialog class="paperDialog" id="claimantDialog">
                 <div class="dialogHeader">
                     <h4>Claimant Search</h4>
-                    <paper-icon-button icon="close" dialog-dismiss></paper-icon-button>
+                    <paper-icon-button icon="mai:close" dialog-dismiss></paper-icon-button>
                 </div>
                 <vaadin-grid id="claimantSelector" items="[[claimantsData]]" class="list-view-datatable"
                              active-item="{{selectedClaimant}}">
@@ -208,7 +208,7 @@
             <paper-dialog class="paperDialog" id="staffDialog">
                 <div class="dialogHeader">
                     <h4>Staff Search</h4>
-                    <paper-icon-button icon="close" dialog-dismiss></paper-icon-button>
+                    <paper-icon-button icon="mai:close" dialog-dismiss></paper-icon-button>
                 </div>
                 <vaadin-grid id="staffSelector" items="[[staffsData]]" class="list-view-datatable"
                              active-item="{{selectedStaff}}">
@@ -227,7 +227,7 @@
             <paper-dialog class="paperDialog" id="investigatorDialog">
                 <div class="dialogHeader">
                     <h4>Investigators Search</h4>
-                    <paper-icon-button icon="close" dialog-dismiss></paper-icon-button>
+                    <paper-icon-button icon="mai:close" dialog-dismiss></paper-icon-button>
                 </div>
                 <vaadin-grid id="investigatorSelector" items="[[investigatorsData]]" class="list-view-datatable"
                              active-item="{{selectedInvestigator}}">
@@ -246,7 +246,7 @@
             <paper-dialog class="paperDialog" id="contactDialog">
                 <div class="dialogHeader">
                     <h4>Contacts Search</h4>
-                    <paper-icon-button icon="close" dialog-dismiss></paper-icon-button>
+                    <paper-icon-button icon="mai:close" dialog-dismiss></paper-icon-button>
                 </div>
                 <vaadin-grid id="contactSelector" items="[[contactsData]]" class="list-view-datatable"
                              active-item="{{selectedContact}}">
@@ -269,16 +269,16 @@
                             <template>
                                 <ul>
                                     <li><a href="/staffs/detail/1304">[[_getDataFromArray(staffs.*, index, 'T16q_projects_STAFF|id_staff|id_staff|::Name_Full')]]</a></li>
-                                    <li><paper-icon-button icon="close" field-name="staffs" data-index$="[[index]]" on-tap="removeAssigned"></paper-icon-button></li>
-                                    <!--<li><paper-icon-button icon="search"></paper-icon-button></li>-->
-                                    <li><paper-icon-button icon="mail"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="mai:close" field-name="staffs" data-index$="[[index]]" on-tap="removeAssigned"></paper-icon-button></li>
+                                    <!--<li><paper-icon-button icon="mai:search"></paper-icon-button></li>-->
+                                    <li><paper-icon-button icon="mai:mail"></paper-icon-button></li>
                                 </ul>
                             </template>
                         </dom-repeat>
 
                         <ul>
                             <li></li>
-                            <li><span>Add: </span><paper-icon-button icon="search" field-name="staff" on-tap="selectInput"></paper-icon-button></li>
+                            <li><span>Add: </span><paper-icon-button icon="mai:search" field-name="staff" on-tap="selectInput"></paper-icon-button></li>
                         </ul>
                     </div>
                 </div>
@@ -293,16 +293,16 @@
                             <template>
                                 <ul>
                                     <li><a href="/">[[investigator.PRJ_Projects_ING_Investigators::Investigator]]</a></li>
-                                    <li><paper-icon-button icon="close" field-name="investigators" data-index$="[[index]]" on-tap="removeAssigned"></paper-icon-button></li>
-                                    <!--<li><paper-icon-button icon="search"></paper-icon-button></li>-->
-                                    <li><paper-icon-button icon="mail"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="mai:close" field-name="investigators" data-index$="[[index]]" on-tap="removeAssigned"></paper-icon-button></li>
+                                    <!--<li><paper-icon-button icon="mai:search"></paper-icon-button></li>-->
+                                    <li><paper-icon-button icon="mai:mail"></paper-icon-button></li>
                                 </ul>
                             </template>
                         </dom-repeat>
 
                         <ul>
                             <li></li>
-                            <li><span>Add: </span><paper-icon-button icon="search" field-name="investigator" on-tap="selectInput"></paper-icon-button></li>
+                            <li><span>Add: </span><paper-icon-button icon="mai:search" field-name="investigator" on-tap="selectInput"></paper-icon-button></li>
                         </ul>
                     </div>
                 </div>
@@ -316,15 +316,15 @@
                             <template>
                                 <ul>
                                     <li><a href="/">[[contact.PRJ_Projects_CON_Contacts::Contact]]</a></li>
-                                    <li><paper-icon-button icon="close" field-name="contacts" data-index$="[[index]]" on-tap="removeAssigned">></paper-icon-button></li>
-                                    <!--<li><paper-icon-button icon="search"></paper-icon-button></li>-->
-                                    <li><paper-icon-button icon="mail"></paper-icon-button></li>
+                                    <li><paper-icon-button icon="mai:close" field-name="contacts" data-index$="[[index]]" on-tap="removeAssigned">></paper-icon-button></li>
+                                    <!--<li><paper-icon-button icon="mai:search"></paper-icon-button></li>-->
+                                    <li><paper-icon-button icon="mai:mail"></paper-icon-button></li>
                                 </ul>
                             </template>
                         </dom-repeat>
                         <ul>
                             <li></li>
-                            <li><span>Add: </span><paper-icon-button icon="search" field-name="contact" on-tap="selectInput"></paper-icon-button></li>
+                            <li><span>Add: </span><paper-icon-button icon="mai:search" field-name="contact" on-tap="selectInput"></paper-icon-button></li>
                         </ul>
                     </div>
                 </div>
@@ -334,7 +334,7 @@
 
             <!--Tab-->
             <div class="group-tabs box-spacing border-lightgray" >
-                <paper-tabs  class="border-bottom-lightgray " selected="{{papertabSelected}}" attrForSelected="name">
+                <paper-tabs class="border-bottom-lightgray " selected="{{papertabSelected}}" attrForSelected="name">
                     <paper-tab class="border-right-lightgray" link name="tasks"><span class="counts">{{tasks.length}} </span> Tasks </paper-tab>
                     <paper-tab class="border-right-lightgray" link name="files"><span class="counts">{{files.length}} </span>  Files </paper-tab>
                     <paper-tab class="border-right-lightgray" link name="notes"><span class="counts">{{notes.length}} </span>  Note </paper-tab>
@@ -385,10 +385,10 @@
                     <div name="files">
                         <vaadin-grid items="{{files}}" class="list-view-datatable">
                             <vaadin-grid-column width="40px" flex-grow="0">
-                                <template><paper-icon-button icon="delete"></paper-icon-button></template>
+                                <template><paper-icon-button icon="mai:delete"></paper-icon-button></template>
                             </vaadin-grid-column>
                             <vaadin-grid-column width="40px" flex-grow="0">
-                                <template><paper-icon-button icon="info"></paper-icon-button></template>
+                                <template><paper-icon-button icon="mai:info"></paper-icon-button></template>
                             </vaadin-grid-column>
                             <vaadin-grid-column width="100px" flex-grow="0">
                                 <template class="header">Date</template>
@@ -411,7 +411,7 @@
                             </template>
 
                             <vaadin-grid-column width="40px" flex-grow="0">
-                                <template><paper-icon-button icon="delete"></paper-icon-button></template>
+                                <template><paper-icon-button icon="mai:delete"></paper-icon-button></template>
                             </vaadin-grid-column>
                             <vaadin-grid-column width="100px" flex-grow="0">
                                 <template class="header">Date</template>
@@ -438,10 +438,10 @@
             </div>
             <iron-list class="box-spacing" items="{{projectDetail}}" as="project" scroll-target="document">
                 <template>
-                    <div class="group-item border-lightgray">
+                    <div class="group-item border-lightgray" style="max-width: 170px;">
                         <div class="group-header">
                             <div class="box-container">Dates</div>
-                            <div class="group-item border-lightgray" style="display:table">
+                            <div class="group-item border-lightgray" style="display:table;width:96%">
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Start</span>
                                     <span class="secondary">
@@ -575,6 +575,7 @@
                 showDialog() {
                     this.shadowRoot.querySelector('#dialog').toggle();
 
+
                 }
                 _selectedCompanyChanged(item){
                     if(item) {
@@ -628,8 +629,9 @@
                 }
 
                 _recordIdChanged(recordId, tokenData){
-                    //console.log(tokenData);
-                    if(tokenData) {
+                    console.log(recordId);
+                    if(recordId && tokenData) {
+                        console.log(recordId);
                         this.$.getProjectsDetail.headers = {'fm-data-token': tokenData.token};
                         this.$.getProjectsDetail.generateRequest();
                     }
@@ -769,8 +771,7 @@
                         this.tasks = this.projectDetail[0].portalData.tasks_portal;
                         this.files = this.projectDetail[0].portalData.portalDocuments;
                         this.auditField = this.projectDetail[0].fieldData.Audit_log_UltraLog;
-
-
+                        this.papertabSelected = 0;
                     }
 
                 }

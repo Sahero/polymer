@@ -241,7 +241,7 @@
                     this.$.getStaffsDetail.generateRequest();
                 }*/
                 _recordIdChanged(recordId, tokenData){
-                    if(tokenData) {
+                    if(recordId && tokenData) {
                         this.$.getStaffsDetail.headers = {'fm-data-token': tokenData.token};
                         this.$.getStaffsDetail.generateRequest();
                     }

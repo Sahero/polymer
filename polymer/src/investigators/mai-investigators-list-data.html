@@ -3,8 +3,13 @@
 <dom-module id="mai-investigators-list-data">
 
     <template>
-        <mai-get-list-data layout-name="[[investigatorsLayout]]" list-data="{{investigatorsData}}"
-        selected-item="{{selectedItem}}"></mai-get-list-data>
+        <mai-get-list-data layout-name="[[investigatorsLayout]]"
+                           list-data="{{investigatorsData}}"
+                           selected-item="{{selectedItem}}"
+                           filter-query="{{filterQuery}}"
+                           pages="{{pages}}"
+                           current-page="{{currentPage}}"
+        ></mai-get-list-data>
     </template>
 
     <script>
@@ -20,14 +25,19 @@
                             type: Array,
                             notify: true,
                         },
+                        investigatorsLayout: {
+                            type: String,
+                            value: 'L131_INVESTIGATOR_List_View'
+                        },
                         selectedItem: {
                             type: Object,
                             notify: true
                         },
-                        investigatorsLayout: {
-                            type: String,
-                            value: 'L131_INVESTIGATOR_List_View'
-                        }
+                        pages:{
+                            type: Array,
+                            notify: true
+                        },
+                        currentPage:{type:Number, notify:true}
                     }
                 }
 

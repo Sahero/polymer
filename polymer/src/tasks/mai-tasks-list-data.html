@@ -1,10 +1,10 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
-<dom-module id="mai-staffs-list-data">
+<dom-module id="mai-tasks-list-data">
 
     <template>
-        <mai-get-list-data layout-name="[[staffsLayout]]"
-                           list-data="{{staffsData}}"
+        <mai-get-list-data layout-name="[[tasksLayout]]"
+                           list-data="{{tasksData}}"
                            selected-item="{{selectedItem}}"
                            filter-query="{{filterQuery}}"
                            pages="{{pages}}"
@@ -14,24 +14,24 @@
 
     <script>
         (function() {
-            class MaiStaffsListData extends Polymer.Element {
+            class MaiTasksListData extends Polymer.Element {
                 static get is() {
-                    return 'mai-staffs-list-data';
+                    return 'mai-tasks-list-data';
                 }
 
                 static get properties() {
                     return {
-                        staffsData: {
+                        tasksData: {
                             type: Array,
                             notify: true,
-                        },
-                        staffsLayout:{
-                            type: String,
-                            value: 'L131_STAFF_List_View'
                         },
                         selectedItem: {
                             type: Object,
                             notify: true
+                        },
+                        tasksLayout:{
+                            type: String,
+                            value: 'L141_TIMESHEETS_List_View'
                         },
                         pages:{
                             type: Array,
@@ -42,7 +42,7 @@
                 }
 
             }
-            window.customElements.define(MaiStaffsListData.is, MaiStaffsListData);
+            window.customElements.define(MaiTasksListData.is, MaiTasksListData);
         }());
     </script>
 </dom-module>

@@ -7,7 +7,7 @@
 
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 
-<dom-module id="mai-projects">
+<dom-module id="mai-contacts">
     <template>
 
         <custom-style>
@@ -19,33 +19,37 @@
         <app-route
                 route="[[route]]"
                 pattern="/:page"
-                data="{{projectsData}}"
+                data="{{contactsData}}"
                 tail="{{tailroute}}"
         ></app-route>
 
         <app-route
                 route="{{tailroute}}"
-                pattern="/projects/detail/:recordId"
+                pattern="/contacts/detail/:recordId"
                 data="{{recordIdData}}"
         ></app-route>
 
 
         <app-toolbar>
-            <iron-selector class="view-toolbar" selected="[[projectsData.page]]"  attr-for-selected="name" role="navigation">
+            <iron-selector class="view-toolbar" selected="[[contactsData.page]]"  attr-for-selected="name" role="navigation">
                 <a name="detail" href="[[route.prefix]]/detail">
                     <paper-fab mini icon="mai:content-copy"></paper-fab>
                     Detail view</a>
                 <a name="list" href="[[route.prefix]]/list">
                     <paper-fab mini icon="mai:list"></paper-fab>
                     List view</a>
+                <a name="follow" href="[[route.prefix]]/follow">
+                    <paper-fab mini icon="mai:chat"></paper-fab>
+                    Follow up</a>
                 <dom-if if="[[_shouldShowDetailHeaders]]">
                     <template>
                         <div class="detailsHeader">
-                            <div style="flex-grow:0.25">Due [[selectedData.fieldData.Date_Due]]</div>
-                            <div># [[selectedData.fieldData.ID_Project]]&nbsp;</div>
-                            <div>[[selectedData.fieldData.Claim_No]]</div>
+                            <div># [[selectedData.fieldData.ID_Contact]]&nbsp;</div>
+                            <div>[[selectedData.fieldData.Title]]</div>
+                            <div>[[selectedData.fieldData.Name_First]]</div>
+                            <div>[[selectedData.fieldData.Name_Last]]</div>
                             <div>&nbsp;|&nbsp;</div>
-                            <div style="font-style: italic">[[selectedData.fieldData.Status]]</div>
+                            <div style="font-style: italic">[[selectedData.fieldData.followup_status]]</div>
                         </div>
                     </template>
                 </dom-if>
@@ -53,10 +57,10 @@
 
         </app-toolbar>
         <div>
-            <iron-pages selected="[[projectsData.page]]" attr-for-selected="name">
+            <iron-pages selected="[[contactsData.page]]" attr-for-selected="name">
 
-                <mai-projects-list name="list" ></mai-projects-list>
-                <mai-projects-detail id="detailView" name="detail" recordId="{{recordIdData.recordId}}"></mai-projects-detail>
+                <mai-contacts-list name="list" ></mai-contacts-list>
+                <mai-contacts-detail id="contactsDetailView" name="detail" recordId="{{recordIdData.recordId}}"></mai-contacts-detail>
 
             </iron-pages>
         </div>
@@ -65,17 +69,17 @@
 
     <script>
         (function() {
-            class MaiProjects extends Polymer.Element {
+            class MaiContacts extends Polymer.Element {
                 static get is() {
-                    return 'mai-projects';
+                    return 'mai-contacts';
                 }
 
                 static get properties(){
                     return {
-                        projectsData: {
+                        contactsData: {
                             type:Object,
                             notify:true,
-                            observer:'_onProjectsDataChanged'},
+                            observer:'_onContactsDataChanged'},
                         selectedData: {
                             type:Object,
                             notify:true,
@@ -83,7 +87,7 @@
                         visible: {
                             type: Boolean,
                             notify: true,
-                            observer: '_onProjectsDataChanged'
+                            observer: '_onContactsDataChanged'
                         },
                         _shouldShowDetailHeaders : {
                             type: Boolean,
@@ -92,16 +96,16 @@
                     };
                 }
 
-                _onProjectsDataChanged(projectsData ,oldProjectsData){
+                _onContactsDataChanged(contactsData,oldContactsData){
                     if(this.visible) {
                         /*To check if the current view page is visible or not*/
-                        if(projectsData===true || (JSON.stringify(projectsData) === JSON.stringify(oldProjectsData))){
+                        if(contactsData===true || (JSON.stringify(contactsData) === JSON.stringify(oldContactsData))){
                             return;
                         }
 
-                        if(projectsData.page === undefined || projectsData.page ===""){
-                            this.projectsData.page = projectsData.page || "detail";
-                            this.set('route.path',this.projectsData.page);
+                        if(contactsData.page === undefined || contactsData.page ===""){
+                            this.contactsData.page = contactsData.page || "detail";
+                            this.set('route.path',this.contactsData.page);
                         }
                         else{
                             this._computeShouldShowDetailHeaders();
@@ -110,16 +114,17 @@
                                     bubbles: true,
                                     composed: true,
                                     detail: {
-                                        name: 'projects',
-                                        view: projectsData.page
+                                        name: 'contacts',
+                                        view: contactsData.page
                                     }
                                 }));
+
                             if(this.tailroute.path){
                                 this.recordIdData.recordId = this.tailroute.path.replace("/","");
                             }
 
-                            if(this.projectsData.page === 'detail' && this.recordIdData.recordId !== null){
-                                this.$.detailView.recordId = this.recordIdData.recordId;
+                            if(this.contactsData.page === 'detail' && this.recordIdData.recordId !== null){
+                                this.$.contactsDetailView.recordId = this.recordIdData.recordId;
                                 this.set('tailroute.path', this.recordIdData.recordId);
                                 this.notifyPath('tailroute.path');
                                 this.notifyPath('route.path');
@@ -132,24 +137,24 @@
 
                 ready(){
                     super.ready();
-                    this.addEventListener('project-item-selected', e => this._onProjectItemSelected(e));
+                    this.addEventListener('contact-item-selected', e => this._onContactItemSelected(e));
                 }
 
-                _onProjectItemSelected(event){
+                _onContactItemSelected(event){
                     let detail = event.detail;
                     this.selectedData = detail.data;
                     this.recordIdData.recordId = this.selectedData.recordId;
-                    this.$.detailView.recordId = this.selectedData.recordId;
+                    this.$.contactsDetailView.recordId = this.selectedData.recordId;
                 }
 
                 _computeShouldShowDetailHeaders(){
 
-                    if(this.projectsData.page==='detail'){
-                        //console.log(this.projectsData);
+                    if(this.contactsData.page==='detail'){
+                        //console.log(this.contactsData);
                         this._shouldShowDetailHeaders =  true;
                     }
                     else{
-                        //console.log(this.projectsData);
+                        //console.log(this.contactsData);
                         this._shouldShowDetailHeaders = false;
                     }
 
@@ -158,7 +163,7 @@
 
             }
 
-            window.customElements.define(MaiProjects.is, MaiProjects);
+            window.customElements.define(MaiContacts.is, MaiContacts);
         }());
     </script>
 </dom-module>

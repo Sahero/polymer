@@ -7,39 +7,48 @@
         <style>
 
             vaadin-grid.list-view-datatable {
-                font: 500 12px "Open Sans", sans-serif;
-                color: black;
+                /*font: 500 12px "Open Sans", sans-serif;*/
+                /*color: black;*/
 
-                --divider-color: rgb(223, 232, 239);
+                /*--divider-color: rgb(223, 232, 239);*/
+                --dark-divider-opacity: 0.05;
+                font: 500 12px "Open Sans", sans-serif;
+                --divider-color: rgba(0, 0, 0, var(--dark-divider-opacity));
 
                 --vaadin-grid-cell: {
-                    padding: 0 13px;
-                    white-space: pre-wrap;
+                    /*padding: 0 13px;*/
+                    padding: 0;
+                    white-space: normal;
                 };
 
                 --vaadin-grid-body-cell: {
-                    height: 30px;
+                    min-height: 30px;
+                    color: rgba(0, 0, 0, var(--dark-primary-opacity));
+                    padding-left:5px;
                 };
 
 
                 --vaadin-grid-header-cell: {
-                    color: rgb(148, 154, 171);
+                    color: rgba(0, 0, 0, var(--dark-secondary-opacity));
 
                     background: rgba(235, 238, 246, 0.9);
                     border-bottom: 1px solid rgba(208, 217, 225, 0.9);
                     border-top: 1px solid rgba(248, 250, 252, 0.9);
-                    min-height: 35px;
+
+                    padding: 3px;
 
                     background-image: linear-gradient(rgba(108, 160, 218, 0), rgba(108, 160, 218, 0.15));
                     background-size: 1px 100%;
                     background-position: 100% 0%;
                     background-repeat: no-repeat;
+                    padding-left:5px;
                 };
 
                 --vaadin-grid-body-row-selected-cell: {
                     background-color: rgb(131, 183, 236);
                     color: #fff;
                     border-bottom-color: rgb(108, 160, 218);
+                    transition:0.2s ease all;
                 };
 
                 --vaadin-grid-body-row-odd-cell: {
@@ -47,7 +56,8 @@
                 };
 
                 --vaadin-grid-body-row-hover-cell: {
-                    background-color: rgb(235, 238, 246);
+                    /*background-color: rgb(235, 238, 246);*/
+                    background-color: var(--paper-grey-200);
                     color: dimgray;
                 };
 
@@ -58,6 +68,8 @@
                 --vaadin-grid-column-resize-handle: {
                     opacity: 0;
                 };
+
+
             }
 
 
@@ -72,13 +84,13 @@
             .dueSoon{
                 background: orange;
                 color:white;
-                padding: 0 13px;
+                text-align: center;
             }
 
             .dueOver{
                 background: red;
                 color:white;
-                padding: 0 13px;
+                text-align: center;
             }
 
             vaadin-grid.list-view-datatable input[type=checkbox] {
@@ -105,6 +117,21 @@
                 background: #fff;
                 width: 100%;
             }
+
+            vaadin-grid.list-view-datatable vaadin-grid-sorter {
+                --vaadin-grid-sorter-arrow: {
+                    vertical-align: bottom;
+                    display:inline;
+                };
+            }
+
+            vaadin-grid.list-view-datatable vaadin-grid-sorter .cell {
+                flex: 1;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
 
             vaadin-grid {
                 height: auto;
