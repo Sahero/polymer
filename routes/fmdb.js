@@ -182,15 +182,15 @@ router.get('/getDetail/:layoutname/:recordid', function(req, res) {
     }
 });
 
-//to update and create new records
+//to update records
 router.put('/getDetail/:layoutname/:recordid', function(req, res) {
     if(env=="development"){
         res.json("success dev");
         return;
     }
-
+    console.log(req.body);
     var _body = Object.keys(req.body)[0];
-    //console.log(_body);
+    console.log(_body);
     let url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/record/'+config.filemaker.solution+'/'+req.params.layoutname+'/'+req.params.recordid;
     //console.log(url);
 
@@ -214,43 +214,6 @@ router.put('/getDetail/:layoutname/:recordid', function(req, res) {
         }
     });
 });
-
-//Using POST method to filter the list data
-/*
- router.post('/getList/:layoutname', function(req, res) {
- console.log(env);
- if(env=="development"){
- res.json(require('../data/' + req.params.layoutname + '.json'));
-
- }
- else {
- console.log(req.body);
- var _body = Object.keys(req.body)[0];
- console.log(JSON.parse(_body));
-
- let url = config.filemaker.protocol + '://' + config.filemaker.ip + '/fmi/rest/api/find/' + config.filemaker.solution + '/' + req.params.layoutname;
- console.log(url);
- // Make the API Call
- request({
- "rejectUnauthorized": false,
- "method": 'POST',
- "url": url,
- "headers": {"FM-data-token": req.header('fm-data-token'), "Content-Type": "application/json"},
- "agentOptions": config.filemaker.selfSignedCertificate,
- "json": true,
- "body" : JSON.parse(_body)
- }, (error, response, body) => {
- if (error) {
- console.log(error);
- }
- else {
- //console.log(body);
- res.json(body.data);
- }
- });
- }
- });
- */
 
 
 router.post('/getList/:layoutname', function(req, res) {
@@ -300,4 +263,35 @@ router.post('/getList/:layoutname/:page/:numofrecords', function(req, res) {
             }
         });
     }
+});
+
+//to create new records
+router.post('/add/:layoutname', function(req, res) {
+    if(env=="development"){
+        res.json("success dev");
+        return;
+    }
+
+    let url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/record/'+config.filemaker.solution+'/'+req.params.layoutname;
+    console.log(url);
+
+    // Make the API Call
+    request({
+        "rejectUnauthorized": false,
+        "method" : 'POST',
+        "url" : url,
+        "headers" : {"FM-data-token": req.header('fm-data-token'), "Content-Type" : "application/json"},
+        "agentOptions" : config.filemaker.selfSignedCertificate,
+        "json": true,
+        "body" : {"data":{}}
+    }, (error, response, body) => {
+        if(error){
+            console.log(error);
+            res.json(error);
+        }
+        else{
+            console.log(body);
+            res.json(body);
+        }
+    });
 });

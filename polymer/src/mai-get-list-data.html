@@ -21,6 +21,15 @@
                 handle-as="json"
                 on-response="getRecordCount"
         ></iron-ajax>
+
+        <iron-ajax
+                id="addNew"
+                method="POST"
+                url="[[_computeURLforNewRecord()]]"
+                headers$='{"FM-data-token": "[[tokenData.token]]"}'
+                handle-as="json"
+                on-response="getNewRecordId"
+        ></iron-ajax>
     </template>
 
     <script>
@@ -54,7 +63,9 @@
                         pageSize:{value:20},
                         totalRecord: Number,
                         pages: {type: Array, notify: true},
-                        currentPage:{type:Number, value:0, notify:true}
+                        currentPage:{type:Number, value:0, notify:true},
+                        addNew:{type:Boolean, notify:true,
+                                observer:'_addNewChanged'}
                     }
                 }
 
@@ -62,6 +73,13 @@
                     return [
                         '_currentPageChanged(currentPage,filterQuery,tokenData)'
                     ]
+                }
+
+                _addNewChanged(addNew, oldAddNew){
+
+                    if(addNew && !(addNew===oldAddNew)){
+                        this.$.addNew.generateRequest();
+                    }
                 }
 
                 _currentPageChanged(currentPage,filterQuery,tokenData){
@@ -96,10 +114,23 @@
                 listLoaded(data) {
                     if(data.detail.response!==null) {
                         this.listData = data.detail.response;
-                        //console.log(this.listData);
-                        this.selectedItem = this.listData[0];
+                        //console.log(this.selectedItem);
+                        //console.log('recordId' in this.selectedItem);
+                        if(this.selectedItem && 'recordId' in this.selectedItem) {
+                            for (var i = 0; i < this.listData.length; i++) {
+                                if (this.listData[i].recordId == this.selectedItem.recordId) {
+                                    this.selectedItem = this.listData[i];
+                                    break;
+                                }
+                            }
+                        }
+                        else{
+                            this.selectedItem = this.listData[0];
+                        }
+                        //console.log(this.selectedItem);
                     }
                 }
+
                 getRecordCount(data){
                     if(data.detail.response!==null){
                         this.totalRecord = data.detail.response;
@@ -112,12 +143,23 @@
                     }
                 }
 
+                getNewRecordId(data){
+                    if(data.detail.response!==null) {
+                       console.log(data.detail.response);
+                       //this.addNew.recordId = data.detail.response.recordId;
+                    }
+                }
+
                 _computeURL() {
                     return `https://localhost:3000/fm/getList/${this.layoutName}/${this.currentPage}/${this.pageSize}`;
                 }
 
                 _computeURLforRecordCount(){
                     return `https://localhost:3000/fm/getRecordCount/${this.layoutName}`;
+                }
+
+                _computeURLforNewRecord(){
+                    return `https://localhost:3000/fm/add/${this.layoutName}`;
                 }
 
             }

@@ -512,7 +512,6 @@
                             </div>
                         </div>
                     </div>
-
                 </template>
             </iron-list>
         </div>
@@ -601,7 +600,10 @@
                 _selectedStaffChanged(item){
                     if(item) {
                         this.$.staffSelector.selectedItems = item ? [item] : [];
-                        this.push('staffs',{"T16q_projects_STAFF|id_staff|id_staff|::Name_Full":this.selectedStaff.fieldData.Name_Full});
+                        this.push('staffs',
+                            {"T16q_projects_STAFF|id_staff|id_staff|::Name_Full":this.selectedStaff.fieldData.Name_Full},
+                            {"T16q_projects_STAFF::ID_staff":this.selectedStaff.fieldData.ID_staff}
+                        );
                         this.shadowRoot.querySelector('#staffDialog').toggle();
                     }
                 }
@@ -611,7 +613,7 @@
                         this.$.investigatorSelector.selectedItems = item ? [item] : [];
                         this.push('investigators',
                             {"PRJ_Projects_ING_Investigators::Investigator":this.selectedInvestigator.fieldData.Name_Full},
-                            //{"PRJ_Projects_ING_Investigators::id_investigator":this.selectedInvestigator.fieldData.ID_investigator}
+                            {"PRJ_Projects_ING_Investigators::id_investigator":this.selectedInvestigator.fieldData.ID_investigator}
                         );
                         this.shadowRoot.querySelector('#investigatorDialog').toggle();
                     }
@@ -623,6 +625,7 @@
                         this.$.contactSelector.selectedItems = item ? [item] : [];
                         this.push('contacts',
                             {"PRJ_Projects_CON_Contacts::Contact":this.selectedContact.fieldData.Name_First+' '+this.selectedContact.fieldData.Name_Last},
+                            {"PRJ_Projects_CON_Contacts::id_contact":this.selectedContact.fieldData.ID_Contact}
                         );
                         this.shadowRoot.querySelector('#contactDialog').toggle();
                     }
@@ -652,14 +655,14 @@
                     if (changeRecord) {
                         console.log(changeRecord);
                         changeRecord.indexSplices.forEach(function(data) {
+                            var body ='';
 
                             for (var i=0; i<data.removed.length; i++) {
                                 var item = data.removed[i];
                                 console.log(item);
                                 var value = Object.keys(item)[1];
                                 value = value.substring(0,value.indexOf(":"));
-                                //console.log(value);
-                                this._updateDetail('deleteRelated', value+'.'+item.recordId);
+                                body = '"deleteRelated":"'+value+'.'+item.recordId+'"';
                             }
 
                             for (var i=0; i<data.addedCount; i++) {
@@ -667,9 +670,12 @@
                                 var selected = data.object[index];
                                 var fieldName = Object.keys(selected)[0];
                                 var value = selected[fieldName];
-                                console.log(fieldName +'--' + value)
-                                this._updateDetail(fieldName+'.0', value);
+                                body += '"'+fieldName+'.0":"'+value+'"';
+                                if(i!==(data.addedCount - 1)){
+                                    body +=',';
+                                }
                             }
+                            this._updateDetails(body);
                         }, this);
                     }
                 }
@@ -690,13 +696,9 @@
                     if(date===null || date===""){
                         return null;
                     }
-                    //console.log(moment(new Date(date)).format("DD/MM/YYYY"));
-                    //date = new Date(date);
-                    //return moment(new Date(date)).format("DD/MM/YYYY");
-                    //return new Date(date.getFullYear(), date.getMonth(), date.getDate());
                     var d = new Date(date);
+                    console.log(d.getFullYear()+'-'+('0' + (d.getMonth()+1)).slice(-2)+'-'+('0' + (d.getDate())).slice(-2));
                     return d.getFullYear()+'-'+('0' + (d.getMonth()+1)).slice(-2)+'-'+('0' + (d.getDate())).slice(-2);
-
                 }
 
                 _onProjectDetailChanged(changeDetail) {
@@ -706,14 +708,16 @@
                         var fieldName = path.substring(path.lastIndexOf('.') + 1);
                         var value = changeDetail.value;
 
-                        this._updateDetail(fieldName, value);
+                        if(value===null){
+                            value="";
+                        }
+                        this._updateDetails('"'+fieldName+'":"'+value+'"');
                     }
                 }
 
-                _updateDetail(fieldName, value){
+                _updateDetails(body){
                     //var body = '{"data": {"'+fieldName+'":"'+value+'"}}';
-                    console.log(fieldName);
-                    console.log(value);
+
                     /*if(fieldName.toLowerCase().includes("date") && value!=="" && value!==undefined){
                      if(value.length<10){
                      return;
@@ -721,10 +725,8 @@
                      value = new Date(value);
                      value = ('0' + (value.getMonth()+1)).slice(-2) +'/'+('0' + (value.getDate())).slice(-2)+'/'+ value.getFullYear();
                      }*/
-                    if(value===null){
-                        value="";
-                    }
-                    this.$.updateProjectsDetail.body = '{"data": {"'+fieldName+'":"'+value+'"}}';
+                    console.log(body);
+                    this.$.updateProjectsDetail.body = '{"data": {'+body+'}}';
                     this.$.updateProjectsDetail.generateRequest();
                 }
 
