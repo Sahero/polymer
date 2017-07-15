@@ -3,7 +3,7 @@
 <dom-module id="mai-clients-list-data">
 
     <template>
-        <mai-get-list-data layout-name="[[clientsLayout]]"
+        <mai-get-list-data layout-name="[[layoutName]]"
                            list-data="{{clientsData}}"
                            selected-item="{{selectedItem}}"
                            filter-query="{{filterQuery}}"
@@ -25,9 +25,9 @@
                             type: Array,
                             notify: true,
                         },
-                        clientsLayout:{
+                        layoutName:{
                             type: String,
-                            value: 'L11_ACCOUNTS_List_View'
+                            value: 'clients'
                         },
                         selectedItem: {
                             type: Object,

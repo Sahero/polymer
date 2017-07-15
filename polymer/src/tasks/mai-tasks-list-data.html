@@ -3,7 +3,7 @@
 <dom-module id="mai-tasks-list-data">
 
     <template>
-        <mai-get-list-data layout-name="[[tasksLayout]]"
+        <mai-get-list-data layout-name="[[layoutName]]"
                            list-data="{{tasksData}}"
                            selected-item="{{selectedItem}}"
                            filter-query="{{filterQuery}}"
@@ -29,9 +29,9 @@
                             type: Object,
                             notify: true
                         },
-                        tasksLayout:{
+                        layoutName:{
                             type: String,
-                            value: 'L141_TIMESHEETS_List_View'
+                            value: 'tasks'
                         },
                         pages:{
                             type: Array,

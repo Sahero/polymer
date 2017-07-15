@@ -11,12 +11,6 @@
 
 <link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
 <link rel="import" href="../mai-input.html">
-<link rel="import" href="../mai-input-date.html">
-<link rel="import" href="../clients/mai-clients-list-data.html">
-<link rel="import" href="../claimants/mai-claimants-list-data.html">
-<link rel="import" href="../staffs/mai-staffs-list-data.html">
-<link rel="import" href="../investigators/mai-investigators-list-data.html">
-<link rel="import" href="../contacts/mai-contacts-list-data.html">
 
 <dom-module id="mai-projects-detail">
     <template>
@@ -144,19 +138,19 @@
                         <div class="group-item-row border-bottom-lightgray">
                             <span class="primary">Company</span>
                             <span class="secondary inputSearch">
-                                <mai-input disabled="{{disabled}}" id$="company[[project.recordId]]" value="{{project.fieldData.Account_Name::input}}">
+                                <mai-input disabled="{{disabled}}" id$="clients[[project.recordId]]" value="{{project.fieldData.Account_Name::input}}">
                                 </mai-input>
-                                <paper-icon-button icon="mai:close" field-name="company" on-tap="clearInput"></paper-icon-button>
-                                <paper-icon-button icon="mai:search" field-name="company" on-tap="selectInput"></paper-icon-button>
+                                <paper-icon-button icon="mai:close" field-name="clients" on-tap="clearInput"></paper-icon-button>
+                                <paper-icon-button icon="mai:search" field-name="clients" on-tap="selectInput"></paper-icon-button>
                             </span>
                         </div>
                         <div class="group-item-row border-bottom-lightgray">
                             <span class="primary">Claimant</span>
                             <span class="secondary inputSearch">
-                                <mai-input disabled="{{disabled}}" id$="claimant[[project.recordId]]" value="{{project.fieldData.Claimant::input}}">
+                                <mai-input disabled="{{disabled}}" id$="claimants[[project.recordId]]" value="{{project.fieldData.Claimant::input}}">
                                 </mai-input>
-                                <paper-icon-button icon="mai:close" field-name="claimant" on-tap="clearInput"></paper-icon-button>
-                                <paper-icon-button icon="mai:search" field-name="claimant" on-tap="selectInput"></paper-icon-button>
+                                <paper-icon-button icon="mai:close" field-name="claimants" on-tap="clearInput"></paper-icon-button>
+                                <paper-icon-button icon="mai:search" field-name="claimants" on-tap="selectInput"></paper-icon-button>
                             </span>
                         </div>
                     </div>
@@ -164,7 +158,7 @@
             </iron-list>
 
             <!-- Popup selection for company/client/account -->
-            <paper-dialog class="paperDialog" id="companyDialog">
+            <paper-dialog class="paperDialog" id="clientsDialog">
                 <div class="dialogHeader">
                     <h4>Clients Search</h4>
                     <paper-icon-button icon="mai:close" dialog-dismiss></paper-icon-button>
@@ -186,7 +180,7 @@
                 </vaadin-grid>
             </paper-dialog>
             <!-- Popup selection for claimants -->
-            <paper-dialog class="paperDialog" id="claimantDialog">
+            <paper-dialog class="paperDialog" id="claimantsDialog">
                 <div class="dialogHeader">
                     <h4>Claimant Search</h4>
                     <paper-icon-button icon="mai:close" dialog-dismiss></paper-icon-button>
@@ -205,7 +199,7 @@
             </paper-dialog>
 
             <!-- Popup selection for staffs -->
-            <paper-dialog class="paperDialog" id="staffDialog">
+            <paper-dialog class="paperDialog" id="staffsDialog">
                 <div class="dialogHeader">
                     <h4>Staff Search</h4>
                     <paper-icon-button icon="mai:close" dialog-dismiss></paper-icon-button>
@@ -224,7 +218,7 @@
             </paper-dialog>
 
             <!-- Popup selection for investigators -->
-            <paper-dialog class="paperDialog" id="investigatorDialog">
+            <paper-dialog class="paperDialog" id="investigatorsDialog">
                 <div class="dialogHeader">
                     <h4>Investigators Search</h4>
                     <paper-icon-button icon="mai:close" dialog-dismiss></paper-icon-button>
@@ -243,7 +237,7 @@
             </paper-dialog>
 
             <!-- Popup selection for contacts -->
-            <paper-dialog class="paperDialog" id="contactDialog">
+            <paper-dialog class="paperDialog" id="contactsDialog">
                 <div class="dialogHeader">
                     <h4>Contacts Search</h4>
                     <paper-icon-button icon="mai:close" dialog-dismiss></paper-icon-button>
@@ -278,7 +272,7 @@
 
                         <ul>
                             <li></li>
-                            <li><span>Add: </span><paper-icon-button icon="mai:search" field-name="staff" on-tap="selectInput"></paper-icon-button></li>
+                            <li><span>Add: </span><paper-icon-button icon="mai:search" field-name="staffs" on-tap="selectInput"></paper-icon-button></li>
                         </ul>
                     </div>
                 </div>
@@ -302,7 +296,7 @@
 
                         <ul>
                             <li></li>
-                            <li><span>Add: </span><paper-icon-button icon="mai:search" field-name="investigator" on-tap="selectInput"></paper-icon-button></li>
+                            <li><span>Add: </span><paper-icon-button icon="mai:search" field-name="investigators" on-tap="selectInput"></paper-icon-button></li>
                         </ul>
                     </div>
                 </div>
@@ -324,7 +318,7 @@
                         </dom-repeat>
                         <ul>
                             <li></li>
-                            <li><span>Add: </span><paper-icon-button icon="mai:search" field-name="contact" on-tap="selectInput"></paper-icon-button></li>
+                            <li><span>Add: </span><paper-icon-button icon="mai:search" field-name="contacts" on-tap="selectInput"></paper-icon-button></li>
                         </ul>
                     </div>
                 </div>
@@ -579,21 +573,21 @@
                 _selectedCompanyChanged(item){
                     if(item) {
                         this.$.companySelector.selectedItems = item ? [item] : [];
-                        var id = 'company'+this.recordId;
+                        var id = 'clients'+this.recordId;
                         this.shadowRoot.querySelector('#' + id).value = this.selectedCompany.fieldData.Account;
                         this.shadowRoot.querySelector('#' + id).dispatchEvent(new Event('input', { 'bubbles': true,composed:true }));
-                        this.shadowRoot.querySelector('#companyDialog').toggle();
+                        this.shadowRoot.querySelector('#clientsDialog').toggle();
                     }
                 }
 
                 _selectedClaimantChanged(item){
                     if(item) {
                         this.$.claimantSelector.selectedItems = item ? [item] : [];
-                        var id = 'claimant'+this.recordId;
+                        var id = 'claimants'+this.recordId;
                         console.log(this.selectedClaimant);
                         this.shadowRoot.querySelector('#' + id).value = this.selectedClaimant.fieldData.Name_Full;
                         this.shadowRoot.querySelector('#' + id).dispatchEvent(new Event('input', { 'bubbles': true,composed:true }));
-                        this.shadowRoot.querySelector('#claimantDialog').toggle();
+                        this.shadowRoot.querySelector('#claimantsDialog').toggle();
                     }
                 }
 
@@ -604,7 +598,7 @@
                             {"T16q_projects_STAFF|id_staff|id_staff|::Name_Full":this.selectedStaff.fieldData.Name_Full},
                             {"T16q_projects_STAFF::ID_staff":this.selectedStaff.fieldData.ID_staff}
                         );
-                        this.shadowRoot.querySelector('#staffDialog').toggle();
+                        this.shadowRoot.querySelector('#staffsDialog').toggle();
                     }
                 }
                 _selectedInvestigatorChanged(item){
@@ -615,7 +609,7 @@
                             {"PRJ_Projects_ING_Investigators::Investigator":this.selectedInvestigator.fieldData.Name_Full},
                             {"PRJ_Projects_ING_Investigators::id_investigator":this.selectedInvestigator.fieldData.ID_investigator}
                         );
-                        this.shadowRoot.querySelector('#investigatorDialog').toggle();
+                        this.shadowRoot.querySelector('#investigatorsDialog').toggle();
                     }
                 }
 
@@ -627,14 +621,12 @@
                             {"PRJ_Projects_CON_Contacts::Contact":this.selectedContact.fieldData.Name_First+' '+this.selectedContact.fieldData.Name_Last},
                             {"PRJ_Projects_CON_Contacts::id_contact":this.selectedContact.fieldData.ID_Contact}
                         );
-                        this.shadowRoot.querySelector('#contactDialog').toggle();
+                        this.shadowRoot.querySelector('#contactsDialog').toggle();
                     }
                 }
 
                 _recordIdChanged(recordId, tokenData){
-                    console.log(recordId);
                     if(recordId && tokenData) {
-                        console.log(recordId);
                         this.$.getProjectsDetail.headers = {'fm-data-token': tokenData.token};
                         this.$.getProjectsDetail.generateRequest();
                     }
@@ -748,6 +740,15 @@
                 }
                 selectInput(e){
                     var id = e.target.getAttribute('field-name')+'Dialog';
+
+                    this.dispatchEvent(new CustomEvent('lazy-load-page',
+                        {
+                            bubbles: true,
+                            composed: true,
+                            detail: {
+                                name: e.target.getAttribute('field-name')
+                            }
+                        }));
                     this.shadowRoot.querySelector('#' + id).toggle();
                 }
 

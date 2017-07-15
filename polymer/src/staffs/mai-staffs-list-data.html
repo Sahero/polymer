@@ -3,7 +3,7 @@
 <dom-module id="mai-staffs-list-data">
 
     <template>
-        <mai-get-list-data layout-name="[[staffsLayout]]"
+        <mai-get-list-data layout-name="[[layoutName]]"
                            list-data="{{staffsData}}"
                            selected-item="{{selectedItem}}"
                            filter-query="{{filterQuery}}"
@@ -25,9 +25,9 @@
                             type: Array,
                             notify: true,
                         },
-                        staffsLayout:{
+                        layoutName:{
                             type: String,
-                            value: 'L131_STAFF_List_View'
+                            value: 'staffs'
                         },
                         selectedItem: {
                             type: Object,

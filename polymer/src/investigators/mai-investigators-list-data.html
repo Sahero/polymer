@@ -3,7 +3,7 @@
 <dom-module id="mai-investigators-list-data">
 
     <template>
-        <mai-get-list-data layout-name="[[investigatorsLayout]]"
+        <mai-get-list-data layout-name="[[layoutName]]"
                            list-data="{{investigatorsData}}"
                            selected-item="{{selectedItem}}"
                            filter-query="{{filterQuery}}"
@@ -25,9 +25,9 @@
                             type: Array,
                             notify: true,
                         },
-                        investigatorsLayout: {
+                        layoutName: {
                             type: String,
-                            value: 'L131_INVESTIGATOR_List_View'
+                            value: 'investigators'
                         },
                         selectedItem: {
                             type: Object,

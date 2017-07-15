@@ -1,5 +1,4 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="styles/mai-shared-styles.html">
 
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
@@ -39,7 +38,7 @@
 
         <app-toolbar>
             <iron-selector class="view-toolbar" selected="[[projectsData.page]]"  attr-for-selected="name" role="navigation">
-                <a name="detail" href="[[route.prefix]]/detail">
+                <a name="detail" id="projectsDetailLink" href="[[route.prefix]]/detail">
                     <paper-fab mini icon="mai:content-copy"></paper-fab>
                     Detail view</a>
                 <a name="list" href="[[route.prefix]]/list">
@@ -74,7 +73,7 @@
                                    current-page="{{currentPage}}"
                                    add-new="{{addNew}}"
                 ></mai-projects-list>
-                <mai-projects-detail name="detail" record-id="{{selectedItem.recordId}}"></mai-projects-detail>
+                <mai-projects-detail id="projectDetails" name="detail" record-id="{{selectedItem.recordId}}"></mai-projects-detail>
 
             </iron-pages>
         </div>
@@ -110,18 +109,19 @@
                     };
                 }
 
+
                 _onProjectsDataChanged(projectsData ,oldProjectsData){
+                    if(projectsData===true || (JSON.stringify(projectsData) === JSON.stringify(oldProjectsData))){
+                        return;
+                    }
+
                     if(this.visible) {
                         /*To check if the current view page is visible or not*/
-                        if(projectsData===true || (JSON.stringify(projectsData) === JSON.stringify(oldProjectsData))){
-                            return;
-                        }
-
                         if(projectsData.page === undefined || projectsData.page ===""){
-                            this.projectsData.page = projectsData.page || "detail";
+                            this.projectsData.page = "detail";
                             this.set('route.path',this.projectsData.page);
                         }
-                        else{
+                        //else{
                             this._computeShouldShowHeaders();
                             this.dispatchEvent(new CustomEvent('change-view',
                                 {
@@ -133,29 +133,34 @@
                                     }
                                 }));
 
-                            if(!this.selectedItem){
-                                return;
-                            }
-
                             if(this.tailroute.path){
                                 this.selectedItem.recordId = this.tailroute.path.replace("/","");
                             }
+
                             if(this.projectsData.page === 'detail' && this.selectedItem.recordId !== null){
                                 this.set('tailroute.path', this.selectedItem.recordId);
                                 this.notifyPath('tailroute.path');
                                 this.notifyPath('route.path');
                             }
-                        }
+                        //}
                     }
 
                 }
 
-                /*ready(){
+                ready(){
                     super.ready();
-                    this.addEventListener('project-item-selected', e => this._onProjectItemSelected(e));
+                    //this.addEventListener('project-item-selected', e => this._onProjectItemSelected(e));
+                    this.addEventListener('add-new-item', e => this._onNewItem(e));
                 }
 
-                _onProjectItemSelected(event){
+                _onNewItem(event){
+                    let detail = event.detail;
+
+                    this.selectedItem.recordId = detail.recordId;
+                    this.$.projectDetails.recordId = detail.recordId;
+                    this.$.projectsDetailLink.click();
+                }
+                /*_onProjectItemSelected(event){
                     let detail = event.detail;
                     this.selectedData = detail.data;
                     this.recordIdData.recordId = this.selectedData.recordId;

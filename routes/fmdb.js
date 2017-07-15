@@ -268,7 +268,8 @@ router.post('/getList/:layoutname/:page/:numofrecords', function(req, res) {
 //to create new records
 router.post('/add/:layoutname', function(req, res) {
     if(env=="development"){
-        res.json("success dev");
+        console.log(req.params.layoutname);
+        res.json({recordId:'716788'});
         return;
     }
 

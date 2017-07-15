@@ -102,7 +102,6 @@
 
             .group-tabs paper-tab[link] {
                 color: gray;
-                padding-right: 5px;
             }
             paper-tab.iron-selected{
                 color: #4285f4;
@@ -117,6 +116,7 @@
             .iron-selected > .counts{
                 font-size:14px;
                 color: #4285f4;
+                padding-right: 5px;
             }
             .note-details{
                 align-self: center;
@@ -132,10 +132,13 @@
                 font-size: 11px;
                 padding: 0;
                 border: none;
+                max-height: 200px;
             }
             iron-list.box-spacing{
                 flex-grow: 0;
             }
+
+
         </style>
     </template>
 </dom-module>

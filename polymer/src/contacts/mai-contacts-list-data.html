@@ -3,7 +3,7 @@
 <dom-module id="mai-contacts-list-data">
 
     <template>
-        <mai-get-list-data layout-name="[[contactsLayout]]"
+        <mai-get-list-data layout-name="[[layoutName]]"
                            list-data="{{contactsData}}"
                            selected-item="{{selectedItem}}"
                            filter-query="{{filterQuery}}"
@@ -25,9 +25,9 @@
                             type: Array,
                             notify: true,
                         },
-                        contactsLayout:{
+                        layoutName:{
                             type: String,
-                            value: 'L31_CONTACTS_List_View'
+                            value: 'contacts'
                         },
                         selectedItem: {
                             type: Object,

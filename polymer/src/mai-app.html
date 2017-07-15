@@ -213,7 +213,7 @@
                 fallback-selection="view404"
                 selected-attribute="visible"
                 role="main">
-          <mai-main name="main"></mai-main>
+          <mai-main name=""></mai-main>
           <mai-claimants name="claimants" page="{{routeData.page}}" route="{{routeTail}}" ></mai-claimants>
           <mai-contacts name="contacts" page="{{routeData.page}}" route="{{routeTail}}" ></mai-contacts>
           <mai-investigators name="investigators" page="{{routeData.page}}" route="{{routeTail}}" ></mai-investigators>
@@ -269,6 +269,7 @@
           constructor() {
               super();
               this.rootPattern = (new URL(this.rootPath)).pathname;
+
           }
 
           _routePageChanged(page) {
@@ -285,16 +286,9 @@
 
           _pageChanged(page, oldPage) {
               // Load page import on demand. Show 404 page if fails
-
               this._ensureLazyLoaded();
-
               var resolvedPageUrl = this.resolveUrl('mai-'+ page + '.html');
-
-              Polymer.importHref(
-                  resolvedPageUrl,
-                  null,
-                  this._showPage404.bind(this),
-                  true);
+              Polymer.importHref( resolvedPageUrl, null, this._showPage404.bind(this), true);
 
               document.title = 'MAI '+page.toUpperCase();
               this.drawerOpened = false;
@@ -348,9 +342,15 @@
                   //console.log(this.$.tokenStorage.zeroValue());
               }
               this.addEventListener('change-view', e => this._onChangeView(e));
+              this.addEventListener('lazy-load-page', e => this._onLazyLoadPage(e));
               //console.log(this.menus);
           }
 
+          _onLazyLoadPage(event){
+              var resolvedPageUrl = this.resolveUrl(event.detail.name+'/mai-'+event.detail.name+'-list-data.html');
+              //console.log(resolvedPageUrl);
+              Polymer.importHref(resolvedPageUrl, null, null, true);
+          }
 
           _onChangeView(event){
             //console.log(event.detail);
@@ -358,14 +358,8 @@
               var resolvedPageUrl = this.resolveUrl(detail.name+'/mai-'+ detail.name+'-'+detail.view + '.html');
               //var resolvedPageUrl = this.resolveUrl(detail.name+'/mai-'+ detail.view + '.html');
               //console.log(resolvedPageUrl);
-              Polymer.importHref(
-                  resolvedPageUrl,
-                  null,
-                  null,
-                  true);
-
+              Polymer.importHref(resolvedPageUrl, null, null, true);
               document.title = 'MAI '+ detail.name+' '+detail.view;
-              //event.
           }
 
           _computeShouldShowTabs(smallScreen) {

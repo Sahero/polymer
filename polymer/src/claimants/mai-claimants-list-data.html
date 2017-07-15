@@ -3,7 +3,7 @@
 <dom-module id="mai-claimants-list-data">
 
     <template>
-        <mai-get-list-data layout-name="[[claimantsLayout]]"
+        <mai-get-list-data layout-name="[[layoutName]]"
                            list-data="{{claimantsData}}"
                            selected-item="{{selectedItem}}"
                            filter-query="{{filterQuery}}"
@@ -25,9 +25,9 @@
                             type: Array,
                             notify: true,
                         },
-                        claimantsLayout:{
+                        layoutName:{
                             type:String,
-                            value:'L131_CLAIMANT_List_View'
+                            value:'claimants'
                         },
                         selectedItem: {
                             type: Object,

@@ -79,6 +79,7 @@
 
                     if(addNew && !(addNew===oldAddNew)){
                         this.$.addNew.generateRequest();
+                        this.addNew = false;
                     }
                 }
 
@@ -114,7 +115,7 @@
                 listLoaded(data) {
                     if(data.detail.response!==null) {
                         this.listData = data.detail.response;
-                        //console.log(this.selectedItem);
+                        //console.log(this.layoutName);
                         //console.log('recordId' in this.selectedItem);
                         if(this.selectedItem && 'recordId' in this.selectedItem) {
                             for (var i = 0; i < this.listData.length; i++) {
@@ -145,21 +146,61 @@
 
                 getNewRecordId(data){
                     if(data.detail.response!==null) {
-                       console.log(data.detail.response);
-                       //this.addNew.recordId = data.detail.response.recordId;
+                       //console.log(data.detail.response);
+                       //console.log(this.selectedItem);
+                       this.selectedItem.recordId = data.detail.response.recordId;
+                       /*TODO: Load newly added item to selectedItem*/
+
+                        this.dispatchEvent(new CustomEvent('add-new-item',
+                            {
+                                bubbles: true,
+                                composed: true,
+                                detail: {
+                                    name: this._getLayout(this.layoutName),
+                                    recordId: data.detail.response.recordId
+                                }
+                            }));
                     }
                 }
 
+                _getLayout(flag){
+                    var layout='';
+                    switch(flag){
+                        case 'claimants':
+                            layout = 'L131_CLAIMANT_List_View';
+                            break;
+                        case 'clients':
+                            layout = 'L11_ACCOUNTS_List_View';
+                            break;
+                        case 'contacts':
+                            layout = 'L31_CONTACTS_List_View';
+                            break;
+                        case 'investigators':
+                            layout = 'L131_INVESTIGATOR_List_View';
+                            break;
+                        case 'projects':
+                            layout = 'L121_PROJECTS_List_View';
+                            break;
+                        case 'staffs':
+                            layout = 'L131_STAFF_List_View';
+                            break;
+                        case 'tasks':
+                            layout = 'L141_TIMESHEETS_List_View';
+                            break;
+                    }
+                    return layout;
+                }
                 _computeURL() {
-                    return `https://localhost:3000/fm/getList/${this.layoutName}/${this.currentPage}/${this.pageSize}`;
+
+                    return `https://localhost:3000/fm/getList/${this._getLayout(this.layoutName)}/${this.currentPage}/${this.pageSize}`;
                 }
 
                 _computeURLforRecordCount(){
-                    return `https://localhost:3000/fm/getRecordCount/${this.layoutName}`;
+                    return `https://localhost:3000/fm/getRecordCount/${this._getLayout(this.layoutName)}`;
                 }
 
                 _computeURLforNewRecord(){
-                    return `https://localhost:3000/fm/add/${this.layoutName}`;
+                    return `https://localhost:3000/fm/add/${this._getLayout(this.layoutName)}`;
                 }
 
             }
