@@ -90,27 +90,28 @@
                 static get properties(){
                     return {
                         projectsData: {
-                            type:Object,
-                            notify:true,
-                            observer:'_onProjectsDataChanged'},
+                            type: Object,
+                            notify: true,
+                            observer: '_onProjectsDataChanged'
+                        },
                         visible: {
                             type: Boolean,
                             notify: true,
                             observer: '_onProjectsDataChanged'
                         },
-                        _shouldShowDetailHeaders : {
+                        _shouldShowDetailHeaders: {
                             type: Boolean,
                             value: false
                         },
-                        _shouldShowListHeaders : {
+                        _shouldShowListHeaders: {
                             type: Boolean,
                             value: false
                         }
                     };
                 }
 
-
                 _onProjectsDataChanged(projectsData ,oldProjectsData){
+
                     if(projectsData===true || (JSON.stringify(projectsData) === JSON.stringify(oldProjectsData))){
                         return;
                     }
@@ -132,11 +133,13 @@
                                         view: projectsData.page
                                     }
                                 }));
-
+                        //console.log(this.tailroute);
+                        //console.log(this.selectedItem);
                             if(this.tailroute.path){
                                 this.selectedItem.recordId = this.tailroute.path.replace("/","");
+                                //this.$.projectDetails.recordId = this.selectedItem.recordId;
                             }
-
+                        //console.log(this.projectsData);
                             if(this.projectsData.page === 'detail' && this.selectedItem.recordId !== null){
                                 this.set('tailroute.path', this.selectedItem.recordId);
                                 this.notifyPath('tailroute.path');
@@ -155,7 +158,6 @@
 
                 _onNewItem(event){
                     let detail = event.detail;
-
                     this.selectedItem.recordId = detail.recordId;
                     this.$.projectDetails.recordId = detail.recordId;
                     this.$.projectsDetailLink.click();

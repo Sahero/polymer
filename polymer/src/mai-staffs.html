@@ -5,7 +5,7 @@
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 
-
+<link rel="import" href="staffs/mai-staffs-list-data.html">
 <dom-module id="mai-staffs">
     <template>
 
@@ -23,14 +23,21 @@
         <app-route
                 route="{{tailroute}}"
                 pattern="/staffs/detail/:recordId"
-                data="{{recordIdData}}"
+                data="{{selectedItem}}"
         ></app-route>
 
+        <mai-staffs-list-data selected-item="{{selectedItem}}"
+                                projects-data="{{staffsList}}"
+                                filter-query="{{filterQuery}}"
+                                pages="{{pages}}"
+                                current-page="{{currentPage}}"
+                                add-new="{{addNew}}"
+        ></mai-staffs-list-data>
 
         <app-toolbar>
             <iron-selector class="view-toolbar" selected="[[staffsData.page]]"  attr-for-selected="name" role="navigation">
 
-                <a name="detail" href="[[route.prefix]]/detail">
+                <a name="detail" id="staffsDetailLink" href="[[route.prefix]]/detail">
                     <paper-fab mini icon="mai:content-copy"></paper-fab>
                     Detail view</a>
                 <a name="list" href="[[route.prefix]]/list">

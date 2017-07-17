@@ -30,6 +30,15 @@
                 handle-as="json"
                 on-response="getNewRecordId"
         ></iron-ajax>
+
+        <iron-ajax
+                id="getSelectedItem"
+                method="GET"
+                headers$='{"FM-data-token": "[[tokenData.token]]"}'
+                handle-as="json"
+                on-response="getSelected"
+        ></iron-ajax>
+
     </template>
 
     <script>
@@ -50,7 +59,7 @@
                         },
                         selectedItem: {
                             type: Object,
-                            notify: true
+                            notify: true,
                         },
                         method: {
                             type: String,
@@ -112,18 +121,27 @@
 
                 }
 
+                getSelectedItemData(recordId){
+                    this.$.getSelectedItem.url = this._computeURLForSelectedItem(recordId);
+                    this.$.getSelectedItem.headers = {'fm-data-token': this.tokenData.token};
+                    this.$.getSelectedItem.generateRequest();
+                }
+
+                _selectedItemChanged(selectedItem, tokenData){
+                    if(this.selectedItem && 'recordId' in this.selectedItem) {
+                        this.$.getSelectedItem.url = this._computeURLForSelectedItem(this.selectedItem.recordId);
+                        this.$.getSelectedItem.headers = {'fm-data-token': this.tokenData.token};
+                        this.$.getSelectedItem.generateRequest();
+                        console.log(this.selectedItem);
+                    }
+                }
+
                 listLoaded(data) {
                     if(data.detail.response!==null) {
                         this.listData = data.detail.response;
-                        //console.log(this.layoutName);
-                        //console.log('recordId' in this.selectedItem);
+                        //console.log(this.listData);
                         if(this.selectedItem && 'recordId' in this.selectedItem) {
-                            for (var i = 0; i < this.listData.length; i++) {
-                                if (this.listData[i].recordId == this.selectedItem.recordId) {
-                                    this.selectedItem = this.listData[i];
-                                    break;
-                                }
-                            }
+                            this.getSelectedItemData(this.selectedItem.recordId);
                         }
                         else{
                             this.selectedItem = this.listData[0];
@@ -146,61 +164,39 @@
 
                 getNewRecordId(data){
                     if(data.detail.response!==null) {
-                       //console.log(data.detail.response);
-                       //console.log(this.selectedItem);
-                       this.selectedItem.recordId = data.detail.response.recordId;
-                       /*TODO: Load newly added item to selectedItem*/
-
+                        this.getSelectedItemData(data.detail.response.recordId);
                         this.dispatchEvent(new CustomEvent('add-new-item',
                             {
                                 bubbles: true,
                                 composed: true,
                                 detail: {
-                                    name: this._getLayout(this.layoutName),
+                                    name: _getLayout(this.layoutName).list,
                                     recordId: data.detail.response.recordId
                                 }
                             }));
                     }
                 }
 
-                _getLayout(flag){
-                    var layout='';
-                    switch(flag){
-                        case 'claimants':
-                            layout = 'L131_CLAIMANT_List_View';
-                            break;
-                        case 'clients':
-                            layout = 'L11_ACCOUNTS_List_View';
-                            break;
-                        case 'contacts':
-                            layout = 'L31_CONTACTS_List_View';
-                            break;
-                        case 'investigators':
-                            layout = 'L131_INVESTIGATOR_List_View';
-                            break;
-                        case 'projects':
-                            layout = 'L121_PROJECTS_List_View';
-                            break;
-                        case 'staffs':
-                            layout = 'L131_STAFF_List_View';
-                            break;
-                        case 'tasks':
-                            layout = 'L141_TIMESHEETS_List_View';
-                            break;
+                getSelected(data){
+                    if(data.detail.response!==null) {
+                        this.selectedItem = data.detail.response[0];
                     }
-                    return layout;
                 }
-                _computeURL() {
 
-                    return `https://localhost:3000/fm/getList/${this._getLayout(this.layoutName)}/${this.currentPage}/${this.pageSize}`;
+                _computeURL() {
+                    return `https://localhost:3000/fm/getList/${_getLayout(this.layoutName).list}/${this.currentPage}/${this.pageSize}`;
+                }
+
+                _computeURLForSelectedItem(recordId) {
+                    return `https://localhost:3000/fm/getDetail/${_getLayout(this.layoutName).list}/${recordId}`;
                 }
 
                 _computeURLforRecordCount(){
-                    return `https://localhost:3000/fm/getRecordCount/${this._getLayout(this.layoutName)}`;
+                    return `https://localhost:3000/fm/getRecordCount/${_getLayout(this.layoutName).list}`;
                 }
 
                 _computeURLforNewRecord(){
-                    return `https://localhost:3000/fm/add/${this._getLayout(this.layoutName)}`;
+                    return `https://localhost:3000/fm/add/${_getLayout(this.layoutName).list}`;
                 }
 
             }

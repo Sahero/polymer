@@ -98,7 +98,7 @@
 
         <paper-toast id="toastMessage" class="fit-bottom" duration="5000"></paper-toast>
 
-        <div class="layout horizontal wrap around-justified">
+        <div class="layout horizontal wrap start-justified">
             <!--<div class="" >-->
             <iron-list id="list" class="box-spacing" items="{{projectDetail}}" as="project" scroll-target="document">
                 <template>
@@ -157,105 +157,7 @@
                 </template>
             </iron-list>
 
-            <!-- Popup selection for company/client/account -->
-            <paper-dialog class="paperDialog" id="clientsDialog">
-                <div class="dialogHeader">
-                    <h4>Clients Search</h4>
-                    <paper-icon-button icon="mai:close" dialog-dismiss></paper-icon-button>
-                </div>
-                <vaadin-grid id="companySelector" items="[[clientsData]]" class="list-view-datatable"
-                             active-item="{{selectedCompany}}">
-                    <vaadin-grid-column>
-                        <template class="header">Name</template>
-                        <template>[[item.fieldData.Account]]</template>
-                    </vaadin-grid-column>
-                    <vaadin-grid-column>
-                        <template class="header">Department</template>
-                        <template>[[item.fieldData.Account_Type]]</template>
-                    </vaadin-grid-column>
-                    <vaadin-grid-column>
-                        <template class="header">Status</template>
-                        <template>[[item.fieldData.Status]]</template>
-                    </vaadin-grid-column>
-                </vaadin-grid>
-            </paper-dialog>
-            <!-- Popup selection for claimants -->
-            <paper-dialog class="paperDialog" id="claimantsDialog">
-                <div class="dialogHeader">
-                    <h4>Claimant Search</h4>
-                    <paper-icon-button icon="mai:close" dialog-dismiss></paper-icon-button>
-                </div>
-                <vaadin-grid id="claimantSelector" items="[[claimantsData]]" class="list-view-datatable"
-                             active-item="{{selectedClaimant}}">
-                    <vaadin-grid-column>
-                        <template class="header">Name</template>
-                        <template>[[item.fieldData.Name_Full]]</template>
-                    </vaadin-grid-column>
-                    <vaadin-grid-column>
-                        <template class="header">Email</template>
-                        <template>[[item.fieldData.Email]]</template>
-                    </vaadin-grid-column>
-                </vaadin-grid>
-            </paper-dialog>
-
-            <!-- Popup selection for staffs -->
-            <paper-dialog class="paperDialog" id="staffsDialog">
-                <div class="dialogHeader">
-                    <h4>Staff Search</h4>
-                    <paper-icon-button icon="mai:close" dialog-dismiss></paper-icon-button>
-                </div>
-                <vaadin-grid id="staffSelector" items="[[staffsData]]" class="list-view-datatable"
-                             active-item="{{selectedStaff}}">
-                    <vaadin-grid-column>
-                        <template class="header">Name</template>
-                        <template>[[item.fieldData.Name_Full]]</template>
-                    </vaadin-grid-column>
-                    <vaadin-grid-column>
-                        <template class="header">Email</template>
-                        <template>[[item.fieldData.Email]]</template>
-                    </vaadin-grid-column>
-                </vaadin-grid>
-            </paper-dialog>
-
-            <!-- Popup selection for investigators -->
-            <paper-dialog class="paperDialog" id="investigatorsDialog">
-                <div class="dialogHeader">
-                    <h4>Investigators Search</h4>
-                    <paper-icon-button icon="mai:close" dialog-dismiss></paper-icon-button>
-                </div>
-                <vaadin-grid id="investigatorSelector" items="[[investigatorsData]]" class="list-view-datatable"
-                             active-item="{{selectedInvestigator}}">
-                    <vaadin-grid-column>
-                        <template class="header">Name</template>
-                        <template>[[item.fieldData.Name_Full]]</template>
-                    </vaadin-grid-column>
-                    <vaadin-grid-column>
-                        <template class="header">Email</template>
-                        <template>[[item.fieldData.Email]]</template>
-                    </vaadin-grid-column>
-                </vaadin-grid>
-            </paper-dialog>
-
-            <!-- Popup selection for contacts -->
-            <paper-dialog class="paperDialog" id="contactsDialog">
-                <div class="dialogHeader">
-                    <h4>Contacts Search</h4>
-                    <paper-icon-button icon="mai:close" dialog-dismiss></paper-icon-button>
-                </div>
-                <vaadin-grid id="contactSelector" items="[[contactsData]]" class="list-view-datatable"
-                             active-item="{{selectedContact}}">
-                    <vaadin-grid-column>
-                        <template class="header">Name</template>
-                        <template>[[item.fieldData.Name_First]] [[item.fieldData.Name_Last]]</template>
-                    </vaadin-grid-column>
-                    <vaadin-grid-column>
-                        <template class="header">Email</template>
-                        <template>[[item.fieldData.Email]]</template>
-                    </vaadin-grid-column>
-                </vaadin-grid>
-            </paper-dialog>
-
-            <div class="group-staff box-spacing border-lightgray">
+            <div class="group-staffs box-spacing border-lightgray">
                 <div class="group-header">
                     <div class="box-container">Staff</div>
                     <div class="all-list border-lightgray layout vertical">
@@ -302,7 +204,7 @@
                 </div>
             </div>
 
-            <div class="group-staff box-spacing border-lightgray">
+            <div class="group-contacts box-spacing border-lightgray">
                 <div class="group-header">
                     <div class="box-container">Contacts</div>
                     <div class="all-list border-lightgray layout vertical">
@@ -432,7 +334,7 @@
             </div>
             <iron-list class="box-spacing" items="{{projectDetail}}" as="project" scroll-target="document">
                 <template>
-                    <div class="group-item border-lightgray" style="max-width: 170px;">
+                    <div class="group-item group-dates border-lightgray">
                         <div class="group-header">
                             <div class="box-container">Dates</div>
                             <div class="group-item border-lightgray" style="display:table;width:96%">
@@ -509,6 +411,104 @@
                 </template>
             </iron-list>
         </div>
+
+        <!-- Popup selection for company/client/account -->
+        <paper-dialog class="paperDialog" id="clientsDialog">
+            <div class="dialogHeader">
+                <h4>Clients Search</h4>
+                <paper-icon-button icon="mai:close" dialog-dismiss></paper-icon-button>
+            </div>
+            <vaadin-grid id="companySelector" items="[[clientsData]]" class="list-view-datatable"
+                         active-item="{{selectedCompany}}">
+                <vaadin-grid-column>
+                    <template class="header">Name</template>
+                    <template>[[item.fieldData.Account]]</template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">Department</template>
+                    <template>[[item.fieldData.Account_Type]]</template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">Status</template>
+                    <template>[[item.fieldData.Status]]</template>
+                </vaadin-grid-column>
+            </vaadin-grid>
+        </paper-dialog>
+        <!-- Popup selection for claimants -->
+        <paper-dialog class="paperDialog" id="claimantsDialog">
+            <div class="dialogHeader">
+                <h4>Claimant Search</h4>
+                <paper-icon-button icon="mai:close" dialog-dismiss></paper-icon-button>
+            </div>
+            <vaadin-grid id="claimantSelector" items="[[claimantsData]]" class="list-view-datatable"
+                         active-item="{{selectedClaimant}}">
+                <vaadin-grid-column>
+                    <template class="header">Name</template>
+                    <template>[[item.fieldData.Name_Full]]</template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">Email</template>
+                    <template>[[item.fieldData.Email]]</template>
+                </vaadin-grid-column>
+            </vaadin-grid>
+        </paper-dialog>
+
+        <!-- Popup selection for staffs -->
+        <paper-dialog class="paperDialog" id="staffsDialog">
+            <div class="dialogHeader">
+                <h4>Staff Search</h4>
+                <paper-icon-button icon="mai:close" dialog-dismiss></paper-icon-button>
+            </div>
+            <vaadin-grid id="staffSelector" items="[[staffsData]]" class="list-view-datatable"
+                         active-item="{{selectedStaff}}">
+                <vaadin-grid-column>
+                    <template class="header">Name</template>
+                    <template>[[item.fieldData.Name_Full]]</template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">Email</template>
+                    <template>[[item.fieldData.Email]]</template>
+                </vaadin-grid-column>
+            </vaadin-grid>
+        </paper-dialog>
+
+        <!-- Popup selection for investigators -->
+        <paper-dialog class="paperDialog" id="investigatorsDialog">
+            <div class="dialogHeader">
+                <h4>Investigators Search</h4>
+                <paper-icon-button icon="mai:close" dialog-dismiss></paper-icon-button>
+            </div>
+            <vaadin-grid id="investigatorSelector" items="[[investigatorsData]]" class="list-view-datatable"
+                         active-item="{{selectedInvestigator}}">
+                <vaadin-grid-column>
+                    <template class="header">Name</template>
+                    <template>[[item.fieldData.Name_Full]]</template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">Email</template>
+                    <template>[[item.fieldData.Email]]</template>
+                </vaadin-grid-column>
+            </vaadin-grid>
+        </paper-dialog>
+
+        <!-- Popup selection for contacts -->
+        <paper-dialog class="paperDialog" id="contactsDialog">
+            <div class="dialogHeader">
+                <h4>Contacts Search</h4>
+                <paper-icon-button icon="mai:close" dialog-dismiss></paper-icon-button>
+            </div>
+            <vaadin-grid id="contactSelector" items="[[contactsData]]" class="list-view-datatable"
+                         active-item="{{selectedContact}}">
+                <vaadin-grid-column>
+                    <template class="header">Name</template>
+                    <template>[[item.fieldData.Name_First]] [[item.fieldData.Name_Last]]</template>
+                </vaadin-grid-column>
+                <vaadin-grid-column>
+                    <template class="header">Email</template>
+                    <template>[[item.fieldData.Email]]</template>
+                </vaadin-grid-column>
+            </vaadin-grid>
+        </paper-dialog>
     </template>
 
     <script>
@@ -626,6 +626,7 @@
                 }
 
                 _recordIdChanged(recordId, tokenData){
+                    console.log(recordId);
                     if(recordId && tokenData) {
                         this.$.getProjectsDetail.headers = {'fm-data-token': tokenData.token};
                         this.$.getProjectsDetail.generateRequest();
@@ -760,8 +761,7 @@
 
                 _computeURL(recordId){
                     console.log(recordId);
-                    return `https://localhost:3000/fm/getDetail/L120_Projects_Data_entry/${recordId}`;
-                    //return `https://localhost:3000/fm/getLocalProjectsDetail/${recordId}`;
+                    return `https://localhost:3000/fm/getDetail/${_getLayout('projects').detail}/${recordId}`;
                 }
 
                 detailLoaded(data){
