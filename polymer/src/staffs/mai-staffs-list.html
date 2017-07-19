@@ -1,18 +1,19 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="mai-staffs-list-data.html">
 <link rel="import" href="../mai-page-layout.html">
 
 <dom-module id="mai-staffs-list">
     <template>
-        <style include="mai-datatable-styles">
+        <style include="mai-datatable-styles mai-shared-styles">
         </style>
 
-        <mai-staffs-list-data selected-item="{{selectedItem}}"
-                              staffs-data="{{staffsData}}"
-                              filter-query="{{filterQuery}}"
-                              pages="{{pages}}"
-                              current-page="{{currentPage}}"
-        ></mai-staffs-list-data>
+        <div class="filter-button">
+            <iron-selector attr-for-selected="field-name" selected="none">
+                <paper-button field-name="new" on-tap="_onAddClick">
+                    <iron-icon icon="mai:add-circle-outline"></iron-icon>
+                    Add new staff
+                </paper-button>
+            </iron-selector>
+        </div>
 
         <vaadin-grid items="{{staffsData}}" id="staffsListViewDatatable" class="list-view-datatable" active-item="{{selectedItem}}" >
 
@@ -65,24 +66,38 @@
                         notify:true
                     },
                     selectedItem: {
-                        observer: '_selectedItemChanged'
-                    }
+                        observer: '_selectedItemChanged',
+                        type: Object,
+                        notify: true
+                    },
+                    filterQuery:{
+                        type:String,
+                        notify:true
+                    },
+                    pages: { type: Array, notify: true},
+                    currentPage: { type:Number, value:0, notify:true},
+                    addNew: { type:Boolean, notify:true}
                 }
             }
 
             _selectedItemChanged(item){
+                console.log(item);
                 if(item) {
+                    console.log(1);
                     this.$.staffsListViewDatatable.selectedItems = item ? [item] : [];
-
-                    this.dispatchEvent(new CustomEvent('staff-item-selected',
+                    /*this.dispatchEvent(new CustomEvent('staff-item-selected',
                         {
                             bubbles: true,
                             composed: true,
                             detail: {
                                 data: this.selectedItem
                             }
-                        }));
+                        }));*/
                 }
+            }
+
+            _onAddClick(e){
+                this.addNew = true;
             }
 
         }

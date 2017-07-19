@@ -27,7 +27,7 @@
         ></app-route>
 
         <mai-staffs-list-data selected-item="{{selectedItem}}"
-                                projects-data="{{staffsList}}"
+                                staffs-data="{{staffsList}}"
                                 filter-query="{{filterQuery}}"
                                 pages="{{pages}}"
                                 current-page="{{currentPage}}"
@@ -47,10 +47,10 @@
                 <dom-if if="[[_shouldShowDetailHeaders]]">
                     <template>
                         <div class="detailsHeader">
-                            <div># [[selectedData.fieldData.ID_staff]]&nbsp;</div>
-                            <div>[[selectedData.fieldData.Name_First]] [[selectedData.fieldData.Name_Last]]</div>
+                            <div># [[selectedItem.fieldData.ID_staff]]&nbsp;</div>
+                            <div>[[selectedItem.fieldData.Name_First]] [[selectedItem.fieldData.Name_Last]]</div>
                             <div>&nbsp;|&nbsp;</div>
-                            <div style="font-style: italic">[[selectedData.fieldData.Status]]</div>
+                            <div style="font-style: italic">[[selectedItem.fieldData.Status]]</div>
                         </div>
                     </template>
                 </dom-if>
@@ -59,8 +59,15 @@
 
         <iron-pages selected="[[staffsData.page]]" attr-for-selected="name">
 
-            <mai-staffs-list name="list"></mai-staffs-list>
-            <mai-staffs-detail id="staffDetailView" name="detail" recordId="{{recordIdData.recordId}}"></mai-staffs-detail>
+            <mai-staffs-list name="list"
+                           selected-item="{{selectedItem}}"
+                           staffs-data="{{staffsList}}"
+                           filter-query="{{filterQuery}}"
+                           pages="{{pages}}"
+                           current-page="{{currentPage}}"
+                           add-new="{{addNew}}"
+            ></mai-staffs-list>
+            <mai-staffs-detail id="staffDetails" name="detail" record-id="{{selectedItem.recordId}}"></mai-staffs-detail>
 
         </iron-pages>
 
@@ -76,10 +83,7 @@
                         staffsData: {
                             type:Object,
                             notify:true,
-                            observer:'_onStaffsDataChanged'},
-                        selectedData: {
-                            type:Object,
-                            notify:true,
+                            observer:'_onStaffsDataChanged'
                         },
                         visible: {
                             type: Boolean,
@@ -94,20 +98,17 @@
                 }
 
                 _onStaffsDataChanged(staffsData,oldStaffsData) {
-
+                    /*To check if the current view page is visible or not*/
+                    if(staffsData===true || (JSON.stringify(staffsData) === JSON.stringify(oldStaffsData))){
+                        return;
+                    }
                     if(this.visible) {
-                        /*To check if the current view page is visible or not*/
-                        if(staffsData===true || (JSON.stringify(staffsData) === JSON.stringify(oldStaffsData))){
-                            return;
-                        }
 
                         if ((staffsData.page === undefined || staffsData.page === "")) {
-                            this.staffsData.page = staffsData.page || "detail";
+                            this.staffsData.page = "detail";
                             this.set('route.path', this.staffsData.page);
-                            //this.notifyPath('route.path');
-
                         }
-                        else {
+                        //else {
                             //console.log(staffsData);
                             this._computeShouldShowDetailHeaders();
                             this.dispatchEvent(new CustomEvent('change-view',
@@ -122,33 +123,36 @@
 
 
                             if(this.tailroute.path){
-                                this.recordIdData.recordId = this.tailroute.path.replace("/","");
+                                this.selectedItem.recordId = this.tailroute.path.replace("/","");
                             }
-                            if (this.staffsData.page === 'detail' && this.recordIdData.recordId!==null) {
-                                //console.log(this.recordIdData);
-                                this.$.staffDetailView.recordId = this.recordIdData.recordId;
-                                this.set('tailroute.path', this.recordIdData.recordId);
+                            if (this.staffsData.page === 'detail' && this.selectedItem.recordId!==null) {
+                                this.set('tailroute.path', this.selectedItem.recordId);
                                 this.notifyPath('tailroute.path');
                                 this.notifyPath('route.path');
                             }
-                        }
-
+                     //   }
                     }
-
-
                 }
 
                 ready(){
                     super.ready();
-                    this.addEventListener('staff-item-selected', e => this._onStaffItemSelected(e));
+                    //this.addEventListener('staff-item-selected', e => this._onStaffItemSelected(e));
+                    this.addEventListener('add-new-item', e => this._onNewItem(e));
                 }
 
-                _onStaffItemSelected(event){
+                _onNewItem(event){
+                    let detail = event.detail;
+                    this.selectedItem.recordId = detail.recordId;
+                    this.$.staffDetails.recordId = detail.recordId;
+                    this.$.staffsDetailLink.click();
+                }
+
+                /*_onStaffItemSelected(event){
                     let detail = event.detail;
                     this.selectedData = detail.data;
                     this.recordIdData.recordId = this.selectedData.recordId;
                     this.$.staffDetailView.recordId = this.selectedData.recordId;
-                }
+                }*/
 
                 _computeShouldShowDetailHeaders(){
 
