@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../mai-input.html">
 
 <dom-module id="mai-staffs-detail">
 
@@ -32,13 +33,16 @@
                 on-response="detailLoaded"
         ></iron-ajax>
 
-        <!--<iron-ajax id="getStaffsDetail"
-                   method="get"
-                   handle-as="json"
-                   url="[[_computeURL(recordId)]]"
-                   headers='{"FM-data-token": "a1e9f08b24c5db58ed9e7c644f66e769ce978b859b7573deb50b"}'
-                   on-response="detailLoaded"
-                   ></iron-ajax>-->
+        <iron-ajax
+                id="updatestaffDetail"
+                method="put"
+                url="[[_computeURL(recordId)]]"
+                headers$='{"FM-data-token": "[[tokenData.token]]"}'
+                handle-as="json"
+                on-response="checkUpdateResult"
+        ></iron-ajax>
+
+        <paper-toast id="toastMessage" class="fit-bottom" duration="5000"></paper-toast>
 
         <iron-list  items="{{staffDetail}}" as="staff" scroll-target="document">
             <template>
@@ -48,10 +52,10 @@
                             <div class="group-item border-lightgray">
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">First</span>
-                                    <span class="secondary staffs-id">[[staff.fieldData.Name_First]]
-                                <span>
-                                [[staff.fieldData.ID_staff]]</span>
-                            </span>
+                                    <span class="secondary staffs-id">
+                                        <mai-input  value="{{staff.fieldData.Name_First::input}}"></mai-input>
+                                        <span>[[staff.fieldData.ID_staff]]</span>
+                                    </span>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Last</span>
@@ -225,18 +229,13 @@
 
     <script>
         (function() {
-            class MyStaffsDetail extends Polymer.Element {
+            class MyStaffsDetail extends MaiMixins(Polymer.Element) {
                 static get is() {
                     return 'mai-staffs-detail';
                 }
                 static get properties() {
                     return {
-                        staffDetail: Array,
-                        /* staffDetail: {
-                         type: Array,
-                         computed: '_computeStaffDetail(recordId)',
-                         notify: true,
-                         },*/
+                        staffDetail: {type: Array, notify: true},
                         recordId: {
                             type: String,
                             // notify:true,
@@ -249,13 +248,40 @@
 
                 static get observers() {
                     return [
-                        '_recordIdChanged(recordId,tokenData)'
+                        '_recordIdChanged(recordId,tokenData)',
+                        //'_onStaffDetailChanged(staffDetail.*)',
+                        '_onDetailChanged(staffDetail.*,"staffDetail")',
                     ]
                 }
 
-                /*_computeStaffDetail(recordId){
-                 this.$.getStaffsDetail.generateRequest();
-                 }*/
+                /*_onStaffDetailChanged(changeDetail) {
+                    //console.log(changeDetail);
+                    if(changeDetail.path !=='staffDetail') {
+                        var path = changeDetail.path;
+                        var fieldName = path.substring(path.lastIndexOf('.') + 1);
+                        var value = changeDetail.value;
+
+                        if(value===null){
+                            value="";
+                        }
+                        this._updateDetails('"'+fieldName+'":"'+value+'"');
+                    }
+                }
+
+                _updateDetails(body){
+                    console.log(body);
+                    this.$.updateStaffsDetail.body = '{"data": {'+body+'}}';
+                    this.$.updateStaffsDetail.generateRequest();
+                }
+
+                checkUpdateResult(data){
+                    var response = data.detail.response;
+                    if(response && response.errorCode !== '0') {
+                        this.$.toastMessage.text = "Error updating: "+response.errorMessage;
+                        this.$.toastMessage.open();
+                    }
+                }*/
+
                 _recordIdChanged(recordId, tokenData){
                     if(recordId && tokenData) {
                         this.$.getStaffsDetail.headers = {'fm-data-token': tokenData.token};

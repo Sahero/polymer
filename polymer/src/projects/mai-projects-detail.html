@@ -82,7 +82,7 @@
         ></iron-ajax>
 
         <iron-ajax
-                id="updateProjectsDetail"
+                id="updateprojectDetail"
                 method="put"
                 url="[[_computeURL(recordId)]]"
                 headers$='{"FM-data-token": "[[tokenData.token]]"}'
@@ -513,7 +513,7 @@
 
     <script>
         (function() {
-            class MaiProjectsDetail extends Polymer.Element {
+            class MaiProjectsDetail extends MaiMixins(Polymer.Element) {
 
                 static get is() {
                     return 'mai-projects-detail';
@@ -559,7 +559,8 @@
                 static get observers() {
                     return [
                         '_recordIdChanged(recordId,tokenData)',
-                        '_onProjectDetailChanged(projectDetail.*)',
+                        //'_onProjectDetailChanged(projectDetail.*)',
+                        '_onDetailChanged(projectDetail.*,"projectDetail")',
                         '_onStaffsChanged(staffs.splices)',
                         '_onInvestigatorsChanged(investigators.splices)',
                         '_onContactsChanged(contacts.splices)',
@@ -567,8 +568,6 @@
                 }
                 showDialog() {
                     this.shadowRoot.querySelector('#dialog').toggle();
-
-
                 }
                 _selectedCompanyChanged(item){
                     if(item) {
@@ -673,13 +672,13 @@
                     }
                 }
 
-                _getDataFromArray(dataList, index, path) {
+                /*_getDataFromArray(dataList, index, path) {
                     //console.log(dataList);
                     if(dataList.value===null){
                         return;
                     }
                     return this.get(path, dataList.base[index]);
-                }
+                }*/
 
                 _onNoteDetailsChanged(e) {
                     this.$.notegrid.expandedItems = [e.detail.value];
@@ -694,7 +693,7 @@
                     return d.getFullYear()+'-'+('0' + (d.getMonth()+1)).slice(-2)+'-'+('0' + (d.getDate())).slice(-2);
                 }
 
-                _onProjectDetailChanged(changeDetail) {
+                /*_onProjectDetailChanged(changeDetail) {
                     //console.log(changeDetail);
                     if(changeDetail.path !=='projectDetail') {
                         var path = changeDetail.path;
@@ -706,30 +705,33 @@
                         }
                         this._updateDetails('"'+fieldName+'":"'+value+'"');
                     }
-                }
+                }*/
 
-                _updateDetails(body){
+                /*_updateDetails(body){
                     //var body = '{"data": {"'+fieldName+'":"'+value+'"}}';
 
-                    /*if(fieldName.toLowerCase().includes("date") && value!=="" && value!==undefined){
+                    /!*if(fieldName.toLowerCase().includes("date") && value!=="" && value!==undefined){
                      if(value.length<10){
                      return;
                      }
                      value = new Date(value);
                      value = ('0' + (value.getMonth()+1)).slice(-2) +'/'+('0' + (value.getDate())).slice(-2)+'/'+ value.getFullYear();
-                     }*/
+                     }*!/
                     console.log(body);
-                    this.$.updateProjectsDetail.body = '{"data": {'+body+'}}';
-                    this.$.updateProjectsDetail.generateRequest();
-                }
 
-                checkUpdateResult(data){
+                    this.shadowRoot.querySelector('#updateProjectsDetail').body = '{"data": {'+body+'}}';
+                    this.shadowRoot.querySelector('#updateProjectsDetail').generateRequest();
+                    /!*this.$.updateProjectsDetail.body = '{"data": {'+body+'}}';
+                    this.$.updateProjectsDetail.generateRequest();*!/
+                }*/
+
+                /*checkUpdateResult(data){
                     var response = data.detail.response;
                     if(response && response.errorCode !== '0') {
                         this.$.toastMessage.text = "Error updating: "+response.errorMessage;
                         this.$.toastMessage.open();
                     }
-                }
+                }*/
 
                 removeAssigned(e){
                     this.splice(e.target.getAttribute('field-name'),e.target.getAttribute('data-index'),1);
@@ -761,7 +763,7 @@
 
                 _computeURL(recordId){
                     console.log(recordId);
-                    return `https://localhost:3000/fm/getDetail/${_getLayout('projects').detail}/${recordId}`;
+                    return `https://localhost:3000/fm/getDetail/${super._getLayout('projects').detail}/${recordId}`;
                 }
 
                 detailLoaded(data){

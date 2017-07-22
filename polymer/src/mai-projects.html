@@ -51,7 +51,7 @@
                             <div># [[selectedItem.fieldData.ID_Project]]&nbsp;</div>
                             <div>[[selectedItem.fieldData.Claim_No]]</div>
                             <div>&nbsp;|&nbsp;</div>
-                            <div style="font-style: italic">[[selectedItem.fieldData.Status]]</div>
+                            <div style="font-style: italic" class$="{{_getClassForStatus(selectedItem.fieldData.Status)}}" >[[selectedItem.fieldData.Status]]</div>
                         </div>
                     </template>
                 </dom-if>
@@ -82,7 +82,7 @@
 
     <script>
         (function() {
-            class MaiProjects extends Polymer.Element {
+            class MaiProjects extends MaiMixins(Polymer.Element) {
                 static get is() { return 'mai-projects'; }
 
                 static get properties(){

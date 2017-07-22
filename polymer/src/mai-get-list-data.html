@@ -43,7 +43,7 @@
 
     <script>
         (function() {
-            class MaiGetListData extends Polymer.Element {
+            class MaiGetListData extends MaiMixins(Polymer.Element) {
                 static get is() {
                     return 'mai-get-list-data';
                 }
@@ -170,7 +170,7 @@
                                 bubbles: true,
                                 composed: true,
                                 detail: {
-                                    name: _getLayout(this.layoutName).list,
+                                    name: super._getLayout(this.layoutName).list,
                                     recordId: data.detail.response.recordId
                                 }
                             }));
@@ -185,19 +185,19 @@
                 }
 
                 _computeURL() {
-                    return `https://localhost:3000/fm/getList/${_getLayout(this.layoutName).list}/${this.currentPage}/${this.pageSize}`;
+                    return `https://localhost:3000/fm/getList/${super._getLayout(this.layoutName).list}/${this.currentPage}/${this.pageSize}`;
                 }
 
                 _computeURLForSelectedItem(recordId) {
-                    return `https://localhost:3000/fm/getDetail/${_getLayout(this.layoutName).list}/${recordId}`;
+                    return `https://localhost:3000/fm/getDetail/${super._getLayout(this.layoutName).list}/${recordId}`;
                 }
 
                 _computeURLforRecordCount(){
-                    return `https://localhost:3000/fm/getRecordCount/${_getLayout(this.layoutName).list}`;
+                    return `https://localhost:3000/fm/getRecordCount/${super._getLayout(this.layoutName).list}`;
                 }
 
                 _computeURLforNewRecord(){
-                    return `https://localhost:3000/fm/add/${_getLayout(this.layoutName).list}`;
+                    return `https://localhost:3000/fm/add/${super._getLayout(this.layoutName).list}`;
                 }
 
             }

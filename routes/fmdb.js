@@ -4,8 +4,8 @@ let request = require('request');
 let _ = require('lodash');
 let router = module.exports = express.Router();
 
-//let env = express().get('env');
-let env ="production";
+let env = express().get('env');
+//let env ="production";
 
 //Get token for accessing data using default login information
 router.get('/getToken', function(req, res) {

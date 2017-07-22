@@ -85,7 +85,7 @@
     <script>
 
         (function() {
-            class MaiProjectsList extends Polymer.Element {
+            class MaiProjectsList extends MaiMixins(Polymer.Element) {
                 static get is() {
                     return 'mai-projects-list';
                 }
@@ -112,23 +112,12 @@
                 }
 
                 _selectedItemChanged(item){
-
                     if(item) {
                         this.$.projectsListViewDatatable.selectedItems = item ? [item] : [];
-                        // this.selectedItem = item;
-                        //console.log(this.selectedItem);
-                        /*this.dispatchEvent(new CustomEvent('project-item-selected',
-                            {
-                                bubbles: true,
-                                composed: true,
-                                detail: {
-                                    data: this.selectedItem
-                                }
-                            }));*/
                     }
                 }
 
-                _getClassForStatus(status) {
+                /*_getClassForStatus(status) {
                     //console.log(status);
                     if (status=="Open") {
                         return "open";
@@ -154,7 +143,7 @@
                         return "";
                     }
 
-                }
+                }*/
 
                 _onFilterClick(e){
                     var fieldname = e.target.getAttribute('field-name');
