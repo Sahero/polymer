@@ -1,0 +1,21 @@
+
+<script>
+
+    const MaiNodeMixin = superclass => class extends superclass {
+
+        static get properties() {
+            return {};
+        }
+
+        connectedCallback() {
+            super.connectedCallback();
+        }
+
+        _getServer(){
+            return 'https://localhost:3000/';
+        }
+
+
+     };
+
+</script>

@@ -301,7 +301,7 @@
                 _computeURL(recordId){
                     console.log(recordId);
                     //console.log(this.tokenData);
-                    return `https://localhost:3000/fm/getDetail/L130_STAFF_Data_Entry/${recordId}`;
+                    return `${super._getServer()}fm/getDetail/L130_STAFF_Data_Entry/${recordId}`;
                 }
 
                 _getDataFromArray(dataList, index, path) {

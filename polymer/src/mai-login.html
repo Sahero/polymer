@@ -1,108 +1,95 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="../bower_components/iron-localstorage/iron-localstorage.html">
+
 <link rel="import" href="../bower_components/iron-input/iron-input.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/iron-a11y-keys/iron-a11y-keys.html">
 
 <link rel="import" href="styles/mai-shared-styles.html">
-<link rel="import" href="mai-user-data.html">
-
+<link rel="import" href="mai-node-mixin.html">
+<!--<link rel="import" href="../bower_components/iron-localstorage/iron-localstorage.html">-->
+<!--<link rel="import" href="mai-user-data.html">-->
+<link rel="import" href="../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
 <dom-module id="mai-login">
     <template>
-        <style></style>
+        <style>
 
-        <app-location route="{{route}}" data="{{routeData}}"></app-location>
+            #login-button {
+                background: #4285f4;
+                color: var(--text-primary-color);
+            }
+            #login-button[disabled] {
+                background: darkgray;
+                color: var(--text-primary-color);
+            }
 
-        <iron-localstorage name="user-storage" value="{{storedUser}}"></iron-localstorage>
+            .error-message {
+                color: red;
+            }
+            .header::after {
+                content: "";
+                position: absolute;
+                width: 300px;
+                border-bottom: 1px solid orange;
+            }
 
-        <user-data user="{{storedUser}}"></user-data>
+            .logo img{
+                max-width:100%;
+                border-radius: 5px;
+            }
+            .login {
+                width: 300px;
+                margin: 20px auto;
+                border: 1px solid lightgray;
+                border-radius: 10px;
+                padding: 10px;
+            }
+        </style>
 
-        <iron-ajax
-                id="loginAjax"
-                method="post"
-                content-type="application/json"
-                handle-as="text"
-                on-response="handleUserResponse"
-                on-error="handleUserError"></iron-ajax>
-
-        <div>
-            <template is="dom-if" if="[[error]]">
-                <p class="alert-error"><strong>Error:</strong> [[error]]</p>
+        <iron-a11y-keys keys="enter" on-keys-pressed="_logIn"></iron-a11y-keys>
+        <div id="loginContainer">
+        <div class="login">
+            <div class="logo header">
+                <img src="../images/mai_logo_long_darkblue.png"/>
+            </div>
+            <dom-if  if="[[error]]">
+            <template>
+                <p class="error-message"><strong>Error:</strong> [[error]]</p>
             </template>
-            <paper-input is="iron-input" id="username" type="text" value="{{formData.username}}"></paper-input>
-            <paper-input is="iron-input" id="password" type="password" value="{{formData.password}}"></paper-input>
+            </dom-if>
+            <paper-input label="USERNAME" id="username" type="text" required auto-validate error-message="Username missing" value="{{userFormData.username}}"></paper-input>
+            <paper-input invalid="{{invalid}}" label="PASSWORD" id="password" type="password" required auto-validate error-message="Password missing" value="{{userFormData.password}}"></paper-input>
             <br>
-            <paper-button raised on-tap="postLogin">Log In</paper-button>
-            <paper-button raised on-tap="_reset(event)">Reset</paper-button>
-            <div class="output"></div>
-
+            <paper-button id="login-button" disabled$="{{invalid}}" raised on-tap="_logIn">Log In</paper-button>
         </div>
-
-        <!--<paper-dialog modal opened="[[opened]]">-->
-            <!--<h2>Please Sign In</h2>-->
-
-            <!--<template is="dom-if" if="[[error]]">-->
-                <!--<p class="alert-error"><strong>Error:</strong> [[error]]</p>-->
-            <!--</template>-->
-            <!--<paper-input is="iron-input" id="username" type="text" value="{{formData.username}}"></paper-input>-->
-            <!--<paper-input is="iron-input" id="password" type="password" value="{{formData.password}}"></paper-input>-->
-            <!--<br>-->
-            <!--<paper-button raised on-tap="postLogin">Log In</paper-button>-->
-
-        <!--</paper-dialog>-->
+        </div>
 
     </template>
     <script>
-        class MaiLogin extends Polymer.Element {
+        class MaiLogin extends MaiNodeMixin(Polymer.Element) {
             static get is() { return 'mai-login'; }
 
             static get properties() {
                 return {
-
-                    formData: {type: Object,value:{}},
-                    storedUser: Object,
-                    error: String
+                    userFormData: {type: Object,value:{}, notify:true},
+                    userData: {type: Array, notify: true},
+                    fmTokenData: {
+                        type: Array,
+                        value: () => [],
+                        notify: true
+                    },
+                    error: {type: String, notify: true}
                 };
             }
 
-            postLogin(){
-                this.$.loginAjax.url = 'http://localhost:3000/users/login';
-                //console.log(this.formData);
-                this.$.loginAjax.body = this.formData;
-                this.$.loginAjax.generateRequest();
-            }
-
-            handleUserResponse(event) {
-                var response = JSON.parse(event.detail.response);
-                //console.log(event);
-                //console.log(response);
-                //var response = event.detail.response;
-
-                if (response.id_token) {
-                    this.error = '';
-                    this.storedUser = {
-                        username: response.data.username,
-                        user_id: response.data.id,
-                        id_token: response.id_token,
-                        access_token: response.access_token,
-                        loggedin: true
-                    };
-                    console.log(this.storedUser);
-                    this.set('routeData.stored-user', this.storedUser);
-                    this.set('route.path', 'mai-main');
-                         }
-                else{
-                    this.error = response.msg;
-                    }
-                //console.log(this.formData);
-                // reset form data
-                this.formData = {};
-            }
-            handleUserError(event) {
-                this.error = event.detail.request.xhr.response;
+            _logIn(){
+                this.dispatchEvent(new CustomEvent('log-in', {
+                    bubbles: true,
+                    composed: true
+                }));
             }
         }
 

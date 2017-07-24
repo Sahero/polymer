@@ -10,6 +10,10 @@
             super.connectedCallback();
         }
 
+        _getServer(){
+            return 'https://localhost:3000/';
+        }
+
         _getDataFromArray(dataList, index, path) {
             if(dataList.value===null){
                 return;

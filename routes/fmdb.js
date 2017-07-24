@@ -4,13 +4,13 @@ let request = require('request');
 let _ = require('lodash');
 let router = module.exports = express.Router();
 
-let env = express().get('env');
-//let env ="production";
+//let env = express().get('env');
+let env ="production";
 
 //Get token for accessing data using default login information
 router.get('/getToken', function(req, res) {
     if(env=="development"){
-        res.json({token:'1234'});
+        return {token:'1234'};
         return;
     }
     let url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/auth/'+config.filemaker.solution;
@@ -26,16 +26,14 @@ router.get('/getToken', function(req, res) {
         "body" : config.filemaker.body
     }, (error, response, body) => {
 
-
         if(!error) {
-            res.json(body);
+            res.json( body);
             // res.json("["+body+"]");
         }
         else {
             res.json(error);
         }
     });
-
 });
 
 //get record count of the provided layout

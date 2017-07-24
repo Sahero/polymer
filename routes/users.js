@@ -8,6 +8,7 @@ var router = module.exports = express.Router();
 
 var users = require('../data/users.json');
 
+
 function createIdToken(user) {
     return jwt.sign(_.omit(user, 'password'), config.secret, { expiresIn: 60*60*5 });
 }
@@ -87,10 +88,10 @@ router.post('/login', function(req, res) {
         return res.json({success:false, msg:'Wrong username or password!'});
     }
 
-    return res.status(201).send({
+    var userData = {
         success: true,
-        id_token: createIdToken(user),
-        access_token: createAccessToken(),
-        data: {username: user.username, id: user.id}
-    });
+        username: user.username,
+        userId: user.id
+    };
+    return res.send(userData);
 });

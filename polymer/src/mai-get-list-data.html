@@ -1,14 +1,16 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 
+<link rel="import" href="mai-node-mixin.html">
+
 <dom-module id="mai-get-list-data">
 
     <template>
-        <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localStorage"></app-localstorage-document>
+        <app-localstorage-document key="user" data="{{userData}}" storage="window.localStorage"></app-localstorage-document>
 
         <iron-ajax
                 id="getList"
                 method="[[method]]"
-                headers$='{"FM-data-token": "[[tokenData.token]]"}'
+                headers$='{"FM-data-token": "[[userData.fmTokenData.token]]"}'
                 handle-as="json"
                 on-response="listLoaded"
         ></iron-ajax>
@@ -17,7 +19,7 @@
                 id="getRecordCount"
                 method="[[method]]"
                 url="[[_computeURLforRecordCount()]]"
-                headers$='{"FM-data-token": "[[tokenData.token]]"}'
+                headers$='{"FM-data-token": "[[userData.fmTokenData.token]]"}'
                 handle-as="json"
                 on-response="getRecordCount"
         ></iron-ajax>
@@ -26,7 +28,7 @@
                 id="addNew"
                 method="POST"
                 url="[[_computeURLforNewRecord()]]"
-                headers$='{"FM-data-token": "[[tokenData.token]]"}'
+                headers$='{"FM-data-token": "[[userData.fmTokenData.token]]"}'
                 handle-as="json"
                 on-response="getNewRecordId"
         ></iron-ajax>
@@ -34,7 +36,7 @@
         <iron-ajax
                 id="getSelectedItem"
                 method="GET"
-                headers$='{"FM-data-token": "[[tokenData.token]]"}'
+                headers$='{"FM-data-token": "[[userData.fmTokenData.token]]"}'
                 handle-as="json"
                 on-response="getSelected"
         ></iron-ajax>
@@ -43,7 +45,7 @@
 
     <script>
         (function() {
-            class MaiGetListData extends MaiMixins(Polymer.Element) {
+            class MaiGetListData extends MaiMixins(MaiNodeMixin(Polymer.Element)) {
                 static get is() {
                     return 'mai-get-list-data';
                 }
@@ -80,7 +82,7 @@
 
                 static get observers() {
                     return [
-                        '_currentPageChanged(currentPage,filterQuery,tokenData)'
+                        '_currentPageChanged(currentPage,filterQuery,userData)'
                     ]
                 }
 
@@ -92,8 +94,9 @@
                     }
                 }
 
-                _currentPageChanged(currentPage,filterQuery,tokenData){
-                    if(tokenData && currentPage!==undefined) {
+                _currentPageChanged(currentPage,filterQuery,userData){
+                    console.log(userData);
+                    if(userData && currentPage!==undefined) {
                         if(filterQuery) {
                             if (filterQuery === "none") {
                                 this.method = "GET";
@@ -113,24 +116,24 @@
 
                 getData(){
                     this.$.getList.url = this._computeURL();
-                    this.$.getList.headers = {'fm-data-token': this.tokenData.token};
+                    this.$.getList.headers = {'fm-data-token': this.userData.fmTokenData.token};
                     this.$.getList.generateRequest();
                     //get total records as well
-                    this.$.getRecordCount.headers = {'fm-data-token': this.tokenData.token};
+                    this.$.getRecordCount.headers = {'fm-data-token': this.userData.fmTokenData.token};
                     this.$.getRecordCount.generateRequest();
 
                 }
 
                 getSelectedItemData(recordId){
                     this.$.getSelectedItem.url = this._computeURLForSelectedItem(recordId);
-                    this.$.getSelectedItem.headers = {'fm-data-token': this.tokenData.token};
+                    this.$.getSelectedItem.headers = {'fm-data-token': this.userData.fmTokenData.token};
                     this.$.getSelectedItem.generateRequest();
                 }
 
-                _selectedItemChanged(selectedItem, tokenData){
+                _selectedItemChanged(selectedItem, userData){
                     if(this.selectedItem && 'recordId' in this.selectedItem) {
                         this.$.getSelectedItem.url = this._computeURLForSelectedItem(this.selectedItem.recordId);
-                        this.$.getSelectedItem.headers = {'fm-data-token': this.tokenData.token};
+                        this.$.getSelectedItem.headers = {'fm-data-token': this.userData.fmTokenData.token};
                         this.$.getSelectedItem.generateRequest();
                         console.log(this.selectedItem);
                     }
@@ -185,19 +188,23 @@
                 }
 
                 _computeURL() {
-                    return `https://localhost:3000/fm/getList/${super._getLayout(this.layoutName).list}/${this.currentPage}/${this.pageSize}`;
+                    return `${super._getServer()}fm/getList/${super._getLayout(this.layoutName).list}/${this.currentPage}/${this.pageSize}`;
                 }
 
                 _computeURLForSelectedItem(recordId) {
-                    return `https://localhost:3000/fm/getDetail/${super._getLayout(this.layoutName).list}/${recordId}`;
+                    return `${super._getServer()}fm/getDetail/${super._getLayout(this.layoutName).list}/${recordId}`;
                 }
 
                 _computeURLforRecordCount(){
-                    return `https://localhost:3000/fm/getRecordCount/${super._getLayout(this.layoutName).list}`;
+                    return `${super._getServer()}fm/getRecordCount/${super._getLayout(this.layoutName).list}`;
                 }
 
                 _computeURLforNewRecord(){
-                    return `https://localhost:3000/fm/add/${super._getLayout(this.layoutName).list}`;
+                    return `${super._getServer()}fm/add/${super._getLayout(this.layoutName).list}`;
+                }
+
+                ready(){
+                    super.ready();
                 }
 
             }

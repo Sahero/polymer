@@ -42,7 +42,8 @@
     "paper-toast": "^2.0.0",
     "paper-spinner": "^2.0.0",
     "iron-meta": "^2.0.2",
-    "iron-image": "^2.1.1"
+    "iron-image": "^2.1.1",
+    "iron-a11y-keys": "^2.0.0"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0-prerelease.7"

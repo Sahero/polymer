@@ -1,0 +1,409 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/iron-input/iron-input.html">
+<link rel="import" href="../bower_components/iron-form-element-behavior/iron-form-element-behavior.html">
+
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<!--<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">-->
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
+
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
+
+<link rel="import" href="mai-main.html">
+<link rel="import" href="mai-menu-data.html">
+<link rel="import" href="mai-icon.html">
+
+<link rel="import" href="mai-login.html">
+<link rel="import" href="mai-node-mixin.html">
+<dom-module id="mai-dashboard">
+  <template>
+    <custom-style>
+      <style is="custom-style" include="iron-flex iron-flex-alignment">
+        body {
+          margin: 0;
+          font-family: "Open Sans", sans-serif;
+          background-color: white;
+        }
+        app-header {
+          background-color: dimgray;
+          color: lightgray;
+        }
+
+        app-header paper-icon-button {
+          --paper-icon-button-ink-color: #fff;
+        }
+        app-drawer-layout {
+          --app-drawer-layout-content-transition: margin 0.2s;
+        }
+        app-drawer {
+          --app-drawer-content-container: {
+            background-color: dimgray;
+          };
+          --paper-fab-background: #4285f4;
+        }
+
+        paper-fab{
+          border-radius:5px;
+          margin: auto;
+        }
+
+        .drawer-list {
+          margin-left: 10px;
+          margin-top: 80px;
+          height: calc(100% - 80px);
+          overflow: auto;
+          display:flex;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+        }
+
+        .drawer-list a{
+          font-size:12px;
+          color:lightgray;
+          text-decoration: none;
+          padding:3px;
+          /*text-align:center;*/
+        }
+
+        paper-tab[link] a {
+          /* These mixins (from iron-flex-layout) center the link text. */
+
+          @apply(--layout-horizontal);
+          @apply(--layout-center-center);
+          text-decoration: none;
+          color: #fff;
+          text-transform: uppercase;
+          margin-bottom: 1px;
+          padding-right: 20px;
+
+        }
+        app-toolbar{
+          @apply(--layout-horizontal);
+          --paper-fab-background: #4285f4;
+          /*@apply(--layout-justified);*/
+        }
+
+        .paperTabs{
+          @apply(--layout-flex);
+
+        }
+
+        .logo img{
+          max-width:100%;
+          padding: 10px;
+          border-radius: 15px;
+          margin-top: 5px;
+        }
+
+        .iron-selected paper-fab{
+          border: 1px solid var(--paper-tab-ink, var(--paper-yellow-a100));
+          box-shadow: 3px -3px var(--paper-tab-ink, var(--paper-yellow-a100));
+          -moz-box-shadow: 3px -3px var(--paper-tab-ink, var(--paper-yellow-a100));
+          -webkit-box-shadow: 3px -3px var(--paper-tab-ink, var(--paper-yellow-a100));
+          -o-box-shadow: 3px -3px var(--paper-tab-ink, var(--paper-yellow-a100));
+          border-radius:5px;
+        }
+        a:focus{
+          outline:none;
+        }
+
+        #footer {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          box-sizing: border-box;
+          align-items: center;
+          color: var(--text-primary-color);
+          --iron-icon-height: 16px;
+          --iron-icon-width: 16px;
+          font-size: 12px;
+          --paper-button:{
+            font-size: 12px;
+          };
+          margin-left:10px;
+          text-transform: uppercase;
+        }
+
+        .drawer-contents::after {
+          content: "";
+          position: absolute;
+          width: 100%;
+          border-bottom: 1px solid orange;
+        }
+
+      </style>
+    </custom-style>
+
+    <app-route
+            route="{{route}}"
+            pattern="/:page"
+            data="{{routeData}}"
+            tail="{{routeTail}}"></app-route>
+
+    <iron-media-query query="max-width: 767px" query-matches="{{smallScreen}}"></iron-media-query>
+
+    <app-localstorage-document key="user" data="{{userData}}" storage="window.localStorage"></app-localstorage-document>
+
+
+    <mai-menu-data menus="{{menus}}"></mai-menu-data>
+
+    <app-header-layout>
+
+      <app-header slot="header" id="header" fixed effects="waterfall">
+        <app-toolbar>
+          <div align="left"><paper-fab icon="mai:dashboard" on-tap="_toggleDrawer"></paper-fab>
+          </div>
+          <!--Not loading tabs for small devices-->
+          <dom-if if="[[_shouldShowTabs]]">
+            <template>
+              <div class="paperTabs">
+                <paper-tabs id="toolbarMenu" selected="{{page}}"
+                            attr-for-selected="name"
+                            fallbackSelection="view404"
+                            role="navigation" sticky>
+                  <dom-repeat items="[[menus]]" as="menu">
+                    <template>
+                      <paper-tab link name="[[menu.name]]">
+                        <a href="/[[menu.name]]" class="link" tabindex="-1">[[menu.title]]</a>
+                      </paper-tab>
+                    </template>
+                  </dom-repeat>
+                </paper-tabs>
+              </div>
+            </template>
+          </dom-if>
+          <div class="logo">
+            <a href="/"><img src="../images/mai_logo_long_darkblue.png"/></a>
+          </div>
+        </app-toolbar>
+      </app-header>
+
+      <app-drawer-layout id="drawerLayout" force-narrow>
+        <app-drawer slot="drawer" opened="{{drawerOpened}}">
+          <div class="drawer-contents">
+            <iron-selector selected="[[routeData.page]]" attr-for-selected="name" fallback-selection="view404" class="drawer-list" role="navigation">
+
+              <dom-repeat items="[[menus]]" as="menu">
+                <template>
+                  <a name="[[menu.name]]" href="/[[menu.name]]">
+                    <paper-fab icon="mai:[[menu.iconName]]" title="[[menu.title]]"></paper-fab>
+                    [[menu.title]]
+                  </a>
+                </template>
+              </dom-repeat>
+              <a name="tasks" href="/tasks">
+                <paper-fab icon="mai:check" title="TASKS"></paper-fab>
+                TASKS
+              </a>
+
+            </iron-selector>
+          </div>
+          <div id="footer">
+            <div>[[userData.username]]</div>
+            <paper-button on-tap="_logout">Logout</paper-button>
+          </div>
+        </app-drawer>
+
+        <iron-pages
+                selected="[[routeData.page]]"
+                attr-for-selected="name"
+                fallback-selection="view404"
+                selected-attribute="visible"
+                role="main">
+          <mai-main name=""></mai-main>
+          <mai-claimants name="claimants" page="{{routeData.page}}" route="{{routeTail}}" ></mai-claimants>
+          <mai-contacts name="contacts" page="{{routeData.page}}" route="{{routeTail}}" ></mai-contacts>
+          <mai-investigators name="investigators" page="{{routeData.page}}" route="{{routeTail}}" ></mai-investigators>
+          <mai-clients name="clients" page="{{routeData.page}}" route="{{routeTail}}" ></mai-clients>
+          <mai-projects name="projects" page="{{routeData.page}}" route="{{routeTail}}" ></mai-projects>
+          <mai-staffs name="staffs" page="{{routeData.page}}" route="{{routeTail}}" ></mai-staffs>
+          <mai-tasks name="tasks" page="{{routeData.page}}" route="{{routeTail}}" ></mai-tasks>
+          <mai-view404 name="view404"></mai-view404>
+
+        </iron-pages>
+
+      </app-drawer-layout>
+
+    </app-header-layout>
+
+  </template>
+
+  <script>
+
+
+      class MaiDashboard extends MaiNodeMixin(Polymer.Element) {
+
+
+          static get is() { return 'mai-dashboard'; }
+
+          static get properties() {
+              return {
+                  page: {
+                      type: String,
+                      reflectToAttribute: true,
+                      observer: '_pageChanged',
+                  },
+                  rootPattern: String,
+                  routeData: Object,
+                  routeTail: String,
+                /*tokenData: {
+                 type: Array,
+                 value: () => [],
+                 notify: true
+                 },*/
+                  userData: {
+                      type: Array,
+                      value: () => [],
+                      notify: true
+                  },
+                  _shouldShowTabs: {
+                      computed: '_computeShouldShowTabs(smallScreen)'
+                  }
+              };
+          }
+
+          static get observers() {
+              return [
+                  '_routePageChanged(routeData.page)',
+              ];
+          }
+
+          constructor() {
+              super();
+              this.rootPattern = (new URL(this.rootPath)).pathname;
+
+          }
+
+          _routePageChanged(page) {
+
+              if (page === undefined || page === "") {
+                  return;
+              }
+              console.log(page);
+              // If no page was found in the route data, page will be an empty string.
+              // Deault to 'main' in that case.
+              this.page = page || 'main';
+          }
+
+          _pageChanged(page, oldPage) {
+              if (page === undefined || page === "") {
+                  return;
+              }
+              // Load page import on demand. Show 404 page if fails
+              this._ensureLazyLoaded();
+              var resolvedPageUrl = this.resolveUrl('mai-'+ page + '.html');
+
+              Polymer.importHref( resolvedPageUrl, null, this._showPage404.bind(this), true);
+
+              document.title = 'MAI '+page.toUpperCase();
+              this.drawerOpened = false;
+          }
+
+        /*_pageLoaded(shouldResetLayout) {
+         this._ensureLazyLoaded();
+         if (shouldResetLayout) {
+         // The size of the header depends on the page (e.g. on some pages the tabs
+         // do not appear), so reset the header's layout only when switching pages.
+         Polymer.Async.timeOut.run(() => {
+         this.$.header.resetLayout();
+         }, 1);
+         }
+         }*/
+
+          _ensureLazyLoaded() {
+              // load lazy resources after render and set `loadComplete` when done.
+              if (!this.loadComplete) {
+                  Polymer.RenderStatus.afterNextRender(this, () => {
+                      Polymer.importHref(this.resolveUrl('lazy-resources.html'), () => {
+                          // Register service worker if supported.
+                          if ('serviceWorker' in navigator) {
+                              navigator.serviceWorker.register('service-worker.js', {scope: '/'});
+                          }
+                          //this._notifyNetworkStatus();
+                          this.loadComplete = true;
+                      });
+                  });
+              }
+          }
+
+          _showPage404() {
+              this.page = 'view404';
+          }
+
+          _toggleDrawer() {
+              var drawerLayout = this.$.drawerLayout;
+              drawerLayout.drawer.toggle();
+          }
+
+
+          ready(){
+              super.ready();
+
+            /*if(userData.username===undefined || !this.userData.username){
+
+             }*/
+
+            /*if (localStorage.getItem("user") === null || localStorage.getItem("user").length <= 2) {
+             console.log(1);
+             this._routePageChanged('login');
+             }*/
+            /*else{
+             this.page =''
+             //this.tokenData = localStorage.getItem("token");
+             //console.log(this.$.tokenStorage.zeroValue());
+             }*/
+              this.addEventListener('change-view', e => this._onChangeView(e));
+              this.addEventListener('lazy-load-page', e => this._onLazyLoadPage(e));
+
+          }
+
+          _onLazyLoadPage(event){
+              var resolvedPageUrl = this.resolveUrl(event.detail.name+'/mai-'+event.detail.name+'-list-data.html');
+              //console.log(resolvedPageUrl);
+              Polymer.importHref(resolvedPageUrl, null, null, true);
+          }
+
+          _onChangeView(event){
+              console.log(event.detail);
+              var detail = event.detail;
+              var resolvedPageUrl = this.resolveUrl(detail.name+'/mai-'+ detail.name+'-'+detail.view + '.html');
+              //var resolvedPageUrl = this.resolveUrl(detail.name+'/mai-'+ detail.view + '.html');
+              //console.log(resolvedPageUrl);
+              Polymer.importHref(resolvedPageUrl, null, null, true);
+              document.title = 'MAI '+ detail.name+' '+detail.view;
+          }
+
+          _computeShouldShowTabs(smallScreen) {
+              return !smallScreen;
+          }
+
+          _logout() {
+              this.dispatchEvent(new CustomEvent('log-out', {
+                  bubbles: true,
+                  composed: true
+              }));
+          }
+      }
+
+      window.customElements.define(MaiDashboard.is, MaiDashboard);
+
+
+  </script>
+</dom-module>

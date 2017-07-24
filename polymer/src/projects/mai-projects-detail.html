@@ -68,14 +68,14 @@
                 }
             </style>
         </custom-style>
-        <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localStorage"></app-localstorage-document>
+        <app-localstorage-document key="user" data="{{userData}}" storage="window.localStorage"></app-localstorage-document>
 
         <iron-ajax
 
                 id="getProjectsDetail"
                 method="get"
                 url="[[_computeURL(recordId)]]"
-                headers$='{"FM-data-token": "[[tokenData.token]]"}'
+                headers$='{"FM-data-token": "[[userData.fmTokenData.token]]"}'
                 handle-as="json"
 
                 on-response="detailLoaded"
@@ -85,7 +85,7 @@
                 id="updateprojectDetail"
                 method="put"
                 url="[[_computeURL(recordId)]]"
-                headers$='{"FM-data-token": "[[tokenData.token]]"}'
+                headers$='{"FM-data-token": "[[userData.fmTokenData.token]]"}'
                 handle-as="json"
                 on-response="checkUpdateResult"
         ></iron-ajax>
@@ -558,7 +558,7 @@
 
                 static get observers() {
                     return [
-                        '_recordIdChanged(recordId,tokenData)',
+                        '_recordIdChanged(recordId,userData)',
                         //'_onProjectDetailChanged(projectDetail.*)',
                         '_onDetailChanged(projectDetail.*,"projectDetail")',
                         '_onStaffsChanged(staffs.splices)',
@@ -624,10 +624,10 @@
                     }
                 }
 
-                _recordIdChanged(recordId, tokenData){
+                _recordIdChanged(recordId, userData){
                     console.log(recordId);
-                    if(recordId && tokenData) {
-                        this.$.getProjectsDetail.headers = {'fm-data-token': tokenData.token};
+                    if(recordId && userData) {
+                        this.$.getProjectsDetail.headers = {'fm-data-token': userData.fmTokenData.token};
                         this.$.getProjectsDetail.generateRequest();
                     }
                 }
@@ -763,7 +763,7 @@
 
                 _computeURL(recordId){
                     console.log(recordId);
-                    return `https://localhost:3000/fm/getDetail/${super._getLayout('projects').detail}/${recordId}`;
+                    return `${super._getServer()}fm/getDetail/${super._getLayout('projects').detail}/${recordId}`;
                 }
 
                 detailLoaded(data){
