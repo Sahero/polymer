@@ -6,15 +6,13 @@
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
-
+<link rel="import" href="contacts/mai-contacts-list-data.html">
 <dom-module id="mai-contacts">
     <template>
 
-        <custom-style>
-            <style include="mai-shared-styles">
+        <style include="mai-shared-styles">
 
-            </style>
-        </custom-style>
+        </style>
 
         <app-route
                 route="[[route]]"
@@ -26,13 +24,20 @@
         <app-route
                 route="{{tailroute}}"
                 pattern="/contacts/detail/:recordId"
-                data="{{recordIdData}}"
+                data="{{selectedItem}}"
         ></app-route>
 
+        <mai-contacts-list-data selected-item="{{selectedItem}}"
+                              contacts-data="{{contactsList}}"
+                              filter-query="{{filterQuery}}"
+                              pages="{{pages}}"
+                              current-page="{{currentPage}}"
+                              add-new="{{addNew}}"
+        ></mai-contacts-list-data>
 
         <app-toolbar>
             <iron-selector class="view-toolbar" selected="[[contactsData.page]]"  attr-for-selected="name" role="navigation">
-                <a name="detail" href="[[route.prefix]]/detail">
+                <a name="detail" id="contactsDetailLink" href="[[route.prefix]]/detail/[[selectedItem.recordId]]">
                     <paper-fab mini icon="mai:content-copy"></paper-fab>
                     Detail view</a>
                 <a name="list" href="[[route.prefix]]/list">
@@ -44,12 +49,12 @@
                 <dom-if if="[[_shouldShowDetailHeaders]]">
                     <template>
                         <div class="detailsHeader">
-                            <div># [[selectedData.fieldData.ID_Contact]]&nbsp;</div>
-                            <div>[[selectedData.fieldData.Title]]</div>
-                            <div>[[selectedData.fieldData.Name_First]]</div>
-                            <div>[[selectedData.fieldData.Name_Last]]</div>
+                            <div># [[selectedItem.fieldData.ID_Contact]]&nbsp;</div>
+                            <div>[[selectedItem.fieldData.Title]]</div>
+                            <div>[[selectedItem.fieldData.Name_First]]</div>
+                            <div>[[selectedItem.fieldData.Name_Last]]</div>
                             <div>&nbsp;|&nbsp;</div>
-                            <div style="font-style: italic">[[selectedData.fieldData.followup_status]]</div>
+                            <div style="font-style: italic">[[selectedItem.fieldData.followup_status]]</div>
                         </div>
                     </template>
                 </dom-if>
@@ -59,8 +64,15 @@
         <div>
             <iron-pages selected="[[contactsData.page]]" attr-for-selected="name">
 
-                <mai-contacts-list name="list" ></mai-contacts-list>
-                <mai-contacts-detail id="contactsDetailView" name="detail" recordId="{{recordIdData.recordId}}"></mai-contacts-detail>
+                <mai-contacts-list name="list"
+                                   selected-item="{{selectedItem}}"
+                                   contacts-data="{{contactsList}}"
+                                   filter-query="{{filterQuery}}"
+                                   pages="{{pages}}"
+                                   current-page="{{currentPage}}"
+                                   add-new="{{addNew}}"
+                ></mai-contacts-list>
+                <mai-contacts-detail id="contactDetails" name="detail" recordId="{{selectedItem.recordId}}"></mai-contacts-detail>
 
             </iron-pages>
         </div>
@@ -69,7 +81,7 @@
 
     <script>
         (function() {
-            class MaiContacts extends Polymer.Element {
+            class MaiContacts extends MaiMixins(Polymer.Element) {
                 static get is() {
                     return 'mai-contacts';
                 }
@@ -80,7 +92,7 @@
                             type:Object,
                             notify:true,
                             observer:'_onContactsDataChanged'},
-                        selectedData: {
+                        selectedItem: {
                             type:Object,
                             notify:true,
                         },
@@ -107,59 +119,42 @@
                             this.contactsData.page = contactsData.page || "detail";
                             this.set('route.path',this.contactsData.page);
                         }
-                        else{
-                            this._computeShouldShowDetailHeaders();
-                            this.dispatchEvent(new CustomEvent('change-view',
-                                {
-                                    bubbles: true,
-                                    composed: true,
-                                    detail: {
-                                        name: 'contacts',
-                                        view: contactsData.page
-                                    }
-                                }));
 
-                            if(this.tailroute.path){
-                                this.recordIdData.recordId = this.tailroute.path.replace("/","");
-                            }
+                        super._computeShouldShowDetailHeaders(this.contactsData.page);
+                        this.dispatchEvent(new CustomEvent('change-view',
+                            {
+                                bubbles: true,
+                                composed: true,
+                                detail: {
+                                    name: 'contacts',
+                                    view: contactsData.page
+                                }
+                            }));
 
-                            if(this.contactsData.page === 'detail' && this.recordIdData.recordId !== null){
-                                this.$.contactsDetailView.recordId = this.recordIdData.recordId;
-                                this.set('tailroute.path', this.recordIdData.recordId);
-                                this.notifyPath('tailroute.path');
-                                this.notifyPath('route.path');
-                            }
+                        if(this.tailroute.path){
+                            this.selectedItem.recordId = this.tailroute.path.replace("/","");
+                        }
+
+                        if(this.contactsData.page === 'detail' && this.selectedItem.recordId !== null){
+                            this.set('tailroute.path', this.selectedItem.recordId);
+                            this.notifyPath('tailroute.path');
+                            this.notifyPath('route.path');
                         }
                     }
-
 
                 }
 
                 ready(){
                     super.ready();
-                    this.addEventListener('contact-item-selected', e => this._onContactItemSelected(e));
+                    this.addEventListener('add-new-item', e => this._onNewItem(e));
                 }
 
-                _onContactItemSelected(event){
+                _onNewItem(event){
                     let detail = event.detail;
-                    this.selectedData = detail.data;
-                    this.recordIdData.recordId = this.selectedData.recordId;
-                    this.$.contactsDetailView.recordId = this.selectedData.recordId;
+                    this.selectedItem.recordId = detail.recordId;
+                    this.$.contactDetails.recordId = detail.recordId;
+                    this.$.contactsDetailLink.click();
                 }
-
-                _computeShouldShowDetailHeaders(){
-
-                    if(this.contactsData.page==='detail'){
-                        //console.log(this.contactsData);
-                        this._shouldShowDetailHeaders =  true;
-                    }
-                    else{
-                        //console.log(this.contactsData);
-                        this._shouldShowDetailHeaders = false;
-                    }
-
-                }
-
 
             }
 

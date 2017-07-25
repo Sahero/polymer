@@ -1,18 +1,16 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="mai-claimants-list-data.html">
-<link rel="import" href="../mai-page-layout.html">
 
 <dom-module id="mai-claimants-list">
     <template>
         <style include="mai-datatable-styles">
         </style>
 
-        <mai-claimants-list-data selected-item="{{selectedItem}}"
-                              claimants-data="{{claimantsData}}"
-                              filter-query="{{filterQuery}}"
-                              pages="{{pages}}"
-                              current-page="{{currentPage}}"
-        ></mai-claimants-list-data>
+        <mai-filter-toolbar>
+            <paper-button field-name="new" on-tap="_onAddClick">
+                <iron-icon icon="mai:add-circle-outline"></iron-icon>
+                Add new claimant
+            </paper-button>
+        </mai-filter-toolbar>
 
         <vaadin-grid items="{{claimantsData}}" id="claimantsListViewDatatable" class="list-view-datatable" active-item="{{selectedItem}}" >
 
@@ -59,7 +57,7 @@
     </template>
     <script>
 
-        class MaiClaimantsList extends Polymer.Element
+        class MaiClaimantsList extends MaiMixins(Polymer.Element)
         {
             static get is() { return 'mai-claimants-list'; }
             static get properties() {
@@ -69,23 +67,24 @@
                         notify:true
                     },
                     selectedItem: {
-                        observer: '_selectedItemChanged'
-                    }
+                        observer: '_selectedItemChanged',
+                        type: Object,
+                        notify: true
+                    },
+                    filterQuery:{
+                        type:String,
+                        notify:true
+                    },
+                    pages: { type: Array, notify: true},
+                    currentPage: { type:Number, value:0, notify:true},
+                    addNew: { type:Boolean, notify:true}
+
                 }
             }
 
             _selectedItemChanged(item){
                 if(item) {
                     this.$.claimantsListViewDatatable.selectedItems = item ? [item] : [];
-
-                    this.dispatchEvent(new CustomEvent('claimant-item-selected',
-                        {
-                            bubbles: true,
-                            composed: true,
-                            detail: {
-                                data: this.selectedItem
-                            }
-                        }));
                 }
             }
 

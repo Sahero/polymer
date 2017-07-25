@@ -1,18 +1,21 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="mai-clients-list-data.html">
-<link rel="import" href="../mai-page-layout.html">
 
 <dom-module id="mai-clients-list">
     <template>
         <style include="mai-datatable-styles">
         </style>
 
-        <mai-clients-list-data selected-item="{{selectedItem}}"
-                              clients-data="{{clientsData}}"
-                              filter-query="{{filterQuery}}"
-                              pages="{{pages}}"
-                              current-page="{{currentPage}}"
-        ></mai-clients-list-data>
+        <mai-filter-toolbar>
+            <paper-button field-name="none" filter-text="none" on-tap="_onFilterClick"><iron-icon icon="mai:filter-none"></iron-icon>Find All</paper-button>
+            <paper-button field-name="Status" filter-text="active" on-tap="_onFilterClick">Find Active</paper-button>
+            <paper-button field-name="seperator">
+                <iron-icon icon="mai:more-vert"></iron-icon>
+            </paper-button>
+            <paper-button field-name="new" on-tap="_onAddClick">
+                <iron-icon icon="mai:add-circle-outline"></iron-icon>
+                Add new client
+            </paper-button>
+        </mai-filter-toolbar>
 
         <vaadin-grid items="{{clientsData}}" id="clientsListViewDatatable" class="list-view-datatable" active-item="{{selectedItem}}" >
 
@@ -55,7 +58,7 @@
     </template>
     <script>
 
-        class MaiClientsList extends Polymer.Element
+        class MaiClientsList extends MaiMixins(Polymer.Element)
         {
             static get is() { return 'mai-clients-list'; }
             static get properties() {
@@ -65,33 +68,25 @@
                         notify:true
                     },
                     selectedItem: {
-                        observer: '_selectedItemChanged'
-                    }
+                        observer: '_selectedItemChanged',
+                        type: Object,
+                        notify: true
+                    },
+                    filterQuery:{
+                        type:String,
+                        notify:true
+                    },
+                    pages: { type: Array, notify: true},
+                    currentPage: { type:Number, value:0, notify:true},
+                    addNew: { type:Boolean, notify:true}
                 }
             }
 
             _selectedItemChanged(item){
                 if(item) {
                     this.$.clientsListViewDatatable.selectedItems = item ? [item] : [];
-
-                    this.dispatchEvent(new CustomEvent('client-item-selected',
-                        {
-                            bubbles: true,
-                            composed: true,
-                            detail: {
-                                data: this.selectedItem
-                            }
-                        }));
                 }
             }
-
-            _getDataFromArray(dataList, index, path) {
-                if(dataList.value===null){
-                    return;
-                }
-                return this.get(path, dataList.base[index]);
-            }
-
         }
 
         window.customElements.define(MaiClientsList.is, MaiClientsList);

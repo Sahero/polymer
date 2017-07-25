@@ -9,6 +9,7 @@
                            filter-query="{{filterQuery}}"
                            pages="{{pages}}"
                            current-page="{{currentPage}}"
+                           add-new="{{addNew}}"
         ></mai-get-list-data>
     </template>
 
@@ -37,7 +38,8 @@
                             type: Array,
                             notify: true
                         },
-                        currentPage:{type:Number, notify:true}
+                        currentPage:{type:Number, notify:true},
+                        addNew:{type:Boolean, notify:true}
                     }
                 }
 

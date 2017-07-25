@@ -6,15 +6,14 @@
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="claimants/mai-claimants-list-data.html">
 
 <dom-module id="mai-claimants">
     <template>
 
-        <custom-style>
-            <style include="mai-shared-styles">
+        <style include="mai-shared-styles">
 
-            </style>
-        </custom-style>
+        </style>
 
         <app-route
                 route="[[route]]"
@@ -26,13 +25,20 @@
         <app-route
                 route="{{tailroute}}"
                 pattern="/claimants/detail/:recordId"
-                data="{{recordIdData}}"
+                data="{{selectedItem}}"
         ></app-route>
 
+        <mai-claimants-list-data selected-item="{{selectedItem}}"
+                                 claimants-data="{{claimantsList}}"
+                              filter-query="{{filterQuery}}"
+                              pages="{{pages}}"
+                              current-page="{{currentPage}}"
+                              add-new="{{addNew}}"
+        ></mai-claimants-list-data>
 
         <app-toolbar>
             <iron-selector class="view-toolbar" selected="[[claimantsData.page]]"  attr-for-selected="name" role="navigation">
-                <a name="detail" href="[[route.prefix]]/detail">
+                <a name="detail" id="claimantsDetailLink" href="[[route.prefix]]/detail/[[selectedItem.recordId]]">
                     <paper-fab mini icon="mai:content-copy"></paper-fab>
                     Detail view</a>
                 <a name="list" href="[[route.prefix]]/list">
@@ -41,10 +47,10 @@
                 <dom-if if="[[_shouldShowDetailHeaders]]">
                     <template>
                         <div class="detailsHeader">
-                            <div># [[selectedData.fieldData.ID_claimant]]&nbsp;</div>
-                            <div>[[selectedData.fieldData.Name_Full]]</div>
+                            <div># [[selectedItem.fieldData.ID_claimant]]&nbsp;</div>
+                            <div>[[selectedItem.fieldData.Name_Full]]</div>
                             <div>&nbsp;|&nbsp;</div>
-                            <div style="font-style: italic">[[selectedData.fieldData.Status]]</div>
+                            <div style="font-style: italic">[[selectedItem.fieldData.Status]]</div>
                         </div>
                     </template>
                 </dom-if>
@@ -54,8 +60,15 @@
         <div>
             <iron-pages selected="[[claimantsData.page]]" attr-for-selected="name">
 
-                <mai-claimants-list name="list" ></mai-claimants-list>
-                <mai-claimants-detail id="claimantsDetailView" name="detail" recordId="{{recordIdData.recordId}}"></mai-claimants-detail>
+                <mai-claimants-list name="list"
+                                 selected-item="{{selectedItem}}"
+                                    claimants-data="{{claimantsList}}"
+                                 filter-query="{{filterQuery}}"
+                                 pages="{{pages}}"
+                                 current-page="{{currentPage}}"
+                                 add-new="{{addNew}}"
+                ></mai-claimants-list>
+                <mai-claimants-detail id="claimantDetails" name="detail" recordId="{{selectedItem.recordId}}"></mai-claimants-detail>
 
             </iron-pages>
         </div>
@@ -64,7 +77,7 @@
 
     <script>
         (function() {
-            class MaiClaimants extends Polymer.Element {
+            class MaiClaimants extends MaiMixins(Polymer.Element) {
                 static get is() {
                     return 'mai-claimants';
                 }
@@ -75,7 +88,7 @@
                             type:Object,
                             notify:true,
                             observer:'_onClaimantsDataChanged'},
-                        selectedData: {
+                        selectedItem: {
                             type:Object,
                             notify:true,
                         },
@@ -103,7 +116,7 @@
                             this.set('route.path',this.claimantsData.page);
                         }
                         else{
-                            this._computeShouldShowDetailHeaders();
+                            super._computeShouldShowDetailHeaders(this.claimantsData.page);
                             this.dispatchEvent(new CustomEvent('change-view',
                                 {
                                     bubbles: true,
@@ -115,11 +128,10 @@
                                 }));
 
                             if(this.tailroute.path){
-                                this.recordIdData.recordId = this.tailroute.path.replace("/","");
+                                this.selectedItem.recordId = this.tailroute.path.replace("/","");
                             }
-                            if(this.claimantsData.page === 'detail' && this.recordIdData.recordId !== null){
-                                this.$.claimantsDetailView.recordId = this.recordIdData.recordId;
-                                this.set('tailroute.path', this.recordIdData.recordId);
+                            if(this.claimantsData.page === 'detail' && this.selectedItem.recordId !== null){
+                                this.set('tailroute.path', this.selectedItem.recordId);
                                 this.notifyPath('tailroute.path');
                                 this.notifyPath('route.path');
                             }
@@ -131,30 +143,15 @@
 
                 ready(){
                     super.ready();
-                    this.addEventListener('claimant-item-selected', e => this._onClaimantItemSelected(e));
+                    this.addEventListener('add-new-item', e => this._onNewItem(e));
                 }
 
-                _onClaimantItemSelected(event){
+                _onNewItem(event){
                     let detail = event.detail;
-                    this.selectedData = detail.data;
-                    this.recordIdData.recordId = this.selectedData.recordId;
-                    this.$.claimantsDetailView.recordId = this.selectedData.recordId;
+                    this.selectedItem.recordId = detail.recordId;
+                    this.$.claimantDetails.recordId = detail.recordId;
+                    this.$.claimantsDetailLink.click();
                 }
-
-                _computeShouldShowDetailHeaders(){
-
-                    if(this.claimantsData.page==='detail'){
-                        //console.log(this.claimantsData);
-                        this._shouldShowDetailHeaders =  true;
-                    }
-                    else{
-                        //console.log(this.claimantsData);
-                        this._shouldShowDetailHeaders = false;
-                    }
-
-                }
-
-
             }
 
             window.customElements.define(MaiClaimants.is, MaiClaimants);

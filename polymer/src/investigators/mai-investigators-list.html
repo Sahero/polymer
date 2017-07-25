@@ -1,18 +1,16 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="mai-investigators-list-data.html">
-<link rel="import" href="../mai-page-layout.html">
 
 <dom-module id="mai-investigators-list">
     <template>
-        <style include="mai-datatable-styles">
+        <style include="mai-datatable-styles mai-shared-styles">
         </style>
 
-        <mai-investigators-list-data selected-item="{{selectedItem}}"
-                              investigators-data="{{investigatorsData}}"
-                              filter-query="{{filterQuery}}"
-                              pages="{{pages}}"
-                              current-page="{{currentPage}}"
-        ></mai-investigators-list-data>
+        <mai-filter-toolbar>
+            <paper-button field-name="new" on-tap="_onAddClick">
+                <iron-icon icon="mai:add-circle-outline"></iron-icon>
+                Add new investigator
+            </paper-button>
+        </mai-filter-toolbar>
 
         <vaadin-grid items="{{investigatorsData}}" id="investigatorsListViewDatatable" class="list-view-datatable" active-item="{{selectedItem}}" >
 
@@ -59,7 +57,7 @@
     </template>
     <script>
 
-        class MaiInvestigatorsList extends Polymer.Element
+        class MaiInvestigatorsList extends MaiMixins(Polymer.Element)
         {
             static get is() { return 'mai-investigators-list'; }
             static get properties() {
@@ -69,23 +67,23 @@
                         notify:true
                     },
                     selectedItem: {
-                        observer: '_selectedItemChanged'
-                    }
+                        observer: '_selectedItemChanged',
+                        type: Object,
+                        notify: true
+                    },
+                    filterQuery:{
+                        type:String,
+                        notify:true
+                    },
+                    pages: { type: Array, notify: true},
+                    currentPage: { type:Number, value:0, notify:true},
+                    addNew: { type:Boolean, notify:true}
                 }
             }
 
             _selectedItemChanged(item){
                 if(item) {
                     this.$.investigatorsListViewDatatable.selectedItems = item ? [item] : [];
-
-                    this.dispatchEvent(new CustomEvent('investigator-item-selected',
-                        {
-                            bubbles: true,
-                            composed: true,
-                            detail: {
-                                data: this.selectedItem
-                            }
-                        }));
                 }
             }
 

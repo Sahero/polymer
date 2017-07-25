@@ -16,68 +16,16 @@
     <template>
         <custom-style>
             <style is="custom-style" include="iron-flex iron-flex-alignment mai-datatable-styles mai-detail-styles mai-date-styles">
-
-                :root{
-                    --vaadin-combo-box-overlay-max-height:50px;
-
-                    --paper-input-container-input:{
-                        font-size:12px;
-                        color:grey;
-                    };
-                    --paper-input-container-underline:{
-                        border:none;
-                        height:0px;
-                    };
-                }
-                .secondary vaadin-combo-box{
-                    padding:0;
-                }
-                .inputSearch{
-                    display:flex;
-                }
-                .paperDialog{
-                    width: 50%;
-                    height: 50%;
-                    border-radius:10px;
-                }
-                .paperDialog h4{
-                    padding: 0;
-                    text-align: center;
-                    margin: 5px;
-                    align-self:center;
-                }
-                .paperDialog vaadin-grid{
-                    margin:0px 0px 10px 0px;
-                    height:100%;
-                    padding:0;
-                }
-                .dialogHeader{
-                    display: flex;
-                    justify-content: space-between;
-                    margin: 0;
-                    padding-right: 0;
-                    background:cadetblue;
-                }
-                .dialogHeader paper-icon-button{
-                    color: red;
-                }
-
-                #toastMessage{
-                    --paper-toast-background-color: orangered;
-                    --paper-toast-color: white;
-                }
             </style>
         </custom-style>
         <app-localstorage-document key="user" data="{{userData}}" storage="window.localStorage"></app-localstorage-document>
 
         <iron-ajax
-
                 id="getProjectsDetail"
                 method="get"
                 url="[[_computeURL(recordId)]]"
                 headers$='{"FM-data-token": "[[userData.fmTokenData.token]]"}'
                 handle-as="json"
-
                 on-response="detailLoaded"
         ></iron-ajax>
 
@@ -114,7 +62,7 @@
                         <div class="group-item-row border-bottom-lightgray">
                             <span class="primary">Category</span>
                             <span class="secondary">
-                                <vaadin-combo-box selected-item="{{project.fieldData.Category::change}}" no-label-float="true"
+                                <vaadin-combo-box class="combo-box" selected-item="{{project.fieldData.Category::change}}" no-label-float="true"
                                                   items='["Surveillance","Factual","General","Social Media","Other"]'>
                                 </vaadin-combo-box>
                             </span>
@@ -125,7 +73,7 @@
                                 <vaadin-combo-box selected-item="{{project.fieldData.Status::change}}" no-label-float="true"
                                                   items='["Open","Overdue","Extension","Completed","Cancelled"]'>
                                 </vaadin-combo-box>
-                                 </span>
+                            </span>
                         </div>
                         <div class="group-item-row border-bottom-lightgray">
                             <span class="primary">Claim No</span>
@@ -667,18 +615,10 @@
                                     body +=',';
                                 }
                             }
-                            this._updateDetails(body);
+                            this._updateDetails(body,"projectDetail");
                         }, this);
                     }
                 }
-
-                /*_getDataFromArray(dataList, index, path) {
-                    //console.log(dataList);
-                    if(dataList.value===null){
-                        return;
-                    }
-                    return this.get(path, dataList.base[index]);
-                }*/
 
                 _onNoteDetailsChanged(e) {
                     this.$.notegrid.expandedItems = [e.detail.value];
@@ -693,46 +633,6 @@
                     return d.getFullYear()+'-'+('0' + (d.getMonth()+1)).slice(-2)+'-'+('0' + (d.getDate())).slice(-2);
                 }
 
-                /*_onProjectDetailChanged(changeDetail) {
-                    //console.log(changeDetail);
-                    if(changeDetail.path !=='projectDetail') {
-                        var path = changeDetail.path;
-                        var fieldName = path.substring(path.lastIndexOf('.') + 1);
-                        var value = changeDetail.value;
-
-                        if(value===null){
-                            value="";
-                        }
-                        this._updateDetails('"'+fieldName+'":"'+value+'"');
-                    }
-                }*/
-
-                /*_updateDetails(body){
-                    //var body = '{"data": {"'+fieldName+'":"'+value+'"}}';
-
-                    /!*if(fieldName.toLowerCase().includes("date") && value!=="" && value!==undefined){
-                     if(value.length<10){
-                     return;
-                     }
-                     value = new Date(value);
-                     value = ('0' + (value.getMonth()+1)).slice(-2) +'/'+('0' + (value.getDate())).slice(-2)+'/'+ value.getFullYear();
-                     }*!/
-                    console.log(body);
-
-                    this.shadowRoot.querySelector('#updateProjectsDetail').body = '{"data": {'+body+'}}';
-                    this.shadowRoot.querySelector('#updateProjectsDetail').generateRequest();
-                    /!*this.$.updateProjectsDetail.body = '{"data": {'+body+'}}';
-                    this.$.updateProjectsDetail.generateRequest();*!/
-                }*/
-
-                /*checkUpdateResult(data){
-                    var response = data.detail.response;
-                    if(response && response.errorCode !== '0') {
-                        this.$.toastMessage.text = "Error updating: "+response.errorMessage;
-                        this.$.toastMessage.open();
-                    }
-                }*/
-
                 removeAssigned(e){
                     this.splice(e.target.getAttribute('field-name'),e.target.getAttribute('data-index'),1);
                 }
@@ -741,6 +641,7 @@
                     var field = e.target.getAttribute('field-name');
                     this._onValueChangedFromSelection(field, '');
                 }
+
                 selectInput(e){
                     var id = e.target.getAttribute('field-name')+'Dialog';
 

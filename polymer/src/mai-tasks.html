@@ -6,15 +6,14 @@
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="tasks/mai-tasks-list-data.html">
 
 <dom-module id="mai-tasks">
     <template>
 
-        <custom-style>
-            <style include="mai-shared-styles">
+        <style include="mai-shared-styles">
 
-            </style>
-        </custom-style>
+        </style>
 
         <app-route
                 route="[[route]]"
@@ -26,13 +25,21 @@
         <app-route
                 route="{{tailroute}}"
                 pattern="/tasks/detail/:recordId"
-                data="{{recordIdData}}"
+                data="{{selectedItem}}"
         ></app-route>
+
+        <mai-tasks-list-data  selected-item="{{selectedItem}}"
+                              tasks-data="{{tasksList}}"
+                              filter-query="{{filterQuery}}"
+                              pages="{{pages}}"
+                              current-page="{{currentPage}}"
+                              add-new="{{addNew}}"
+        ></mai-tasks-list-data>
 
 
         <app-toolbar>
             <iron-selector class="view-toolbar" selected="[[tasksData.page]]"  attr-for-selected="name" role="navigation">
-                <a name="detail" href="[[route.prefix]]/detail">
+                <a name="detail" id="tasksDetailLink" href="[[route.prefix]]/detail/[[selectedItem.recordId]]">
                     <paper-fab mini icon="mai:content-copy"></paper-fab>
                     Detail view</a>
                 <a name="list" href="[[route.prefix]]/list">
@@ -41,9 +48,9 @@
                 <dom-if if="[[_shouldShowDetailHeaders]]">
                     <template>
                         <div class="detailsHeader">
-                            <div># [[selectedData.fieldData.id_Timesheet]]&nbsp;</div>
+                            <div># [[selectedItem.fieldData.id_Timesheet]]&nbsp;</div>
                             <div>&nbsp;|&nbsp;</div>
-                            <div style="font-style: italic">[[selectedData.fieldData.Timesheet_Status]]</div>
+                            <div style="font-style: italic">[[selectedItem.fieldData.Timesheet_Status]]</div>
                         </div>
                     </template>
                 </dom-if>
@@ -53,8 +60,15 @@
         <div>
             <iron-pages selected="[[tasksData.page]]" attr-for-selected="name">
 
-                <mai-tasks-list name="list" ></mai-tasks-list>
-                <mai-tasks-detail id="tasksDetailView" name="detail" recordId="{{recordIdData.recordId}}"></mai-tasks-detail>
+                <mai-tasks-list  name="list"
+                                 selected-item="{{selectedItem}}"
+                                 tasks-data="{{tasksList}}"
+                                 filter-query="{{filterQuery}}"
+                                 pages="{{pages}}"
+                                 current-page="{{currentPage}}"
+                                 add-new="{{addNew}}"
+                ></mai-tasks-list>
+                <mai-tasks-detail id="taskDetails" name="detail" recordId="{{selectedItem.recordId}}"></mai-tasks-detail>
 
             </iron-pages>
         </div>
@@ -63,10 +77,8 @@
 
     <script>
         (function() {
-            class MaiTasks extends Polymer.Element {
-                static get is() {
-                    return 'mai-tasks';
-                }
+            class MaiTasks extends MaiMixins(Polymer.Element) {
+                static get is() { return 'mai-tasks';}
 
                 static get properties(){
                     return {
@@ -74,7 +86,7 @@
                             type:Object,
                             notify:true,
                             observer:'_onTasksDataChanged'},
-                        selectedData: {
+                        selectedItem: {
                             type:Object,
                             notify:true,
                         },
@@ -101,8 +113,8 @@
                             this.tasksData.page = tasksData.page || "detail";
                             this.set('route.path',this.tasksData.page);
                         }
-                        else{
-                            this._computeShouldShowDetailHeaders();
+                        //else{
+                            super._computeShouldShowDetailHeaders(this.tasksData.page);
                             this.dispatchEvent(new CustomEvent('change-view',
                                 {
                                     bubbles: true,
@@ -114,16 +126,15 @@
                                 }));
 
                             if(this.tailroute.path){
-                                this.recordIdData.recordId = this.tailroute.path.replace("/","");
+                                this.selectedItem.recordId = this.tailroute.path.replace("/","");
                             }
 
-                            if(this.tasksData.page === 'detail' && this.recordIdData.recordId !== null){
-                                this.$.tasksDetailView.recordId = this.recordIdData.recordId;
-                                this.set('tailroute.path', this.recordIdData.recordId);
+                            if(this.tasksData.page === 'detail' && this.selectedItem.recordId !== null){
+                                this.set('tailroute.path', this.selectedItem.recordId);
                                 this.notifyPath('tailroute.path');
                                 this.notifyPath('route.path');
                             }
-                        }
+                        //}
                     }
 
 
@@ -131,27 +142,15 @@
 
                 ready(){
                     super.ready();
-                    this.addEventListener('task-item-selected', e => this._onTaskItemSelected(e));
+                    //this.addEventListener('task-item-selected', e => this._onTaskItemSelected(e));
+                    this.addEventListener('add-new-item', e => this._onNewItem(e));
                 }
 
-                _onTaskItemSelected(event){
+                _onNewItem(event){
                     let detail = event.detail;
-                    this.selectedData = detail.data;
-                    this.recordIdData.recordId = this.selectedData.recordId;
-                    this.$.tasksDetailView.recordId = this.selectedData.recordId;
-                }
-
-                _computeShouldShowDetailHeaders(){
-
-                    if(this.tasksData.page==='detail'){
-                        //console.log(this.tasksData);
-                        this._shouldShowDetailHeaders =  true;
-                    }
-                    else{
-                        //console.log(this.tasksData);
-                        this._shouldShowDetailHeaders = false;
-                    }
-
+                    this.selectedItem.recordId = detail.recordId;
+                    this.$.taskDetails.recordId = detail.recordId;
+                    this.$.tasksDetailLink.click();
                 }
 
 

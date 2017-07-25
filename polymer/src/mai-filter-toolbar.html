@@ -1,0 +1,53 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="mai-filter-toolbar">
+    <template>
+        <style>
+            /*Filter buttons for list view*/
+            .filter-button > iron-selector {
+                display:flex;
+                flex-direction: row;
+                justify-content: center;
+                font-size: 10px;
+                color:#4285f4;
+                list-style: none;
+                --iron-icon-width: 16px;
+                --iron-icon-height: 16px;
+                --iron-icon-stroke-color: none;
+            }
+            .filter-button > iron-selector > ::slotted(.iron-selected) {
+                text-decoration: underline;
+            }
+
+            ::slotted(.add-button){
+                flex: 1;
+                justify-content: flex-end;
+                --iron-icon-width: 16px;
+                --iron-icon-height: 16px;
+                font-size: 12px;
+                text-transform: none;
+            }
+
+        </style>
+
+        <div class="filter-button">
+            <iron-selector attr-for-selected="field-name" selected="none">
+                <slot></slot>
+            </iron-selector>
+        </div>
+
+    </template>
+    <script>
+        (function () {
+            class MaiFilterToolbar extends MaiMixins(Polymer.Element)
+            {
+
+                static get is() {
+                    return 'mai-filter-toolbar';
+                }
+
+            }
+            window.customElements.define(MaiFilterToolbar.is,MaiFilterToolbar);
+        })();
+    </script>
+</dom-module>

@@ -1,5 +1,4 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../mai-page-layout.html">
 
 <dom-module id="mai-projects-list">
     <template>
@@ -8,22 +7,19 @@
 
         </style>
 
-        <div class="filter-button">
-            <iron-selector attr-for-selected="field-name" selected="none">
-                <paper-button field-name="none" filter-text="none" on-tap="_onFilterClick"><iron-icon icon="mai:filter-none"></iron-icon>Find All</paper-button>
-                <paper-button field-name="Status" filter-text="open" on-tap="_onFilterClick">Find Open</paper-button>
-                <paper-button field-name="Category" filter-text="surveillance" on-tap="_onFilterClick">Find Surveillance</paper-button>
-                <paper-button field-name="Factual">Find Factual</paper-button>
-                <paper-button field-name="seperator">
-                    <iron-icon icon="mai:more-vert"></iron-icon>
-                </paper-button>
-                <paper-button field-name="new" on-tap="_onAddClick">
-                    <iron-icon icon="mai:add-circle-outline"></iron-icon>
-                    Add new project
-                </paper-button>
-
-            </iron-selector>
-        </div>
+        <mai-filter-toolbar>
+            <paper-button field-name="none" filter-text="none" on-tap="_onFilterClick"><iron-icon icon="mai:filter-none"></iron-icon>Find All</paper-button>
+            <paper-button field-name="Status" filter-text="open" on-tap="_onFilterClick">Find Open</paper-button>
+            <paper-button field-name="Category" filter-text="surveillance" on-tap="_onFilterClick">Find Surveillance</paper-button>
+            <paper-button field-name="Factual">Find Factual</paper-button>
+            <paper-button field-name="seperator">
+                <iron-icon icon="mai:more-vert"></iron-icon>
+            </paper-button>
+            <paper-button field-name="new" on-tap="_onAddClick">
+                <iron-icon icon="mai:add-circle-outline"></iron-icon>
+                Add new project
+            </paper-button>
+        </mai-filter-toolbar>
 
         <vaadin-grid items="{{projectsData}}" id="projectsListViewDatatable" class="list-view-datatable" active-item="{{selectedItem}}">
             <vaadin-grid-column>
@@ -86,9 +82,7 @@
 
         (function() {
             class MaiProjectsList extends MaiMixins(Polymer.Element) {
-                static get is() {
-                    return 'mai-projects-list';
-                }
+                static get is() { return 'mai-projects-list'; }
 
                 static get properties() {
                     return {
@@ -115,49 +109,6 @@
                     if(item) {
                         this.$.projectsListViewDatatable.selectedItems = item ? [item] : [];
                     }
-                }
-
-                /*_getClassForStatus(status) {
-                    //console.log(status);
-                    if (status=="Open") {
-                        return "open";
-                    }
-                    return "completed";
-                }
-
-                _getClassForDueDate(dueDate) {
-                    if(dueDate=="" || dueDate ==null){
-                        return "";
-                    }
-
-                    var today = new Date();
-                    dueDate=new Date(dueDate);
-                    //console.log((dueDate - today)/(1000*60*60*24));
-                    if (today > dueDate) {
-                        return "dueOver";
-                    }
-                    else if(((dueDate - today)/(1000*60*60*24)) < 5){
-                        return "dueSoon";
-                    }
-                    else{
-                        return "";
-                    }
-
-                }*/
-
-                _onFilterClick(e){
-                    var fieldname = e.target.getAttribute('field-name');
-                    var filtertext = e.target.getAttribute('filter-text');
-                    this.currentPage = 0;
-                    if(fieldname === "none"){
-                        this.filterQuery = "none";
-                    }else{
-                        this.filterQuery= '"'+fieldname+'":"'+filtertext+'"';
-                    }
-                }
-
-                _onAddClick(e){
-                    this.addNew = true;
                 }
 
             }

@@ -6,15 +6,14 @@
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="clients/mai-clients-list-data.html">
 
 <dom-module id="mai-clients">
     <template>
 
-        <custom-style>
-            <style include="mai-shared-styles">
+        <style include="mai-shared-styles">
 
-            </style>
-        </custom-style>
+        </style>
 
         <app-route
                 route="[[route]]"
@@ -26,13 +25,22 @@
         <app-route
                 route="{{tailroute}}"
                 pattern="/clients/detail/:recordId"
-                data="{{recordIdData}}"
+                data="{{selectedItem}}"
         ></app-route>
+
+        <mai-clients-list-data selected-item="{{selectedItem}}"
+                               clients-data="{{clientsList}}"
+                               filter-query="{{filterQuery}}"
+                               pages="{{pages}}"
+                               current-page="{{currentPage}}"
+                               add-new="{{addNew}}"
+        ></mai-clients-list-data>
+
 
 
         <app-toolbar>
             <iron-selector class="view-toolbar" selected="[[clientsData.page]]"  attr-for-selected="name" role="navigation">
-                <a name="detail" href="[[route.prefix]]/detail">
+                <a name="detail" id="clientsDetailLink" href="[[route.prefix]]/detail/[[selectedItem.recordId]]">
                     <paper-fab mini icon="mai:content-copy"></paper-fab>
                     Detail view</a>
                 <a name="list" href="[[route.prefix]]/list">
@@ -41,10 +49,10 @@
                 <dom-if if="[[_shouldShowDetailHeaders]]">
                     <template>
                         <div class="detailsHeader">
-                            <div># [[selectedData.fieldData.ID_Account]]&nbsp;</div>
-                            <div>[[selectedData.fieldData.Account]]</div>
+                            <div># [[selectedItem.fieldData.ID_Account]]&nbsp;</div>
+                            <div>[[selectedItem.fieldData.Account]]</div>
                             <div>&nbsp;|&nbsp;</div>
-                            <div style="font-style: italic">[[selectedData.fieldData.Status]]</div>
+                            <div style="font-style: italic">[[selectedItem.fieldData.Status]]</div>
                         </div>
                     </template>
                 </dom-if>
@@ -54,8 +62,15 @@
         <div>
             <iron-pages selected="[[clientsData.page]]" attr-for-selected="name">
 
-                <mai-clients-list name="list" ></mai-clients-list>
-                <mai-clients-detail id="clientsDetailView" name="detail" recordId="{{recordIdData.recordId}}"></mai-clients-detail>
+                <mai-clients-list name="list"
+                                  selected-item="{{selectedItem}}"
+                                  clients-data="{{clientsList}}"
+                                  filter-query="{{filterQuery}}"
+                                  pages="{{pages}}"
+                                  current-page="{{currentPage}}"
+                                  add-new="{{addNew}}"
+                ></mai-clients-list>
+                <mai-clients-detail id="clientDetails" name="detail" recordId="{{selectedItem.recordId}}"></mai-clients-detail>
 
             </iron-pages>
         </div>
@@ -64,7 +79,7 @@
 
     <script>
         (function() {
-            class MaiClients extends Polymer.Element {
+            class MaiClients extends MaiMixins(Polymer.Element) {
                 static get is() {
                     return 'mai-clients';
                 }
@@ -75,7 +90,7 @@
                             type:Object,
                             notify:true,
                             observer:'_onClientsDataChanged'},
-                        selectedData: {
+                        selectedItem: {
                             type:Object,
                             notify:true,
                         },
@@ -102,28 +117,27 @@
                             this.clientsData.page = clientsData.page || "detail";
                             this.set('route.path',this.clientsData.page);
                         }
-                        else{
-                            this._computeShouldShowDetailHeaders();
-                            this.dispatchEvent(new CustomEvent('change-view',
-                                {
-                                    bubbles: true,
-                                    composed: true,
-                                    detail: {
-                                        name: 'clients',
-                                        view: clientsData.page
-                                    }
-                                }));
 
-                            if(this.tailroute.path){
-                                this.recordIdData.recordId = this.tailroute.path.replace("/","");
-                            }
-                            if(this.clientsData.page === 'detail' && this.recordIdData.recordId !== null){
-                                this.$.clientsDetailView.recordId = this.recordIdData.recordId;
-                                this.set('tailroute.path', this.recordIdData.recordId);
-                                this.notifyPath('tailroute.path');
-                                this.notifyPath('route.path');
-                            }
+                        super._computeShouldShowDetailHeaders(this.clientsData.page);
+                        this.dispatchEvent(new CustomEvent('change-view',
+                            {
+                                bubbles: true,
+                                composed: true,
+                                detail: {
+                                    name: 'clients',
+                                    view: clientsData.page
+                                }
+                            }));
+
+                        if(this.tailroute.path){
+                            this.selectedItem.recordId = this.tailroute.path.replace("/","");
                         }
+                        if(this.clientsData.page === 'detail' && this.selectedItem.recordId !== null){
+                            this.set('tailroute.path', this.selectedItem.recordId);
+                            this.notifyPath('tailroute.path');
+                            this.notifyPath('route.path');
+                        }
+
                     }
 
 
@@ -131,30 +145,15 @@
 
                 ready(){
                     super.ready();
-                    this.addEventListener('client-item-selected', e => this._onClientItemSelected(e));
+                    this.addEventListener('add-new-item', e => this._onNewItem(e));
                 }
 
-                _onClientItemSelected(event){
+                _onNewItem(event){
                     let detail = event.detail;
-                    this.selectedData = detail.data;
-                    this.recordIdData.recordId = this.selectedData.recordId;
-                    this.$.clientsDetailView.recordId = this.selectedData.recordId;
+                    this.selectedItem.recordId = detail.recordId;
+                    this.$.clientDetails.recordId = detail.recordId;
+                    this.$.clientsDetailLink.click();
                 }
-
-                _computeShouldShowDetailHeaders(){
-
-                    if(this.clientsData.page==='detail'){
-                        //console.log(this.clientsData);
-                        this._shouldShowDetailHeaders =  true;
-                    }
-                    else{
-                        //console.log(this.clientsData);
-                        this._shouldShowDetailHeaders = false;
-                    }
-
-                }
-
-
             }
 
             window.customElements.define(MaiClients.is, MaiClients);

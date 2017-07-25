@@ -9,11 +9,9 @@
 <dom-module id="mai-projects">
     <template>
 
-        <custom-style>
-            <style include="mai-shared-styles">
+        <style include="mai-shared-styles">
 
-            </style>
-        </custom-style>
+        </style>
 
         <app-route
                 route="[[route]]"
@@ -38,7 +36,7 @@
 
         <app-toolbar>
             <iron-selector class="view-toolbar" selected="[[projectsData.page]]"  attr-for-selected="name" role="navigation">
-                <a name="detail" id="projectsDetailLink" href="[[route.prefix]]/detail">
+                <a name="detail" id="projectsDetailLink" href="[[route.prefix]]/detail/[[selectedItem.recordId]]">
                     <paper-fab mini icon="mai:content-copy"></paper-fab>
                     Detail view</a>
                 <a name="list" href="[[route.prefix]]/list">
@@ -53,10 +51,6 @@
                             <div>&nbsp;|&nbsp;</div>
                             <div style="font-style: italic" class$="{{_getClassForStatus(selectedItem.fieldData.Status)}}" >[[selectedItem.fieldData.Status]]</div>
                         </div>
-                    </template>
-                </dom-if>
-                <dom-if if="[[_shouldShowListHeaders]]">
-                    <template>
                     </template>
                 </dom-if>
             </iron-selector>
@@ -100,10 +94,6 @@
                         _shouldShowDetailHeaders: {
                             type: Boolean,
                             value: false
-                        },
-                        _shouldShowListHeaders: {
-                            type: Boolean,
-                            value: false
                         }
                     };
                 }
@@ -121,28 +111,28 @@
                             this.set('route.path',this.projectsData.page);
                         }
                         //else{
-                            this._computeShouldShowHeaders();
-                            this.dispatchEvent(new CustomEvent('change-view',
-                                {
-                                    bubbles: true,
-                                    composed: true,
-                                    detail: {
-                                        name: 'projects',
-                                        view: projectsData.page
-                                    }
-                                }));
+                        super._computeShouldShowDetailHeaders(this.projectsData.page);
+                        this.dispatchEvent(new CustomEvent('change-view',
+                            {
+                                bubbles: true,
+                                composed: true,
+                                detail: {
+                                    name: 'projects',
+                                    view: projectsData.page
+                                }
+                            }));
                         //console.log(this.tailroute);
                         //console.log(this.selectedItem);
-                            if(this.tailroute.path){
-                                this.selectedItem.recordId = this.tailroute.path.replace("/","");
-                                //this.$.projectDetails.recordId = this.selectedItem.recordId;
-                            }
+                        if(this.tailroute.path){
+                            this.selectedItem.recordId = this.tailroute.path.replace("/","");
+                            //this.$.projectDetails.recordId = this.selectedItem.recordId;
+                        }
                         //console.log(this.projectsData);
-                            if(this.projectsData.page === 'detail' && this.selectedItem.recordId !== null){
-                                this.set('tailroute.path', this.selectedItem.recordId);
-                                this.notifyPath('tailroute.path');
-                                this.notifyPath('route.path');
-                            }
+                        if(this.projectsData.page === 'detail' && this.selectedItem.recordId !== null){
+                            this.set('tailroute.path', this.selectedItem.recordId);
+                            this.notifyPath('tailroute.path');
+                            this.notifyPath('route.path');
+                        }
                         //}
                     }
 
@@ -160,24 +150,7 @@
                     this.$.projectDetails.recordId = detail.recordId;
                     this.$.projectsDetailLink.click();
                 }
-                /*_onProjectItemSelected(event){
-                    let detail = event.detail;
-                    this.selectedData = detail.data;
-                    this.recordIdData.recordId = this.selectedData.recordId;
-                    this.$.detailView.recordId = this.selectedData.recordId;
-                }*/
 
-                _computeShouldShowHeaders(){
-                    if(this.projectsData.page==='detail'){
-                        this._shouldShowDetailHeaders =  true;
-                        this._shouldShowListHeaders =  false;
-                    }
-                    else{
-                        this._shouldShowDetailHeaders =  false;
-                        this._shouldShowListHeaders =  true;
-                    }
-
-                }
             }
 
             window.customElements.define(MaiProjects.is, MaiProjects);

@@ -9,12 +9,12 @@
 <dom-module id="mai-staffs">
     <template>
 
-        <style is="custom-style" include="mai-shared-styles">
+        <style include="mai-shared-styles">
 
         </style>
 
         <app-route
-                route="{{route}}"
+                route="[[route]]"
                 pattern="/:page"
                 data="{{staffsData}}"
                 tail="{{tailroute}}"
@@ -27,17 +27,17 @@
         ></app-route>
 
         <mai-staffs-list-data selected-item="{{selectedItem}}"
-                                staffs-data="{{staffsList}}"
-                                filter-query="{{filterQuery}}"
-                                pages="{{pages}}"
-                                current-page="{{currentPage}}"
-                                add-new="{{addNew}}"
+                              staffs-data="{{staffsList}}"
+                              filter-query="{{filterQuery}}"
+                              pages="{{pages}}"
+                              current-page="{{currentPage}}"
+                              add-new="{{addNew}}"
         ></mai-staffs-list-data>
 
         <app-toolbar>
             <iron-selector class="view-toolbar" selected="[[staffsData.page]]"  attr-for-selected="name" role="navigation">
 
-                <a name="detail" id="staffsDetailLink" href="[[route.prefix]]/detail">
+                <a name="detail" id="staffsDetailLink" href="[[route.prefix]]/detail/[[selectedItem.recordId]]">
                     <paper-fab mini icon="mai:content-copy"></paper-fab>
                     Detail view</a>
                 <a name="list" href="[[route.prefix]]/list">
@@ -60,12 +60,12 @@
         <iron-pages selected="[[staffsData.page]]" attr-for-selected="name">
 
             <mai-staffs-list name="list"
-                           selected-item="{{selectedItem}}"
-                           staffs-data="{{staffsList}}"
-                           filter-query="{{filterQuery}}"
-                           pages="{{pages}}"
-                           current-page="{{currentPage}}"
-                           add-new="{{addNew}}"
+                             selected-item="{{selectedItem}}"
+                             staffs-data="{{staffsList}}"
+                             filter-query="{{filterQuery}}"
+                             pages="{{pages}}"
+                             current-page="{{currentPage}}"
+                             add-new="{{addNew}}"
             ></mai-staffs-list>
             <mai-staffs-detail id="staffDetails" name="detail" record-id="{{selectedItem.recordId}}"></mai-staffs-detail>
 
@@ -74,7 +74,7 @@
     </template>
     <script>
         (function() {
-            class MaiStaffs extends Polymer.Element
+            class MaiStaffs extends MaiMixins(Polymer.Element)
             {
                 static get is(){ return 'mai-staffs'; }
 
@@ -109,28 +109,28 @@
                             this.set('route.path', this.staffsData.page);
                         }
                         //else {
-                            //console.log(staffsData);
-                            this._computeShouldShowDetailHeaders();
-                            this.dispatchEvent(new CustomEvent('change-view',
-                                {
-                                    bubbles: true,
-                                    composed: true,
-                                    detail: {
-                                        name: 'staffs',
-                                        view: staffsData.page
-                                    }
-                                }));
+                        //console.log(staffsData);
+                        super._computeShouldShowDetailHeaders(this.staffsData.page);
+                        this.dispatchEvent(new CustomEvent('change-view',
+                            {
+                                bubbles: true,
+                                composed: true,
+                                detail: {
+                                    name: 'staffs',
+                                    view: staffsData.page
+                                }
+                            }));
 
 
-                            if(this.tailroute.path){
-                                this.selectedItem.recordId = this.tailroute.path.replace("/","");
-                            }
-                            if (this.staffsData.page === 'detail' && this.selectedItem.recordId!==null) {
-                                this.set('tailroute.path', this.selectedItem.recordId);
-                                this.notifyPath('tailroute.path');
-                                this.notifyPath('route.path');
-                            }
-                     //   }
+                        if(this.tailroute.path){
+                            this.selectedItem.recordId = this.tailroute.path.replace("/","");
+                        }
+                        if (this.staffsData.page === 'detail' && this.selectedItem.recordId!==null) {
+                            this.set('tailroute.path', this.selectedItem.recordId);
+                            this.notifyPath('tailroute.path');
+                            this.notifyPath('route.path');
+                        }
+                        //   }
                     }
                 }
 
@@ -145,24 +145,6 @@
                     this.selectedItem.recordId = detail.recordId;
                     this.$.staffDetails.recordId = detail.recordId;
                     this.$.staffsDetailLink.click();
-                }
-
-                /*_onStaffItemSelected(event){
-                    let detail = event.detail;
-                    this.selectedData = detail.data;
-                    this.recordIdData.recordId = this.selectedData.recordId;
-                    this.$.staffDetailView.recordId = this.selectedData.recordId;
-                }*/
-
-                _computeShouldShowDetailHeaders(){
-
-                    if(this.staffsData.page==='detail'){
-                        this._shouldShowDetailHeaders =  true;
-                    }
-                    else{
-                        this._shouldShowDetailHeaders = false;
-                    }
-
                 }
 
             }

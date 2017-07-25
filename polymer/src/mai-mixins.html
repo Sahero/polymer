@@ -80,9 +80,13 @@
         checkUpdateResult(data){
             var response = data.detail.response;
             if(response && response.errorCode !== '0') {
-                this.$.toastMessage.text = "Error updating: "+response.errorMessage;
-                this.$.toastMessage.open();
+                this._viewToastMessage("Error updating: "+response.errorMessage);
             }
+        }
+
+        _viewToastMessage(message){
+            this.$.toastMessage.text = message;
+            this.$.toastMessage.open();
         }
 
         _getClassForStatus(status) {
@@ -111,6 +115,30 @@
                 return "";
             }
 
+        }
+
+        _onFilterClick(e){
+            var fieldname = e.target.getAttribute('field-name');
+            var filtertext = e.target.getAttribute('filter-text');
+            this.currentPage = 0;
+            if(fieldname === "none"){
+                this.filterQuery = "none";
+            }else{
+                this.filterQuery= '"'+fieldname+'":"'+filtertext+'"';
+            }
+        }
+
+        _onAddClick(e){
+            this.addNew = true;
+        }
+
+        _computeShouldShowDetailHeaders(page){
+            if(page==='detail'){
+                this._shouldShowDetailHeaders =  true;
+            }
+            else{
+                this._shouldShowDetailHeaders = false;
+            }
         }
 
     };

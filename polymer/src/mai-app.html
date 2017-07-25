@@ -47,6 +47,13 @@
             on-response="_storeTokenData"
     ></iron-ajax>
 
+    <iron-ajax
+            id="checkToken"
+            method="get"
+            handle-as="json"
+            on-response="_checkTokenData"
+    ></iron-ajax>
+
     <iron-pages
             selected="[[_selected]]"
             attr-for-selected="pagename"
@@ -153,7 +160,7 @@
               if(response){
                   this.fmTokenData = data.detail.response;
                   this.userData.fmTokenData = this.fmTokenData;
-                  //this.push('userData', {"fmTokenData": this.fmTokenData});
+                  this.userData.loggedInTime = new Date().getTime();
                   this.notifyPath('userData.fmTokenData');
               }
               console.log(this.userData);
@@ -162,6 +169,7 @@
         /*          _handleUserError(event) {
          this.error = event.detail.request.xhr.response;
          }*/
+
 
           _computeTokenURL(){
               return `${super._getServer()}fm/getToken`;
@@ -176,18 +184,42 @@
               this.page = 'view404';
           }
 
+          _checkTokenData(data){
+              var response = data.detail.response;
+              if(response){
+                  if(response.errorCode === "0"){
+                      this._loggedIn = true;
+                  }
+                  else{
+                      this._logOut();
+                  }
+              }
+              else{
+                  this._logOut();
+              }
+          }
+
           ready(){
               super.ready();
 
-              if (localStorage.getItem("user") === null || localStorage.getItem("user").length <= 2) {
-                  console.log(1);
-                  this._loggedIn = false;
+              if (localStorage.getItem("user") === null || localStorage.getItem("user") === undefined || localStorage.getItem("user").length <= 2) {
+                  this._logOut();
               }
               else{
-                  this.page =''
+                  this.page ='';
                   this.userData = localStorage.getItem("user");
-                  this._loggedIn = true;
+
+                /*//Token expires in 15 mins and user should log out
+                 var now = new Date().getTime();
+                 var loggedInTime = JSON.parse(this.userData).loggedInTime;
+                 console.log(now - loggedInTime);*/
+                  this.$.checkToken.url = `${super._getServer()}fm/checkToken/${JSON.parse(this.userData).fmTokenData.layout}`;
+                  this.$.checkToken.headers = {'fm-data-token': JSON.parse(this.userData).fmTokenData.token};
+                  this.$.checkToken.generateRequest();
               }
+
+              this.addEventListener('invalid-token', e => this._logOut());
+
           }
 
       }

@@ -1,19 +1,16 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../mai-page-layout.html">
 
 <dom-module id="mai-staffs-list">
     <template>
         <style include="mai-datatable-styles mai-shared-styles">
         </style>
 
-        <div class="filter-button">
-            <iron-selector attr-for-selected="field-name" selected="none">
-                <paper-button field-name="new" on-tap="_onAddClick">
-                    <iron-icon icon="mai:add-circle-outline"></iron-icon>
-                    Add new staff
-                </paper-button>
-            </iron-selector>
-        </div>
+        <mai-filter-toolbar>
+            <paper-button field-name="new" on-tap="_onAddClick">
+                <iron-icon icon="mai:add-circle-outline"></iron-icon>
+                Add new staff
+            </paper-button>
+        </mai-filter-toolbar>
 
         <vaadin-grid items="{{staffsData}}" id="staffsListViewDatatable" class="list-view-datatable" active-item="{{selectedItem}}" >
 
@@ -56,7 +53,7 @@
     </template>
     <script>
 
-        class MaiStaffsList extends Polymer.Element
+        class MaiStaffsList extends MaiMixins(Polymer.Element)
         {
             static get is() { return 'mai-staffs-list'; }
             static get properties() {
@@ -83,21 +80,8 @@
             _selectedItemChanged(item){
                 //console.log(item);
                 if(item) {
-                    //console.log(1);
-                    this.$.staffsListViewDatatable.selectedItems = item ? [item] : [];
-                    /*this.dispatchEvent(new CustomEvent('staff-item-selected',
-                        {
-                            bubbles: true,
-                            composed: true,
-                            detail: {
-                                data: this.selectedItem
-                            }
-                        }));*/
+                     this.$.staffsListViewDatatable.selectedItems = item ? [item] : [];
                 }
-            }
-
-            _onAddClick(e){
-                this.addNew = true;
             }
 
         }

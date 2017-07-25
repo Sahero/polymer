@@ -144,6 +144,54 @@
                 min-width: 250px;
             }
 
+            .secondary vaadin-combo-box{
+                --vaadin-combo-box-overlay-max-height:50px;
+
+                --paper-input-container-input:{
+                    font-size:12px;
+                    color:grey;
+                };
+                --paper-input-container-underline:{
+                    border:none;
+                    height:0px;
+                };
+                padding:0;
+            }
+            .inputSearch{
+                display:flex;
+            }
+            .paperDialog{
+                width: 50%;
+                height: 50%;
+                border-radius:10px;
+            }
+            .paperDialog h4{
+                padding: 0;
+                text-align: center;
+                margin: 5px;
+                align-self:center;
+            }
+            .paperDialog vaadin-grid{
+                margin:0px 0px 10px 0px;
+                height:100%;
+                padding:0;
+            }
+            .dialogHeader{
+                display: flex;
+                justify-content: space-between;
+                margin: 0;
+                padding-right: 0;
+                background:cadetblue;
+            }
+            .dialogHeader paper-icon-button{
+                color: red;
+            }
+
+            #toastMessage{
+                --paper-toast-background-color: orangered;
+                --paper-toast-color: white;
+            }
+
 
         </style>
     </template>

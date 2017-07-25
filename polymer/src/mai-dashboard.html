@@ -163,7 +163,7 @@
 
 
     <mai-menu-data menus="{{menus}}"></mai-menu-data>
-
+    <paper-toast id="toastMessage" class="fit-bottom" duration="5000"></paper-toast>
     <app-header-layout>
 
       <app-header slot="header" id="header" fixed effects="waterfall">
@@ -181,7 +181,7 @@
                   <dom-repeat items="[[menus]]" as="menu">
                     <template>
                       <paper-tab link name="[[menu.name]]">
-                        <a href="/[[menu.name]]" class="link" tabindex="-1">[[menu.title]]</a>
+                        <a href="/[[menu.name]]/detail" class="link" tabindex="-1">[[menu.title]]</a>
                       </paper-tab>
                     </template>
                   </dom-repeat>
@@ -202,7 +202,7 @@
 
               <dom-repeat items="[[menus]]" as="menu">
                 <template>
-                  <a name="[[menu.name]]" href="/[[menu.name]]">
+                  <a name="[[menu.name]]" href="/[[menu.name]]/detail">
                     <paper-fab icon="mai:[[menu.iconName]]" title="[[menu.title]]"></paper-fab>
                     [[menu.title]]
                   </a>
@@ -239,10 +239,13 @@
 
         </iron-pages>
 
+
+
+
+
       </app-drawer-layout>
 
     </app-header-layout>
-
   </template>
 
   <script>
@@ -255,6 +258,7 @@
 
           static get properties() {
               return {
+                  //pages: {value:'home',type:String, reflectToAttribute: true,},
                   page: {
                       type: String,
                       reflectToAttribute: true,
@@ -381,7 +385,7 @@
           }
 
           _onChangeView(event){
-              console.log(event.detail);
+
               var detail = event.detail;
               var resolvedPageUrl = this.resolveUrl(detail.name+'/mai-'+ detail.name+'-'+detail.view + '.html');
               //var resolvedPageUrl = this.resolveUrl(detail.name+'/mai-'+ detail.view + '.html');

@@ -7,7 +7,7 @@
 
 
     <template>
-        <style is="custom-style" include="iron-flex iron-flex-alignment mai-datatable-styles mai-detail-styles">
+        <style include="iron-flex iron-flex-alignment mai-datatable-styles mai-detail-styles">
             .group-item{
                 min-width:200px;
                 margin: 5px 20px 0px 5px;
@@ -22,13 +22,13 @@
             }
         </style>
 
-        <app-localstorage-document key="token" data="{{tokenData}}" storage="window.localStorage"></app-localstorage-document>
+        <app-localstorage-document key="user" data="{{userData}}" storage="window.localStorage"></app-localstorage-document>
 
         <iron-ajax
                 id="getStaffsDetail"
                 method="get"
                 url="[[_computeURL(recordId)]]"
-                headers$='{"FM-data-token": "[[tokenData.token]]"}'
+                headers$='{"FM-data-token": "[[userData.fmTokenData.token]]"}'
                 handle-as="json"
                 on-response="detailLoaded"
         ></iron-ajax>
@@ -37,7 +37,7 @@
                 id="updatestaffDetail"
                 method="put"
                 url="[[_computeURL(recordId)]]"
-                headers$='{"FM-data-token": "[[tokenData.token]]"}'
+                headers$='{"FM-data-token": "[[userData.fmTokenData.token]]"}'
                 handle-as="json"
                 on-response="checkUpdateResult"
         ></iron-ajax>
@@ -59,42 +59,50 @@
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Last</span>
-                                    <span class="secondary">[[staff.fieldData.Name_Last]]</span>
+                                    <mai-input class="secondary" value="{{staff.fieldData.Name_Last::input}}"></mai-input>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Permissions</span>
-                                    <span class="secondary">[[staff.fieldData.Permissions]]</span>
+                                    <span class="secondary">
+                                        <vaadin-combo-box selected-item="{{staff.fieldData.Permissions::change}}" no-label-float="true"
+                                                          items='["Staff","Manager"]'>
+                                        </vaadin-combo-box>
+                                    </span>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Login Account</span>
-                                    <span class="secondary">[[staff.fieldData.FileMaker_Account]]</span>
+                                    <mai-input class="secondary" value="{{staff.fieldData.FileMaker_Account::input}}"></mai-input>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Status</span>
-                                    <span class="secondary">[[staff.fieldData.Status]]</span>
+                                    <span class="secondary">
+                                        <vaadin-combo-box selected-item="{{staff.fieldData.Status::change}}" no-label-float="true"
+                                                          items='["Active","Inactive","Disregard"]'>
+                                        </vaadin-combo-box>
+                                    </span>
                                 </div>
                             </div>
 
                             <div class="group-item border-lightgray">
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Phone 1</span>
-                                    <span class="secondary">[[staff.fieldData.Phone1]]</span>
+                                    <mai-input class="secondary" value="{{staff.fieldData.Phone1::input}}"></mai-input>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Phone 2</span>
-                                    <span class="secondary">[[staff.fieldData.Phone2]]</span>
+                                    <mai-input class="secondary" value="{{staff.fieldData.Phone2::input}}"></mai-input>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Mobile Phone</span>
-                                    <span class="secondary">[[staff.fieldData.Cell]]</span>
+                                    <mai-input class="secondary" value="{{staff.fieldData.Cell::input}}"></mai-input>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Fax</span>
-                                    <span class="secondary">[[staff.fieldData.Fax]]</span>
+                                    <mai-input class="secondary" value="{{staff.fieldData.Fax::input}}"></mai-input>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Email</span>
-                                    <span class="secondary">[[staff.fieldData.Email]]</span>
+                                    <mai-input class="secondary" value="{{staff.fieldData.Email::input}}"></mai-input>
                                 </div>
                             </div>
 
@@ -103,38 +111,38 @@
                             <div class="group-item border-lightgray">
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Address 1</span>
-                                    <span class="secondary">[[staff.fieldData.Street1]]</span>
+                                    <mai-input class="secondary" value="{{staff.fieldData.Street1::input}}"></mai-input>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Address 2</span>
-                                    <span class="secondary">[[staff.fieldData.Street2]]</span>
+                                    <mai-input class="secondary" value="{{staff.fieldData.Street2::input}}"></mai-input>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">City</span>
-                                    <span class="secondary">[[staff.fieldData.City]]</span>
+                                    <mai-input class="secondary" value="{{staff.fieldData.City::input}}"></mai-input>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">State</span>
-                                    <span class="secondary">[[staff.fieldData.State]]</span>
+                                    <mai-input class="secondary" value="{{staff.fieldData.State::input}}"></mai-input>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Postal Code</span>
-                                    <span class="secondary">[[staff.fieldData.Postal_Code]]</span>
+                                    <mai-input class="secondary" value="{{staff.fieldData.Postal_Code::input}}"></mai-input>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Country</span>
-                                    <span class="secondary">[[staff.fieldData.Primary_Country]]</span>
+                                    <mai-input class="secondary" value="{{staff.fieldData.Primary_Country::input}}"></mai-input>
                                 </div>
                             </div>
 
                             <div class="group-item border-lightgray">
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Birthday</span>
-                                    <span class="secondary">[[staff.fieldData.Birthday]]</span>
+                                    <mai-input class="secondary" value="{{staff.fieldData.Birthday::input}}"></mai-input>
                                 </div>
                                 <div class="group-item-row border-bottom-lightgray">
                                     <span class="primary">Company</span>
-                                    <span class="secondary">[[staff.fieldData.Instant_Messaging]]</span>
+                                    <mai-input class="secondary" value="{{staff.fieldData.Instant_Messaging::input}}"></mai-input>
                                 </div>
                             </div>
                         </div>
@@ -248,43 +256,15 @@
 
                 static get observers() {
                     return [
-                        '_recordIdChanged(recordId,tokenData)',
+                        '_recordIdChanged(recordId,userData)',
                         //'_onStaffDetailChanged(staffDetail.*)',
                         '_onDetailChanged(staffDetail.*,"staffDetail")',
                     ]
                 }
 
-                /*_onStaffDetailChanged(changeDetail) {
-                    //console.log(changeDetail);
-                    if(changeDetail.path !=='staffDetail') {
-                        var path = changeDetail.path;
-                        var fieldName = path.substring(path.lastIndexOf('.') + 1);
-                        var value = changeDetail.value;
-
-                        if(value===null){
-                            value="";
-                        }
-                        this._updateDetails('"'+fieldName+'":"'+value+'"');
-                    }
-                }
-
-                _updateDetails(body){
-                    console.log(body);
-                    this.$.updateStaffsDetail.body = '{"data": {'+body+'}}';
-                    this.$.updateStaffsDetail.generateRequest();
-                }
-
-                checkUpdateResult(data){
-                    var response = data.detail.response;
-                    if(response && response.errorCode !== '0') {
-                        this.$.toastMessage.text = "Error updating: "+response.errorMessage;
-                        this.$.toastMessage.open();
-                    }
-                }*/
-
-                _recordIdChanged(recordId, tokenData){
-                    if(recordId && tokenData) {
-                        this.$.getStaffsDetail.headers = {'fm-data-token': tokenData.token};
+                _recordIdChanged(recordId, userData){
+                    if(recordId && userData) {
+                        this.$.getStaffsDetail.headers = {'fm-data-token': userData.fmTokenData.token};
                         this.$.getStaffsDetail.generateRequest();
                     }
                 }
@@ -301,17 +281,8 @@
                 _computeURL(recordId){
                     console.log(recordId);
                     //console.log(this.tokenData);
-                    return `${super._getServer()}fm/getDetail/L130_STAFF_Data_Entry/${recordId}`;
+                    return `${super._getServer()}fm/getDetail/${super._getLayout('staffs').detail}/${recordId}`;
                 }
-
-                _getDataFromArray(dataList, index, path) {
-                    //console.log(dataList);
-                    if(dataList.value===null){
-                        return;
-                    }
-                    return this.get(path, dataList.base[index]);
-                }
-
             }
             window.customElements.define(MyStaffsDetail.is, MyStaffsDetail);
         }());

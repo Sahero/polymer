@@ -1,18 +1,16 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="mai-tasks-list-data.html">
-<link rel="import" href="../mai-page-layout.html">
 
 <dom-module id="mai-tasks-list">
     <template>
-        <style include="mai-datatable-styles">
+        <style include="mai-datatable-styles mai-shared-styles">
         </style>
 
-        <mai-tasks-list-data selected-item="{{selectedItem}}"
-                              tasks-data="{{tasksData}}"
-                              filter-query="{{filterQuery}}"
-                              pages="{{pages}}"
-                              current-page="{{currentPage}}"
-        ></mai-tasks-list-data>
+        <mai-filter-toolbar>
+            <paper-button field-name="new" on-tap="_onAddClick">
+                <iron-icon icon="mai:add-circle-outline"></iron-icon>
+                Add new task
+            </paper-button>
+        </mai-filter-toolbar>
 
         <vaadin-grid items="{{tasksData}}" id="tasksListViewDatatable" class="list-view-datatable" active-item="{{selectedItem}}" >
 
@@ -63,7 +61,7 @@
     </template>
     <script>
 
-        class MaiTasksList extends Polymer.Element
+        class MaiTasksList extends MaiMixins(Polymer.Element)
         {
             static get is() { return 'mai-tasks-list'; }
             static get properties() {
@@ -73,33 +71,24 @@
                         notify:true
                     },
                     selectedItem: {
-                        observer: '_selectedItemChanged'
-                    }
+                        observer: '_selectedItemChanged',
+                        type: Object,
+                        notify: true
+                    },
+                    filterQuery:{
+                        type:String,
+                        notify:true
+                    },
+                    pages: { type: Array, notify: true},
+                    currentPage: { type:Number, value:0, notify:true},
+                    addNew: { type:Boolean, notify:true}
                 }
             }
 
             _selectedItemChanged(item){
                 if(item) {
                     this.$.tasksListViewDatatable.selectedItems = item ? [item] : [];
-
-                    this.dispatchEvent(new CustomEvent('task-item-selected',
-                        {
-                            bubbles: true,
-                            composed: true,
-                            detail: {
-                                data: this.selectedItem
-                            }
-                        }));
                 }
-            }
-
-
-            _getDataFromArray(dataList, index, path) {
-                //console.log(dataList);
-                if(dataList.value===null){
-                    return;
-                }
-                return this.get(path, dataList.base[index]);
             }
 
         }

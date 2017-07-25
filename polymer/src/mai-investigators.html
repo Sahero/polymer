@@ -6,15 +6,14 @@
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="investigators/mai-investigators-list-data.html">
 
 <dom-module id="mai-investigators">
     <template>
 
-        <custom-style>
-            <style include="mai-shared-styles">
+        <style include="mai-shared-styles">
 
-            </style>
-        </custom-style>
+        </style>
 
         <app-route
                 route="[[route]]"
@@ -26,13 +25,20 @@
         <app-route
                 route="{{tailroute}}"
                 pattern="/investigators/detail/:recordId"
-                data="{{recordIdData}}"
+                data="{{selectedItem}}"
         ></app-route>
 
+        <mai-investigators-list-data selected-item="{{selectedItem}}"
+                                     investigators-data="{{investigatorsList}}"
+                                     filter-query="{{filterQuery}}"
+                                     pages="{{pages}}"
+                                     current-page="{{currentPage}}"
+                                     add-new="{{addNew}}"
+        ></mai-investigators-list-data>
 
         <app-toolbar>
             <iron-selector class="view-toolbar" selected="[[investigatorsData.page]]"  attr-for-selected="name" role="navigation">
-                <a name="detail" href="[[route.prefix]]/detail">
+                <a name="detail" id="investigatorsDetailLink" href="[[route.prefix]]/detail/[[selectedItem.recordId]]">
                     <paper-fab mini icon="mai:content-copy"></paper-fab>
                     Detail view</a>
                 <a name="list" href="[[route.prefix]]/list">
@@ -41,10 +47,10 @@
                 <dom-if if="[[_shouldShowDetailHeaders]]">
                     <template>
                         <div class="detailsHeader">
-                            <div># [[selectedData.fieldData.ID_investigator]]&nbsp;</div>
-                            <div>[[selectedData.fieldData.Name_Full]]</div>
+                            <div># [[selectedItem.fieldData.ID_investigator]]&nbsp;</div>
+                            <div>[[selectedItem.fieldData.Name_Full]]</div>
                             <div>&nbsp;|&nbsp;</div>
-                            <div style="font-style: italic">[[selectedData.fieldData.Status]]</div>
+                            <div style="font-style: italic">[[selectedItem.fieldData.Status]]</div>
                         </div>
                     </template>
                 </dom-if>
@@ -54,8 +60,15 @@
         <div>
             <iron-pages selected="[[investigatorsData.page]]" attr-for-selected="name">
 
-                <mai-investigators-list name="list" ></mai-investigators-list>
-                <mai-investigators-detail id="investigatorsDetailView" name="detail" recordId="{{recordIdData.recordId}}"></mai-investigators-detail>
+                <mai-investigators-list name="list"
+                                        selected-item="{{selectedItem}}"
+                                        investigators-data="{{investigatorsList}}"
+                                        filter-query="{{filterQuery}}"
+                                        pages="{{pages}}"
+                                        current-page="{{currentPage}}"
+                                        add-new="{{addNew}}"
+                ></mai-investigators-list>
+                <mai-investigators-detail id="investigatorDetails" name="detail" recordId="{{selectedItem.recordId}}"></mai-investigators-detail>
 
             </iron-pages>
         </div>
@@ -64,7 +77,7 @@
 
     <script>
         (function() {
-            class MaiInvestigators extends Polymer.Element {
+            class MaiInvestigators extends MaiMixins(Polymer.Element) {
                 static get is() {
                     return 'mai-investigators';
                 }
@@ -75,7 +88,7 @@
                             type:Object,
                             notify:true,
                             observer:'_onInvestigatorsDataChanged'},
-                        selectedData: {
+                        selectedItem: {
                             type:Object,
                             notify:true,
                         },
@@ -99,31 +112,30 @@
                         }
 
                         if(investigatorsData.page === undefined || investigatorsData.page ===""){
-                            this.investigatorsData.page = investigatorsData.page || "detail";
+                            this.investigatorsData.page = "detail";
                             this.set('route.path',this.investigatorsData.page);
                         }
-                        else{
-                            this._computeShouldShowDetailHeaders();
-                            this.dispatchEvent(new CustomEvent('change-view',
-                                {
-                                    bubbles: true,
-                                    composed: true,
-                                    detail: {
-                                        name: 'investigators',
-                                        view: investigatorsData.page
-                                    }
-                                }));
 
-                            if(this.tailroute.path){
-                                this.recordIdData.recordId = this.tailroute.path.replace("/","");
-                            }
-                            if(this.investigatorsData.page === 'detail' && this.recordIdData.recordId !== null){
-                                this.$.investigatorsDetailView.recordId = this.recordIdData.recordId;
-                                this.set('tailroute.path', this.recordIdData.recordId);
-                                this.notifyPath('tailroute.path');
-                                this.notifyPath('route.path');
-                            }
+                        super._computeShouldShowDetailHeaders(this.investigatorsData.page);
+                        this.dispatchEvent(new CustomEvent('change-view',
+                            {
+                                bubbles: true,
+                                composed: true,
+                                detail: {
+                                    name: 'investigators',
+                                    view: investigatorsData.page
+                                }
+                            }));
+
+                        if(this.tailroute.path){
+                            this.selectedItem.recordId = this.tailroute.path.replace("/","");
                         }
+                        if(this.investigatorsData.page === 'detail' && this.selectedItem.recordId !== null){
+                            this.set('tailroute.path', this.selectedItem.recordId);
+                            this.notifyPath('tailroute.path');
+                            this.notifyPath('route.path');
+                        }
+
                     }
 
 
@@ -131,29 +143,15 @@
 
                 ready(){
                     super.ready();
-                    this.addEventListener('investigator-item-selected', e => this._onInvestigatorItemSelected(e));
+                    this.addEventListener('add-new-item', e => this._onNewItem(e));
                 }
 
-                _onInvestigatorItemSelected(event){
+                _onNewItem(event){
                     let detail = event.detail;
-                    this.selectedData = detail.data;
-                    this.recordIdData.recordId = this.selectedData.recordId;
-                    this.$.investigatorsDetailView.recordId = this.selectedData.recordId;
+                    this.selectedItem.recordId = detail.recordId;
+                    this.$.investigatorDetails.recordId = detail.recordId;
+                    this.$.investigatorsDetailLink.click();
                 }
-
-                _computeShouldShowDetailHeaders(){
-
-                    if(this.investigatorsData.page==='detail'){
-                        //console.log(this.investigatorsData);
-                        this._shouldShowDetailHeaders =  true;
-                    }
-                    else{
-                        //console.log(this.investigatorsData);
-                        this._shouldShowDetailHeaders = false;
-                    }
-
-                }
-
 
             }
 

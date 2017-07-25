@@ -36,6 +36,33 @@ router.get('/getToken', function(req, res) {
     });
 });
 
+
+//Check if token is valid
+router.get('/checkToken/:layoutname', function(req, res) {
+    if(env=="development"){
+        return {token:'1234'};
+        return;
+    }
+    let url = config.filemaker.protocol+'://'+config.filemaker.ip+'/fmi/rest/api/record/'+config.filemaker.solution+ '/' + req.params.layoutname+'?range=1';
+    // Make the API Call
+    request({
+        "rejectUnauthorized": false,
+        "method" : 'GET',
+        "url" : url,
+        "headers" : {"FM-data-token": req.header('fm-data-token')},
+        "agentOptions" : config.filemaker.selfSignedCertificate,
+        "json" : true,
+        "body" : config.filemaker.body
+    }, (error, response, body) => {
+        //console.log(body);
+        if(!error) {
+            res.json( body);
+        }
+        else {
+            res.json(error);
+        }
+    });
+});
 //get record count of the provided layout
 router.get('/getRecordCount/:layoutname', function(req, res) {
     if(env=="development"){
@@ -83,7 +110,7 @@ router.post('/getRecordCount/:layoutname', function(req, res) {
             }
             else {
 
-                if(body.data.length) {
+                if(body.errorCode === "0") {
                     res.json(body.data.length);
                 }
                 else{
@@ -129,8 +156,12 @@ router.get('/getList/:layoutname/:page/:numofrecords', function(req, res) {
                 console.log(error);
             }
             else {
-                //console.log(body);
-                res.json(body.data);
+                if(body.errorCode === "0") {
+                    res.json(body.data);
+                }
+                else{
+                    res.json(body);
+                }
             }
         });
     }

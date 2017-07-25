@@ -41,6 +41,8 @@
                 on-response="getSelected"
         ></iron-ajax>
 
+        <paper-toast id="toastMessage" class="fit-bottom" duration="5000"></paper-toast>
+
     </template>
 
     <script>
@@ -95,7 +97,7 @@
                 }
 
                 _currentPageChanged(currentPage,filterQuery,userData){
-                    console.log(userData);
+                    //console.log(userData);
                     if(userData && currentPage!==undefined) {
                         if(filterQuery) {
                             if (filterQuery === "none") {
@@ -142,7 +144,14 @@
                 listLoaded(data) {
                     if(data.detail.response!==null) {
                         this.listData = data.detail.response;
-                        //console.log(this.listData);
+                        console.log(this.listData);
+                        if(this.listData && 'errorMessage' in this.listData) {
+                            this.dispatchEvent(new CustomEvent('invalid-token', {
+                                bubbles: true,
+                                composed: true
+                            }));
+                            return;
+                        }
                         if(this.selectedItem && 'recordId' in this.selectedItem) {
                             this.getSelectedItemData(this.selectedItem.recordId);
                         }
@@ -157,7 +166,10 @@
                     if(data.detail.response!==null){
                         this.totalRecord = data.detail.response;
                         //console.log(this.totalRecord);
-
+                        if(this.totalRecord===0){
+                            super._viewToastMessage("No records found");
+                            return;
+                        }
                         this.pages = Array.apply( null, {length: Math.ceil(this.totalRecord/this.pageSize)} ).map((item, index) => {
                             return index + 1;
                         });
