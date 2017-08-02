@@ -1,16 +1,366 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../mai-input.html">
 
 <dom-module id="mai-clients-detail">
 
     <template>
-      <p>Clients Detail</p>
+        <style include="iron-flex iron-flex-alignment mai-datatable-styles mai-detail-styles">
+            .group-item{
+                margin: 5px 20px 0px 5px;
+                width: 93%;
+            }
+            .group-client{
+                min-width:200px;
+                margin: 5px 20px 0px 5px;
+                height: 100%;
+            }
+            .primary{
+                --paper-checkbox-label-color: gray;
+                --paper-checkbox-checked-color: gray;
+                --paper-checkbox-unchecked-color: gray;
+            }
+
+        </style>
+
+        <app-localstorage-document key="user" data="{{userData}}" storage="window.localStorage"></app-localstorage-document>
+
+        <iron-ajax
+                id="getClientsDetail"
+                method="get"
+                url="[[_computeURL(recordId)]]"
+                headers$='{"FM-data-token": "[[userData.fmTokenData.token]]"}'
+                handle-as="json"
+                on-response="detailLoaded"
+        ></iron-ajax>
+
+        <iron-ajax
+                id="updateclientDetail"
+                method="put"
+                url="[[_computeURL(recordId)]]"
+                headers$='{"FM-data-token": "[[userData.fmTokenData.token]]"}'
+                handle-as="json"
+                on-response="checkUpdateResult"
+        ></iron-ajax>
+
+        <paper-toast id="toastMessage" class="fit-bottom" duration="5000"></paper-toast>
+
+
+
+        <iron-list id="list" class="box-spacing" items="{{clientDetail}}" as="client" scroll-target="document">
+            <template>
+                <div class="layout horizontal wrap start-justified">
+                    <div class="group-client group-header border-lightgray">
+                        <div class="box-container">Basic Info</div>
+                        <div class="group-item border-lightgray">
+                            <div class="group-header group-item-row border-bottom-lightgray">
+                                <span class="primary">ID#</span>
+                                <span class="secondary">[[client.fieldData.ID_Account]]</span>
+                            </div>
+                            <div class="group-item-row border-bottom-lightgray">
+                                <span class="primary">Client Name</span>
+                                <mai-input class="secondary" value="{{client.fieldData.Account::input}}"></mai-input>
+                            </div>
+                            <div class="group-item-row border-bottom-lightgray">
+                                <span class="primary">Department</span>
+                                <mai-input class="secondary" value="{{client.fieldData.Account_Type::input}}"></mai-input>
+                            </div>
+                            <div class="group-item-row border-bottom-lightgray">
+                                <span class="primary">Phone 1</span>
+                                <mai-input class="secondary" value="{{client.fieldData.Phone1::input}}"></mai-input>
+                            </div>
+                            <div class="group-item-row border-bottom-lightgray">
+                                <span class="primary">Phone 2</span>
+                                <mai-input class="secondary" value="{{client.fieldData.Phone2::input}}"></mai-input>
+                            </div>
+                            <div class="group-item-row border-bottom-lightgray">
+                                <span class="primary">Fax</span>
+                                <mai-input class="secondary" value="{{client.fieldData.Fax::input}}"></mai-input>
+                            </div>
+                            <div class="group-item-row border-bottom-lightgray">
+                                <span class="primary">Email</span>
+                                <mai-input class="secondary" value="{{client.fieldData.Email::input}}"></mai-input>
+                            </div>
+                            <div class="group-item-row border-bottom-lightgray">
+                                <span class="primary">Website</span>
+                                <mai-input class="secondary" value="{{client.fieldData.Website::input}}"></mai-input>
+                            </div>
+                            <div class="group-item-row border-bottom-lightgray">
+                                <span class="primary">Status</span>
+                                <mai-input class="secondary" value="{{client.fieldData.Status::input}}"></mai-input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group-client group-header border-lightgray">
+                        <div class="box-container">Bill To</div>
+                        <div class="group-item border-lightgray">
+                            <div class="group-header group-item-row border-bottom-lightgray">
+                                <span class="primary">Address 1</span>
+                                <mai-input class="secondary" value="{{client.fieldData.Billing_Street1::input}}"></mai-input>
+                            </div>
+                            <div class="group-item-row border-bottom-lightgray">
+                                <span class="primary">Address 2</span>
+                                <mai-input class="secondary" value="{{client.fieldData.Billing_Street2::input}}"></mai-input>
+                            </div>
+                            <div class="group-item-row border-bottom-lightgray">
+                                <span class="primary">City</span>
+                                <mai-input class="secondary" value="{{client.fieldData.Billing_City::input}}"></mai-input>
+                            </div>
+                            <div class="group-item-row border-bottom-lightgray">
+                                <span class="primary">State</span>
+                                <mai-input class="secondary" value="{{client.fieldData.Billing_State_Province::input}}"></mai-input>
+                            </div>
+                            <div class="group-item-row border-bottom-lightgray">
+                                <span class="primary">Postal Code</span>
+                                <mai-input class="secondary" value="{{client.fieldData.Billing_Postal_Code::input}}"></mai-input>
+                            </div>
+                            <div class="group-item-row border-bottom-lightgray">
+                                <span class="primary">Country</span>
+                                <mai-input class="secondary" value="{{client.fieldData.Billing_Country::input}}"></mai-input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group-client group-header border-lightgray">
+                        <div class="box-container">Street Address</div>
+                        <div class="group-item border-lightgray">
+                            <div class="group-header group-item-row border-bottom-lightgray">
+                                <span class="primary">Address 1</span>
+                                <mai-input class="secondary" value="{{client.fieldData.Shipping_Street1::input}}"></mai-input>
+                            </div>
+                            <div class="group-item-row border-bottom-lightgray">
+                                <span class="primary">Address 2</span>
+                                <mai-input class="secondary" value="{{client.fieldData.Shipping_Street2::input}}"></mai-input>
+                            </div>
+                            <div class="group-item-row border-bottom-lightgray">
+                                <span class="primary">City</span>
+                                <mai-input class="secondary" value="{{client.fieldData.Shipping_City::input}}"></mai-input>
+                            </div>
+                            <div class="group-item-row border-bottom-lightgray">
+                                <span class="primary">State</span>
+                                <mai-input class="secondary" value="{{client.fieldData.Shipping_State_Province::input}}"></mai-input>
+                            </div>
+                            <div class="group-item-row border-bottom-lightgray">
+                                <span class="primary">Postal Code</span>
+                                <mai-input class="secondary" value="{{client.fieldData.Shipping_Postal_Code::input}}"></mai-input>
+                            </div>
+                            <div class="group-item-row border-bottom-lightgray">
+                                <span class="primary">Country</span>
+                                <mai-input class="secondary" value="{{client.fieldData.Shipping_Country::input}}"></mai-input>
+                            </div>
+                            <div class="group-item-row">
+                                <span class="primary"></span>
+                                <paper-button class="secondary" on-tap="_onSameAsBilling">Same as Billing</paper-button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group-client group-header border-lightgray">
+                        <div class="box-container">Accreditations Required</div>
+                        <div class="group-item border-lightgray">
+                            <div class="group-item-row">
+                                <span class="primary">
+                                    <paper-checkbox field-name="Acc_ALLIANZ" checked="{{_check(client.fieldData.Acc_ALLIANZ)}}" on-change="_onChangeCheckbox">ALLIANZ</paper-checkbox>
+                                </span>
+                            </div>
+                            <div class="group-item-row">
+                                <span class="primary">
+                                    <paper-checkbox field-name="Acc_COMCARE" checked="{{_check(client.fieldData.Acc_COMCARE)}}" on-change="_onChangeCheckbox">COMCARE</paper-checkbox>
+                                </span>
+                            </div>
+                            <div class="group-item-row">
+                                <span class="primary">
+                                    <paper-checkbox field-name="Acc_GIO_AAMI" checked="{{_check(client.fieldData.Acc_GIO_AAMI)}}" on-change="_onChangeCheckbox">GIO/AAMI</paper-checkbox>
+                                </span>
+                            </div>
+                            <div class="group-item-row">
+                                <span class="primary">
+                                    <paper-checkbox field-name="Acc_NRMA" checked="{{_check(client.fieldData.Acc_NRMA)}}" on-change="_onChangeCheckbox">NRMA</paper-checkbox>
+                                </span>
+                            </div>
+                            <div class="group-item-row">
+                                <span class="primary">
+                                    <paper-checkbox field-name="Acc_QBE" checked="{{_check(client.fieldData.Acc_QBE)}}" on-change="_onChangeCheckbox">QBE</paper-checkbox>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Tab-->
+                    <div class="group-tabs box-spacing border-lightgray" >
+                        <paper-tabs  class="border-bottom-lightgray " selected="{{papertabSelected}}" attrForSelected="name">
+                            <paper-tab class="border-right-lightgray" link name="projects"><span class="counts">{{projects.length}} </span> Projects </paper-tab>
+                            <paper-tab class="border-right-lightgray" link name="notes"><span class="counts">{{notes.length}} </span>  Notes </paper-tab>
+                            <paper-tab class="border-right-lightgray" link name="contacts"><span class="counts">{{contacts.length}} </span>  Contacts </paper-tab>
+                        </paper-tabs>
+
+                        <iron-pages selected="{{papertabSelected}}" attrForSelected="name">
+                            <div name="projects">
+                                <vaadin-grid items="{{projects}}" class="list-view-datatable">
+                                    <vaadin-grid-column>
+                                        <template class="header">Ref. No.</template>
+                                        <template>[[_getDataFromArray(projects.*, index, 'T01m_account_PROJECTS||id_account|::ID_Project')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Claim No.</template>
+                                        <template>[[_getDataFromArray(projects.*, index, 'T01m_account_PROJECTS||id_account|::Claim_No')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Claimant</template>
+                                        <template>[[_getDataFromArray(projects.*, index, 'T01m_account_PROJECTS||id_account|::Claimant')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Client</template>
+                                        <template>[[_getDataFromArray(projects.*, index, 'T01m_account_PROJECTS||id_account|::Account_Name')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Contacts</template>
+                                        <template>[[_getDataFromArray(projects.*, index, 'T01m_account_PROJECTS||id_account|::Auditing_Assigned_Contacts_Names')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Investigators</template>
+                                        <template>[[_getDataFromArray(projects.*, index, 'T01m_account_PROJECTS||id_account|::Auditing_Assigned_Investigators_Names')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Staff</template>
+                                        <template>[[_getDataFromArray(projects.*, index, 'T01m_account_PROJECTS||id_account|::Auditing_Assigned_Staff_Names')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Start</template>
+                                        <template>[[_getDataFromArray(projects.*, index, 'T01m_account_PROJECTS||id_account|::Date_Start')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">End</template>
+                                        <template>[[_getDataFromArray(projects.*, index, 'T01m_account_PROJECTS||id_account|::Date_End')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Due</template>
+                                        <template>[[_getDataFromArray(projects.*, index, 'T01m_account_PROJECTS||id_account|::Date_Due')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Category</template>
+                                        <template>[[_getDataFromArray(projects.*, index, 'T01m_account_PROJECTS||id_account|::Category')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Status</template>
+                                        <template>[[_getDataFromArray(projects.*, index, 'T01m_account_PROJECTS||id_account|::Status')]]</template>
+                                    </vaadin-grid-column>
+                                </vaadin-grid>
+                            </div>
+
+                            <div name="notes">
+                                Coming soon
+                            </div>
+
+                            <div name="contacts">
+                                <vaadin-grid items="{{contacts}}" class="list-view-datatable">
+                                    <vaadin-grid-column>
+                                        <template class="header">Primary</template>
+                                        <template>
+                                            <paper-checkbox disabled checked="{{_check(_getDataFromArray(contacts.*, index, 'T01c_accounts_CONTACT||id_account|::flag_primary'))}}"></paper-checkbox>
+                                        </template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Name</template>
+                                        <template>[[_getDataFromArray(contacts.*, index, 'T01c_accounts_CONTACT||id_account|::Name_Full')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Title</template>
+                                        <template>[[_getDataFromArray(contacts.*, index, 'T01c_accounts_CONTACT||id_account|::Title')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Address</template>
+                                        <template>[[_getDataFromArray(contacts.*, index, 'T01c_accounts_CONTACT||id_account|::Primary_Address_calc')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Email</template>
+                                        <template>[[_getDataFromArray(contacts.*, index, 'T01c_accounts_CONTACT||id_account|::Email')]]</template>
+                                    </vaadin-grid-column>
+                                    <vaadin-grid-column>
+                                        <template class="header">Phone</template>
+                                        <template>[[_getDataFromArray(contacts.*, index, 'T01c_accounts_CONTACT||id_account|::Phone1')]]</template>
+                                    </vaadin-grid-column>
+
+                                </vaadin-grid>
+                            </div>
+
+                        </iron-pages>
+                    </div>
+                </div>
+            </template>
+        </iron-list>
+
     </template>
 
     <script>
         (function() {
-            class MyClientsDetail extends Polymer.Element {
+            class MyClientsDetail extends MaiMixins(Polymer.Element) {
                 static get is() {
                     return 'mai-clients-detail';
+                }
+
+                static get properties() {
+                    return {
+                        clientDetail: {type: Array, notify: true},
+                        recordId: {
+                            type: String,
+                        },
+                        projects: Array,
+                        notes: Array,
+                        contacts: Array
+                    };
+                }
+
+                static get observers() {
+                    return [
+                        '_recordIdChanged(recordId,userData)',
+                        '_onDetailChanged(clientDetail.*,"clientDetail")',
+                    ]
+                }
+
+                _recordIdChanged(recordId, userData){
+                    if(recordId && userData) {
+                        this.$.getClientsDetail.headers = {'fm-data-token': userData.fmTokenData.token};
+                        this.$.getClientsDetail.generateRequest();
+                    }
+                }
+
+                detailLoaded(data){
+                    console.log(data.detail.response);
+                    this.clientDetail= data.detail.response;
+                    if(this.clientDetail){
+                        this.projects = this.clientDetail[0].portalData["T01m_account_PROJECTS||id_account|"];
+                        this.notes = this.clientDetail[0].portalData["T01i_accounts_NOTES||id_account|"];
+                        this.contacts = this.clientDetail[0].portalData["T01c_accounts_CONTACT||id_account|"];
+                        this.papertabSelected = 0;
+                    }
+                }
+                _computeURL(recordId){
+                    console.log(recordId);
+                    //console.log(this.tokenData);
+                    return `${super._getServer()}fm/getDetail/${super._getLayout('clients').detail}/${recordId}`;
+                }
+
+                _onSameAsBilling(){
+                    if(this.clientDetail){
+                        this.set('clientDetail.0.fieldData.Shipping_Street1',this.clientDetail[0].fieldData.Billing_Street1);
+                        this.set('clientDetail.0.fieldData.Shipping_Street2',this.clientDetail[0].fieldData.Billing_Street2);
+                        this.set('clientDetail.0.fieldData.Shipping_City',this.clientDetail[0].fieldData.Billing_City);
+                        this.set('clientDetail.0.fieldData.Shipping_State_Province',this.clientDetail[0].fieldData.Billing_State_Province);
+                        this.set('clientDetail.0.fieldData.Shipping_Postal_Code',this.clientDetail[0].fieldData.Billing_Postal_Code);
+                        this.set('clientDetail.0.fieldData.Shipping_Country',this.clientDetail[0].fieldData.Billing_Country);
+                    }
+                }
+
+                _onChangeCheckbox(e){
+                    var fieldname = e.target.getAttribute('field-name');
+                    if(e.target.checked) {
+                        this.set('clientDetail.0.fieldData.'+fieldname,"1");
+                    }
+                    else{
+                        this.set('clientDetail.0.fieldData.'+fieldname,"0");
+                    }
                 }
 
             }

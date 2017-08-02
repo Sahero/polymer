@@ -132,6 +132,18 @@
             this.addNew = true;
         }
 
+
+        _check(val){
+            if(val==="1")
+            {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
+
         _computeShouldShowDetailHeaders(page){
             if(page==='detail'){
                 this._shouldShowDetailHeaders =  true;
@@ -140,6 +152,11 @@
                 this._shouldShowDetailHeaders = false;
             }
         }
+
+        _onNoteDetailsChanged(e) {
+            this.$.notegrid.expandedItems = [e.detail.value];
+        }
+
 
     };
 

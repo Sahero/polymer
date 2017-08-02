@@ -44,17 +44,17 @@
                 <a name="list" href="[[route.prefix]]/list">
                     <paper-fab mini icon="mai:list"></paper-fab>
                     List view</a>
-                <dom-if if="[[_shouldShowDetailHeaders]]">
-                    <template>
-                        <div class="detailsHeader">
-                            <div># [[selectedItem.fieldData.ID_claimant]]&nbsp;</div>
-                            <div>[[selectedItem.fieldData.Name_Full]]</div>
-                            <div>&nbsp;|&nbsp;</div>
-                            <div style="font-style: italic">[[selectedItem.fieldData.Status]]</div>
-                        </div>
-                    </template>
-                </dom-if>
             </iron-selector>
+            <dom-if if="[[_shouldShowDetailHeaders]]">
+                <template>
+                    <div class="detailsHeader">
+                        <div># [[selectedItem.fieldData.ID_claimant]]&nbsp;</div>
+                        <div>[[selectedItem.fieldData.Name_Full]]</div>
+                        <div>&nbsp;|&nbsp;</div>
+                        <div style="font-style: italic">[[selectedItem.fieldData.Status]]</div>
+                    </div>
+                </template>
+            </dom-if>
 
         </app-toolbar>
         <div>

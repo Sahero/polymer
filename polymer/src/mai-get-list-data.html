@@ -112,18 +112,19 @@
                         else {
                             this.method = "GET";
                         }
-                        this.getData();
+                        this.getData(userData);
                     }
                 }
 
-                getData(){
-                    this.$.getList.url = this._computeURL();
-                    this.$.getList.headers = {'fm-data-token': this.userData.fmTokenData.token};
-                    this.$.getList.generateRequest();
-                    //get total records as well
-                    this.$.getRecordCount.headers = {'fm-data-token': this.userData.fmTokenData.token};
-                    this.$.getRecordCount.generateRequest();
-
+                getData(userData){
+                    if(userData) {
+                        this.$.getList.url = this._computeURL();
+                        this.$.getList.headers = {'fm-data-token': userData.fmTokenData.token};
+                        this.$.getList.generateRequest();
+                        //get total records as well
+                        this.$.getRecordCount.headers = {'fm-data-token': userData.fmTokenData.token};
+                        this.$.getRecordCount.generateRequest();
+                    }
                 }
 
                 getSelectedItemData(recordId){

@@ -46,19 +46,19 @@
                 <a name="follow" href="[[route.prefix]]/follow">
                     <paper-fab mini icon="mai:chat"></paper-fab>
                     Follow up</a>
-                <dom-if if="[[_shouldShowDetailHeaders]]">
-                    <template>
-                        <div class="detailsHeader">
-                            <div># [[selectedItem.fieldData.ID_Contact]]&nbsp;</div>
-                            <div>[[selectedItem.fieldData.Title]]</div>
-                            <div>[[selectedItem.fieldData.Name_First]]</div>
-                            <div>[[selectedItem.fieldData.Name_Last]]</div>
-                            <div>&nbsp;|&nbsp;</div>
-                            <div style="font-style: italic">[[selectedItem.fieldData.followup_status]]</div>
-                        </div>
-                    </template>
-                </dom-if>
             </iron-selector>
+            <dom-if if="[[_shouldShowDetailHeaders]]">
+                <template>
+                    <div class="detailsHeader">
+                        <div># [[selectedItem.fieldData.ID_Contact]]&nbsp;</div>
+                        <div>[[selectedItem.fieldData.Title]]</div>
+                        <div>[[selectedItem.fieldData.Name_First]]</div>
+                        <div>[[selectedItem.fieldData.Name_Last]]</div>
+                        <div>&nbsp;|&nbsp;</div>
+                        <div style="font-style: italic">[[selectedItem.fieldData.followup_status]]</div>
+                    </div>
+                </template>
+            </dom-if>
 
         </app-toolbar>
         <div>

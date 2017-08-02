@@ -36,8 +36,6 @@
                                add-new="{{addNew}}"
         ></mai-clients-list-data>
 
-
-
         <app-toolbar>
             <iron-selector class="view-toolbar" selected="[[clientsData.page]]"  attr-for-selected="name" role="navigation">
                 <a name="detail" id="clientsDetailLink" href="[[route.prefix]]/detail/[[selectedItem.recordId]]">
@@ -46,18 +44,17 @@
                 <a name="list" href="[[route.prefix]]/list">
                     <paper-fab mini icon="mai:list"></paper-fab>
                     List view</a>
-                <dom-if if="[[_shouldShowDetailHeaders]]">
-                    <template>
-                        <div class="detailsHeader">
-                            <div># [[selectedItem.fieldData.ID_Account]]&nbsp;</div>
-                            <div>[[selectedItem.fieldData.Account]]</div>
-                            <div>&nbsp;|&nbsp;</div>
-                            <div style="font-style: italic">[[selectedItem.fieldData.Status]]</div>
-                        </div>
-                    </template>
-                </dom-if>
             </iron-selector>
-
+            <dom-if if="[[_shouldShowDetailHeaders]]">
+                <template>
+                    <div class="detailsHeader">
+                        <div># [[selectedItem.fieldData.ID_Account]]&nbsp;</div>
+                        <div>[[selectedItem.fieldData.Account]]</div>
+                        <div>&nbsp;|&nbsp;</div>
+                        <div style="font-style: italic">[[selectedItem.fieldData.Status]]</div>
+                    </div>
+                </template>
+            </dom-if>
         </app-toolbar>
         <div>
             <iron-pages selected="[[clientsData.page]]" attr-for-selected="name">
@@ -70,7 +67,7 @@
                                   current-page="{{currentPage}}"
                                   add-new="{{addNew}}"
                 ></mai-clients-list>
-                <mai-clients-detail id="clientDetails" name="detail" recordId="{{selectedItem.recordId}}"></mai-clients-detail>
+                <mai-clients-detail id="clientDetails" name="detail" record-id="{{selectedItem.recordId}}"></mai-clients-detail>
 
             </iron-pages>
         </div>
@@ -113,8 +110,9 @@
                             return;
                         }
 
+
                         if(clientsData.page === undefined || clientsData.page ===""){
-                            this.clientsData.page = clientsData.page || "detail";
+                            this.clientsData.page = "detail";//clientsData.page || "detail";
                             this.set('route.path',this.clientsData.page);
                         }
 
